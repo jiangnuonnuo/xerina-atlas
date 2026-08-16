@@ -2,6 +2,8 @@
 
 这是独立于未来 VitePress + Teek 实现的产品原型，当前用于确认信息架构、视觉语言、响应式布局和页面交互，不代表最终业务代码结构。
 
+正式实现的目录、Markdown frontmatter、自动发现、导航生成和部署方案见仓库根目录的 [ARCHITECTURE.md](../ARCHITECTURE.md)；后续人工或 AI 新增内容时，遵循 [CONTENT_AUTHORING_GUIDE.md](../CONTENT_AUTHORING_GUIDE.md) 与 `content-templates/` 中的模板。
+
 ## 预览
 
 在仓库根目录执行：
@@ -26,4 +28,4 @@ python3 -m http.server 4173 -d prototype
 
 ## 数据驱动说明
 
-当前内容写在 HTML 与 `app.js` 的示例数据对象中，仅用于快速验证。UI 确认后，建议将这些内容拆成项目、文章、经历和个人信息数据文件，再由 VitePress/Teek 页面消费。项目详情和经历详情已经按数据对象组织，后续可以分别映射成 `projects/<project>/01-requirements.md` 与 `experiences/<experience>/index.md`。
+当前内容写在 HTML 与 `app.js` 的示例数据对象中，仅用于快速验证。正式实现时，项目、文章和经历会迁移到 VitePress 的 Markdown 内容目录，由 frontmatter 和构建期数据加载驱动首页、列表、顶部项目文档下拉和项目侧栏。项目详情与经历详情的建议目录分别为 `docs/projects/<project>/` 与 `docs/experience/<experience>/`。
