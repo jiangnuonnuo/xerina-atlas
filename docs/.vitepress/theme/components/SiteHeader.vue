@@ -11,6 +11,7 @@ const navItems = [
   { text: '首页', href: '/' },
   { text: '实习经历', href: '/experience/' },
   { text: '项目经历', href: '/projects/' },
+  { text: '作品集', href: '/portfolio/' },
   { text: '文章', href: '/notes/' },
   { text: '关于', href: '/about/' },
 ]
@@ -40,7 +41,7 @@ function resumeUrl() {
       </a>
 
       <nav class="desktop-nav" aria-label="主导航">
-        <a v-for="item in navItems.slice(0, 3)" :key="item.href" :href="withBase(item.href)" :class="{ 'is-active': isActive(item.href) }">{{ item.text }}</a>
+        <a v-for="item in navItems.slice(0, 4)" :key="item.href" :href="withBase(item.href)" :class="{ 'is-active': isActive(item.href) }">{{ item.text }}</a>
         <div class="nav-dropdown" :class="{ 'is-open': docsOpen }">
           <button class="nav-dropdown-trigger" type="button" aria-haspopup="true" :aria-expanded="docsOpen" @click="docsOpen = !docsOpen">
             项目文档 <span aria-hidden="true">⌄</span>
@@ -53,7 +54,7 @@ function resumeUrl() {
             </a>
           </div>
         </div>
-        <a v-for="item in navItems.slice(3)" :key="item.href" :href="withBase(item.href)" :class="{ 'is-active': isActive(item.href) }">{{ item.text }}</a>
+        <a v-for="item in navItems.slice(4)" :key="item.href" :href="withBase(item.href)" :class="{ 'is-active': isActive(item.href) }">{{ item.text }}</a>
       </nav>
 
       <div class="nav-actions">

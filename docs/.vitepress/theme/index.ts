@@ -7,6 +7,7 @@ import ProjectIndexPage from './components/ProjectIndexPage.vue'
 import ExperienceIndexPage from './components/ExperienceIndexPage.vue'
 import NotesIndexPage from './components/NotesIndexPage.vue'
 import AboutPage from './components/AboutPage.vue'
+import PortfolioPage from './components/PortfolioPage.vue'
 import ProjectVisual from './components/ProjectVisual.vue'
 import MediaFigure from './components/MediaFigure.vue'
 import MediaVideo from './components/MediaVideo.vue'
@@ -23,6 +24,7 @@ export default {
     context.app.component('ExperienceIndexPage', ExperienceIndexPage)
     context.app.component('NotesIndexPage', NotesIndexPage)
     context.app.component('AboutPage', AboutPage)
+    context.app.component('PortfolioPage', PortfolioPage)
     context.app.component('ProjectVisual', ProjectVisual)
     context.app.component('MediaFigure', MediaFigure)
     context.app.component('MediaVideo', MediaVideo)

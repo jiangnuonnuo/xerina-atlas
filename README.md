@@ -22,6 +22,7 @@ npm run preview # 预览构建产物
 - 首页：`docs/index.md`
 - 实习经历：`docs/experience/<slug>/index.md`
 - 项目总览与项目文档：`docs/projects/<project-slug>/`
+- 作品集：`docs/portfolio/index.md`
 - 技术文章：`docs/notes/<category>/<slug>.md`
 - 关于页：`docs/about/index.md`
 - 稳定 URL 的图片、视频、交互图和附件：`docs/public/`

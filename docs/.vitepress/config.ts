@@ -32,6 +32,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '实习经历', link: '/experience/' },
       { text: '项目经历', link: '/projects/' },
+      { text: '作品集', link: '/portfolio/' },
       {
         text: '项目文档',
         items: projects.filter((project) => project.frontmatter.nav !== false).map((project) => ({

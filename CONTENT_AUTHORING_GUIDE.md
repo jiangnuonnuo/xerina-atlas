@@ -10,9 +10,10 @@
 2. 人工确认事实、隐私和表述后，再将内容放入 docs 对应目录。
 3. Markdown 是正文唯一事实源；首页、列表、导航只读取 frontmatter。
 4. 项目经历页用于 HR 快速了解，项目 Markdown 文档用于技术人员深入阅读。
-5. 标题必须明确描述内容，例如“订单状态机设计”，不使用“想法落到现实”之类泛化标题。
-6. 图片、视频、附件、Archify 图和代码按本指南选择目录，不把大段 HTML 或二进制内容塞进 Markdown。
-7. AI 不修改 .vitepress/theme、schema、scripts 和部署配置，除非任务明确要求修改架构。
+5. 竞赛荣誉统一维护在 `docs/about/index.md` 的 `honors` frontmatter，由首页和 `/portfolio/` 自动展示。
+6. 标题必须明确描述内容，例如“订单状态机设计”，不使用“想法落到现实”之类泛化标题。
+7. 图片、视频、附件、Archify 图和代码按本指南选择目录，不把大段 HTML 或二进制内容塞进 Markdown。
+8. AI 不修改 .vitepress/theme、schema、scripts 和部署配置，除非任务明确要求修改架构。
 
 ## 2. 内容应该放在哪里
 
@@ -23,6 +24,7 @@
 | 实习/实践经历 | content-drafts/experience/<experience-slug>/index.md | docs/experience/<experience-slug>/index.md | 是 |
 | 技术文章 | content-drafts/notes/<category>/<slug>.md | docs/notes/<category>/<slug>.md | 是 |
 | 关于页资料 | content-drafts/about.md | docs/about/index.md | 是，更新固定页面 |
+| 竞赛与荣誉 | content-drafts/about.md | docs/about/index.md 的 `honors` | 首页与 `/portfolio/` 自动更新 |
 | 项目独占图片 | 与草稿一起准备 | docs/projects/<project-slug>/assets/images/ | 否，必须由 Markdown 引用 |
 | 大视频/字幕/poster | 先记录媒体清单 | docs/public/media/projects/<project-slug>/videos/ | 否，必须由 Markdown 引用 |
 | PDF/压缩包等附件 | 先记录媒体清单 | docs/public/media/.../downloads/ | 否，必须由 Markdown 引用 |

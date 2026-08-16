@@ -9,6 +9,7 @@ import ProjectVisual from './ProjectVisual.vue'
 const featuredExperience = experiences.slice(0, 3)
 const featuredProjects = projects.slice(0, 3)
 const featuredNotes = notes.slice(0, 3)
+const honors = profile.honors || []
 
 function value(key: string, fallback = '') {
   return profile[key] || fallback
@@ -20,6 +21,16 @@ function url(path: string) {
 
 function formatDate(date: unknown) {
   return String(date ?? '').slice(0, 10).replaceAll('-', '.')
+}
+
+function honorText(honor: unknown) {
+  if (typeof honor === 'string') return honor
+  if (honor && typeof honor === 'object' && 'title' in honor) return String(honor.title)
+  return String(honor ?? '')
+}
+
+function honorYear(honor: unknown) {
+  return honorText(honor).match(/20\d{2}/)?.[0] || 'HONOR'
 }
 </script>
 
@@ -77,9 +88,14 @@ function formatDate(date: unknown) {
         </div>
       </section>
 
+      <section v-if="honors.length" class="section-block home-honors">
+        <div class="section-heading compact-heading"><div><span class="section-index">03 / PORTFOLIO · COMPETITIONS &amp; HONORS</span><h2>竞赛与荣誉</h2></div><a class="section-link" :href="url('/portfolio/#honors')">查看作品集 <span aria-hidden="true">↗</span></a></div>
+        <div class="honor-strip"><a v-for="honor in honors" :key="honorText(honor)" class="honor-row" :href="url('/portfolio/#honors')"><span>{{ honorYear(honor) }}</span><strong>{{ honorText(honor) }}</strong><i aria-hidden="true">↗</i></a></div>
+      </section>
+
       <section class="lower-grid section-block">
         <div>
-          <div class="section-heading compact-heading"><div><span class="section-index">03 / NOTES</span><h2>技术文章与知识库</h2></div><a class="section-link" :href="url('/notes/')">查看全部文章 <span aria-hidden="true">↗</span></a></div>
+          <div class="section-heading compact-heading"><div><span class="section-index">04 / NOTES</span><h2>技术文章与知识库</h2></div><a class="section-link" :href="url('/notes/')">查看全部文章 <span aria-hidden="true">↗</span></a></div>
           <div v-if="featuredNotes.length" class="notes-preview"><a v-for="note in featuredNotes" :key="note.slug" class="note-row" :href="url(note.url)"><span class="note-date">{{ formatDate(note.frontmatter.date) }}</span><span class="note-title"><strong>{{ note.frontmatter.title }}</strong><small>{{ note.frontmatter.category }} · {{ note.frontmatter.readingTime || '阅读' }}</small></span><span aria-hidden="true">↗</span></a></div>
           <p v-else class="empty-state">文章正在整理中，后续会按项目章节和技术主题持续更新。</p>
         </div>

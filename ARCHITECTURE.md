@@ -12,6 +12,7 @@ Xerina Atlas 采用“Markdown 内容源 + VitePress 静态构建 + Teek 文档�
 | --- | --- | --- |
 | 首页首屏、求职定位、联系方式 | index.md + HomePage.vue | 视觉与信息密度是作品集的核心，需要自定义布局，但文字仍然可以从内容数据读取 |
 | 实习经历列表、项目经历列表、文章列表 | index.md + Vue 列表组件 + build-time data loader | 页面只负责展示，条目从 Markdown frontmatter 自动发现 |
+| 作品集与竞赛荣誉 | portfolio/index.md + PortfolioPage.vue | 汇总项目作品和关于页中的 honors，给 HR 一个集中查看入口 |
 | 实习经历详情 | experience/<slug>/index.md + ExperienceDetailLayout.vue | 角色、职责、成果需要长期编辑，正文应由 Markdown 管理 |
 | 项目文档详情 | projects/<slug>/*.md + ProjectDocLayout.vue + Teek | 需要左侧目录、正文、代码、图片、章节跳转，完全符合文档型页面 |
 | 技术文章与知识库 | notes/**/*.md + Teek 默认文章布局 | 文章数量会持续增长，使用文件即页面的路由模型 |
@@ -51,6 +52,7 @@ flowchart LR
 - /：个人定位、求职方向、教育、实习经历摘要、项目经历摘要、技能和联系方式。
 - /experience/：实习与实践经历时间线，实习经历优先展示。
 - /projects/：项目经历快速扫描，只展示项目目标、个人职责、技术栈和结果。
+- /portfolio/：项目作品与竞赛荣誉集中展示，适合快速确认完整成果。
 
 这三页不放大段技术正文。每个条目只保留明确标题、身份/角色、时间、结果和“查看详情”入口。
 
@@ -128,6 +130,8 @@ xerina-atlas/
 │   │   ├── index.md                     # 实习与实践列表
 │   │   └── xiamen-chengcheng/
 │   │       └── index.md                 # 实习详情
+│   ├── portfolio/
+│   │   └── index.md                     # 项目作品与竞赛荣誉聚合页
 │   ├── projects/
 │   │   ├── index.md                     # 项目经历 HR 快速视图
 │   │   ├── nexus-flow-ai/
@@ -165,6 +169,7 @@ xerina-atlas/
 │           │   ├── ProjectIndexPage.vue
 │           │   ├── NotesIndexPage.vue
 │           │   ├── AboutPage.vue
+│           │   ├── PortfolioPage.vue
 │           │   ├── ProjectVisual.vue
 │           │   ├── SiteHeader.vue
 │           │   ├── SiteFooter.vue
@@ -353,6 +358,7 @@ VitePress 使用文件路由，建议固定以下映射。链接不带 .md 或 .
 | 实习经历 | docs/experience/index.md | 面向 HR 的时间线和筛选 |
 | 实习详情 | docs/experience/<slug>/index.md | Markdown 正文 + 经历详情布局 |
 | 项目经历 | docs/projects/index.md | 面向 HR 的快速视图 |
+| 作品集 | docs/portfolio/index.md | 聚合项目作品与竞赛荣誉 |
 | 项目文档入口 | docs/projects/<slug>/index.md | 顶部下拉直接进入，不经过中间选择页 |
 | 项目章节 | docs/projects/<slug>/<chapter>.md | 左侧侧栏自动生成 |
 | 文章索引 | docs/notes/index.md | 文章列表和搜索 |
@@ -614,7 +620,7 @@ docs/projects/new-project/30-implementation.md
 固定项：
 
 ~~~text
-首页 / 实习经历 / 项目经历 / 项目文档 / 文章 / 关于
+首页 / 实习经历 / 项目经历 / 作品集 / 项目文档 / 文章 / 关于
 ~~~
 
 “项目文档”是动态下拉菜单：
