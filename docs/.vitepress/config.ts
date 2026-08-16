@@ -24,7 +24,7 @@ export default defineConfig({
   ignoreDeadLinks: false,
   head: [
     ['meta', { name: 'theme-color', content: '#f7fafc' }],
-    ['link', { rel: 'icon', href: '/brand/favicon.svg' }],
+    ['link', { rel: 'icon', href: '/brand/code-mark.svg' }],
   ],
   themeConfig: {
     ...teekConfig.themeConfig,

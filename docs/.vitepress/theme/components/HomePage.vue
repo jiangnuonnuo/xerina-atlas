@@ -29,7 +29,7 @@ function formatDate(date: unknown) {
       <section class="hero-grid">
         <div class="hero-copy">
           <div class="eyebrow"><span class="eyebrow-dot"></span> OPEN TO WORK <span class="eyebrow-line"></span> JAVA BACKEND</div>
-          <h1>把复杂系统，<br /><em>讲清楚</em>并做出来。</h1>
+          <h1>先理清问题，<br /><em>再做实系统。</em></h1>
           <p class="hero-lede">你好，我是 {{ value('displayName', 'Xerina') }}，一名专注于 Java 后端开发、AI 应用工程化与系统设计的开发者。正在寻找 Java 后端开发、平台工程或 AI 应用方向的机会。</p>
           <div class="hero-actions">
             <a class="button button-primary" :href="url('/projects/')"><span>查看项目</span><span aria-hidden="true">↗</span></a>
