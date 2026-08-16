@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Xerina 的个人作品集、项目解析与技术知识库交互原型。" />
+    <title>Xerina Atlas · Portfolio Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#app">跳到主要内容</a>
+    <header class="site-header">
+      <div class="container nav-shell">
+        <a class="brand" href="#/" data-route="home" aria-label="回到 Xerina 首页">
+          <span class="brand-mark">X</span>
+          <span class="brand-copy">
+            <strong>Xerina</strong>
+            <small>ATLAS / PORTFOLIO</small>
+          </span>
+        </a>
+        <nav class="desktop-nav" aria-label="主导航">
+          <a href="#/" data-route="home">首页</a>
+          <a href="#/experience" data-route="experience">实习经历</a>
+          <a href="#/projects" data-route="projects">项目经历</a>
+          <div class="nav-dropdown" data-docs-dropdown>
+            <button class="nav-dropdown-trigger" type="button" data-action="toggle-docs-menu" data-nav-docs aria-haspopup="true" aria-expanded="false">项目文档 <span aria-hidden="true">⌄</span></button>
+            <div class="nav-dropdown-panel" role="menu" aria-label="选择项目文档">
+              <span class="nav-dropdown-label">SELECT PROJECT DOCUMENT</span>
+              <a class="nav-dropdown-item" role="menuitem" href="#/docs/atlas"><span><b>01</b><strong>Xerina Atlas</strong><small>平台工程 · 内容系统</small></span><i aria-hidden="true">↗</i></a>
+              <a class="nav-dropdown-item" role="menuitem" href="#/docs/order"><span><b>02</b><strong>订单履约服务</strong><small>业务系统 · DDD</small></span><i aria-hidden="true">↗</i></a>
+              <a class="nav-dropdown-item" role="menuitem" href="#/docs/rag"><span><b>03</b><strong>知识库问答实验室</strong><small>AI 应用 · RAG</small></span><i aria-hidden="true">↗</i></a>
+            </div>
+          </div>
+          <a href="#/notes" data-route="notes">文章</a>
+          <a href="#/about" data-route="about">关于</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="text-button" type="button" data-action="resume">下载简历 <span aria-hidden="true">↗</span></button>
+          <button class="icon-button menu-toggle" type="button" data-action="menu" aria-label="打开菜单" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav" aria-label="移动端主导航">
+        <a href="#/" data-route="home">首页 <span>01</span></a>
+        <a href="#/experience" data-route="experience">实习经历 <span>02</span></a>
+        <a href="#/projects" data-route="projects">项目经历 <span>03</span></a>
+        <div class="mobile-nav-group" data-docs-dropdown>
+          <button class="mobile-nav-docs-trigger" type="button" data-action="toggle-docs-menu" data-nav-docs aria-haspopup="true" aria-expanded="false">项目文档 <span>04⌄</span></button>
+          <div class="mobile-docs-menu" role="menu" aria-label="选择项目文档">
+            <a role="menuitem" href="#/docs/atlas"><span>Xerina Atlas</span><b>↗</b></a>
+            <a role="menuitem" href="#/docs/order"><span>订单履约服务</span><b>↗</b></a>
+            <a role="menuitem" href="#/docs/rag"><span>知识库问答实验室</span><b>↗</b></a>
+          </div>
+        </div>
+        <a href="#/notes" data-route="notes">文章 <span>05</span></a>
+        <a href="#/about" data-route="about">关于 <span>06</span></a>
+      </nav>
+    </header>
+
+    <main id="app" tabindex="-1">
+      <section class="page page-home" data-page="home">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <div class="eyebrow"><span class="eyebrow-dot"></span> OPEN TO WORK <span class="eyebrow-line"></span> 2026</div>
+              <h1>把复杂系统，<br /><em>讲清楚</em>并做出来。</h1>
+              <p class="hero-lede">你好，我是 Xerina，一名专注于后端工程与系统设计的开发者。正在寻找后端开发、平台工程或 AI 应用方向的机会。</p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="#/projects"><span>查看项目</span><span aria-hidden="true">↗</span></a>
+                <button class="button button-secondary" type="button" data-action="resume"><span>下载简历</span><span aria-hidden="true">↓</span></button>
+              </div>
+              <div class="hero-contact">
+                <span class="status-pulse"></span>
+                <span>期待与优秀团队一起解决真实问题</span>
+                <button class="inline-link" type="button" data-action="copy-email">xerina@example.com</button>
+              </div>
+            </div>
+            <div class="hero-visual" aria-label="Xerina 的个人定位信息">
+              <div class="hero-visual-top"><span>PROFILE / 001</span><span>SCROLL TO EXPLORE ↓</span></div>
+              <div class="identity-orbit">
+                <div class="orbit-ring ring-one"></div>
+                <div class="orbit-ring ring-two"></div>
+                <div class="orbit-dot dot-one"></div>
+                <div class="orbit-dot dot-two"></div>
+                <div class="monogram">X<span>.</span></div>
+                <div class="orbit-label label-one">BACKEND</div>
+                <div class="orbit-label label-two">SYSTEMS</div>
+                <div class="orbit-label label-three">AI × PRODUCT</div>
+              </div>
+              <div class="hero-visual-bottom">
+                <div><span class="data-label">BASE</span><strong>China · CN</strong></div>
+                <div><span class="data-label">FOCUS</span><strong>Build / Explain / Iterate</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-facts section-rule">
+            <div class="fact"><span class="data-label">EDUCATION</span><strong>计算机科学与技术</strong><small>本科 · 2022 — 2026</small></div>
+            <div class="fact"><span class="data-label">CURRENTLY</span><strong>寻找后端 / 平台工程机会</strong><small>可实习 / 可全职 · Remote friendly</small></div>
+            <div class="fact"><span class="data-label">EXPERIENCE</span><strong>3 个完整项目 · 12+ 篇文章</strong><small>从领域分析到部署交付</small></div>
+            <a class="fact fact-link" href="#/about"><span class="data-label">MORE ABOUT ME</span><strong>认识完整的 Xerina <span aria-hidden="true">↗</span></strong><small>个人介绍、图集与联系方式</small></a>
+          </div>
+
+          <div class="split-section section-block home-experience" id="experience-preview">
+            <div class="section-heading compact-heading"><div><span class="section-index">01 / INTERNSHIP &amp; PRACTICE EXPERIENCE</span><h2>实习与实践经历</h2></div><a class="section-link" href="#/experience">查看完整经历 <span aria-hidden="true">↗</span></a></div>
+            <div class="experience-list">
+              <a class="experience-row experience-row-featured" href="#/experience/internship"><span class="experience-year">2025.06 — 2025.09</span><span class="experience-role"><strong>后端开发实习生</strong><small>某技术服务团队 · 业务中台</small></span><span class="experience-summary">参与领域建模、接口交付与线上问题定位</span><span class="row-arrow" aria-hidden="true">↗</span></a>
+              <a class="experience-row" href="#/experience/project-lead"><span class="experience-year">2024.11 — 2025.04</span><span class="experience-role"><strong>校级创新项目负责人</strong><small>知识库问答实验室</small></span><span class="experience-summary">从需求验证到 MVP 落地，完成 4 次迭代</span><span class="row-arrow" aria-hidden="true">↗</span></a>
+              <a class="experience-row" href="#/experience/community"><span class="experience-year">2023.09 — 2024.06</span><span class="experience-role"><strong>技术社团核心成员</strong><small>工程实践与分享</small></span><span class="experience-summary">组织 10+ 次技术分享，维护学习资料库</span><span class="row-arrow" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <div class="section-block home-projects" id="projects">
+            <div class="section-heading">
+              <div><span class="section-index">02 / PROJECT EXPERIENCE · HR QUICK VIEW</span><h2>项目经历</h2></div>
+              <a class="section-link" href="#/projects">全部项目 <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="project-grid">
+              <article class="project-card project-card-featured">
+                <div class="project-card-top"><span class="project-number">01</span><span class="project-type">平台工程 / 2026</span></div>
+                <div class="project-visual project-visual-atlas"><div class="visual-grid"></div><span class="visual-word">ATLAS</span><span class="visual-caption">CONTENT<br />KNOWLEDGE<br />SYSTEM</span></div>
+                <div class="project-card-body"><div class="tag-row"><span>VitePress</span><span>Vue</span><span>AI Workflow</span></div><h3>Xerina Atlas</h3><p>一套内容驱动的个人知识与作品集系统，让项目、文章和个人经历可以被持续迭代。</p><a href="#/docs/atlas" class="card-arrow" aria-label="查看 Xerina Atlas 项目详情">查看项目详情 <span aria-hidden="true">↗</span></a></div>
+              </article>
+              <article class="project-card">
+                <div class="project-card-top"><span class="project-number">02</span><span class="project-type">业务系统 / 2025</span></div>
+                <div class="project-visual project-visual-order"><div class="order-lines"><i></i><i></i><i></i><i></i></div><div class="order-status">ORDER<br /><b>READY</b></div></div>
+                <div class="project-card-body"><div class="tag-row"><span>Java</span><span>Spring Boot</span><span>DDD</span></div><h3>订单履约服务</h3><p>面向多角色、多状态流转的订单域设计，拆解领域模型与可靠事件链路。</p><a href="#/docs/order" class="card-arrow" aria-label="查看订单履约服务详情">查看项目详情 <span aria-hidden="true">↗</span></a></div>
+              </article>
+              <article class="project-card">
+                <div class="project-card-top"><span class="project-number">03</span><span class="project-type">AI 应用 / 2025</span></div>
+                <div class="project-visual project-visual-lab"><span class="lab-cross cross-a"></span><span class="lab-cross cross-b"></span><div class="lab-core">RAG<br /><b>LAB</b></div><span class="lab-axis axis-x"></span><span class="lab-axis axis-y"></span></div>
+                <div class="project-card-body"><div class="tag-row"><span>Python</span><span>RAG</span><span>Evaluation</span></div><h3>知识库问答实验室</h3><p>从文档切分、检索、评测到回答反馈，记录一套可复用的 AI 应用实践。</p><a href="#/docs/rag" class="card-arrow" aria-label="查看知识库问答实验室详情">查看项目详情 <span aria-hidden="true">↗</span></a></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="lower-grid section-block">
+            <div>
+              <div class="section-heading compact-heading"><div><span class="section-index">03 / NOTES</span><h2>技术文章与知识库</h2></div><a class="section-link" href="#/notes">查看全部文章 <span aria-hidden="true">↗</span></a></div>
+              <div class="notes-preview">
+                <a class="note-row" href="#/notes"><span class="note-date">2026.08.12</span><span class="note-title"><strong>如何为一个个人知识库设计内容模型</strong><small>系统设计 · 8 min read</small></span><span aria-hidden="true">↗</span></a>
+                <a class="note-row" href="#/notes"><span class="note-date">2026.07.26</span><span class="note-title"><strong>从项目复盘到项目解析：我的写作结构</strong><small>方法论 · 6 min read</small></span><span aria-hidden="true">↗</span></a>
+                <a class="note-row" href="#/notes"><span class="note-date">2026.06.18</span><span class="note-title"><strong>DDD 不是分层模板，而是沟通工具</strong><small>后端工程 · 10 min read</small></span><span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <aside class="contact-card">
+              <span class="section-index">LET'S TALK</span>
+              <h3>联系方式</h3>
+              <p>欢迎聊项目、技术方向、实习与全职机会。</p>
+              <button class="button button-dark" type="button" data-action="copy-email">复制邮箱 <span aria-hidden="true">↗</span></button>
+              <div class="social-row"><a href="#/about">GitHub</a><a href="#/about">LinkedIn</a><a href="#/about">掘金</a></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="page page-projects" data-page="projects">
+        <div class="container page-container">
+          <div class="page-intro"><div><span class="section-index">02 / PROJECT EXPERIENCE · HR QUICK VIEW</span><h1>项目经历</h1><p>用于快速了解项目类型、我的职责、使用技术和项目结果。需要完整技术细节时，请进入对应的项目文档。</p></div><div class="page-intro-meta"><span>03 PROJECTS</span><span>QUICK VIEW</span><span>LAST UPDATED / 2026.08</span></div></div>
+          <div class="filter-bar" role="toolbar" aria-label="项目分类筛选"><span class="filter-label">FILTER BY</span><button class="filter-button is-active" type="button" data-filter="all">全部 <span>03</span></button><button class="filter-button" type="button" data-filter="platform">平台工程 <span>01</span></button><button class="filter-button" type="button" data-filter="domain">业务系统 <span>01</span></button><button class="filter-button" type="button" data-filter="ai">AI 应用 <span>01</span></button></div>
+          <div class="project-index-list">
+            <article class="project-index-card" data-project-category="platform"><div class="index-card-media project-visual-atlas"><div class="visual-grid"></div><span class="visual-word">ATLAS</span><span class="visual-caption">CONTENT<br />KNOWLEDGE<br />SYSTEM</span></div><div class="index-card-copy"><div class="project-card-top"><span class="project-number">01</span><span class="project-type">平台工程 / 2026</span></div><h2>Xerina Atlas</h2><p>内容驱动的个人知识与作品集系统。通过内容模型与自动化工作流，让项目、文章、经历和首页摘要共享同一份数据。</p><div class="index-card-bottom"><div class="tag-row"><span>VitePress</span><span>Vue</span><span>AI Workflow</span></div><a href="#/docs/atlas" class="button button-small">查看项目文档 <span>↗</span></a></div></div></article>
+            <article class="project-index-card" data-project-category="domain"><div class="index-card-media project-visual-order"><div class="order-lines"><i></i><i></i><i></i><i></i></div><div class="order-status">ORDER<br /><b>READY</b></div></div><div class="index-card-copy"><div class="project-card-top"><span class="project-number">02</span><span class="project-type">业务系统 / 2025</span></div><h2>订单履约服务</h2><p>以订单状态机为核心，拆解用户、库存、支付与履约之间的边界，记录从领域事件到接口可靠性的设计过程。</p><div class="index-card-bottom"><div class="tag-row"><span>Java</span><span>Spring Boot</span><span>DDD</span></div><a href="#/docs/order" class="button button-small">查看项目文档 <span>↗</span></a></div></div></article>
+            <article class="project-index-card" data-project-category="ai"><div class="index-card-media project-visual-lab"><span class="lab-cross cross-a"></span><span class="lab-cross cross-b"></span><div class="lab-core">RAG<br /><b>LAB</b></div><span class="lab-axis axis-x"></span><span class="lab-axis axis-y"></span></div><div class="index-card-copy"><div class="project-card-top"><span class="project-number">03</span><span class="project-type">AI 应用 / 2025</span></div><h2>知识库问答实验室</h2><p>从文档切分、向量检索、回答生成到离线评测，验证一个可解释、可迭代的知识库问答流程。</p><div class="index-card-bottom"><div class="tag-row"><span>Python</span><span>RAG</span><span>Evaluation</span></div><a href="#/docs/rag" class="button button-small">查看项目文档 <span>↗</span></a></div></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page page-detail" data-page="detail">
+        <div class="container page-container detail-container">
+          <a class="back-link" href="#/projects">← 返回项目经历</a>
+          <div class="doc-project-bar">
+            <div class="doc-project-identity"><span class="doc-project-mark">XP</span><div><span>PROJECT DOCS / ACTIVE</span><strong data-detail-project-label>Xerina Atlas</strong></div></div>
+            <nav class="doc-top-nav" aria-label="项目文档导航">
+              <a href="#/docs/atlas#overview" data-doc-section="overview" class="is-active">项目总览</a>
+              <a href="#/docs/atlas#requirements" data-doc-section="requirements">需求分析</a>
+              <a href="#/docs/atlas#architecture" data-doc-section="architecture">系统设计</a>
+              <a href="#/docs/atlas#implementation" data-doc-section="implementation">核心实现</a>
+              <a href="#/docs/atlas#deployment" data-doc-section="deployment">部署验证</a>
+              <a href="#/docs/atlas#reflection" data-doc-section="reflection">项目复盘</a>
+            </nav>
+          </div>
+          <div class="doc-layout">
+            <aside class="doc-sidebar">
+              <div class="doc-sidebar-head"><span>PROJECT CONTENTS</span><button class="doc-sidebar-toggle" type="button" data-action="doc-sidebar" aria-expanded="false">目录 <span>⌄</span></button></div>
+              <nav class="doc-tree" aria-label="项目文档目录">
+                <a class="doc-tree-link is-active" href="#/docs/atlas#overview" data-doc-section="overview"><span>00</span>项目简介</a>
+                <div class="doc-tree-group"><button class="doc-tree-group-title" type="button" data-action="toggle-doc-group" aria-expanded="true"><span>01</span>项目概览 <b>⌃</b></button><div class="doc-tree-children"><a href="#/docs/atlas#requirements" data-doc-section="requirements">项目背景与目标</a><a href="#/docs/atlas#requirements" data-doc-section="requirements">核心功能范围</a><a href="#/docs/atlas#requirements" data-doc-section="requirements">用户与使用场景</a></div></div>
+                <div class="doc-tree-group"><button class="doc-tree-group-title" type="button" data-action="toggle-doc-group" aria-expanded="true"><span>02</span>需求分析 <b>⌃</b></button><div class="doc-tree-children"><a href="#/docs/atlas#requirements" data-doc-section="requirements">业务流程梳理</a><a href="#/docs/atlas#requirements" data-doc-section="requirements">需求拆解</a><a href="#/docs/atlas#requirements" data-doc-section="requirements">非功能要求</a></div></div>
+                <div class="doc-tree-group"><button class="doc-tree-group-title" type="button" data-action="toggle-doc-group" aria-expanded="true"><span>03</span>系统设计 <b>⌃</b></button><div class="doc-tree-children"><a href="#/docs/atlas#architecture" data-doc-section="architecture">整体架构</a><a href="#/docs/atlas#architecture" data-doc-section="architecture">模块边界</a><a href="#/docs/atlas#architecture" data-doc-section="architecture">数据与内容模型</a></div></div>
+                <div class="doc-tree-group"><button class="doc-tree-group-title" type="button" data-action="toggle-doc-group" aria-expanded="true"><span>04</span>核心实现 <b>⌃</b></button><div class="doc-tree-children"><a href="#/docs/atlas#implementation" data-doc-section="implementation">页面与路由</a><a href="#/docs/atlas#implementation" data-doc-section="implementation">内容渲染</a><a href="#/docs/atlas#implementation" data-doc-section="implementation">AI 更新工作流</a></div></div>
+                <div class="doc-tree-group"><button class="doc-tree-group-title" type="button" data-action="toggle-doc-group" aria-expanded="true"><span>05</span>部署验证 <b>⌃</b></button><div class="doc-tree-children"><a href="#/docs/atlas#deployment" data-doc-section="deployment">启动与构建</a><a href="#/docs/atlas#deployment" data-doc-section="deployment">质量检查</a></div></div>
+                <a class="doc-tree-link" href="#/docs/atlas#reflection" data-doc-section="reflection"><span>06</span>项目复盘</a>
+              </nav>
+              <div class="doc-sidebar-note"><span>MARKDOWN SOURCE</span><p>projects/xerina-atlas/<br />index.md</p></div>
+            </aside>
+            <article class="doc-article">
+              <header class="doc-article-header"><span class="section-index" data-detail-category>项目经历 / 平台工程 · 2026</span><h1 data-detail-title>Xerina Atlas</h1><p class="doc-article-lede" data-detail-lede>把个人作品集变成一套可被持续维护的内容系统：项目、文章、经历和首页摘要，都来自结构化内容。</p><div class="doc-article-meta"><span data-detail-stack>VitePress · Vue · AI Workflow</span><span data-detail-status>STATUS / BUILDING</span><span data-detail-updated>UPDATED / 2026.08</span></div></header>
+              <div class="doc-content" data-doc-content></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page page-experience" data-page="experience">
+        <div class="container page-container">
+          <div class="page-intro experience-intro"><div><span class="section-index">01 / EXPERIENCE</span><h1>实习与实践经历</h1><p>按时间记录我在真实协作、项目实践和技术分享中承担过的工作内容，以及这些经历如何影响我的工程方法。</p></div><div class="quote-block">“先把问题讲清楚，<br />再把代码写漂亮。”</div></div>
+          <div class="timeline"><div class="timeline-axis"></div><a class="timeline-item timeline-link is-current" href="#/experience/internship"><div class="timeline-marker">01</div><div class="timeline-date">2025.06 — 2025.09</div><div class="timeline-content"><div class="timeline-heading"><div><span class="status-label">INTERNSHIP</span><h2>后端开发实习生</h2><p>某技术服务团队 · 业务中台</p></div><span class="timeline-location">CHINA / REMOTE</span></div><p>参与订单与履约相关服务的接口开发、领域对象梳理与线上问题排查。通过日志、链路与复现用例，把“偶发问题”变成可讨论、可修复的工程任务。</p><div class="timeline-tags"><span>领域建模</span><span>接口设计</span><span>问题定位</span></div><span class="timeline-detail-link">查看角色与工作详情 ↗</span></div></a><a class="timeline-item timeline-link" href="#/experience/project-lead"><div class="timeline-marker">02</div><div class="timeline-date">2024.11 — 2025.04</div><div class="timeline-content"><div class="timeline-heading"><div><span class="status-label">PROJECT LEAD</span><h2>知识库问答实验室</h2><p>校级创新项目 · 项目负责人</p></div><span class="timeline-location">TEAM OF 4</span></div><p>从用户访谈和资料整理开始，搭建第一版 RAG 问答链路。把“回答看起来不错”拆成检索命中、引用完整性和人工评分三个维度，完成 4 次迭代。</p><div class="timeline-tags"><span>需求验证</span><span>RAG</span><span>评测设计</span></div><span class="timeline-detail-link">查看角色与工作详情 ↗</span></div></a><a class="timeline-item timeline-link" href="#/experience/community"><div class="timeline-marker">03</div><div class="timeline-date">2023.09 — 2024.06</div><div class="timeline-content"><div class="timeline-heading"><div><span class="status-label">COMMUNITY</span><h2>技术社团核心成员</h2><p>工程实践与分享</p></div><span class="timeline-location">10+ SESSIONS</span></div><p>组织后端基础、Git 协作和项目复盘分享，维护一份面向新成员的学习资料库。开始意识到，能把复杂内容讲明白，本身就是一种工程能力。</p><div class="timeline-tags"><span>技术写作</span><span>协作</span><span>知识沉淀</span></div><span class="timeline-detail-link">查看角色与工作详情 ↗</span></div></a></div>
+          <div class="skills-panel"><div><span class="section-index">WORKING PRINCIPLES</span><h2>我的工作关键词</h2></div><div class="principle-list"><div><b>01</b><strong>先建模，再编码</strong><span>用业务语言确认边界</span></div><div><b>02</b><strong>先可观测，再优化</strong><span>让问题有证据、有路径</span></div><div><b>03</b><strong>先交付，再迭代</strong><span>用小步验证替代空想</span></div></div></div>
+        </div>
+      </section>
+
+      <section class="page page-experience-detail" data-page="experience-detail">
+        <div class="container page-container detail-container experience-detail-container">
+          <a class="back-link" href="#/experience">← 返回实习与实践经历</a>
+          <header class="experience-detail-header"><div><span class="section-index" data-experience-type>INTERNSHIP / BACKEND ENGINEERING</span><h1 data-experience-title>后端开发实习生</h1><p data-experience-organization>某技术服务团队 · 业务中台</p></div><div class="experience-detail-meta"><span data-experience-period>2025.06 — 2025.09</span><span data-experience-location>CHINA / REMOTE</span><span data-experience-status>CURRENT FOCUS / BACKEND</span></div></header>
+          <div class="experience-detail-layout"><aside class="experience-detail-sidebar"><span>EXPERIENCE CONTENTS</span><div><a href="#/experience/internship#role" data-experience-section="role">01 / 我的角色</a><a href="#/experience/internship#responsibilities" data-experience-section="responsibilities">02 / 具体参与</a><a href="#/experience/internship#outcomes" data-experience-section="outcomes">03 / 结果与复盘</a><a href="#/experience/internship#skills" data-experience-section="skills">04 / 实践关键词</a></div><a class="related-project" data-related-project href="#/docs/order"><span>RELATED PROJECT</span><strong>订单履约服务</strong><small>查看关联项目文档 ↗</small></a></aside><article class="experience-detail-article"><p class="experience-detail-lede" data-experience-lede>在真实业务协作中参与订单与履约相关服务，把需求、领域对象、接口交付和线上问题定位连接成一条可复盘的工程链路。</p><div data-experience-content></div></article></div>
+        </div>
+      </section>
+
+      <section class="page page-notes" data-page="notes">
+        <div class="container page-container">
+          <div class="page-intro"><div><span class="section-index">03 / KNOWLEDGE BASE</span><h1>技术文章与知识库</h1><p>这里聚合项目教程、技术文章和方法论内容。文章正文会沿用 Teek 的长文阅读体验，并与项目文档互相串联。</p></div><div class="notes-stat"><strong>12<span>+</span></strong><small>已发布文章</small></div></div>
+          <div class="notes-toolbar"><div class="note-filters"><button class="filter-button is-active" type="button" data-note-filter="all">全部</button><button class="filter-button" type="button" data-note-filter="engineering">工程实践</button><button class="filter-button" type="button" data-note-filter="method">方法论</button><button class="filter-button" type="button" data-note-filter="ai">AI 应用</button></div><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg><span class="sr-only">搜索文章</span><input type="search" placeholder="搜索标题 / 标签" data-notes-search /></label></div>
+          <div class="notes-table" id="notes-table"><a class="note-table-row" data-note-category="method" href="#/docs/atlas"><div class="note-table-date">2026.08.12<br /><span>8 MIN READ</span></div><div class="note-table-main"><h2>如何为一个个人知识库设计内容模型</h2><p>从首页、项目页和文章页的阅读任务出发，设计可被不同视图复用的数据结构。</p><div class="tag-row"><span>系统设计</span><span>内容模型</span></div></div><span class="row-arrow">↗</span></a><a class="note-table-row" data-note-category="method" href="#/notes"><div class="note-table-date">2026.07.26<br /><span>6 MIN READ</span></div><div class="note-table-main"><h2>从项目复盘到项目解析：我的写作结构</h2><p>复盘是写给自己的，解析是写给读者的。两种写作如何保留真实决策。</p><div class="tag-row"><span>方法论</span><span>技术写作</span></div></div><span class="row-arrow">↗</span></a><a class="note-table-row" data-note-category="engineering" href="#/docs/order"><div class="note-table-date">2026.07.02<br /><span>12 MIN READ</span></div><div class="note-table-main"><h2>DDD 不是分层模板，而是沟通工具</h2><p>从一个订单履约服务开始，解释边界、实体和值对象如何帮助团队对齐。</p><div class="tag-row"><span>DDD</span><span>Java</span></div></div><span class="row-arrow">↗</span></a><a class="note-table-row" data-note-category="ai" href="#/docs/rag"><div class="note-table-date">2026.06.18<br /><span>10 MIN READ</span></div><div class="note-table-main"><h2>RAG 应用的评测：不要只看回答像不像</h2><p>把命中、引用和回答质量拆开，建立一个可以持续回归的最小评测集。</p><div class="tag-row"><span>RAG</span><span>Evaluation</span></div></div><span class="row-arrow">↗</span></a><a class="note-table-row" data-note-category="engineering" href="#/docs/order"><div class="note-table-date">2026.05.30<br /><span>7 MIN READ</span></div><div class="note-table-main"><h2>如何为状态机设计可读的接口契约</h2><p>状态越多，越需要把约束写在接口和错误反馈里，而不是藏在调用方猜测中。</p><div class="tag-row"><span>API Design</span><span>Backend</span></div></div><span class="row-arrow">↗</span></a></div>
+        </div>
+      </section>
+
+      <section class="page page-about" data-page="about">
+        <div class="container page-container">
+          <div class="about-hero"><div><span class="section-index">04 / ABOUT XERINA</span><h1>个人介绍<br /><em>Xerina</em></h1></div><div class="about-lede"><p>我喜欢在技术和表达之间来回走动：一边把系统做得可靠，一边把过程写得清楚。</p><span>Currently exploring / Backend · Platform · AI × Product</span></div></div>
+          <div class="about-grid"><div class="about-story"><span class="section-index">PERSONAL INTRODUCTION</span><p class="story-lede">我相信，优秀的工程师不只是把事情做完，而是让下一次做同样的事情变得更容易。</p><p>我在计算机科学与技术专业学习，持续参与后端、AI 应用与知识库相关实践。比起追逐一个看起来很酷的技术名词，我更关心它能否解决具体问题、能否被团队理解、能否在真实约束下持续运行。</p><p>如果你正在寻找一个愿意深入业务、喜欢梳理复杂问题、也愿意把经验公开分享的人，欢迎和我聊聊。</p><div class="about-actions"><button class="button button-primary" type="button" data-action="resume">下载简历 <span>↓</span></button><button class="button button-secondary" type="button" data-action="copy-email">联系我 <span>↗</span></button></div></div><div class="about-portrait"><div class="portrait-frame"><span class="portrait-label">X / 2026</span><div class="portrait-shape shape-one"></div><div class="portrait-shape shape-two"></div><div class="portrait-initial">X<span>.</span></div><span class="portrait-caption">BUILD WITH<br />CLARITY</span></div><div class="portrait-meta"><span>BASED IN CHINA</span><span>OPEN TO WORK</span></div></div></div>
+          <div class="gallery-section"><div class="section-heading compact-heading"><div><span class="section-index">PERSONAL GALLERY</span><h2>个人图集</h2></div><span class="gallery-note">A VISUAL INDEX OF SMALL MOMENTS</span></div><div class="gallery-grid"><div class="gallery-card gallery-card-wide"><div class="gallery-art art-notes"><span>NOTES<br />IN PROGRESS</span><i></i><i></i><i></i></div><div><strong>写作与整理</strong><small>把思考变成可分享的东西</small></div></div><div class="gallery-card"><div class="gallery-art art-terminal"><span>~/xerina</span><b>ship the<br />next version<span class="cursor">_</span></b></div><div><strong>持续交付</strong><small>从小步开始验证</small></div></div><div class="gallery-card"><div class="gallery-art art-library"><span class="book book-a"></span><span class="book book-b"></span><span class="book book-c"></span><span class="book-label">READ / BUILD / SHARE</span></div><div><strong>学习与复盘</strong><small>保持对问题的耐心</small></div></div></div></div>
+          <div class="about-contact"><div><span class="section-index">CONTACT</span><h2>联系方式</h2></div><div class="contact-details"><button type="button" class="contact-detail" data-action="copy-email"><span>EMAIL</span><strong>xerina@example.com</strong><b>↗</b></button><a class="contact-detail" href="#/about"><span>GITHUB</span><strong>github.com/xerina</strong><b>↗</b></a><a class="contact-detail" href="#/about"><span>LINKEDIN</span><strong>linkedin.com/in/xerina</strong><b>↗</b></a></div></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-inner"><span>© 2026 XERINA ATLAS</span><span>DESIGNED FOR CLARITY · BUILT FOR ITERATION</span><a href="#/about">回到顶部 ↑</a></div></footer>
+    <div class="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
