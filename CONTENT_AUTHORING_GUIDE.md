@@ -13,7 +13,9 @@
 5. 竞赛荣誉统一维护在 `docs/about/index.md` 的 `honors` frontmatter，由首页和 `/portfolio/` 自动展示。
 6. 标题必须明确描述内容，例如“订单状态机设计”，不使用“想法落到现实”之类泛化标题。
 7. 图片、视频、附件、Archify 图和代码按本指南选择目录，不把大段 HTML 或二进制内容塞进 Markdown。
-8. AI 不修改 .vitepress/theme、schema、scripts 和部署配置，除非任务明确要求修改架构。
+8. 项目总览和项目章节统一使用 `layout: project-doc`，字体、字号、目录宽度、间距和响应式行为由统一布局控制，Markdown 文件不单独写样式。
+9. 项目文档正文不要重复添加 `# 一级标题`；布局会根据 frontmatter 的 `title` 自动渲染页面标题。
+10. AI 不修改 .vitepress/theme、schema、scripts 和部署配置，除非任务明确要求修改架构。
 
 ## 2. 内容应该放在哪里
 
@@ -194,6 +196,8 @@ layout: project-doc
 ~~~
 
 项目文档布局会从 frontmatter 的 `title` 输出一级标题，因此项目总览和章节正文不要再重复写 `# 标题`；普通 Teek 技术文章仍可按文章自身需要保留一级标题。
+
+所有使用 `layout: project-doc` 的项目文件都会自动获得统一的文档阅读样式，包括中文字体栈、标题和正文层级、左侧目录宽度、目录项行高与移动端折叠行为。新增项目文件只需使用模板并补齐 frontmatter，不要在 Markdown 中通过 HTML、内联样式或自定义字体覆盖这套规则。
 
 章节只解决一个独立阅读任务。若同时出现需求分析、数据库设计和部署步骤，应拆分成多个 Markdown 文件。
 
@@ -450,6 +454,7 @@ scripts/**
 - [ ] 文件放在正确的 scope 和 slug 下。
 - [ ] 正式内容已移除 `draft: true` 或将其改为 `false`。
 - [ ] frontmatter 类型、标题、摘要、排序和关联字段完整。
+- [ ] 项目总览和项目章节使用 `layout: project-doc`，正文没有重复的 `# 一级标题`。
 - [ ] 标题具体、准确，没有模糊口号。
 - [ ] 项目职责与团队职责区分清楚。
 - [ ] 所有事实和指标已由 Xerina 确认。
