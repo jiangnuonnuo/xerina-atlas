@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Xerina note frontmatter",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["title", "type", "category", "date", "summary"],
+  "properties": {
+    "type": { "const": "note" },
+    "title": { "type": "string", "minLength": 1 },
+    "category": { "type": "string", "minLength": 1 },
+    "date": { "type": ["string", "object"] },
+    "summary": { "type": "string", "minLength": 1 }
+  }
+}

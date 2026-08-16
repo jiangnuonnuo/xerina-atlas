@@ -6,10 +6,9 @@ group: "[NEEDS_REVIEW: 需求分析 / 系统设计 / 核心实现 / 测试部署
 order: 30
 description: "[NEEDS_REVIEW: 本章解决的问题与结论]"
 sidebar: true
+layout: project-doc
 draft: true
 ---
-
-# [NEEDS_REVIEW: 本章准确标题]
 
 ## 要解决的问题
 

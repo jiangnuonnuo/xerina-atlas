@@ -125,6 +125,7 @@ tags:
   - 状态机
 nav: true
 sidebar: true
+layout: project-doc
 ---
 ~~~
 
@@ -166,14 +167,13 @@ group: 系统设计
 order: 30
 description: 订单聚合、领域边界和状态事件的设计。
 sidebar: true
+layout: project-doc
 ---
 ~~~
 
 正文推荐结构：
 
 ~~~md
-# 系统设计
-
 ## 设计目标
 
 ## 约束与取舍
@@ -190,6 +190,8 @@ sidebar: true
 
 ## 本章结论
 ~~~
+
+项目文档布局会从 frontmatter 的 `title` 输出一级标题，因此项目总览和章节正文不要再重复写 `# 标题`；普通 Teek 技术文章仍可按文章自身需要保留一级标题。
 
 章节只解决一个独立阅读任务。若同时出现需求分析、数据库设计和部署步骤，应拆分成多个 Markdown 文件。
 
@@ -213,6 +215,7 @@ period: 2025.06 — 2025.09
 location: CHINA / REMOTE
 order: 10
 featured: true
+layout: experience-detail
 summary: 参与领域建模、接口交付与线上问题定位。
 skills:
   - Java

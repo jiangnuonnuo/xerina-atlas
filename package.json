@@ -1,0 +1,23 @@
+{
+  "name": "xerina-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "npm run check && vitepress build docs",
+    "preview": "vitepress preview docs",
+    "check": "npm run check:content && npm run check:assets",
+    "check:content": "tsx scripts/validate-content.ts",
+    "check:assets": "tsx scripts/validate-assets.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "gray-matter": "^4.0.3",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2",
+    "vitepress": "^1.6.4",
+    "vitepress-theme-teek": "^1.6.2",
+    "vue": "^3.5.41"
+  }
+}

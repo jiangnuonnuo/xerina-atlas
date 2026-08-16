@@ -7,13 +7,12 @@ period: "[NEEDS_REVIEW: YYYY.MM — YYYY.MM]"
 location: "[NEEDS_REVIEW: 城市 / 远程]"
 order: 100
 featured: false
+layout: experience-detail
 summary: "[NEEDS_REVIEW: 一句话说明职责、行动与价值]"
 skills: []
 relatedProjects: []
 draft: true
 ---
-
-# [NEEDS_REVIEW: 职位或实践角色]
 
 ## 我的角色
 
