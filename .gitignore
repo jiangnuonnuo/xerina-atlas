@@ -1,4 +1,5 @@
 /.idea/workspace.xml
+/node_modules
 node_modules/
 docs/.vitepress/cache/
 docs/.vitepress/temp/
@@ -6,3 +7,4 @@ docs/.vitepress/data/*.timestamp-*.mjs
 docs/.vitepress/dist/
 tmp/
 .DS_Store
+/.idea
