@@ -1,83 +1,283 @@
 ---
-title: 核心实现：把“不要猜、要验证、可恢复”写成真正会拒绝错误的代码
+title: 40 核心实现：用契约传递事实，用状态保存接续点
 type: project-chapter
 project: V-Team-Skills
 group: 核心实现
 order: 40
-description: 将模式路由、契约校验、恢复记录和完成门禁落实为可执行的 CLI 约束。
+description: 通过契约生命周期、恢复状态、模块完成和里程碑把事实落到 CLI。
 sidebar: true
 layout: project-doc
 ---
 
-V-Team 的说服力并不只来自一份写得漂亮的技能说明，而来自 `scripts/vteam.py` 对关键边界的实际执行。它不是简单地把 JSON 当作日志文件，也不是把命令做成“记录一下就算完成”；在多个关键节点上，代码会主动拒绝不完整、歧义或不安全的输入，把协作纪律从建议提升为可执行约束。
+[返回总览](/projects/V-Team-Skills/) · [系统设计](/projects/V-Team-Skills/30-system-design) · [验证与接入](/projects/V-Team-Skills/50-testing-and-deployment)
 
-下面的实现说明以 develop 当前的 CLI 为准。命令行可以通过 `--json` 输出机器友好的结果，因此它既适合 Agent 读取，也适合被项目脚本、开发工具或更高层的工作流调用。所有写入都进入项目根目录下的 `.vteam/state.json`，时间统一使用秒级 UTC 时间，列表字段通过去重保留稳定顺序，错误则以清晰中文信息和不同退出码返回。
+V-Team 的核心实现由一套 Python 标准库 CLI 提供。它不负责“自动思考”，而是把跨角色协作中容易说不清、记不准、接不上三类问题变成稳定结构：契约索引、恢复状态和完成事实。
 
-## 1. 身份与来源校验：先保证“指向正确”
+<InteractiveDiagram
+  title="跨角色契约协作链路"
+  src="/media/projects/v-team-skills/diagrams/contract-collaboration/index.html?embed=1"
+  poster="/media/projects/v-team-skills/diagrams/contract-collaboration/preview.png"
+  description="提供者发布并验证，消费者按唯一契约发现、联调和记录证据。"
+/>
 
-实现从小而硬的输入规则开始。一般 ID 必须以小写字母或数字开头，只允许小写字母、数字、点、下划线和短横线；角色 ID 还必须符合 `<职能>-<功能范围>` 的形式，职能只能来自 `requirement`、`product`、`architect`、`backend`、`frontend` 和 `qa`。这意味着一个类似 `frontend-billing-console` 的角色既能表达职能，也能表达当前能力范围；而一个模糊的 `developer-1` 会被直接拒绝。
+## 为什么需要 CLI
 
-契约来源的校验更加关键：本地 `source_ref` 必须使用项目相对路径，并且真实存在于项目内；可以附带 `#fragment` 或 `::` 定位信息，但不能通过 `../` 逃逸项目根目录；如果来源在外部，则必须是明确的 URI。理想情况下，任何消费者拿到的契约都能沿着一条可定位路径找到权威正文，不会因为 Agent 记住了某个旧 URL 或凭模糊文件名做集成。
+一次会话内，后端说“接口好了”，前端通常知道它指什么。换一个会话后，“好了”可能表示代码写完、单测通过、服务可启动，或者只是开发者今天心态不错。
 
-## 2. `context`：冷启动时只读取最小必要事实
+CLI 为关键事实增加可验证语义：
 
-`context --project-root ... --role-id ... [--capability ...]` 是恢复和协作的入口。它会先验证项目目录和角色，再加载或构造空状态，返回：
+- `draft` 只能用于 mock，不能真实联调；
+- `ready` 必须有提供者的直接验证证据；
+- `verified` 表示登记的消费者已经验证；
+- 多个候选契约必须明确选择；
+- 完成模块时必须提供验证证据；
+- 恢复记录按 capability 覆盖，不无限追加。
 
-- 当前角色 ID 与解析出的职能；
-- 对应的角色参考路径；
-- 当前 capability 的完成事实（如果提供了 capability）；
-- 与角色和 capability 相关的可发现契约；
+它所做的不多，但每一项都对应跨会话和跨角色最常见的误解。
+
+## 命令总览
+
+脚本入口是 `scripts/vteam.py`：
+
+```text
+python3 scripts/vteam.py <command> [options]
+```
+
+| 命令 | 用途 | 是否写状态 |
+| --- | --- | --- |
+| `context` | 读取角色的最小上下文 | 否 |
+| `contract publish` | 创建或更新契约索引 | 是 |
+| `contract discover` | 按 capability 和消费者发现契约 | 否 |
+| `contract verify` | 记录消费者验证证据 | 是 |
+| `contract deprecate` | 停用契约并指向替代项 | 是 |
+| `resume set` | 覆盖 capability 的恢复记录 | 是 |
+| `resume clear` | 清除恢复记录 | 按需 |
+| `module complete` | 记录完成事实并清除 active | 是 |
+| `milestone record` | 记录重大里程碑引用 | 是 |
+| `milestone list/show` | 读取紧凑索引或单项详情 | 否 |
+
+普通任务不需要运行这些命令。只有出现跨角色契约、明确跨会话恢复或重大里程碑时，结构化状态才比对话上下文更有价值。
+
+## `context`：只拿当前角色需要的内容
+
+```text
+python3 scripts/vteam.py context \
+  --project-root /path/to/project \
+  --role-id frontend-order-export \
+  --capability order-export
+```
+
+输出包括：
+
+- 角色职能与对应参考文件；
+- capability 的完成事实；
+- 与该角色有关的可发现契约；
 - 当前 active 恢复记录；
-- 里程碑数量与状态文件是否真实存在。
+- 里程碑数量；
+- 状态文件是否存在。
 
-这里有一个非常精致的实现选择：当状态文件不存在时，读取路径返回空状态，但不会创建 `.vteam` 目录。也就是说，“询问系统现在有没有状态”不会改变系统状态。测试明确覆盖了这一点，理想情况下任何只读冷启动都可以安全重复，不会因为一次查询就让项目出现无意义的痕迹。
+如果前端冷启动时还不知道 capability，可以先省略 `--capability` 读取角色收件箱。上下文不会加载里程碑正文，也不会把无关 capability 全部倒进会话。
 
-`context` 还会把契约转换成带有 `integration_allowed` 的输出：只有 `ready` 和 `verified` 才允许真实集成，`draft` 和 `blocked` 仍然可被读取，但不能伪装成可上线连接。这个小字段把状态语义直接传递给消费者，减少调用方自行解释状态而产生的分歧。
+## 契约生命周期
 
-## 3. 契约发布：让提供者先说清楚“我提供什么”
+### 1. 提供者发布索引
 
-`contract publish` 支持 `openapi`、`graphql`、`protobuf`、`json-schema`、`shared-types` 和 `contract-test` 等来源类型。发布时必须明确 contract ID、capability、provider、至少一个 consumer、来源、版本和 `source_ref`。状态默认为 `draft`，如果要发布为 `ready`，必须同时提供至少一条非空的提供者验证证据；如果状态是 `blocked`，必须写明阻塞原因。
+契约正文应先写入项目的 OpenAPI、Schema、protobuf、共享类型或契约测试。然后将位置登记到 V-Team：
 
-同一个 contract ID 一旦存在，后续更新不能偷偷改绑 capability 或 provider。这条规则看似保守，实际上是在保护索引的身份稳定性：版本可以更新，状态可以推进，验证证据可以累积，但不能把一个已有契约悄悄换成完全不同的能力或提供者。理想情况下，消费者看到的 ID 始终指向同一条协作关系，重大变化必须通过新契约或明确迁移表达。
+```text
+python3 scripts/vteam.py contract publish \
+  --project-root /path/to/project \
+  --id order-export-api \
+  --capability order-export \
+  --provider backend-order-export \
+  --consumer frontend-order-export \
+  --source openapi \
+  --source-ref api/openapi.yaml#/paths/~1orders~1export \
+  --status draft
+```
 
-脚本不会复制请求、响应和字段示例，只保存 `source_ref`。这样既避免索引与真实接口正文漂移，也让产品仓库保持真正的单一事实源。即使接口来自外部 Catalog，也必须用完整 URI 定位，而不是把外部内容偷偷缓存成另一份不透明副本。
+`source` 支持：
 
-## 4. 契约发现：零个阻塞，多个选择，唯一才直达
+- `openapi`
+- `graphql`
+- `protobuf`
+- `json-schema`
+- `shared-types`
+- `contract-test`
 
-`contract discover` 按 capability 和 consumer 精确过滤，并排除 `deprecated` 契约。当没有匹配时，命令返回明确错误并告诉调用方“禁止猜测接口”；当出现多个匹配时，返回选择所需的退出码和候选 ID，要求调用方用 `--contract-id` 明确选择；只有一个匹配时，才返回 `selection: single` 和具体契约。
+本地 `source_ref` 必须指向项目内真实文件，可以附带 fragment；也可以使用外部 URI 指向项目已有 Catalog 或 Registry。
 
-这是一种极其适合 Agent 的安全默认值。很多集成错误并非来自代码写错，而是来自“有两个看起来都像正确答案”的时候，Agent 擅自选了一个。V-Team 让歧义成为显式状态，让阻塞成为可行动信息：零个匹配意味着需要补充契约或调整范围，多个匹配意味着需要产品或架构选择，唯一匹配才意味着可以顺着 `source_ref` 继续。
+### 2. 从 draft 升级到 ready
 
-消费者验证由 `contract verify` 完成。验证者必须登记为该契约的 consumer，契约必须先处于 `ready` 或 `verified`，证据必须非空；成功后契约转为 `verified`，并追加验证者、证据和 UTC 时间。没有登记关系的角色不能借用一次无关测试把契约标成完成，这让验证证据与真实消费关系绑定。
+实现完成并取得直接证据后，提供者再次发布同一契约：
 
-当接口不再接受新消费时，`contract deprecate` 会写入原因、可选替代契约和时间，并使它不再参与后续发现。理想状态下，契约生命周期因此形成完整闭环：发布、提供者验证、消费者验证、停用和替代都有清晰动作，而不是靠删除文件或在聊天里宣布“以后别用了”。
+```text
+python3 scripts/vteam.py contract publish \
+  --project-root /path/to/project \
+  --id order-export-api \
+  --capability order-export \
+  --provider backend-order-export \
+  --consumer frontend-order-export \
+  --source openapi \
+  --source-ref api/openapi.yaml#/paths/~1orders~1export \
+  --status ready \
+  --verification "导出接口集成测试通过"
+```
 
-## 5. 恢复状态：一项能力只保留一个下一步
+`ready` 没有 `--verification` 会被拒绝。输出中的 `integration_allowed` 只有在状态为 `ready` 或 `verified` 时才为 `true`。
 
-`resume set` 以 capability 为键写入一条 active 记录，至少包含当前角色、摘要和下一步，可选记录阻塞与引用；再次设置同一 capability 时会覆盖旧记录，而不是堆叠多个互相矛盾的“当前进度”。`resume clear` 则是幂等的：没有状态时返回 `cleared: false`，有状态时删除并返回 `cleared: true`。
+### 3. 消费者发现契约
 
-这个“每个 capability 一条 active”的选择非常有力量。它强迫恢复信息保持当前、简短和可执行，而不是变成另一个历史聊天库。理想情况下，接班 Agent 不需要阅读十个旧进度条目，只需要知道：目前角色是谁，已经完成了什么，下一步是什么，是否存在阻塞，应该跳到哪个真实文件。
+```text
+python3 scripts/vteam.py contract discover \
+  --project-root /path/to/project \
+  --capability order-export \
+  --consumer frontend-order-export
+```
 
-## 6. 模块完成：把完成定义成可验证事实
+发现规则很明确：
 
-`module complete` 要求 capability、摘要和至少一条非空验证证据；如果同时关联 contract，则每一个契约都必须属于当前 capability，并且状态达到 `ready` 或 `verified`。通过后，脚本将 capability 写入 `completed` 状态、记录摘要、契约列表、验证证据和完成时间，同时清理 active。
+- 没有匹配：报错并禁止猜接口；
+- 一个匹配：直接返回；
+- 多个匹配：要求使用 `--contract-id` 明确选择；
+- 已停用契约：不进入可发现结果。
 
-这一步把“交付完成”从一个语气词变成一个有门槛的动作。没有验证证据不能完成，有不稳定契约不能完成，关联错 capability 不能完成。与此同时，完成不会保留无效的 active，因此状态不会出现“能力已完成但仍显示下一步待做”的自相矛盾。理想情况下，任何上层工具都可以把 `capabilities[capability].status` 和 `verification` 当作可靠的当前事实。
+“我猜后端大概返回这个字段”在短期内很快，在联调时通常会变成一项团队考古活动。
 
-## 7. 里程碑：只为重大事实留下短索引
+### 4. 消费者记录验证
 
-`milestone record` 是显式动作，不会因为普通契约发布或普通模块完成而自动产生。它要求唯一的里程碑 ID、capability、摘要和至少一个引用；`list` 只输出 ID、能力和摘要；`show` 才返回引用详情。测试还验证了 context 和 list 不会加载引用正文，只保留索引层信息。
+```text
+python3 scripts/vteam.py contract verify \
+  --project-root /path/to/project \
+  --id order-export-api \
+  --verifier frontend-order-export \
+  --evidence "页面按当前筛选成功下载 CSV"
+```
 
-这使里程碑既能承担“首次形成可用闭环”“公共架构发生重大变化”“发布切换完成”等长期事实，又不会把每一次日常测试都变成沉重档案。理想状态下，未来的 Agent 可以通过里程碑快速知道项目曾经跨过哪些关键门槛，而无需吞下整段历史上下文。
+只有登记在 `consumers` 中的角色可以验证，且契约必须已经是 `ready` 或 `verified`。验证成功后状态成为 `verified`，证据和时间被追加保存。
 
-## 8. 错误不是意外，而是工作流的一部分
+### 5. 停用契约
 
-当前实现使用普通输入/状态错误和需要选择的歧义错误区分退出码：一般错误返回 `2`，契约候选过多需要明确选择时返回 `3`。错误文本直接说明原因，例如来源文件不存在、契约必须先达到 ready、消费者未登记、禁止猜测接口或模块完成缺少证据。
+```text
+python3 scripts/vteam.py contract deprecate \
+  --project-root /path/to/project \
+  --id order-export-api \
+  --reason "已迁移到异步导出协议" \
+  --replacement order-export-job-api
+```
 
-这让失败也成为结构化输出。理想状态下，Agent 遇到错误不会陷入无意义重试，而是能根据错误类型采取下一步：补来源、补验证、选择 contract ID、登记 consumer、先完成 provider 实现，或者把任务标记为真实阻塞。系统不是只在成功时有用，拒绝错误路径同样是在帮助交付前进。
+替代契约不能是自身。停用记录保留原因、替代 ID 和时间，旧契约不再被新消费者发现。
 
-## 核心实现的结论
+## 契约状态语义
 
-V-Team 的核心实现可以被概括为一组极简但有力的默认值：来源必须可定位，角色必须可识别，契约必须有状态，歧义不能猜，恢复只保留当前事实，完成必须带证据，重大事实才做持久化。正是这些小而明确的拒绝条件，让它在理想状态下呈现出一种近乎“自动守住边界”的体验：Agent 仍然可以快速工作，但错误的协作假设很难悄悄穿过系统。
+| 状态 | 含义 | 可以真实联调 |
+| --- | --- | --- |
+| `draft` | 结构可讨论，可用于 mock | 否 |
+| `ready` | 提供者已实现并有直接证据 | 是 |
+| `verified` | 消费者已完成验证 | 是 |
+| `blocked` | 存在明确阻塞，必须附原因 | 否 |
+| `deprecated` | 已停用，可记录替代契约 | 否 |
 
-> 下一章：[50-testing-and-deployment.md](50-testing-and-deployment.md) 将把这些实现边界与测试证据、运行方式和项目接入方式对应起来。
+同一 contract ID 更新时不能改变 capability 或 provider，避免一个稳定名称悄悄变成另一份协议。
+
+## 恢复状态：每个 capability 只保留一条当前记录
+
+跨会话暂停时，可以保存接续点：
+
+```text
+python3 scripts/vteam.py resume set \
+  --project-root /path/to/project \
+  --capability order-export \
+  --role frontend-order-export \
+  --summary "后端契约 ready，页面尚未联调" \
+  --next-step "发现 order-export-api 并完成下载流程" \
+  --reference api/openapi.yaml
+```
+
+如果再次执行 `resume set`，同一 capability 的旧记录会被覆盖。可选字段 `--blocker` 用于说明当前阻塞，`--reference` 可以重复提供必要引用。
+
+清除恢复点：
+
+```text
+python3 scripts/vteam.py resume clear \
+  --project-root /path/to/project \
+  --capability order-export
+```
+
+如果状态或记录不存在，清除操作直接返回 `cleared: false`，不会为了“清理不存在的东西”先创建一个新文件。这是一种小但令人安心的克制。
+
+## 模块完成：以证据覆盖当前事实
+
+```text
+python3 scripts/vteam.py module complete \
+  --project-root /path/to/project \
+  --capability order-export \
+  --summary "订单按筛选条件导出 CSV 已闭环" \
+  --verification "后端导出集成测试通过" \
+  --verification "页面主流程手动验收通过" \
+  --contract order-export-api
+```
+
+完成命令会：
+
+1. 要求至少一条非空验证证据；
+2. 检查显式引用的契约属于同一 capability；
+3. 检查这些契约处于 `ready` 或 `verified`；
+4. 覆盖 capability 的当前完成事实；
+5. 清除同一 capability 的 active 记录。
+
+它只验证命令中显式传入的契约，不会猜测还应该关联哪些索引。因此完成前必须由执行者准确提供当前模块使用的契约列表。
+
+## 重大里程碑：保存引用，不复制正文
+
+只有确实需要长期定位的重要事实才记录里程碑：
+
+```text
+python3 scripts/vteam.py milestone record \
+  --project-root /path/to/project \
+  --id order-export-v1 \
+  --capability order-export \
+  --summary "同步导出 V1 已交付" \
+  --reference docs/order-export.md \
+  --reference api/openapi.yaml
+```
+
+`milestone list` 只返回 ID、capability 和摘要；`milestone show --id ...` 才读取单项引用。正文继续留在项目文档和契约中。
+
+## 状态文件结构
+
+V-Team 使用 schema version 2：
+
+```json
+{
+  "schema_version": 2,
+  "project": "shop-console",
+  "capabilities": {
+    "order-export": {
+      "status": "completed",
+      "summary": "订单导出已闭环",
+      "contracts": ["order-export-api"],
+      "verification": ["主流程验收通过"],
+      "completed_at": "2026-08-17T08:00:00Z"
+    }
+  },
+  "contracts": {},
+  "active": {},
+  "milestones": []
+}
+```
+
+写入时使用 UTF-8、排序字段和缩进 JSON，并通过同目录临时文件原子替换。状态文件适合人和工具共同读取，也便于代码评审。
+
+## 输入校验与错误语义
+
+- ID 最长 128 个字符，只允许小写字母、数字、点、下划线和短横线；
+- 角色职能限定为 requirement、product、architect、backend、frontend、qa，可附功能范围；
+- 本地引用不能是绝对路径，不能通过 `..` 逃逸项目；
+- 状态版本不兼容或字段类型错误时明确拒绝读取；
+- 一般输入和状态错误退出码为 `2`；
+- 多契约需要选择时退出码为 `3`；
+- 文件系统错误退出码为 `1`；
+- 所有命令可使用 `--json` 输出单行 JSON，方便自动化消费。
+
+这些机制让 V-Team 的协作信息可以被程序验证，又保持足够小。真正的业务复杂度留在项目里，CLI 只确保交接时大家谈的是同一件事。

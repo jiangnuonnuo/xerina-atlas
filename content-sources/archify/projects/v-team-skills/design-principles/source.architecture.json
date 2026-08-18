@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "V-Team 的设计原则",
+    "subtitle": "正确性、效率与可恢复性共同组成一次可靠交付",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "vteam", "type": "backend", "label": "V-Team", "sublabel": "个人功能交付技能", "pos": [450, 260], "size": [170, 76], "tag": "single-task delivery" },
+    { "id": "explicit", "type": "security", "label": "显式启用", "sublabel": "用户掌握流程成本", "pos": [150, 90], "size": [165, 66] },
+    { "id": "progressive", "type": "cloud", "label": "渐进加载", "sublabel": "只读当前所需规则", "pos": [150, 430], "size": [165, 66] },
+    { "id": "evidence", "type": "security", "label": "证据完成", "sublabel": "实际验证而非猜测", "pos": [760, 90], "size": [165, 66] },
+    { "id": "restraint", "type": "frontend", "label": "流程克制", "sublabel": "风险决定验证深度", "pos": [760, 430], "size": [165, 66] },
+    { "id": "truth", "type": "database", "label": "事实归位", "sublabel": "代码、Schema 与 Git", "pos": [450, 520], "size": [170, 66] }
+  ],
+  "connections": [
+    { "id": "explicit-vteam", "from": "explicit", "to": "vteam", "label": "授权", "variant": "security", "fromSide": "right", "toSide": "top", "route": "orthogonal-h" },
+    { "id": "progressive-vteam", "from": "progressive", "to": "vteam", "label": "上下文", "variant": "dashed", "fromSide": "right", "toSide": "bottom", "route": "orthogonal-h" },
+    { "id": "evidence-vteam", "from": "evidence", "to": "vteam", "label": "可信度", "variant": "security", "fromSide": "left", "toSide": "top", "route": "orthogonal-h" },
+    { "id": "restraint-vteam", "from": "restraint", "to": "vteam", "label": "效率", "variant": "emphasis", "fromSide": "left", "toSide": "bottom", "route": "orthogonal-h" },
+    { "id": "vteam-truth", "from": "vteam", "to": "truth", "label": "定位真实来源", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "route": "orthogonal-v" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "为什么轻量", "items": ["普通任务默认不写状态", "没有真实取舍就不凑方案", "失败只重做受影响部分"] },
+    { "dot": "emerald", "title": "为什么可靠", "items": ["需求与架构先过门禁", "跨角色通过真实契约对接", "完成必须报告实际证据"] },
+    { "dot": "rose", "title": "为什么适合个人", "items": ["同一个 Agent 按阶段切换角色", "不依赖团队平台或常驻服务", "在日常开发中持续吸收作者经验"] }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "需求审判：从想法到可执行结论",
+    "subtitle": "项目事实优先，Skills 与官方资料按需补充",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "request", "type": "external", "label": "用户请求", "sublabel": "问题、目标与约束", "pos": [40, 270], "size": [140, 70] },
+    { "id": "local", "type": "database", "label": "项目事实", "sublabel": "代码 / 契约 / 测试", "pos": [250, 270], "size": [150, 70] },
+    { "id": "skills", "type": "cloud", "label": "可用 Skills", "sublabel": "相关能力按需加载", "pos": [460, 90], "size": [160, 64] },
+    { "id": "official", "type": "cloud", "label": "官方资料", "sublabel": "易变或高风险事实", "pos": [460, 450], "size": [160, 64] },
+    { "id": "judge", "type": "security", "label": "需求审判", "sublabel": "价值 / 必要 / 可行", "pos": [500, 270], "size": [160, 70], "tag": "Gate R" },
+    { "id": "result", "type": "backend", "label": "明确结论", "sublabel": "Pass / Reuse / Narrow", "pos": [760, 270], "size": [175, 70], "tag": "Reject / Blocked" }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "证据与判断", "wraps": ["local", "skills", "official", "judge"] }
+  ],
+  "connections": [
+    { "id": "request-local", "from": "request", "to": "local", "label": "先查项目", "variant": "emphasis" },
+    { "id": "local-judge", "from": "local", "to": "judge" },
+    { "id": "skills-judge", "from": "skills", "to": "judge", "label": "可复用能力", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "route": "orthogonal-v" },
+    { "id": "official-judge", "from": "official", "to": "judge", "label": "必要事实", "variant": "dashed", "fromSide": "top", "toSide": "bottom", "route": "orthogonal-v" },
+    { "id": "judge-result", "from": "judge", "to": "result", "label": "可执行判断", "variant": "emphasis" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "先搜索", "items": ["已有能力能复用，就不重新发明", "外部研究只服务当前决策", "找到充分证据后及时停止"] },
+    { "dot": "emerald", "title": "允许不开发", "items": ["Reuse：已有能力足够", "Narrow：缩小到单任务边界", "Reject：价值与风险不匹配"] },
+    { "dot": "rose", "title": "通过条件", "items": ["目标与非目标清楚", "验收结果可以观察", "没有未决的关键产品选择"] }
+  ]
+}

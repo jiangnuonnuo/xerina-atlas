@@ -247,3 +247,29 @@ h1, h2, h3, p { margin-top: 0; }h1, h2, h3 { color: var(--ink-strong); font-fami
 .timeline-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
 .timeline-skills > span:not(.timeline-skills-label) { max-width: 100%; padding: 5px 10px; border: 1px solid rgba(35,104,181,.3); border-radius: 5px; color: var(--blue-deep); background: var(--blue-wash); font-family: "JetBrains Mono", monospace; font-size: 10px; line-height: 1.35; overflow-wrap: anywhere; }
 .timeline-skills-label { flex-basis: 100%; color: var(--soft); font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .1em; line-height: 1.4; }
+
+/* Project-specific visuals: keep each card recognizable without adding image assets. */
+.project-visual-platform { background: linear-gradient(135deg, #f4f0e8 0%, #f7f6f1 55%, #e9eee9 100%); }
+.platform-flow { position: absolute; top: 31px; right: 22px; left: 22px; display: grid; grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1.2fr) 18px minmax(0, 1fr); align-items: center; gap: 5px; transform: rotate(-4deg); }
+.platform-node { display: grid; min-height: 56px; align-content: center; gap: 4px; padding: 8px 9px; border: 1px solid #b9b6aa; background: rgba(255,255,255,.58); }
+.platform-node-main { border-color: #7d9d91; background: rgba(235,245,239,.82); }
+.platform-node b { color: #51665b; font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 500; letter-spacing: .07em; }
+.platform-node span { color: #8b928b; font-family: "JetBrains Mono", monospace; font-size: 7px; letter-spacing: .04em; }
+.platform-connector { position: relative; height: 1px; background: #a9b2aa; }
+.platform-connector::after { position: absolute; top: -3px; right: 0; content: ""; width: 6px; height: 6px; border-top: 1px solid #83978b; border-right: 1px solid #83978b; transform: rotate(45deg); }
+.platform-status { position: absolute; bottom: 23px; left: 25px; color: #7c887e; font-family: "JetBrains Mono", monospace; font-size: 11px; line-height: 1.65; letter-spacing: .1em; }
+.platform-status b { color: #415d50; font-weight: 500; }
+.project-visual-skills { background: #e9eef5; }
+.skills-grid { position: absolute; inset: 0; opacity: .55; background: linear-gradient(rgba(68,102,139,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(68,102,139,.1) 1px, transparent 1px); background-size: 24px 24px; }
+.skills-network { position: absolute; inset: 27px 26px 28px 34px; }
+.skills-link { position: absolute; height: 1px; background: #9aaec2; transform-origin: left center; }
+.skills-link-a { top: 33%; right: 28%; left: 29%; transform: rotate(-25deg); }
+.skills-link-b { top: 39%; right: 23%; left: 30%; transform: rotate(29deg); }
+.skills-link-c { top: 47%; right: 28%; left: 30%; transform: rotate(93deg); }
+.skills-node { position: absolute; display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid #7894af; border-radius: 50%; color: #547492; background: rgba(247,250,253,.78); font-family: "JetBrains Mono", monospace; font-size: 8px; }
+.skills-node-core { top: 33%; left: 28%; width: 58px; height: 58px; border-radius: 15px; color: #fff; border-color: #31689b; background: #31689b; font-size: 25px; font-family: "Space Grotesk", sans-serif; font-weight: 600; }
+.skills-node-a { top: 8%; right: 17%; }
+.skills-node-b { right: 6%; bottom: 9%; }
+.skills-node-c { bottom: 0; left: 16%; }
+.skills-word { position: absolute; bottom: 20px; left: 23px; color: #285985; font-family: "Space Grotesk", sans-serif; font-size: 42px; font-weight: 700; line-height: .9; letter-spacing: -.08em; }
+.skills-caption { position: absolute; top: 20px; right: 20px; color: #547492; font-family: "JetBrains Mono", monospace; font-size: 9px; line-height: 1.55; letter-spacing: .1em; }

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "V-Team 单任务交付闭环",
+    "subtitle": "先判断价值，再设计、实现和验收；失败只回到真正出错的位置",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "delivery", "label": "主交付路径" },
+    { "id": "exception", "label": "停止与修正", "variant": "exception" }
+  ],
+  "phases": [
+    { "id": "decide", "label": "发现与判断", "fromCol": 0, "toCol": 1 },
+    { "id": "build", "label": "方案与实现", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "prove", "label": "验收与交付", "fromCol": 4, "toCol": 5 }
+  ],
+  "mainPath": ["discover", "judge", "design", "implement", "validate", "deliver"],
+  "nodes": [
+    { "id": "discover", "lane": "delivery", "col": 0, "width": 40, "type": "cloud", "label": "发现" },
+    { "id": "judge", "lane": "delivery", "col": 1, "width": 40, "type": "security", "label": "审判" },
+    { "id": "design", "lane": "delivery", "col": 2, "width": 40, "type": "backend", "label": "方案" },
+    { "id": "implement", "lane": "delivery", "col": 3, "width": 40, "type": "frontend", "label": "实现" },
+    { "id": "validate", "lane": "delivery", "col": 4, "width": 40, "type": "security", "label": "验收" },
+    { "id": "deliver", "lane": "delivery", "col": 5, "width": 40, "type": "external", "label": "交付" },
+    { "id": "stop", "lane": "exception", "col": 1, "type": "security", "label": "停止 / 缩小", "sublabel": "复用或拒绝" },
+    { "id": "correct", "lane": "exception", "col": 4, "type": "messagebus", "label": "精确修正", "sublabel": "只回责任阶段" }
+  ],
+  "edges": [
+    { "id": "discover-judge", "from": "discover", "to": "judge" },
+    { "id": "judge-design", "from": "judge", "to": "design" },
+    { "id": "design-implement", "from": "design", "to": "implement" },
+    { "id": "implement-validate", "from": "implement", "to": "validate" },
+    { "id": "validate-deliver", "from": "validate", "to": "deliver", "variant": "emphasis" },
+    { "id": "judge-stop", "from": "judge", "to": "stop", "label": "不值得做", "variant": "security", "role": "error", "route": "drop", "fromSide": "bottom", "toSide": "top" },
+    { "id": "validate-correct", "from": "validate", "to": "correct", "label": "未通过", "variant": "dashed", "role": "return", "route": "drop", "fromSide": "bottom", "toSide": "top" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "交付原则", "items": ["需求值得做，方案才进入实现", "代码遵守通过的架构边界", "完成必须有实际验证证据"] },
+    { "dot": "rose", "title": "成本边界", "items": ["快速任务不进入重型流程", "不默认全量测试或重复确认", "失败不重跑无关阶段"] },
+    { "dot": "cyan", "title": "使用结果", "items": ["少造轮子，少做无价值功能", "小事快速完成，大事认真处理", "过程轻量，结论可以核对"] }
+  ]
+}

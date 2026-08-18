@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "V-Team 完整任务流转",
+    "subtitle": "主路径持续向前，问题沿责任边界精确回退",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "main", "label": "功能交付" },
+    { "id": "review", "label": "门禁与判断" },
+    { "id": "rework", "label": "修正路径", "variant": "exception" }
+  ],
+  "phases": [
+    { "id": "understand", "label": "理解", "fromCol": 0, "toCol": 1 },
+    { "id": "construct", "label": "构建", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "close", "label": "闭环", "fromCol": 4, "toCol": 5 }
+  ],
+  "mainPath": ["discover", "requirement", "architecture", "code", "acceptance", "complete"],
+  "nodes": [
+    { "id": "discover", "lane": "main", "col": 0, "width": 40, "type": "cloud", "label": "发现" },
+    { "id": "requirement", "lane": "main", "col": 1, "width": 40, "type": "security", "label": "需求" },
+    { "id": "architecture", "lane": "main", "col": 2, "width": 40, "type": "backend", "label": "架构" },
+    { "id": "code", "lane": "main", "col": 3, "width": 40, "type": "frontend", "label": "代码" },
+    { "id": "acceptance", "lane": "main", "col": 4, "width": 40, "type": "security", "label": "验收" },
+    { "id": "complete", "lane": "main", "col": 5, "width": 40, "type": "external", "label": "完成" },
+    { "id": "gate-r", "lane": "review", "col": 1, "width": 64, "type": "security", "label": "需求门禁", "sublabel": "价值与可行" },
+    { "id": "gate-a", "lane": "review", "col": 2, "width": 64, "type": "security", "label": "架构门禁", "sublabel": "方案可实施" },
+    { "id": "gate-fq", "lane": "review", "col": 4, "width": 64, "type": "security", "label": "质量门禁", "sublabel": "结果与实现" },
+    { "id": "fix-design", "lane": "rework", "col": 2, "type": "messagebus", "label": "修正方案", "sublabel": "架构假设错误" },
+    { "id": "fix-code", "lane": "rework", "col": 4, "type": "messagebus", "label": "修正代码", "sublabel": "实现行为错误" }
+  ],
+  "edges": [
+    { "id": "discover-requirement", "from": "discover", "to": "requirement" },
+    { "id": "requirement-architecture", "from": "requirement", "to": "architecture" },
+    { "id": "architecture-code", "from": "architecture", "to": "code" },
+    { "id": "code-acceptance", "from": "code", "to": "acceptance" },
+    { "id": "acceptance-complete", "from": "acceptance", "to": "complete", "variant": "emphasis" },
+    { "id": "requirement-gate", "from": "requirement", "to": "gate-r", "route": "drop", "fromSide": "bottom", "toSide": "top", "variant": "security" },
+    { "id": "architecture-gate", "from": "architecture", "to": "gate-a", "route": "drop", "fromSide": "bottom", "toSide": "top", "variant": "security" },
+    { "id": "acceptance-gate", "from": "acceptance", "to": "gate-fq", "route": "drop", "fromSide": "bottom", "toSide": "top", "variant": "security" },
+    { "id": "gate-a-fix", "from": "gate-a", "to": "fix-design", "label": "未通过", "role": "error", "route": "drop", "fromSide": "bottom", "toSide": "top", "variant": "dashed" },
+    { "id": "gate-fq-fix", "from": "gate-fq", "to": "fix-code", "label": "实现缺陷", "role": "error", "route": "drop", "fromSide": "bottom", "toSide": "top", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "主路径", "items": ["每个阶段都有清楚入口与出口", "重要功能先通过需求和架构门禁", "验收通过后才声明完成"] },
+    { "dot": "rose", "title": "失败处理", "items": ["代码错误回实现", "架构错误回方案", "需求假设错误才回需求审判"] },
+    { "dot": "cyan", "title": "效率设计", "items": ["快速任务内联完成判断", "一次方案确认后连续执行", "只重复受影响的验证"] }
+  ]
+}
