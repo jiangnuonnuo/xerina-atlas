@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Xerina project frontmatter",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["title", "type", "category", "summary", "role", "layout"],
+  "properties": {
+    "type": { "const": "project" },
+    "title": { "type": "string", "minLength": 1 },
+    "category": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "role": { "type": "string", "minLength": 1 },
+    "layout": { "const": "project-doc" },
+    "stack": { "type": "array", "items": { "type": "string" } }
+  }
+}

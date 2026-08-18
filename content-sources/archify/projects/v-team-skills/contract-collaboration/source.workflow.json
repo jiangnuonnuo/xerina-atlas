@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "跨角色契约协作",
+    "subtitle": "提供者发布真实来源，消费者精确发现并用联调证据闭环",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "provider", "label": "能力提供者" },
+    { "id": "index", "label": "V-Team 契约索引" },
+    { "id": "consumer", "label": "能力消费者" },
+    { "id": "blocked", "label": "阻塞与歧义", "variant": "exception" }
+  ],
+  "phases": [
+    { "id": "define", "label": "定义", "fromCol": 0, "toCol": 1 },
+    { "id": "prepare", "label": "准备", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "integrate", "label": "消费与验证", "fromCol": 4, "toCol": 5 }
+  ],
+  "mainPath": ["source", "draft", "implement", "ready", "discover", "verified"],
+  "nodes": [
+    { "id": "source", "lane": "provider", "col": 0, "type": "backend", "label": "权威来源", "sublabel": "OpenAPI / Schema" },
+    { "id": "draft", "lane": "index", "col": 1, "type": "messagebus", "label": "发布 draft", "sublabel": "只允许设计与 mock" },
+    { "id": "implement", "lane": "provider", "col": 2, "type": "backend", "label": "实现与验证", "sublabel": "提供者直接证据" },
+    { "id": "ready", "lane": "index", "col": 3, "type": "security", "label": "升级 ready", "sublabel": "允许真实集成" },
+    { "id": "discover", "lane": "consumer", "col": 4, "type": "frontend", "label": "精确发现", "sublabel": "capability + role" },
+    { "id": "verified", "lane": "consumer", "col": 5, "type": "security", "label": "联调 verified", "sublabel": "消费者实际证据" },
+    { "id": "none", "lane": "blocked", "col": 4, "type": "security", "label": "零个：阻塞", "sublabel": "禁止猜测接口" },
+    { "id": "many", "lane": "blocked", "col": 5, "type": "security", "label": "多个：选择", "sublabel": "明确 contract ID" }
+  ],
+  "edges": [
+    { "id": "source-draft", "from": "source", "to": "draft", "label": "source_ref", "variant": "emphasis", "route": "drop", "fromSide": "bottom", "toSide": "top" },
+    { "id": "draft-implement", "from": "draft", "to": "implement", "variant": "dashed", "route": "drop", "fromSide": "top", "toSide": "bottom" },
+    { "id": "implement-ready", "from": "implement", "to": "ready", "label": "evidence", "variant": "emphasis", "route": "drop", "fromSide": "bottom", "toSide": "top" },
+    { "id": "ready-discover", "from": "ready", "to": "discover", "variant": "emphasis", "route": "drop", "fromSide": "bottom", "toSide": "top" },
+    { "id": "discover-verified", "from": "discover", "to": "verified", "variant": "emphasis" },
+    { "id": "discover-none", "from": "discover", "to": "none", "label": "0", "variant": "security", "role": "error", "route": "drop", "fromSide": "bottom", "toSide": "top" },
+    { "id": "verified-many", "from": "verified", "to": "many", "label": "N", "variant": "security", "role": "error", "route": "drop", "fromSide": "bottom", "toSide": "top" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "来源可信", "items": ["本地来源必须真实存在", "索引不复制请求与响应正文", "同一 ID 不得改绑 capability 或 provider"] },
+    { "dot": "cyan", "title": "状态清楚", "items": ["draft 只供设计与 mock", "ready 有提供者验证", "verified 有消费者联调证据"] },
+    { "dot": "rose", "title": "拒绝猜测", "items": ["零个匹配明确阻塞", "多个匹配要求显式选择", "deprecated 不再参与新发现"] }
+  ]
+}

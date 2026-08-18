@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Xerina experience frontmatter",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["title", "type", "organization", "period", "summary", "layout"],
+  "properties": {
+    "type": { "const": "experience" },
+    "title": { "type": "string", "minLength": 1 },
+    "organization": { "type": "string", "minLength": 1 },
+    "period": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "layout": { "const": "experience-detail" }
+  }
+}

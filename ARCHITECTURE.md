@@ -12,6 +12,7 @@ Xerina Atlas 采用“Markdown 内容源 + VitePress 静态构建 + Teek 文档�
 | --- | --- | --- |
 | 首页首屏、求职定位、联系方式 | index.md + HomePage.vue | 视觉与信息密度是作品集的核心，需要自定义布局，但文字仍然可以从内容数据读取 |
 | 实习经历列表、项目经历列表、文章列表 | index.md + Vue 列表组件 + build-time data loader | 页面只负责展示，条目从 Markdown frontmatter 自动发现 |
+| 作品集与竞赛荣誉 | portfolio/index.md + PortfolioPage.vue | 汇总项目作品和关于页中的 honors，给 HR 一个集中查看入口 |
 | 实习经历详情 | experience/<slug>/index.md + ExperienceDetailLayout.vue | 角色、职责、成果需要长期编辑，正文应由 Markdown 管理 |
 | 项目文档详情 | projects/<slug>/*.md + ProjectDocLayout.vue + Teek | 需要左侧目录、正文、代码、图片、章节跳转，完全符合文档型页面 |
 | 技术文章与知识库 | notes/**/*.md + Teek 默认文章布局 | 文章数量会持续增长，使用文件即页面的路由模型 |
@@ -51,6 +52,7 @@ flowchart LR
 - /：个人定位、求职方向、教育、实习经历摘要、项目经历摘要、技能和联系方式。
 - /experience/：实习与实践经历时间线，实习经历优先展示。
 - /projects/：项目经历快速扫描，只展示项目目标、个人职责、技术栈和结果。
+- /portfolio/：项目作品与竞赛荣誉集中展示，适合快速确认完整成果。
 
 这三页不放大段技术正文。每个条目只保留明确标题、身份/角色、时间、结果和“查看详情”入口。
 
@@ -71,6 +73,8 @@ flowchart LR
 ~~~text
 xerina-atlas/
 ├── package.json
+├── package-lock.json
+├── tsconfig.json
 ├── README.md
 ├── ARCHITECTURE.md
 ├── CONTENT_AUTHORING_GUIDE.md           # 人工与 AI 的内容定位、写作和引用手册
@@ -80,18 +84,12 @@ xerina-atlas/
 │   ├── experience.md
 │   └── note.md
 ├── content-drafts/                      # AI 默认草稿区，不进入线上构建
-│   ├── about.md
-│   ├── projects/
-│   ├── experience/
-│   └── notes/
+│   ├── README.md
+│   ├── projects/<project-slug>/
+│   ├── experience/<experience-slug>/
+│   └── notes/<category>/
 ├── content-sources/                     # 可编辑但不直接发布的资产源文件
-│   └── archify/
-│       ├── projects/<project-slug>/<diagram-slug>/
-│       │   └── source.architecture.json
-│       ├── experience/<experience-slug>/<diagram-slug>/
-│       │   └── source.architecture.json
-│       └── notes/<note-slug>/<diagram-slug>/
-│           └── source.architecture.json
+│   └── archify/README.md
 ├── schemas/
 │   └── content/                         # frontmatter 与媒体引用契约
 │       ├── project.schema.json
@@ -100,16 +98,14 @@ xerina-atlas/
 │       ├── note.schema.json
 │       └── media.schema.json
 ├── scripts/
-│   ├── validate-content.ts              # frontmatter、链接、排序、必填字段检查
-│   ├── validate-assets.ts               # 媒体存在性、体积、引用和孤儿文件检查
-│   └── build-sidebar.ts                 # 需要时输出调试用导航快照
+│   ├── validate-content.ts              # frontmatter、路由、关联关系检查
+│   └── validate-assets.ts               # 发布资源命名与基础存在性检查
 ├── docs/                                # VitePress 源码根目录
 │   ├── public/                           # 不经过 Markdown 解析的静态资源
 │   │   ├── resume/
-│   │   │   └── xerina-resume.pdf
+│   │   │   └── xerina-java-backend-resume.pdf
 │   │   ├── brand/
-│   │   │   ├── favicon.svg
-│   │   │   └── og-cover.png
+│   │   │   └── favicon.svg
 │   │   ├── media/                        # 需要稳定 URL 的发布型媒体
 │   │   │   ├── shared/
 │   │   │   ├── projects/<project-slug>/
@@ -125,84 +121,69 @@ xerina-atlas/
 │   │   │   ├── notes/<note-slug>/
 │   │   │   └── experience/<experience-slug>/
 │   │   └── downloads/                    # 跨内容共享的 PDF、压缩包等附件
-│   ├── snippets/                         # 可由 Markdown 导入的真实代码文件
+│   ├── snippets/                         # 可由 Markdown 导入的真实代码文件（按需添加）
 │   │   └── projects/<project-slug>/
 │   ├── index.md                         # 首页内容入口，挂载 HomePage.vue
 │   ├── about/
 │   │   └── index.md                     # 关于页
 │   ├── experience/
 │   │   ├── index.md                     # 实习与实践列表
-│   │   ├── backend-internship/
-│   │   │   └── index.md                 # 实习详情
-│   │   └── ai-project-lead/
-│   │       └── index.md                 # 项目负责人经历详情
+│   │   └── xiamen-chengcheng/
+│   │       └── index.md                 # 实习详情
+│   ├── portfolio/
+│   │   └── index.md                     # 项目作品与竞赛荣誉聚合页
 │   ├── projects/
 │   │   ├── index.md                     # 项目经历 HR 快速视图
-│   │   ├── xerina-atlas/
+│   │   ├── nexus-flow-ai/
 │   │   │   ├── index.md                 # 项目总览，也是项目文档入口
-│   │   │   ├── 10-project-background.md
-│   │   │   ├── 20-requirements.md
-│   │   │   ├── 30-system-design.md
-│   │   │   ├── 40-core-implementation.md
-│   │   │   ├── 50-deployment.md
-│   │   │   ├── 60-retrospective.md
-│   │   │   └── assets/                   # 由 Vite 处理和哈希的内容局部资产
-│   │   │       ├── images/
-│   │   │       └── lightweight-media/
-│   │   └── order-fulfillment/
+│   │   │   ├── 10-problem-and-solution.md
+│   │   │   ├── 20-ai-drawio.md
+│   │   │   ├── 30-mcp-gateway.md
+│   │   │   ├── 40-rag-and-agent.md
+│   │   │   └── 50-results-and-next.md
+│   │   └── aigc-print-platform/
 │   │       ├── index.md
-│   │       ├── 10-project-background.md
-│   │       ├── 20-domain-analysis.md
-│   │       ├── 30-system-design.md
-│   │       ├── 40-core-implementation.md
-│   │       ├── 50-testing-and-deployment.md
-│   │       └── 60-retrospective.md
+│   │       ├── 20-async-task.md
+│   │       ├── 30-reliable-message.md
+│   │       └── 40-oss-and-inventory.md
 │   ├── notes/
 │   │   ├── index.md                     # 文章索引、筛选和搜索入口
-│   │   ├── engineering/
-│   │   │   └── state-machine-api.md
-│   │   ├── ai/
-│   │   │   └── rag-evaluation.md
-│   │   └── methodology/
-│   │       └── content-model.md
+│   │   └── engineering/
+│   │       └── mcp-gateway.md
 │   └── .vitepress/
 │       ├── config.ts                    # 站点、导航、侧栏、搜索、构建配置
+│       ├── env.d.ts                     # Vue/Vite 类型声明
 │       ├── data/
 │       │   ├── profile.data.ts          # 读取关于页中的个人资料 frontmatter
 │       │   ├── projects.data.ts         # 项目索引数据
 │       │   ├── experiences.data.ts      # 经历索引数据
-│       │   └── notes.data.ts            # 文章索引数据
+│       │   ├── notes.data.ts            # 文章索引数据
+│       │   └── chapters.data.ts         # 当前项目的章节导航数据
 │       ├── utils/
-│       │   ├── content-discovery.ts     # 配置与 data loader 共用
-│       │   ├── sidebar.ts               # 生成项目章节侧栏
-│       │   ├── media.ts                 # public/base URL 与媒体元数据规范化
-│       │   └── metadata.ts              # 标题、摘要、URL 规范化
+│       │   └── content-discovery.ts     # 配置与 data loader 共用
 │       └── theme/
 │           ├── index.ts                 # Teek 主题入口和 enhanceApp
 │           ├── components/
 │           │   ├── HomePage.vue
-│           │   ├── ExperienceList.vue
-│           │   ├── ProjectList.vue
-│           │   ├── NotesList.vue
+│           │   ├── ExperienceIndexPage.vue
+│           │   ├── ProjectIndexPage.vue
+│           │   ├── NotesIndexPage.vue
 │           │   ├── AboutPage.vue
-│           │   ├── ProjectDocHeader.vue
-│           │   ├── ExperienceDetailHeader.vue
+│           │   ├── PortfolioPage.vue
+│           │   ├── ProjectVisual.vue
+│           │   ├── SiteHeader.vue
+│           │   ├── SiteFooter.vue
 │           │   ├── MediaFigure.vue
 │           │   ├── MediaVideo.vue
 │           │   ├── InteractiveDiagram.vue
 │           │   └── DownloadLink.vue
 │           ├── layouts/
-│           │   ├── HomeLayout.vue
+│           │   ├── CustomLayout.vue
 │           │   ├── ProjectDocLayout.vue
 │           │   └── ExperienceDetailLayout.vue
-│           └── styles/
-│               ├── tokens.css
-│               ├── base.css
-│               ├── home.css
-│               └── content.css
-└── .github/
-    └── workflows/
-        └── deploy.yml                   # GitHub push 后构建并部署
+│           └── styles.css
+└── .github/                              # 按最终部署平台按需新增
+    └── workflows/                       # CI 或 GitHub Pages 部署工作流
 ~~~
 
 ### 3.1 为什么不把全部内容放到 app.js 或一份 JSON
@@ -377,6 +358,7 @@ VitePress 使用文件路由，建议固定以下映射。链接不带 .md 或 .
 | 实习经历 | docs/experience/index.md | 面向 HR 的时间线和筛选 |
 | 实习详情 | docs/experience/<slug>/index.md | Markdown 正文 + 经历详情布局 |
 | 项目经历 | docs/projects/index.md | 面向 HR 的快速视图 |
+| 作品集 | docs/portfolio/index.md | 聚合项目作品与竞赛荣誉 |
 | 项目文档入口 | docs/projects/<slug>/index.md | 顶部下拉直接进入，不经过中间选择页 |
 | 项目章节 | docs/projects/<slug>/<chapter>.md | 左侧侧栏自动生成 |
 | 文章索引 | docs/notes/index.md | 文章列表和搜索 |
@@ -413,11 +395,12 @@ tags:
   - 领域建模
 nav: true
 sidebar: true
+layout: project-doc
 ---
 
-# 订单履约服务
+## 项目正文
 
-项目正文从这里开始。首屏摘要由 summary 提供，技术人员进入后继续阅读 Markdown。
+项目文档布局已经使用 frontmatter 的 title 输出一级标题，正文从二级标题开始，避免标题重复。
 ~~~
 
 字段规则：
@@ -440,11 +423,12 @@ group: 系统设计
 order: 30
 description: 订单聚合、领域边界和状态事件的设计。
 sidebar: true
+layout: project-doc
 ---
 
-# 系统设计
+## 章节正文
 
-章节正文、代码、图表和复盘内容写在这里。
+代码、图表和复盘内容写在这里。项目文档布局已经输出本章一级标题。
 ~~~
 
 排序优先使用 order，文件名只作为人类可读的备用排序依据。推荐使用 10、20、30 的间隔，后续插入章节时不需要大范围重命名。
@@ -461,6 +445,7 @@ period: 2025.06 — 2025.09
 location: CHINA / REMOTE
 order: 10
 featured: true
+layout: experience-detail
 summary: 参与领域建模、接口交付与线上问题定位。
 skills:
   - Java
@@ -635,7 +620,7 @@ docs/projects/new-project/30-implementation.md
 固定项：
 
 ~~~text
-首页 / 实习经历 / 项目经历 / 项目文档 / 文章 / 关于
+首页 / 实习经历 / 项目经历 / 作品集 / 项目文档 / 文章 / 关于
 ~~~
 
 “项目文档”是动态下拉菜单：

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "V-Team 系统架构",
+    "subtitle": "规则负责判断，状态负责事实，产品项目保留真正的实现",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "developer", "type": "external", "label": "开发者", "sublabel": "显式调用 $v-team", "pos": [30, 260], "size": [145, 68] },
+    { "id": "skill", "type": "frontend", "label": "SKILL.md", "sublabel": "模式 / 风险 / 路由", "pos": [245, 260], "size": [155, 68], "tag": "核心入口" },
+    { "id": "references", "type": "cloud", "label": "角色与策略", "sublabel": "references/ 按需加载", "pos": [480, 100], "size": [175, 68] },
+    { "id": "cli", "type": "backend", "label": "V-Team CLI", "sublabel": "确定性状态操作", "pos": [480, 310], "size": [175, 68] },
+    { "id": "project", "type": "backend", "label": "产品项目", "sublabel": "业务代码与工程约定", "pos": [740, 210], "size": [175, 68], "tag": "权威实现" },
+    { "id": "state", "type": "database", "label": ".vteam/state.json", "sublabel": "契约 / 恢复 / 里程碑", "pos": [740, 430], "size": [175, 68] },
+    { "id": "evidence", "type": "security", "label": "验证证据", "sublabel": "测试 / Schema / Git", "pos": [990, 210], "size": [165, 68] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "V-Team Skill", "wraps": ["skill", "references", "cli"] },
+    { "kind": "region", "label": "真实项目事实", "wraps": ["project", "state", "evidence"] }
+  ],
+  "connections": [
+    { "id": "developer-skill", "from": "developer", "to": "skill", "label": "任务意图", "variant": "emphasis" },
+    { "id": "skill-references", "from": "skill", "to": "references", "label": "进入阶段", "variant": "dashed", "fromSide": "top", "toSide": "left", "route": "orthogonal-v" },
+    { "id": "skill-cli", "from": "skill", "to": "cli", "label": "按需状态", "fromSide": "bottom", "toSide": "left", "route": "orthogonal-v", "labelDy": 16 },
+    { "id": "references-project", "from": "references", "to": "project", "label": "专业约束", "variant": "dashed", "fromSide": "right", "toSide": "top", "route": "orthogonal-h" },
+    { "id": "cli-project", "from": "cli", "to": "project", "label": "定位事实", "fromSide": "right", "toSide": "bottom", "route": "orthogonal-h" },
+    { "id": "cli-state", "from": "cli", "to": "state", "label": "原子写入", "variant": "emphasis", "fromSide": "bottom", "toSide": "left", "route": "orthogonal-v" },
+    { "id": "project-evidence", "from": "project", "to": "evidence", "label": "直接证明", "variant": "emphasis" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "渐进加载", "items": ["先读简短主流程", "进入阶段再读对应角色规则", "快速任务不加载额外 reference"] },
+    { "dot": "emerald", "title": "单一事实源", "items": ["接口正文留在 Schema 或共享类型", "业务逻辑留在产品代码", "V-Team 只保存定位索引"] },
+    { "dot": "rose", "title": "按需状态", "items": ["普通任务默认无状态", "跨角色时使用契约索引", "跨会话时只保存当前下一步"] }
+  ]
+}

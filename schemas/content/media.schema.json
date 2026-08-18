@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Xerina media reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "src", "title"],
+  "properties": {
+    "kind": { "enum": ["image", "video", "diagram", "download"] },
+    "src": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "poster": { "type": "string" },
+    "captions": { "type": "string" },
+    "alt": { "type": "string" },
+    "description": { "type": "string" }
+  }
+}

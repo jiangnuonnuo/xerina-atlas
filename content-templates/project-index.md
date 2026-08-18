@@ -12,10 +12,9 @@ stack: []
 tags: []
 nav: true
 sidebar: true
+layout: project-doc
 draft: true
 ---
-
-# [NEEDS_REVIEW: 项目正式名称]
 
 ## 项目背景
 

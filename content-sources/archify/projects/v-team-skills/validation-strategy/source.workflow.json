@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "风险驱动的验证策略",
+    "subtitle": "使用能够证明结果的最低有效层级，不把测试数量当作认真程度",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "quick", "label": "快速任务" },
+    { "id": "standard", "label": "标准功能" },
+    { "id": "major", "label": "重大变更" }
+  ],
+  "phases": [
+    { "id": "classify", "label": "识别影响", "fromCol": 0, "toCol": 1 },
+    { "id": "verify", "label": "选择证据", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "report", "label": "形成结论", "fromCol": 4, "toCol": 5 }
+  ],
+  "nodes": [
+    { "id": "quick-change", "lane": "quick", "col": 0, "type": "frontend", "label": "局部改动", "sublabel": "明确且易回滚" },
+    { "id": "quick-check", "lane": "quick", "col": 2, "type": "security", "label": "直接验证", "sublabel": "受影响结果" },
+    { "id": "quick-proof", "lane": "quick", "col": 5, "type": "external", "label": "简洁证据", "sublabel": "完成 / 风险" },
+    { "id": "standard-change", "lane": "standard", "col": 0, "type": "backend", "label": "用户能力", "sublabel": "行为或流程变化" },
+    { "id": "standard-check", "lane": "standard", "col": 2, "type": "security", "label": "定向验证", "sublabel": "主流程 + 关键失败" },
+    { "id": "standard-proof", "lane": "standard", "col": 5, "type": "external", "label": "闭环证据", "sublabel": "功能 + 架构 + 质量" },
+    { "id": "major-change", "lane": "major", "col": 0, "type": "database", "label": "公共边界", "sublabel": "数据 / 权限 / 架构" },
+    { "id": "major-check", "lane": "major", "col": 2, "type": "security", "label": "扩大验证", "sublabel": "契约 / 迁移 / 回滚" },
+    { "id": "major-proof", "lane": "major", "col": 5, "type": "external", "label": "风险说明", "sublabel": "证据与未覆盖项" }
+  ],
+  "edges": [
+    { "id": "quick-direct", "from": "quick-change", "to": "quick-check", "variant": "emphasis" },
+    { "id": "quick-report", "from": "quick-check", "to": "quick-proof" },
+    { "id": "standard-focused", "from": "standard-change", "to": "standard-check", "variant": "emphasis" },
+    { "id": "standard-report", "from": "standard-check", "to": "standard-proof" },
+    { "id": "major-expanded", "from": "major-change", "to": "major-check", "variant": "security" },
+    { "id": "major-report", "from": "major-check", "to": "major-proof" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "最低有效层级", "items": ["业务规则优先单元测试", "接口协作优先契约与集成", "关键用户路径才使用端到端"] },
+    { "dot": "emerald", "title": "扩大条件", "items": ["公共 API 或 Schema", "数据迁移、权限和安全", "并发、事务或共享组件"] },
+    { "dot": "rose", "title": "明确禁止", "items": ["不默认全仓测试", "不按角色重复验收", "不为生成报告而测试"] }
+  ]
+}
