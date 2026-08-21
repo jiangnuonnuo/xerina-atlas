@@ -1,5 +1,5 @@
 ---
-title: V-Team：面向个人开发者的依据功能交付的开发技能
+title: V-Team-SKILL：面向个人开发者的依据功能交付的开发技能
 type: project
 category: skills
 categoryLabel: Agent skills
