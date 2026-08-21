@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "采集方案为什么转向 DOM-first",
+    "subtitle": "不是抛弃 Agent，而是把它放到更擅长的语义判断位置",
+    "output": "../strategy-pivot.html",
+    "animation": "trace",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "views": [
+      { "id": "attempt", "label": "原始尝试", "focus": ["fixed-input", "agent-test", "blind-spots"], "note": "固定输入可控，但纯 Agent 页面探索会遗漏不可见状态。" },
+      { "id": "decision", "label": "方案转变", "focus": ["blind-spots", "dom-evidence", "semantic-agent"], "note": "让确定性工具取证，让 Agent 负责语义。" },
+      { "id": "closed-loop", "label": "最终闭环", "focus": ["dom-evidence", "semantic-agent", "human-review"], "note": "证据、智能与人工共同保证结果可用。" }
+    ]
+  },
+  "lanes": [
+    { "id": "baseline", "label": "原始方式" },
+    { "id": "experiment", "label": "技术验证" },
+    { "id": "decision", "label": "最终设计" }
+  ],
+  "phases": [
+    { "id": "before", "label": "可用但依赖人工", "fromCol": 0, "toCol": 1 },
+    { "id": "problem", "label": "暴露完整性问题", "fromCol": 2, "toCol": 2, "variant": "security" },
+    { "id": "after", "label": "DOM-first 人机闭环", "fromCol": 3, "toCol": 5, "variant": "emphasis" }
+  ],
+  "mainPath": ["fixed-input", "agent-test", "blind-spots", "dom-evidence", "semantic-agent", "human-review"],
+  "nodes": [
+    { "id": "fixed-input", "lane": "baseline", "col": 0, "type": "frontend", "label": "固定层级输入", "sublabel": "前端组装节点" },
+    { "id": "agent-test", "lane": "experiment", "col": 1, "type": "backend", "label": "纯 Agent 采集", "sublabel": "浏览器技能验证" },
+    { "id": "blind-spots", "lane": "experiment", "col": 3, "type": "security", "label": "发现漏采", "sublabel": "Tab / 滚动 / 权限", "tag": "关键转折" },
+    { "id": "dom-evidence", "lane": "decision", "col": 4, "type": "database", "label": "DOM 取证", "sublabel": "快照与页面状态", "width": 72 },
+    { "id": "semantic-agent", "lane": "decision", "col": 5, "type": "backend", "label": "语义判断", "sublabel": "字段与层级判断", "width": 72 },
+    { "id": "human-review", "lane": "baseline", "col": 5, "type": "frontend", "label": "人工确认", "sublabel": "微调或反馈重跑" }
+  ],
+  "edges": [
+    { "id": "input-to-test", "from": "fixed-input", "to": "agent-test", "label": "尝试自动化", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "route": "drop" },
+    { "id": "test-to-gap", "from": "agent-test", "to": "blind-spots" },
+    { "id": "gap-to-dom", "from": "blind-spots", "to": "dom-evidence", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "route": "drop" },
+    { "id": "dom-to-agent", "from": "dom-evidence", "to": "semantic-agent", "variant": "emphasis" },
+    { "id": "agent-to-human", "from": "semantic-agent", "to": "human-review", "variant": "emphasis", "fromSide": "top", "toSide": "bottom", "route": "straight" }
+  ],
+  "cards": [
+    { "dot": "rose", "title": "实测问题", "items": ["Agent 可能在隐藏区域展开前就宣布完成", "页面状态覆盖无法只靠模型自报"] },
+    { "dot": "emerald", "title": "职责重排", "items": ["Agent 负责决策", "DOM 工具负责取证", "规则引擎负责兜底"] }
+  ]
+}

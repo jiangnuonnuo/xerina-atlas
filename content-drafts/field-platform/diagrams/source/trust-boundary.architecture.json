@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "字段采集与 Agent 解析的信任边界",
+    "subtitle": "采集字段定义，不碰业务数据；把不可信页面内容隔离在策略边界之外",
+    "output": "../trust-boundary.html",
+    "visual_preset": "blueprint",
+    "quality_profile": "showcase",
+    "viewBox": [1220, 720],
+    "views": [
+      { "id": "inbound", "label": "输入净化", "focus": ["page", "browser", "sanitizer", "snapshot"], "note": "页面内容是外部输入，先过滤再作为证据进入任务。" },
+      { "id": "agent", "label": "受限解析", "focus": ["snapshot", "policy", "agent", "validator"], "note": "Agent 只看最小必要字段证据，只能调用允许工具。" },
+      { "id": "human", "label": "确认与入库", "focus": ["validator", "review", "catalog"], "note": "高风险或低置信度结果必须人工确认后才进入目录。" }
+    ]
+  },
+  "components": [
+    { "id": "page", "type": "external", "label": "目标页面", "sublabel": "不可信 DOM 来源", "pos": [30, 310], "size": [130, 60] },
+    { "id": "browser", "type": "cloud", "label": "浏览器采集适配", "sublabel": "限定页面与状态", "pos": [210, 310], "size": [150, 60] },
+    { "id": "sanitizer", "type": "security", "label": "字段范围净化", "sublabel": "移除数据、凭据与脚本", "pos": [410, 310], "size": [160, 60], "tag": "安全门" },
+    { "id": "snapshot", "type": "database", "label": "最小证据快照", "sublabel": "标签、位置、状态", "pos": [610, 310], "size": [150, 60], "tag": "可追溯" },
+    { "id": "agent", "type": "backend", "label": "ReAct 应用编排", "sublabel": "受限工具与提示上下文", "pos": [810, 310], "size": [160, 60], "tag": "最小权限" },
+    { "id": "validator", "type": "security", "label": "结构与语义校验", "sublabel": "证据、规则、置信度", "pos": [1010, 310], "size": [160, 60] },
+    { "id": "policy", "type": "security", "label": "工具与提示策略", "sublabel": "白名单、长度、拒绝规则", "pos": [810, 120], "size": [160, 60], "tag": "不可绕过" },
+    { "id": "isolation", "type": "security", "label": "敏感内容隔离", "sublabel": "不采集业务值与会话信息", "pos": [410, 500], "size": [160, 60] },
+    { "id": "review", "type": "frontend", "label": "人工确认", "sublabel": "查看证据与疑点", "pos": [1010, 120], "size": [160, 60] },
+    { "id": "catalog", "type": "database", "label": "字段目录", "sublabel": "通过验证后的定义", "pos": [1010, 500], "size": [160, 60] }
+  ],
+  "boundaries": [
+    { "kind": "security-group", "label": "字段平台受控边界", "wraps": ["sanitizer", "snapshot", "agent", "validator", "policy", "isolation", "review", "catalog"], "pad": 24 }
+  ],
+  "connections": [
+    { "id": "page-browser", "from": "page", "to": "browser", "label": "页面状态", "variant": "default" },
+    { "id": "browser-sanitizer", "from": "browser", "to": "sanitizer", "label": "DOM 候选", "variant": "emphasis" },
+    { "id": "sanitizer-snapshot", "from": "sanitizer", "to": "snapshot", "variant": "emphasis" },
+    { "id": "snapshot-agent", "from": "snapshot", "to": "agent", "variant": "emphasis" },
+    { "id": "agent-validator", "from": "agent", "to": "validator", "variant": "emphasis" },
+    { "id": "policy-agent", "from": "policy", "to": "agent", "label": "工具白名单", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelDy": -68 },
+    { "id": "sanitizer-isolation", "from": "sanitizer", "to": "isolation", "label": "拦截敏感项", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelDy": 66 },
+    { "id": "validator-review", "from": "validator", "to": "review", "label": "低置信度 / 高风险", "variant": "dashed", "fromSide": "top", "toSide": "bottom", "route": "straight", "labelDy": -68 },
+    { "id": "validator-catalog", "from": "validator", "to": "catalog", "label": "通过后入库", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelDy": 66 }
+  ],
+  "cards": [
+    { "dot": "rose", "title": "采集范围的红线", "items": ["只采集字段定义和结构证据", "不采集业务值、账号凭据、Cookie 或接口载荷", "超出范围的内容在入口就剔除"] },
+    { "dot": "emerald", "title": "提示注入防线", "items": ["页面文本只作为数据，不作为指令", "工具与可访问域由策略白名单限制", "不确定结果转人工，不让模型越权补全"] }
+  ]
+}

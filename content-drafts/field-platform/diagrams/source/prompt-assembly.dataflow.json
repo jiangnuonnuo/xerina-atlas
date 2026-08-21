@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "层级解析的提示上下文组装",
+    "subtitle": "把页面事实、输出契约和人工反馈变成受控输入，而不是让模型凭感觉画树",
+    "output": "../prompt-assembly.html",
+    "visual_preset": "blueprint",
+    "quality_profile": "showcase",
+    "viewBox": [1120, 720],
+    "views": [
+      { "id": "inputs", "label": "输入构成", "focus": ["rules", "contract", "dom", "feedback", "prompt"], "note": "输入既有不可突破的规则，也有可修订的业务上下文。" },
+      { "id": "reasoning", "label": "受控推理", "focus": ["prompt", "agent", "tree"], "note": "应用层编排 ReAct 节点，内部 Agent 引擎保持黑盒。" },
+      { "id": "result", "label": "结果边界", "focus": ["agent", "tree", "report"], "note": "结果必须同时给出树和不确定项，才能被验证与人工处理。" }
+    ]
+  },
+  "stages": [
+    { "label": "规则" },
+    { "label": "上下文" },
+    { "label": "组装" },
+    { "label": "推理" },
+    { "label": "受控输出" }
+  ],
+  "nodes": [
+    { "id": "rules", "type": "security", "label": "结构规则", "sublabel": "深度、去重、禁止项", "stage": 0, "row": 0, "tag": "硬约束" },
+    { "id": "contract", "type": "backend", "label": "输出契约", "sublabel": "节点、证据、置信度", "stage": 0, "row": 2, "tag": "结构化" },
+    { "id": "dom", "type": "database", "label": "DOM 证据包", "sublabel": "文本、位置、状态", "stage": 1, "row": 0, "tag": "事实" },
+    { "id": "feedback", "type": "frontend", "label": "人工反馈", "sublabel": "锁定、纠正、补充", "stage": 1, "row": 2, "tag": "可追溯" },
+    { "id": "prompt", "type": "messagebus", "label": "提示上下文", "sublabel": "按优先级拼装", "stage": 2, "row": 1, "tag": "最小必要" },
+    { "id": "agent", "type": "backend", "label": "ReAct 编排", "sublabel": "抽取、判断、自检", "stage": 3, "row": 1, "tag": "应用层" },
+    { "id": "tree", "type": "database", "label": "候选字段树", "sublabel": "节点与证据绑定", "stage": 4, "row": 0, "tag": "待验证" },
+    { "id": "report", "type": "frontend", "label": "不确定项清单", "sublabel": "人工确认入口", "stage": 4, "row": 2, "tag": "不装懂" }
+  ],
+  "flows": [
+    { "id": "rules-prompt", "from": "rules", "to": "prompt", "label": "规则", "classification": "policy", "variant": "security", "fromSide": "right", "toSide": "left", "via": [[220, 80], [445, 80], [445, 270]], "labelAt": [330, 70] },
+    { "id": "contract-prompt", "from": "contract", "to": "prompt", "label": "契约", "classification": "contract", "variant": "default", "fromSide": "right", "toSide": "left", "via": [[220, 500], [445, 500], [445, 270]], "labelAt": [330, 510] },
+    { "id": "dom-prompt", "from": "dom", "to": "prompt", "label": "证据", "classification": "evidence", "variant": "emphasis", "fromSide": "right", "toSide": "left", "via": [[430, 220], [445, 270]], "labelAt": [405, 206] },
+    { "id": "feedback-prompt", "from": "feedback", "to": "prompt", "label": "反馈", "classification": "feedback", "variant": "dashed", "fromSide": "right", "toSide": "left", "via": [[430, 340], [445, 270]], "labelAt": [405, 334] },
+    { "id": "prompt-agent", "from": "prompt", "to": "agent", "label": "上下文", "classification": "assembled context", "variant": "emphasis", "route": "straight", "labelAt": [640, 238] },
+    { "id": "agent-tree", "from": "agent", "to": "tree", "label": "候选", "classification": "structured output", "variant": "emphasis", "fromSide": "right", "toSide": "left", "via": [[850, 80], [880, 142]], "labelAt": [870, 70] },
+    { "id": "agent-report", "from": "agent", "to": "report", "label": "疑点", "classification": "review cue", "variant": "dashed", "fromSide": "right", "toSide": "left", "via": [[850, 500], [880, 414]], "labelAt": [870, 510] }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "输入不是一锅粥", "items": ["DOM 是可追溯事实", "规则和契约由系统固定", "人工反馈只作用于本次修订范围"] },
+    { "dot": "orange", "title": "编排职责", "items": ["应用只定义节点、工具与退出条件", "不描述公司内部 Agent 的底层推理引擎", "模型输出先验收，再允许进入目录"] }
+  ]
+}

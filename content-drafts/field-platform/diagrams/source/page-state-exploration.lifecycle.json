@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "页面状态探索生命周期",
+    "subtitle": "完整不是一句“抓完了”，而是所有已发现可达状态都有处理结果",
+    "output": "../page-state-exploration.html",
+    "animation": "trace",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "views": [
+      { "id": "main", "label": "主探索链", "focus": ["scoped", "scanning", "interacting", "stabilizing", "covered"], "note": "从限定范围开始，逐状态探索并形成覆盖结论。" },
+      { "id": "retry", "label": "稳定与重试", "focus": ["interacting", "retrying", "stabilizing"], "note": "动作失败时从最近状态重试，而不是整页失忆。" },
+      { "id": "partial", "label": "部分完成", "focus": ["stabilizing", "unavailable", "partial"], "note": "不可访问区域被显式记录为部分完成。" }
+    ]
+  },
+  "lanes": [
+    { "id": "main", "label": "探索阶段" },
+    { "id": "events", "label": "异常与等待" },
+    { "id": "terminal", "label": "终态" }
+  ],
+  "states": [
+    { "id": "scoped", "type": "start", "label": "范围已确定", "sublabel": "账号 / 页面 / 场景", "lane": "main", "col": 0, "step": "01" },
+    { "id": "scanning", "type": "active", "label": "扫描状态", "sublabel": "发现可交互区域", "lane": "main", "col": 1, "step": "02" },
+    { "id": "interacting", "type": "active", "label": "安全交互", "sublabel": "展开 / 点击 / 滚动", "lane": "main", "col": 2, "step": "03" },
+    { "id": "stabilizing", "type": "decision", "label": "等待稳定", "sublabel": "指纹与 DOM 变化", "lane": "main", "col": 3, "step": "04" },
+    { "id": "covered", "type": "success", "label": "覆盖完成", "sublabel": "可达状态均有结果", "lane": "main", "col": 4, "step": "05" },
+    { "id": "retrying", "type": "waiting", "label": "重试当前动作", "sublabel": "超时 / 渲染未稳", "lane": "events", "col": 0, "tag": "有限次数" },
+    { "id": "unavailable", "type": "waiting", "label": "区域不可访问", "sublabel": "权限 / iframe / 画布", "lane": "events", "col": 1, "tag": "保留原因" },
+    { "id": "partial", "type": "failure", "label": "部分完成", "sublabel": "可用结果 + 缺口", "lane": "terminal", "col": 1, "tag": "PARTIAL" }
+  ],
+  "transitions": [
+    { "id": "interaction-retry", "from": "interacting", "to": "retrying", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "route": "straight" },
+    { "id": "stabilize-unavailable", "from": "stabilizing", "to": "unavailable", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "straight" },
+    { "id": "unavailable-partial", "from": "unavailable", "to": "partial", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "straight" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "完成定义", "items": ["处理所有已发现的可达状态", "每个状态都有快照、跳过或失败记录"] },
+    { "dot": "rose", "title": "不做承诺", "items": ["不声称覆盖所有角色和所有未来状态", "未知区域不会被悄悄算作成功"] }
+  ]
+}

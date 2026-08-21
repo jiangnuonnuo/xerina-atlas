@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "字段字典交付流水线",
+    "subtitle": "从一致性快照到可下载产物：分段、可恢复、避免一次性吃掉内存",
+    "output": "../delivery-pipeline.html",
+    "visual_preset": "blueprint",
+    "quality_profile": "showcase",
+    "viewBox": [1120, 720],
+    "views": [
+      { "id": "snapshot", "label": "一致性快照", "focus": ["catalog", "snapshot", "valid-path"], "note": "导出从明确时刻的目录视图开始，避免边导出边变树。" },
+      { "id": "write", "label": "分段写入", "focus": ["snapshot", "valid-path", "rows", "workbook"], "note": "中间阶段可检查、可续跑，内存不会被整份工作簿拖垮。" },
+      { "id": "deliver", "label": "产物交付", "focus": ["workbook", "artifact", "consumer"], "note": "完成后才暴露正式文件，失败不留下半成品冒充成果。" }
+    ]
+  },
+  "stages": [
+    { "label": "目录来源" },
+    { "label": "任务快照" },
+    { "label": "校验与展开" },
+    { "label": "流式写入" },
+    { "label": "交付" }
+  ],
+  "nodes": [
+    { "id": "catalog", "type": "database", "label": "目录主存储", "sublabel": "可信字段树", "stage": 0, "row": 1, "tag": "一致性读" },
+    { "id": "snapshot", "type": "database", "label": "任务快照", "sublabel": "本次导出固定视图", "stage": 1, "row": 1, "tag": "检查点" },
+    { "id": "valid-path", "type": "security", "label": "路径有效性校验", "sublabel": "无环、未删除、可达", "stage": 2, "row": 0, "tag": "先验收" },
+    { "id": "rows", "type": "messagebus", "label": "字段路径行", "sublabel": "分批展开", "stage": 2, "row": 2, "tag": "可续跑" },
+    { "id": "workbook", "type": "backend", "label": "流式工作簿写入", "sublabel": "临时产物", "stage": 3, "row": 1, "tag": "低内存" },
+    { "id": "artifact", "type": "cloud", "label": "正式交付产物", "sublabel": "原子提交后可见", "stage": 4, "row": 0, "tag": "可下载" },
+    { "id": "consumer", "type": "external", "label": "字段使用者", "sublabel": "分析、配置、对接", "stage": 4, "row": 2, "tag": "消费" }
+  ],
+  "flows": [
+    { "id": "catalog-snapshot", "from": "catalog", "to": "snapshot", "label": "一致性读取", "classification": "snapshot", "variant": "emphasis", "route": "straight" },
+    { "id": "snapshot-valid", "from": "snapshot", "to": "valid-path", "label": "校验", "classification": "tree state", "variant": "security", "fromSide": "right", "toSide": "left", "via": [[440, 270], [480, 142]], "labelAt": [460, 74] },
+    { "id": "snapshot-rows", "from": "snapshot", "to": "rows", "label": "节点", "classification": "batched", "variant": "emphasis", "fromSide": "right", "toSide": "left", "via": [[440, 270], [480, 414]], "labelAt": [460, 510] },
+    { "id": "valid-rows", "from": "valid-path", "to": "rows", "label": "允许展开", "classification": "validation", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [640, 270] },
+    { "id": "rows-workbook", "from": "rows", "to": "workbook", "label": "分页写入", "classification": "rows", "variant": "emphasis", "route": "straight", "via": [[640, 385], [640, 271]] },
+    { "id": "workbook-artifact", "from": "workbook", "to": "artifact", "label": "提交", "classification": "file commit", "variant": "emphasis", "fromSide": "right", "toSide": "left", "via": [[860, 270], [890, 142]], "labelAt": [872, 74] },
+    { "id": "artifact-consumer", "from": "artifact", "to": "consumer", "label": "下载与使用", "classification": "artifact", "variant": "default", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [960, 270] }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "可恢复不是口号", "items": ["快照、行数据、文件写入各有检查点", "重试从最近完成阶段继续", "临时文件与正式产物严格区分"] },
+    { "dot": "orange", "title": "资源要有边界", "items": ["任务并发数受控", "大树按游标和分批读取", "流式写入避免整表驻留内存"] }
+  ]
+}
