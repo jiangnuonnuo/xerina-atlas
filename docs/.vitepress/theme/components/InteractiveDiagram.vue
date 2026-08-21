@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 
 const props = defineProps<{
@@ -9,14 +9,92 @@ const props = defineProps<{
   description?: string
 }>()
 
-const loaded = ref(false)
-const safeSource = computed(() => props.src.startsWith('/media/') ? withBase(props.src) : '')
+// Diagrams are interactive by default — no click / poster gate.
+const loaded = ref(true)
+const expanded = ref(false)
+const frame = ref<HTMLIFrameElement | null>(null)
+const modalFrame = ref<HTMLIFrameElement | null>(null)
+
+const safeSource = computed(() => (props.src.startsWith('/media/') ? withBase(props.src) : ''))
 const safePoster = computed(() => withBase(props.poster))
+
+// Present mode expands the diagram to fill the viewport (hides cards/footer).
+const presentSource = computed(() => {
+  if (!safeSource.value) return ''
+  if (typeof window === 'undefined') return safeSource.value
+  try {
+    const u = new URL(safeSource.value, window.location.origin)
+    u.searchParams.delete('embed')
+    u.searchParams.set('present', '1')
+    return u.pathname + u.search
+  } catch {
+    return safeSource.value.replace('embed=1', 'present=1')
+  }
+})
+
+// Same-origin iframe (allow-same-origin) lets us listen for dblclick inside it.
+function bindInside(elm: HTMLIFrameElement | null, handler: () => void) {
+  if (!elm) return
+  try {
+    const doc = elm.contentDocument
+    if (doc) doc.addEventListener('dblclick', handler)
+  } catch {
+    /* cross-origin fallback: use the caption affordance */
+  }
+}
+
+function openFullscreen() {
+  expanded.value = true
+}
+function closeFullscreen() {
+  expanded.value = false
+}
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') expanded.value = false
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
   <figure class="interactive-diagram">
-    <div class="interactive-diagram-preview"><img :src="safePoster" :alt="description || title" loading="lazy" decoding="async" /><div class="interactive-diagram-overlay"><span>{{ title }}</span><button v-if="safeSource" type="button" @click="loaded = true">交互查看</button><a :href="safeSource || safePoster" target="_blank" rel="noreferrer">打开完整图 ↗</a></div><iframe v-if="loaded && safeSource" :src="safeSource" :title="title" loading="lazy" sandbox="allow-scripts allow-same-origin" /></div>
-    <figcaption><strong>{{ title }}</strong><span v-if="description">{{ description }}</span></figcaption>
+    <div class="interactive-diagram-preview">
+      <img v-if="!loaded && safePoster" :src="safePoster" :alt="description || title" loading="lazy" decoding="async" />
+      <iframe
+        v-if="loaded && safeSource"
+        ref="frame"
+        :src="safeSource"
+        :title="title"
+        loading="lazy"
+        sandbox="allow-scripts allow-same-origin"
+        @load="bindInside(frame, openFullscreen)"
+      />
+    </div>
+    <figcaption>
+      <strong>{{ title }}</strong>
+      <span v-if="description">{{ description }}</span>
+      <span class="interactive-diagram-hint">
+        <button v-if="safeSource" type="button" @click="openFullscreen">双击展开全图 ↗</button>
+        <a :href="safeSource || safePoster" target="_blank" rel="noreferrer">打开完整图</a>
+      </span>
+    </figcaption>
   </figure>
+
+  <Teleport to="body">
+    <div v-if="expanded" class="interactive-diagram-modal" @click.self="closeFullscreen">
+      <div class="interactive-diagram-modal-inner">
+        <iframe
+          v-if="presentSource"
+          ref="modalFrame"
+          :src="presentSource"
+          :title="`${title}（展开）`"
+          sandbox="allow-scripts allow-same-origin"
+          @load="bindInside(modalFrame, closeFullscreen)"
+        />
+        <button class="interactive-diagram-close" type="button" @click="closeFullscreen" aria-label="关闭">×</button>
+      </div>
+    </div>
+  </Teleport>
 </template>
