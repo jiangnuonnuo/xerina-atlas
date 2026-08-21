@@ -1,0 +1,113 @@
+<!-- title: Function Calling 工作流：两次大模型调用在打配合 | source: CodeMode.md 2.2 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 620" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">
+  <rect width="1280" height="620" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="640" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">Function Calling：两次大模型调用在打配合</text>
+  <text x="640" y="78" text-anchor="middle" font-size="14" fill="#475569">本质 = 第 1 次做选择（调谁、传啥参数），第 2 次做总结（据此作答）</text>
+
+  <!-- Lane labels (left two cards: model calls; right: tool execution) -->
+  <text x="180" y="118" font-size="13" font-weight="700" fill="#2563eb" letter-spacing="1">第 1 轮  ·  选工具 &amp; 填参数</text>
+  <text x="900" y="118" font-size="13" font-weight="700" fill="#f59e0b" letter-spacing="1">第 2 轮  ·  据此作答</text>
+
+  <!-- ===== Nodes ===== -->
+  <!-- Node 1: 用户提问 -->
+  <g transform="translate(60, 160)">
+    <rect width="220" height="96" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="110" y="36" text-anchor="middle" font-size="28">🙋</text>
+    <text x="110" y="68" text-anchor="middle" font-size="15" font-weight="600" fill="#0f172a">用户提问</text>
+    <text x="110" y="86" text-anchor="middle" font-size="12" fill="#64748b">"上海明天下不下雨？"</text>
+  </g>
+
+  <!-- Node 2: LLM 第 1 次调用 -->
+  <g transform="translate(330, 160)">
+    <rect width="220" height="96" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="110" y="36" text-anchor="middle" font-size="28">🧠</text>
+    <text x="110" y="68" text-anchor="middle" font-size="15" font-weight="600" fill="#1d4ed8">LLM · 第 1 次调用</text>
+    <text x="110" y="86" text-anchor="middle" font-size="12" fill="#475569">读工具定义 → 输出 JSON</text>
+  </g>
+
+  <!-- Node 3: 工具执行 -->
+  <g transform="translate(600, 160)">
+    <rect width="220" height="96" rx="14" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
+    <text x="110" y="36" text-anchor="middle" font-size="28">⚙️</text>
+    <text x="110" y="68" text-anchor="middle" font-size="15" font-weight="600" fill="#b45309">工具执行</text>
+    <text x="110" y="86" text-anchor="middle" font-size="12" fill="#475569">调天气 API · 拿真实数据</text>
+  </g>
+
+  <!-- Node 4: LLM 第 2 次调用 -->
+  <g transform="translate(870, 160)">
+    <rect width="220" height="96" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="110" y="36" text-anchor="middle" font-size="28">🧠</text>
+    <text x="110" y="68" text-anchor="middle" font-size="15" font-weight="600" fill="#1d4ed8">LLM · 第 2 次调用</text>
+    <text x="110" y="86" text-anchor="middle" font-size="12" fill="#475569">拿到结果 → 生成回答</text>
+  </g>
+
+  <!-- Node 5: 最终回答 -->
+  <g transform="translate(1140, 160)">
+    <rect width="100" height="96" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="50" y="36" text-anchor="middle" font-size="28">💬</text>
+    <text x="50" y="68" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">最终</text>
+    <text x="50" y="86" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">回答</text>
+  </g>
+
+  <!-- ===== Arrows ===== -->
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <line x1="280" y1="208" x2="330" y2="208" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="550" y1="208" x2="600" y2="208" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+  <line x1="820" y1="208" x2="870" y2="208" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="1090" y1="208" x2="1140" y2="208" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+
+  <!-- Edge labels -->
+  <text x="305" y="200" text-anchor="middle" font-size="11" fill="#64748b">1</text>
+  <text x="575" y="200" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="700">2</text>
+  <text x="845" y="200" text-anchor="middle" font-size="11" fill="#64748b">3</text>
+  <text x="1115" y="200" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="700">4</text>
+
+  <text x="305" y="240" text-anchor="middle" font-size="11" fill="#64748b">自然语言</text>
+  <text x="575" y="240" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="600">JSON 参数</text>
+  <text x="845" y="240" text-anchor="middle" font-size="11" fill="#64748b">真实结果</text>
+  <text x="1115" y="240" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="600">自然语言</text>
+
+  <!-- Step descriptions -->
+  <g transform="translate(60, 320)">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#0f172a">①  用户</text>
+    <text x="0" y="22" font-size="12" fill="#475569">自然语言提问；模型把"做什么"翻译成"调谁"</text>
+  </g>
+  <g transform="translate(330, 320)">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#1d4ed8">②  LLM 第 1 次</text>
+    <text x="0" y="22" font-size="12" fill="#475569">读所有工具定义，决策：调哪个、传什么参数</text>
+  </g>
+  <g transform="translate(600, 320)">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#b45309">③  工具执行</text>
+    <text x="0" y="22" font-size="12" fill="#475569">外部 API 真正跑起来，返回原始数据</text>
+  </g>
+  <g transform="translate(870, 320)">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#1d4ed8">④  LLM 第 2 次</text>
+    <text x="0" y="22" font-size="12" fill="#475569">把原始数据当成"食材"再加工，生成自然语言</text>
+  </g>
+  <g transform="translate(1140, 320)">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#0f172a">⑤  交付</text>
+    <text x="0" y="22" font-size="12" fill="#475569">用户拿到一份能直接用的答案</text>
+  </g>
+
+  <!-- Take-away box -->
+  <g transform="translate(60, 430)">
+    <rect width="1160" height="80" rx="12" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="0"/>
+    <text x="20" y="32" font-size="15" font-weight="700" fill="#3730a3">💡 Take-away  ·  "点菜"类比</text>
+    <text x="20" y="56" font-size="13" fill="#1e293b">第 1 次调用 = 服务员记下你点的菜（参数：菜名 + 忌口），</text>
+    <text x="20" y="74" font-size="13" fill="#1e293b">第 2 次调用 = 菜做好端上来，服务员再讲一遍"这道菜的故事"给用户听。</text>
+  </g>
+
+  <!-- Footer / Source -->
+  <text x="60" y="595" font-size="11" fill="#94a3b8">Source: CodeMode.md §2.2  ·  Style: Flat Icon  ·  主色 #2563eb</text>
+  <text x="1220" y="595" text-anchor="end" font-size="11" fill="#94a3b8">Xerina Atlas</text>
+</svg>

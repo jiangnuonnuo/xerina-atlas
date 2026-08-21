@@ -58,11 +58,7 @@ Agent 圈子里冒出一批"异端分子"，他们喊出了一句让很多老工
 
 Function Calling 的工作流程，本质上是**两次大模型调用**在打配合：
 
-```mermaid
-flowchart TD
-    A[第 1 次调用<br/>模型读工具定义] -->|输出 JSON<br/>决定调哪个工具、传什么参数| B[外部程序执行工具<br/>查数据库 / 调 API / 发请求]
-    B -->|把真实执行结果喂回来| C[第 2 次调用<br/>模型根据结果生成最终回答]
-```
+![Function Calling 工作流：两次大模型调用在打配合](./assets/images/function-calling-flow.svg)
 
 拿"点菜"打个比方，这套流程你秒懂：
 
@@ -154,19 +150,7 @@ Code Mode 的"魔力"，就藏在它只暴露的 **2 个工具**里——这就�
 
 配合一张图，理解它如何用 2 个工具吃掉整个 API：
 
-```mermaid
-flowchart TD
-    LLM[大模型] -->|写代码搜索 search| S[在 OpenAPI 规范里过滤<br/>2500+ 端点 → 缩小范围]
-    S -->|找到目标端点| E[写代码执行 execute]
-    E -->|沙箱内运行| RUN[发起请求 / 处理分页 / 链式操作]
-    RUN -->|只返回结果| LLM
-    subgraph SAFE[隔离沙箱 V8]
-        S
-        E
-        RUN
-    end
-    style SAFE fill:#fff7ed,stroke:#ea580c,stroke-dasharray:5 3
-```
+![Code Mode 双核引擎：把 2500+ API 压缩成 2 个元工具](./assets/images/code-mode-dual-core.svg)
 
 关键就在 `search()` 这一步：**模型要什么，就写代码"搜"什么**，搜到了再用 `execute()` 执行。整套 MCP Server 的上下文占用被压到**固定 ~1000 token**，比传统的 117 万 token 减少了 **99.9%**。
 
@@ -190,21 +174,7 @@ flowchart TD
 
 答案是：**怕，所以把它关进"安全沙箱"。** 下面是 Cloudflare Code Mode SDK（`@cloudflare/codemode`，MIT 开源）的执行链路：
 
-```mermaid
-flowchart LR
-    subgraph HOST[Host Worker 宿主]
-        TD[ToolDispatchers<br/>每个命名空间一个]
-    end
-    subgraph SB[隔离沙箱 Dynamic Worker]
-        CODE[LLM 生成的代码在这里运行]
-        C1[codemode.myTool → dispatcher.call]
-        C2[state.readFile → dispatcher.call]
-        LOCK[fetch 默认被阻止<br/>无文件系统 无环境变量]
-    end
-    HOST -- RPC 双向通信 --> SB
-    CODE --> C1 & C2
-    CODE --- LOCK
-```
+![Code Mode 执行链路：Host Worker 到 Dynamic Worker 沙箱的 6 步流程](./assets/images/code-mode-execution-chain.svg)
 
 执行链路，一共 6 步：
 
@@ -323,16 +293,7 @@ async () => {
 
 想象一个 Agent 帮你做"数据分析日报"：
 
-```mermaid
-flowchart LR
-    A[Agent 数据分析日报] --> B[Function Calling<br/>调数据仓库接口]
-    B --> C[拿到订单数据]
-    C --> D[Code Mode<br/>沙箱写代码]
-    D --> E[清洗 / 聚合 / 算环比 / 出图]
-    E --> F[生成日报]
-    B --- B2[旧神：稳定对接外部]
-    D --- D2[新神：自由编排计算]
-```
+![数据分析日报协作：Function Calling 取数 + Code Mode 加工](./assets/images/function-calling-plus-code-mode.svg)
 
 1. **第一步，用 Function Calling**：稳稳地调"数据仓库接口"，把订单数据拿回来——这是明确、稳定、需要严格校验的外部调用，正是 Function Calling 的强项。
 2. **第二步，用 Code Mode**：拿到数据后，让模型在沙箱里写代码做清洗、聚合、算环比、生成图表——这种"多变、复杂、要组合多步"的活，正是 Code Mode 的主场。

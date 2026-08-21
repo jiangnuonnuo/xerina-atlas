@@ -1,0 +1,115 @@
+<!-- title: Code Mode 双核引擎：把 2500+ API 压缩成 2 个元工具 | source: CodeMode.md 3.4 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+
+  <!-- Title + big takeaway -->
+  <text x="640" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">Code Mode 双核引擎</text>
+  <g transform="translate(640, 80)">
+    <rect x="-280" y="0" width="560" height="44" rx="22" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="0" y="29" text-anchor="middle" font-size="18" font-weight="700" fill="#b45309">2500+ API  →  2 个元工具  (search · execute)</text>
+  </g>
+
+  <!-- ===== LLM (left) ===== -->
+  <g transform="translate(60, 180)">
+    <rect width="240" height="120" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+    <text x="120" y="38" text-anchor="middle" font-size="34">🧠</text>
+    <text x="120" y="72" text-anchor="middle" font-size="16" font-weight="700" fill="#1d4ed8">大模型 LLM</text>
+    <text x="120" y="92" text-anchor="middle" font-size="12" fill="#475569">写 TypeScript 代码</text>
+    <text x="120" y="108" text-anchor="middle" font-size="12" fill="#475569">不用在 2500 里"选"</text>
+  </g>
+
+  <!-- ===== Sandbox (center) ===== -->
+  <g transform="translate(360, 170)">
+    <rect width="540" height="200" rx="20" fill="#ffffff" stroke="#0ea5e9" stroke-width="2.5" stroke-dasharray="6 4"/>
+    <text x="20" y="28" font-size="13" font-weight="700" fill="#0369a1" letter-spacing="1">SANDBOX  ·  沙箱（隔离 + 第 4 工具）</text>
+
+    <!-- Code area inside sandbox -->
+    <g transform="translate(40, 60)">
+      <rect width="460" height="56" rx="8" fill="#0f172a"/>
+      <text x="14" y="22" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7f3d0">// 写出来的代码 = 第 4 个工具</text>
+      <text x="14" y="42" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#fde68a">const api = await search("github repo search");</text>
+      <text x="14" y="56" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#fca5a5">return await execute(api, { q: "code mode" });</text>
+    </g>
+
+    <!-- Two meta-tools inside sandbox -->
+    <g transform="translate(40, 130)">
+      <rect width="220" height="50" rx="10" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+      <text x="110" y="22" text-anchor="middle" font-size="16">🔍</text>
+      <text x="110" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#0e7490">search()  ·  按需取工具</text>
+    </g>
+    <g transform="translate(280, 130)">
+      <rect width="220" height="50" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="110" y="22" text-anchor="middle" font-size="16">⚡</text>
+      <text x="110" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">execute()  ·  执行 + 拿数据</text>
+    </g>
+  </g>
+
+  <!-- ===== OpenAPI spec (right) ===== -->
+  <g transform="translate(960, 180)">
+    <rect width="260" height="120" rx="16" fill="#fef2f2" stroke="#ef4444" stroke-width="2.5"/>
+    <text x="130" y="36" text-anchor="middle" font-size="34">📚</text>
+    <text x="130" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="#b91c1c">OpenAPI 规范</text>
+    <text x="130" y="88" text-anchor="middle" font-size="22" font-weight="800" fill="#dc2626">2500+ API</text>
+    <text x="130" y="106" text-anchor="middle" font-size="11" fill="#7f1d1d">全量端点 · 参数 · 响应 schema</text>
+  </g>
+
+  <!-- ===== Arrows ===== -->
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arr2-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr2-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0891b2"/>
+    </marker>
+  </defs>
+
+  <!-- LLM → sandbox (writes code) -->
+  <line x1="300" y1="240" x2="360" y2="240" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr2-blue)"/>
+  <text x="330" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#1d4ed8">写代码</text>
+
+  <!-- sandbox → OpenAPI (search filter) -->
+  <path d="M 900 240 L 960 240" stroke="#0891b2" stroke-width="2.5" marker-end="url(#arr2-cyan)"/>
+  <text x="930" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#0e7490">search() 取子集</text>
+
+  <!-- OpenAPI → sandbox (filtered APIs) -->
+  <path d="M 960 280 L 900 280" stroke="#475569" stroke-width="2" marker-end="url(#arr2)" stroke-dasharray="4 3"/>
+  <text x="930" y="272" text-anchor="middle" font-size="11" fill="#64748b">按需子集</text>
+
+  <!-- sandbox → LLM (data back) -->
+  <path d="M 360 300 L 300 300" stroke="#475569" stroke-width="2" marker-end="url(#arr2)"/>
+  <text x="330" y="318" text-anchor="middle" font-size="11" fill="#64748b">execute() 结果</text>
+
+  <!-- ===== Legend ===== -->
+  <g transform="translate(60, 430)">
+    <text x="0" y="0" font-size="14" font-weight="700" fill="#0f172a">图例</text>
+    <rect x="0" y="14" width="18" height="14" rx="3" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="28" y="25" font-size="12" fill="#475569">大模型 LLM</text>
+    <rect x="160" y="14" width="18" height="14" rx="3" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+    <text x="188" y="25" font-size="12" fill="#475569">元工具（search / execute）</text>
+    <rect x="360" y="14" width="18" height="14" rx="3" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+    <text x="388" y="25" font-size="12" fill="#475569">OpenAPI 规范数据源</text>
+    <line x1="540" y1="21" x2="580" y2="21" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr2-blue)"/>
+    <text x="588" y="25" font-size="12" fill="#475569">写代码 / 调工具</text>
+    <line x1="730" y1="21" x2="770" y2="21" stroke="#475569" stroke-width="2" marker-end="url(#arr2)"/>
+    <text x="778" y="25" font-size="12" fill="#475569">数据返回</text>
+  </g>
+
+  <!-- ===== Motivation block ===== -->
+  <g transform="translate(60, 490)">
+    <rect width="1160" height="100" rx="14" fill="#fefce8" stroke="#facc15" stroke-width="1.5"/>
+    <text x="20" y="32" font-size="15" font-weight="700" fill="#854d0e">🎯 Motivation  ·  为什么是 2500 → 2 ？</text>
+    <text x="20" y="58" font-size="13" fill="#1e293b">把 2500 个工具全塞进 prompt = 让 LLM 在 2500 个选项里"短上下文选择困难"，浪费 token、命中率低。</text>
+    <text x="20" y="80" font-size="13" fill="#1e293b">Code Mode 改成"写代码 = 第 4 个工具"——LLM 拥有写代码的"长上下文思维"，让沙箱按需过滤 + 执行。</text>
+  </g>
+
+  <!-- Take-away -->
+  <g transform="translate(60, 620)">
+    <text x="0" y="0" font-size="13" font-weight="700" fill="#0f172a">💡 Take-away</text>
+    <text x="0" y="22" font-size="12" fill="#475569">工具选择权下放：让 LLM 用"代码"代替"选 API"，把上下文占用从"工具列表"挪到"任务本身"。</text>
+  </g>
+
+  <text x="60" y="700" font-size="11" fill="#94a3b8">Source: CodeMode.md §3.4  ·  Style: Flat Icon  ·  Xerina Atlas</text>
+</svg>

@@ -1,0 +1,145 @@
+<!-- title: 真实协作：Function Calling 取数 + Code Mode 加工 → 数据分析日报 | source: CodeMode.md 5.2 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+
+  <!-- Title + slogan -->
+  <text x="640" y="46" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">数据日报：手 + 脑，组合出击</text>
+  <g transform="translate(640, 76)">
+    <rect x="-280" y="0" width="560" height="40" rx="20" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="0" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#3730a3">Function Calling = 手（取数）   ·   Code Mode = 脑（加工）</text>
+  </g>
+
+  <!-- ===== Arrows defs ===== -->
+  <defs>
+    <marker id="arr4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arr4-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr4-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- ===== Stage 1: 用户提需求 ===== -->
+  <g transform="translate(60, 170)">
+    <rect width="180" height="100" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="90" y="36" text-anchor="middle" font-size="30">🙋</text>
+    <text x="90" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">用户</text>
+    <text x="90" y="88" text-anchor="middle" font-size="11" fill="#475569">"给我一份昨日销售日报"</text>
+  </g>
+
+  <!-- ===== Stage 2: Agent 调度 ===== -->
+  <g transform="translate(290, 170)">
+    <rect width="200" height="100" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+    <text x="100" y="36" text-anchor="middle" font-size="30">🤖</text>
+    <text x="100" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">Agent 调度</text>
+    <text x="100" y="88" text-anchor="middle" font-size="11" fill="#475569">拆任务 · 分派</text>
+  </g>
+
+  <!-- ===== Stage 3: Function Calling 并行取数 ===== -->
+  <g transform="translate(540, 130)">
+    <rect width="320" height="180" rx="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
+    <text x="160" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309" letter-spacing="1">FUNCTION CALLING  ·  手</text>
+
+    <!-- 3 parallel data sources -->
+    <g transform="translate(30, 60)">
+      <rect width="80" height="60" rx="10" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="40" y="24" text-anchor="middle" font-size="22">🗄️</text>
+      <text x="40" y="48" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">DB</text>
+    </g>
+    <g transform="translate(120, 60)">
+      <rect width="80" height="60" rx="10" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="40" y="24" text-anchor="middle" font-size="22">🔌</text>
+      <text x="40" y="48" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">API</text>
+    </g>
+    <g transform="translate(210, 60)">
+      <rect width="80" height="60" rx="10" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="40" y="24" text-anchor="middle" font-size="22">📧</text>
+      <text x="40" y="48" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">邮件</text>
+    </g>
+
+    <text x="160" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#b45309">并行调用 5–10 个工具</text>
+    <text x="160" y="166" text-anchor="middle" font-size="11" fill="#475569">把"取数"这个动作彻底并行化</text>
+  </g>
+
+  <!-- ===== Stage 4: 拿到大表 ===== -->
+  <g transform="translate(910, 170)">
+    <rect width="160" height="100" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+    <text x="80" y="36" text-anchor="middle" font-size="30">📊</text>
+    <text x="80" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">大表数据</text>
+    <text x="80" y="88" text-anchor="middle" font-size="11" fill="#475569">10 万行 + 20 字段</text>
+  </g>
+
+  <!-- ===== Stage 5: Code Mode 加工 ===== -->
+  <g transform="translate(290, 360)">
+    <rect width="500" height="160" rx="16" fill="#ecfeff" stroke="#0891b2" stroke-width="2.5"/>
+    <text x="250" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#0e7490" letter-spacing="1">CODE MODE  ·  脑（沙箱内写代码加工）</text>
+
+    <g transform="translate(40, 60)">
+      <rect width="100" height="70" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+      <text x="50" y="26" text-anchor="middle" font-size="22">🧹</text>
+      <text x="50" y="50" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">合并</text>
+      <text x="50" y="64" text-anchor="middle" font-size="11" fill="#475569">清洗</text>
+    </g>
+    <g transform="translate(150, 60)">
+      <rect width="100" height="70" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+      <text x="50" y="26" text-anchor="middle" font-size="22">🧮</text>
+      <text x="50" y="50" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">计算</text>
+      <text x="50" y="64" text-anchor="middle" font-size="11" fill="#475569">同比 · 环比</text>
+    </g>
+    <g transform="translate(260, 60)">
+      <rect width="100" height="70" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+      <text x="50" y="26" text-anchor="middle" font-size="22">📈</text>
+      <text x="50" y="50" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">画图</text>
+      <text x="50" y="64" text-anchor="middle" font-size="11" fill="#475569">趋势 · 占比</text>
+    </g>
+    <g transform="translate(370, 60)">
+      <rect width="100" height="70" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+      <text x="50" y="26" text-anchor="middle" font-size="22">📝</text>
+      <text x="50" y="50" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">洞察</text>
+      <text x="50" y="64" text-anchor="middle" font-size="11" fill="#475569">总结</text>
+    </g>
+  </g>
+
+  <!-- ===== Stage 6: 输出日报 ===== -->
+  <g transform="translate(840, 380)">
+    <rect width="240" height="120" rx="14" fill="#ffffff" stroke="#16a34a" stroke-width="2.5"/>
+    <text x="120" y="40" text-anchor="middle" font-size="32">📄</text>
+    <text x="120" y="72" text-anchor="middle" font-size="15" font-weight="700" fill="#15803d">结构化日报</text>
+    <text x="120" y="92" text-anchor="middle" font-size="11" fill="#475569">关键指标 · 趋势图</text>
+    <text x="120" y="108" text-anchor="middle" font-size="11" fill="#475569">异动归因 · 文字洞察</text>
+  </g>
+
+  <!-- ===== Main flow arrows ===== -->
+  <line x1="240" y1="220" x2="290" y2="220" stroke="#475569" stroke-width="2" marker-end="url(#arr4)"/>
+  <line x1="490" y1="220" x2="540" y2="220" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr4-blue)"/>
+  <path d="M 860 220 C 880 220 880 220 910 220" stroke="#475569" stroke-width="2" marker-end="url(#arr4)"/>
+  <text x="885" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">数据</text>
+
+  <path d="M 990 270 C 990 320 990 320 540 440" stroke="#0891b2" stroke-width="2.5" marker-end="url(#arr4-orange)" fill="none"/>
+  <text x="800" y="320" font-size="11" font-weight="700" fill="#0e7490">送进沙箱</text>
+
+  <line x1="790" y1="440" x2="840" y2="440" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arr4-blue)"/>
+  <text x="815" y="432" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">成品</text>
+
+  <!-- ===== Legend ===== -->
+  <g transform="translate(60, 555)">
+    <text x="0" y="0" font-size="14" font-weight="700" fill="#0f172a">角色对照</text>
+    <rect x="0" y="14" width="22" height="14" rx="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="32" y="25" font-size="12" fill="#475569">Function Calling = 秘书（"手"）· 并行取数 · 一次性 5–10 工具</text>
+    <rect x="0" y="40" width="22" height="14" rx="3" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+    <text x="32" y="51" font-size="12" fill="#475569">Code Mode = 专家（"脑"）· 在沙箱里写代码加工海量数据</text>
+  </g>
+
+  <!-- Take-away -->
+  <g transform="translate(60, 610)">
+    <rect width="1160" height="76" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="20" y="30" font-size="15" font-weight="700" fill="#166534">💡 Take-away  ·  组合才是真答案</text>
+    <text x="20" y="54" font-size="13" fill="#1e293b">取数交给 Function Calling（IO 密集 · 一次拿一堆）→ 加工交给 Code Mode（CPU 密集 · 在沙箱里写代码）。</text>
+    <text x="20" y="70" font-size="12" fill="#475569">不是"用谁替代谁"，而是"让合适的人干合适的事"。</text>
+  </g>
+
+  <text x="60" y="708" font-size="11" fill="#94a3b8">Source: CodeMode.md §5.2  ·  Style: Flat Icon  ·  Xerina Atlas</text>
+</svg>

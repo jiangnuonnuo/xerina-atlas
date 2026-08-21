@@ -1,0 +1,130 @@
+<!-- title: Code Mode 执行链路（Host Worker → Dynamic Worker 沙箱） | source: CodeMode.md 3.6 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">
+  <rect width="1280" height="760" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="640" y="44" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">Code Mode 执行链路</text>
+  <text x="640" y="72" text-anchor="middle" font-size="14" fill="#475569">从 HTTP 进入 → 沙箱实例化 → codemodeTool → executeNow → fetch 拦截透传 state</text>
+
+  <!-- ===== Lane backgrounds ===== -->
+  <!-- Host Worker lane (left) -->
+  <rect x="40" y="110" width="560" height="500" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="0"/>
+  <text x="60" y="138" font-size="14" font-weight="700" fill="#1d4ed8" letter-spacing="1">HOST WORKER  ·  宿主进程</text>
+  <text x="60" y="156" font-size="11" fill="#475569">Cloudflare Worker · 路由 / 实例化沙箱</text>
+
+  <!-- Dynamic Worker (Sandbox) lane (right) -->
+  <rect x="640" y="110" width="600" height="500" rx="16" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="660" y="138" font-size="14" font-weight="700" fill="#b45309" letter-spacing="1">DYNAMIC WORKER  ·  沙箱（按 endpoint 懒加载）</text>
+  <text x="660" y="156" font-size="11" fill="#475569">隔离执行环境 · 装入 OpenAPI 规范</text>
+
+  <!-- ===== Arrows defs ===== -->
+  <defs>
+    <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arr3-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr3-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- ===== Host Worker steps (left) ===== -->
+  <!-- Step 1: HTTP enters -->
+  <g transform="translate(80, 200)">
+    <rect width="200" height="76" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">STEP 1</text>
+    <text x="100" y="46" text-anchor="middle" font-size="20">🌐</text>
+    <text x="100" y="66" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">HTTP 请求</text>
+  </g>
+
+  <!-- Step 2: createMCPServer -->
+  <g transform="translate(320, 200)">
+    <rect width="240" height="76" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+    <text x="120" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">STEP 2</text>
+    <text x="120" y="46" text-anchor="middle" font-size="20">🛠️</text>
+    <text x="120" y="66" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">createMCPServer()</text>
+  </g>
+
+  <!-- Step 3: 启动沙箱 -->
+  <g transform="translate(200, 350)">
+    <rect width="360" height="76" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+    <text x="180" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">STEP 3</text>
+    <text x="180" y="46" text-anchor="middle" font-size="20">🚀</text>
+    <text x="180" y="66" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">启动 Dynamic Worker（按 endpoint 懒加载）</text>
+  </g>
+
+  <!-- Step 4: 透传 state -->
+  <g transform="translate(200, 500)">
+    <rect width="360" height="76" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+    <text x="180" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">STEP 4 (回程)</text>
+    <text x="180" y="46" text-anchor="middle" font-size="20">📦</text>
+    <text x="180" y="66" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">把 state 透传给上层 LLM</text>
+  </g>
+
+  <!-- ===== Dynamic Worker (Sandbox) steps (right) ===== -->
+  <!-- Step 3b: 沙箱实例化 + 装入 OpenAPI -->
+  <g transform="translate(680, 200)">
+    <rect width="240" height="76" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="120" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">STEP 3b</text>
+    <text x="120" y="46" text-anchor="middle" font-size="20">📥</text>
+    <text x="120" y="66" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">沙箱加载 OpenAPI 规范</text>
+  </g>
+
+  <!-- Step 4b: 暴露 codemodeTool -->
+  <g transform="translate(960, 200)">
+    <rect width="240" height="76" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="120" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">STEP 4b</text>
+    <text x="120" y="46" text-anchor="middle" font-size="20">📡</text>
+    <text x="120" y="66" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">暴露 codemodeTool 工具</text>
+  </g>
+
+  <!-- Step 5: executeNow 找 endpoint -->
+  <g transform="translate(800, 350)">
+    <rect width="400" height="76" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
+    <text x="200" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">STEP 5  ·  核心</text>
+    <text x="200" y="46" text-anchor="middle" font-size="20">⚡</text>
+    <text x="200" y="66" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">executeNow() → 找 endpoint · 捕获 fetch</text>
+  </g>
+
+  <!-- Step 6: fetch 拦截 + state 透传 -->
+  <g transform="translate(800, 500)">
+    <rect width="400" height="76" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
+    <text x="200" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">STEP 6  ·  魔法</text>
+    <text x="200" y="46" text-anchor="middle" font-size="20">🪄</text>
+    <text x="200" y="66" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">fetch 拦截 → state.xxx 上下文透传</text>
+  </g>
+
+  <!-- ===== Lane-internal arrows ===== -->
+  <line x1="280" y1="238" x2="320" y2="238" stroke="#475569" stroke-width="2" marker-end="url(#arr3)"/>
+  <line x1="200" y1="276" x2="320" y2="350" stroke="#475569" stroke-width="1.5" marker-end="url(#arr3)" stroke-dasharray="3 3"/>
+  <line x1="380" y1="426" x2="380" y2="500" stroke="#475569" stroke-width="1.5" marker-end="url(#arr3)" stroke-dasharray="3 3"/>
+
+  <line x1="920" y1="238" x2="960" y2="238" stroke="#475569" stroke-width="2" marker-end="url(#arr3)"/>
+  <line x1="1080" y1="276" x2="1000" y2="350" stroke="#475569" stroke-width="1.5" marker-end="url(#arr3)" stroke-dasharray="3 3"/>
+  <line x1="1000" y1="426" x2="1000" y2="500" stroke="#475569" stroke-width="1.5" marker-end="url(#arr3)" stroke-dasharray="3 3"/>
+
+  <!-- ===== Cross-boundary arrows (Host ↔ Sandbox) ===== -->
+  <!-- Step 2 → Step 3b: createMCPServer calls dynamic worker -->
+  <path d="M 560 238 C 620 238 620 238 680 238" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr3-blue)"/>
+  <text x="620" y="225" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">RPC</text>
+
+  <!-- Step 5 ↔ Step 4b: codemodeTool 调用 / 返回 -->
+  <path d="M 800 388 C 770 388 770 280 720 280" stroke="#f59e0b" stroke-width="2" marker-end="url(#arr3-orange)" fill="none"/>
+  <text x="785" y="320" font-size="10" font-weight="600" fill="#b45309">tool call</text>
+
+  <!-- Step 6 → Step 4: state 透传回 Host -->
+  <path d="M 800 538 C 700 538 700 538 560 538" stroke="#2563eb" stroke-width="2" marker-end="url(#arr3-blue)" fill="none"/>
+  <text x="680" y="528" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">state 透传</text>
+
+  <!-- ===== Take-away ===== -->
+  <g transform="translate(60, 640)">
+    <rect width="1160" height="86" rx="14" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+    <text x="20" y="32" font-size="15" font-weight="700" fill="#3730a3">💡 Take-away  ·  两个关键点</text>
+    <text x="20" y="58" font-size="13" fill="#1e293b">① executeNow() 才是真执行者：它在沙箱内动态构造并运行 TypeScript 代码片段。</text>
+    <text x="20" y="78" font-size="13" fill="#1e293b">② fetch 拦截 = state 隐式传参的魔法：拦截后注入 state.xxx，让代码不显式传也能拿到上下文。</text>
+  </g>
+
+  <text x="60" y="745" font-size="11" fill="#94a3b8">Source: CodeMode.md §3.6  ·  Style: Flat Icon  ·  关键路径用蓝/橙双色区分宿主与沙箱</text>
+</svg>
