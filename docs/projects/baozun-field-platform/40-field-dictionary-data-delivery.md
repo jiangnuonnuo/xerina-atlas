@@ -44,15 +44,14 @@ layout: project-doc
 
 - **待执行**：已创建，等待资源；
 - **执行中**：流式写入中；
-- **阶段完成**：某分片完成；
-- **等待重试**：遇可恢复错误；
+- **等待重试**：遇到可恢复系统错误，并记录下一次执行时间；
 - **成功 / 失败 / 取消**：终态。
 
 <InteractiveDiagram
   title="字段字典导出任务的生命周期"
   src="/media/projects/baozun-field-platform/diagrams/export-task-lifecycle/index.html?embed=1"
   poster="/media/projects/baozun-field-platform/diagrams/export-task-lifecycle/preview.png"
-  description="待执行、执行中、阶段、等待重试、成功、失败、取消。"
+  description="待执行、执行中、等待重试、成功、失败、取消。"
 />
 
 ## 原子交付

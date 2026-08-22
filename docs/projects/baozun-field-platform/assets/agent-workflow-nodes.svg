@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;fill:#111827} .muted{fill:#6b7280} .small{font-size:12px} .label{font-size:14px} .title{font-size:24px;font-weight:700} .subtitle{font-size:13px} .node-title{font-size:14px;font-weight:600}</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#ea580c"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="1200" height="760" fill="#ffffff"/>
+<text x="40" y="42" class="title">内部低代码 Agent 字段解析工作流</text>
+<text x="40" y="67" class="subtitle muted">平台提供工作流运行时；字段项目负责 DOM 契约、领域节点、质量门和候选草稿。</text>
+<rect x="35" y="95" width="1130" height="570" rx="12" fill="#faf5ff" fill-opacity="0.45" stroke="#c084fc" stroke-width="1.4" stroke-dasharray="7,5"/>
+<text x="51" y="120" font-size="13" font-weight="700" fill="#c084fc">企业内部 Agent 设计平台</text>
+<path d="M 175 200 L 215 200" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path d="M 355 200 L 395 200" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path d="M 535 200 L 575 200" fill="none" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)" data-graph-role="edge"/>
+<rect x="521.0" y="175" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="555" y="190" text-anchor="middle" class="small muted">条件路由</text>
+<path d="M 715 200 L 755 200" fill="none" stroke="#9333ea" stroke-width="2" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<rect x="694.0" y="175" width="82" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="735" y="190" text-anchor="middle" class="small muted">分段上下文</text>
+<path d="M 915 200 L 950 200" fill="none" stroke="#9333ea" stroke-width="2" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<path d="M 1090 200 L 1110 200" fill="none" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)" data-graph-role="edge"/>
+<path d="M 805 245 L 805 320 L 362 320 L 362 400" fill="none" stroke="#9333ea" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<rect x="559.0" y="297" width="82" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="600" y="312" text-anchor="middle" class="small muted">查询上下文</text>
+<path d="M 865 245 L 865 345 L 572 345 L 572 400" fill="none" stroke="#9333ea" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<rect x="701.0" y="322" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="735" y="337" text-anchor="middle" class="small muted">术语匹配</text>
+<path d="M 1000 245 L 1000 360 L 815 360 L 815 400" fill="none" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)" data-graph-role="edge"/>
+<rect x="884.0" y="337" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="918" y="352" text-anchor="middle" class="small muted">执行校验</text>
+<path d="M 1115 238 L 1115 520 L 855 520 L 855 545" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)" data-graph-role="edge"/>
+<rect x="951.0" y="497" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="985" y="512" text-anchor="middle" class="small muted">校验通过</text>
+<path d="M 1135 238 L 1135 675 L 680 675 L 680 605 L 650 605" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-red)" data-graph-role="edge"/>
+<rect x="871.0" y="652" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="905" y="667" text-anchor="middle" class="small muted">证据不足</text>
+<rect x="55" y="155" width="120" height="90" rx="10" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="115.0" y="185" text-anchor="middle" class="node-title">开始</text>
+<text x="115.0" y="206" text-anchor="middle" class="small muted">taskId</text>
+<text x="115.0" y="224" text-anchor="middle" class="small muted">snapshotId</text>
+<rect x="215" y="155" width="140" height="90" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+<text x="285.0" y="185" text-anchor="middle" class="node-title">加载快照</text>
+<text x="285.0" y="206" text-anchor="middle" class="small muted">读取局部 DOM</text>
+<text x="285.0" y="224" text-anchor="middle" class="small muted">检查版本</text>
+<rect x="395" y="155" width="140" height="90" rx="10" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+<text x="465.0" y="185" text-anchor="middle" class="node-title">识别类型</text>
+<text x="465.0" y="206" text-anchor="middle" class="small muted">表单 / 表格</text>
+<text x="465.0" y="224" text-anchor="middle" class="small muted">详情 / 混合</text>
+<rect x="575" y="155" width="140" height="90" rx="10" fill="#ffffff" stroke="#c084fc" stroke-width="1.5"/>
+<text x="645.0" y="185" text-anchor="middle" class="node-title">结构切分</text>
+<text x="645.0" y="206" text-anchor="middle" class="small muted">按业务容器</text>
+<text x="645.0" y="224" text-anchor="middle" class="small muted">循环处理</text>
+<rect x="755" y="155" width="160" height="90" rx="10" fill="#faf5ff" stroke="#a855f7" stroke-width="2.2"/>
+<rect x="759" y="159" width="152" height="82" rx="7" fill="none" stroke="#a855f7" stroke-width="0.8" opacity="0.55"/>
+<text x="835.0" y="185" text-anchor="middle" class="node-title">Agent 提取</text>
+<text x="835.0" y="206" text-anchor="middle" class="small muted">字段、类型、父级</text>
+<text x="835.0" y="224" text-anchor="middle" class="small muted">稳定 draftFieldId</text>
+<rect x="950" y="155" width="140" height="90" rx="10" fill="#ffffff" stroke="#c084fc" stroke-width="1.5"/>
+<text x="1020.0" y="185" text-anchor="middle" class="node-title">合并去重</text>
+<text x="1020.0" y="206" text-anchor="middle" class="small muted">追加到现有草稿</text>
+<text x="1020.0" y="224" text-anchor="middle" class="small muted">保留来源证据</text>
+<polygon points="1125,155 1160,200 1125,245 1090,200" fill="#fff7ed" stroke="#fb923c" stroke-width="1.7"/>
+<text x="1125" y="202" text-anchor="middle" font-size="13" font-weight="600">质量门</text>
+<rect x="250" y="360" width="730" height="150" rx="12" fill="#eff6ff" fill-opacity="0.45" stroke="#93c5fd" stroke-width="1.4" stroke-dasharray="7,5"/>
+<text x="266" y="385" font-size="13" font-weight="700" fill="#93c5fd">字段领域工具（项目实现）</text>
+<rect x="285" y="400" width="155" height="75" rx="10" fill="#ffffff" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="362.5" y="430" text-anchor="middle" class="node-title">目录查询</text>
+<text x="362.5" y="451" text-anchor="middle" class="small muted">已有字段摘要</text>
+<rect x="495" y="400" width="155" height="75" rx="10" fill="#ffffff" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="572.5" y="430" text-anchor="middle" class="node-title">业务术语</text>
+<text x="572.5" y="451" text-anchor="middle" class="small muted">名称与类型映射</text>
+<rect x="705" y="400" width="220" height="75" rx="10" fill="#ffffff" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="815.0" y="430" text-anchor="middle" class="node-title">Candidate Validator</text>
+<text x="815.0" y="451" text-anchor="middle" class="small muted">父级、无环、类型、深度</text>
+<rect x="760" y="545" width="190" height="80" rx="10" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
+<text x="855.0" y="575" text-anchor="middle" class="node-title">DRAFT_READY</text>
+<text x="855.0" y="596" text-anchor="middle" class="small muted">SSE 输出字段草稿</text>
+<rect x="440" y="570" width="210" height="70" rx="10" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
+<text x="545.0" y="600" text-anchor="middle" class="node-title">NEED_MORE_DOM</text>
+<text x="545.0" y="621" text-anchor="middle" class="small muted">前端提示补充业务区域</text>
+<text x="70" y="700" class="small muted">内置节点：开始、条件、循环、Agent、HTTP、结束</text>
+<text x="70" y="724" class="small muted">业务节点：DOM 加载、目录查询、术语映射、候选树校验、草稿合并</text>
+<line x1="450" y1="708" x2="482" y2="708" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+<text x="492" y="712" class="small muted">数据流</text>
+<line x1="572" y1="708" x2="604" y2="708" stroke="#9333ea" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-purple)"/>
+<text x="614" y="712" class="small muted">Agent / 工具</text>
+<line x1="792" y1="708" x2="824" y2="708" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)"/>
+<text x="834" y="712" class="small muted">控制</text>
+<line x1="900" y1="708" x2="932" y2="708" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+<text x="942" y="712" class="small muted">成功</text>
+<line x1="1008" y1="708" x2="1040" y2="708" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-red)"/>
+<text x="1050" y="712" class="small muted">补充证据</text>
+</svg>

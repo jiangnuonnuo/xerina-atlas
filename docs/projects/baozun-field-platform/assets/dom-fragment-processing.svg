@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" width="1200" height="650">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;fill:#111827} .muted{fill:#6b7280} .small{font-size:12px} .label{font-size:14px} .title{font-size:24px;font-weight:700} .subtitle{font-size:13px} .node-title{font-size:14px;font-weight:600}</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#ea580c"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="1200" height="650" fill="#ffffff"/>
+<text x="40" y="42" class="title">局部 DOM 到模型输入的数据处理链路</text>
+<text x="40" y="67" class="subtitle muted">模型看到的是保留字段语义的结构摘要，而不是未经处理的整页 HTML。</text>
+<path d="M 230 220 L 275 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="204.0" y="196" width="96" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="252" y="211" text-anchor="middle" class="small muted">HTML片段</text>
+<path d="M 465 220 L 510 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="453.0" y="196" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="487" y="211" text-anchor="middle" class="small muted">净化结构</text>
+<path d="M 700 220 L 745 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="688.0" y="196" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="722" y="211" text-anchor="middle" class="small muted">上下文树</text>
+<path d="M 935 220 L 980 220" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)" data-graph-role="edge"/>
+<rect x="923.0" y="196" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
+<text x="957" y="211" text-anchor="middle" class="small muted">标准快照</text>
+<rect x="40" y="165" width="190" height="110" rx="10" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+<text x="135.0" y="195" text-anchor="middle" class="node-title">选区原始 DOM</text>
+<text x="135.0" y="216" text-anchor="middle" class="small muted">页面标题</text>
+<text x="135.0" y="234" text-anchor="middle" class="small muted">用户选择的业务区块</text>
+<rect x="275" y="165" width="190" height="110" rx="10" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="370.0" y="195" text-anchor="middle" class="node-title">安全净化</text>
+<text x="370.0" y="216" text-anchor="middle" class="small muted">移除脚本与事件</text>
+<text x="370.0" y="234" text-anchor="middle" class="small muted">剥离输入值和敏感数据</text>
+<rect x="510" y="165" width="190" height="110" rx="10" fill="#f0fdfa" stroke="#2dd4bf" stroke-width="1.5"/>
+<text x="605.0" y="195" text-anchor="middle" class="node-title">语义保留</text>
+<text x="605.0" y="216" text-anchor="middle" class="small muted">label / role / name</text>
+<text x="605.0" y="234" text-anchor="middle" class="small muted">标题路径与表头关系</text>
+<rect x="745" y="165" width="190" height="110" rx="10" fill="#faf5ff" stroke="#c084fc" stroke-width="1.5"/>
+<text x="840.0" y="195" text-anchor="middle" class="node-title">结构切分</text>
+<text x="840.0" y="216" text-anchor="middle" class="small muted">表单 / 表格 / 详情</text>
+<text x="840.0" y="234" text-anchor="middle" class="small muted">按业务容器分段</text>
+<rect x="980" y="165" width="180" height="110" rx="10" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
+<text x="1070.0" y="195" text-anchor="middle" class="node-title">DomSnapshot</text>
+<text x="1070.0" y="216" text-anchor="middle" class="small muted">稳定 nodeId</text>
+<text x="1070.0" y="234" text-anchor="middle" class="small muted">hash 与来源信息</text>
+<rect x="60" y="340" width="510" height="205" rx="12" fill="#fef2f2" fill-opacity="0.45" stroke="#f87171" stroke-width="1.4" stroke-dasharray="7,5"/>
+<text x="76" y="365" font-size="13" font-weight="700" fill="#f87171">明确删除：降低噪声、Token 与数据风险</text>
+<rect x="630" y="340" width="510" height="205" rx="12" fill="#f0fdf4" fill-opacity="0.45" stroke="#4ade80" stroke-width="1.4" stroke-dasharray="7,5"/>
+<text x="646" y="365" font-size="13" font-weight="700" fill="#4ade80">明确保留：支持字段和层级判断</text>
+<circle cx="92" cy="390" r="5" fill="#ef4444" transform="translate(0,0)"/>
+<text x="110" y="395" class="label" transform="translate(0,0)">script / style / SVG path / 注释</text>
+<circle cx="92" cy="390" r="5" fill="#ef4444" transform="translate(0,34)"/>
+<text x="110" y="395" class="label" transform="translate(0,34)">input.value、Cookie、Token 等实际值</text>
+<circle cx="92" cy="390" r="5" fill="#ef4444" transform="translate(0,68)"/>
+<text x="110" y="395" class="label" transform="translate(0,68)">动态 class、内联事件、无意义包装层</text>
+<circle cx="92" cy="390" r="5" fill="#ef4444" transform="translate(0,102)"/>
+<text x="110" y="395" class="label" transform="translate(0,102)">表格业务行、隐藏模板、重复组件</text>
+<circle cx="662" cy="390" r="5" fill="#22c55e" transform="translate(0,0)"/>
+<text x="680" y="395" class="label" transform="translate(0,0)">label、placeholder、name、type、ARIA</text>
+<circle cx="662" cy="390" r="5" fill="#22c55e" transform="translate(0,34)"/>
+<text x="680" y="395" class="label" transform="translate(0,34)">heading、activeTab、selectedRegion</text>
+<circle cx="662" cy="390" r="5" fill="#22c55e" transform="translate(0,68)"/>
+<text x="680" y="395" class="label" transform="translate(0,68)">table header、容器包含关系、字段顺序</text>
+<circle cx="662" cy="390" r="5" fill="#22c55e" transform="translate(0,102)"/>
+<text x="680" y="395" class="label" transform="translate(0,102)">sourceNodeId：用于预览回指与证据定位</text>
+<text x="600" y="610" text-anchor="middle" class="small muted">插件先做一次裁剪，后端再次校验；客户端输入始终按不可信数据处理。</text>
+</svg>
