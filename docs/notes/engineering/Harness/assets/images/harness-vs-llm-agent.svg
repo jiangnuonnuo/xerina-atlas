@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 680" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="arr-gray3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#6B7280"/>
+    </marker>
+  </defs>
+  <rect width="960" height="680" fill="#ffffff"/>
+
+  <text x="480" y="46" text-anchor="middle" font-size="24" font-weight="bold" fill="#1F2937">大模型、Agent、Harness：一张图看清"谁是大脑、谁是员工、谁是缰绳"</text>
+
+  <!-- 三列 -->
+  <!-- LLM 大脑 -->
+  <rect x="60" y="110" width="260" height="60" rx="10" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
+  <text x="190" y="142" text-anchor="middle" font-size="18" font-weight="bold" fill="#047857">大模型 · 大脑</text>
+  <text x="190" y="162" text-anchor="middle" font-size="12" fill="#4B5563">会思考，不会动手</text>
+
+  <rect x="60" y="190" width="260" height="300" rx="12" fill="#F9FAFB" stroke="#059669" stroke-width="1.5"/>
+  <text x="80" y="220" font-size="13" font-weight="bold" fill="#374151">它是什么</text>
+  <text x="80" y="240" font-size="12" fill="#4B5563">静态参数化的推理引擎，只能"想"和"说"</text>
+  <line x1="80" y1="258" x2="300" y2="258" stroke="#E5E7EB"/>
+  <text x="80" y="284" font-size="13" font-weight="bold" fill="#374151">核心能力</text>
+  <text x="80" y="304" font-size="12" fill="#4B5563">推理、理解、生成文字 / 代码</text>
+  <line x1="80" y1="322" x2="300" y2="322" stroke="#E5E7EB"/>
+  <text x="80" y="348" font-size="13" font-weight="bold" fill="#374151">它的局限</text>
+  <text x="80" y="368" font-size="12" fill="#DC2626">没有"手"、不知道实时世界</text>
+  <text x="80" y="386" font-size="12" fill="#DC2626">不能自己调用工具、不能持久干活</text>
+  <line x1="80" y1="404" x2="300" y2="404" stroke="#E5E7EB"/>
+  <text x="80" y="430" font-size="13" font-weight="bold" fill="#374151">类比</text>
+  <text x="80" y="452" font-size="13" fill="#059669" font-weight="bold">一个只会说话的"天才顾问"</text>
+
+  <!-- Agent 员工 -->
+  <rect x="350" y="110" width="260" height="60" rx="10" fill="#EEF2FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="480" y="142" text-anchor="middle" font-size="18" font-weight="bold" fill="#1D4ED8">Agent · 员工</text>
+  <text x="480" y="162" text-anchor="middle" font-size="12" fill="#4B5563">会思考，也会动手</text>
+
+  <rect x="350" y="190" width="260" height="300" rx="12" fill="#F9FAFB" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="370" y="220" font-size="13" font-weight="bold" fill="#374151">它是什么</text>
+  <text x="370" y="240" font-size="12" fill="#4B5563">大模型 + 规划 + 工具 + 记忆的行动体</text>
+  <line x1="370" y1="258" x2="590" y2="258" stroke="#E5E7EB"/>
+  <text x="370" y="284" font-size="13" font-weight="bold" fill="#374151">核心能力</text>
+  <text x="370" y="304" font-size="12" fill="#4B5563">自主拆解目标、调用工具、完成任务</text>
+  <line x1="370" y1="322" x2="590" y2="322" stroke="#E5E7EB"/>
+  <text x="370" y="348" font-size="13" font-weight="bold" fill="#374151">它的局限</text>
+  <text x="370" y="368" font-size="12" fill="#DC2626">裸奔的 Agent 容易失控 / 跑飞</text>
+  <text x="370" y="386" font-size="12" fill="#DC2626">没有边界，可能做出危险操作</text>
+  <line x1="370" y1="404" x2="590" y2="404" stroke="#E5E7EB"/>
+  <text x="370" y="430" font-size="13" font-weight="bold" fill="#374151">类比</text>
+  <text x="370" y="452" font-size="13" fill="#2563EB" font-weight="bold">一个能力很强但需要"管住"的员工</text>
+
+  <!-- Harness 缰绳 -->
+  <rect x="640" y="110" width="260" height="60" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="2"/>
+  <text x="770" y="142" text-anchor="middle" font-size="18" font-weight="bold" fill="#C2410C">Harness · 缰绳</text>
+  <text x="770" y="162" text-anchor="middle" font-size="12" fill="#4B5563">管住 Agent 的驾驶舱</text>
+
+  <rect x="640" y="190" width="260" height="300" rx="12" fill="#F9FAFB" stroke="#EA580C" stroke-width="1.5"/>
+  <text x="660" y="220" font-size="13" font-weight="bold" fill="#374151">它是什么</text>
+  <text x="660" y="240" font-size="12" fill="#4B5563">承载 Agent 运行的具体程序本体</text>
+  <line x1="660" y1="258" x2="880" y2="258" stroke="#E5E7EB"/>
+  <text x="660" y="284" font-size="13" font-weight="bold" fill="#374151">核心能力</text>
+  <text x="660" y="304" font-size="12" fill="#4B5563">循环控制、工具权限、记忆、沙箱隔离</text>
+  <line x1="660" y1="322" x2="880" y2="322" stroke="#E5E7EB"/>
+  <text x="660" y="348" font-size="13" font-weight="bold" fill="#374151">它的作用</text>
+  <text x="660" y="368" font-size="12" fill="#059669">给 Agent 定边界、刹车、兜底</text>
+  <text x="660" y="386" font-size="12" fill="#059669">决定"这个 Agent 到底能干什么"</text>
+  <line x1="660" y1="404" x2="880" y2="404" stroke="#E5E7EB"/>
+  <text x="660" y="430" font-size="13" font-weight="bold" fill="#374151">类比</text>
+  <text x="660" y="452" font-size="13" fill="#EA580C" font-weight="bold">管住员工、保住下限的"缰绳"</text>
+
+  <!-- 箭头关系 -->
+  <line x1="190" y1="495" x2="190" y2="525" stroke="#6B7280" stroke-width="2" marker-end="url(#arr-gray3)"/>
+  <text x="190" y="520" text-anchor="middle" font-size="11" fill="#6B7280">提供大脑</text>
+  <line x1="480" y1="495" x2="480" y2="525" stroke="#6B7280" stroke-width="2" marker-end="url(#arr-gray3)"/>
+  <text x="480" y="520" text-anchor="middle" font-size="11" fill="#6B7280">被控制</text>
+  <line x1="770" y1="495" x2="770" y2="525" stroke="#6B7280" stroke-width="2" marker-end="url(#arr-gray3)"/>
+  <text x="770" y="520" text-anchor="middle" font-size="11" fill="#6B7280">定边界</text>
+
+  <!-- 底部关系条 -->
+  <rect x="60" y="545" width="840" height="92" rx="12" fill="#FDF2F8" stroke="#DB2777" stroke-width="1.5"/>
+  <text x="480" y="572" text-anchor="middle" font-size="15" font-weight="bold" fill="#BE185D">三者是"包含"关系，不是平级：大模型 ⊂ Agent ⊂ Harness</text>
+  <text x="480" y="596" text-anchor="middle" font-size="13" fill="#4B5563">同一个 GPT，放进不同的 Harness，跑出来的是两个完全不同的 Agent</text>
+  <text x="480" y="618" text-anchor="middle" font-size="13" fill="#4B5563">想要一个"靠谱的 AI 助手"，换 Harness 往往比换大模型更有效</text>
+
+  <text x="880" y="656" text-anchor="end" font-size="11" fill="#9CA3AF">图 3 · 大脑 / 员工 / 缰绳</text>
+</svg>

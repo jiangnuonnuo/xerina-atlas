@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#EA580C"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-gray2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#6B7280"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#DC2626"/>
+    </marker>
+  </defs>
+  <rect width="960" height="640" fill="#ffffff"/>
+
+  <text x="480" y="48" text-anchor="middle" font-size="24" font-weight="bold" fill="#1F2937">Harness 的核心：一个永不疲倦的"干活的循环"</text>
+  <text x="480" y="74" text-anchor="middle" font-size="14" fill="#6B7280">把大模型封装成"想 → 做 → 看 → 改 → 记"的自动驾驶，直到任务完成</text>
+
+  <!-- 中央循环节点 -->
+  <!-- Plan -->
+  <rect x="400" y="150" width="160" height="74" rx="12" fill="#FFF7ED" stroke="#EA580C" stroke-width="2"/>
+  <text x="480" y="180" text-anchor="middle" font-size="17" font-weight="bold" fill="#C2410C">1 计划 Plan</text>
+  <text x="480" y="202" text-anchor="middle" font-size="12" fill="#4B5563">把目标拆成可执行步骤</text>
+
+  <!-- Act -->
+  <rect x="620" y="268" width="160" height="74" rx="12" fill="#EEF2FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="700" y="298" text-anchor="middle" font-size="17" font-weight="bold" fill="#1D4ED8">2 行动 Act</text>
+  <text x="700" y="320" text-anchor="middle" font-size="12" fill="#4B5563">写代码 / 调用工具 / 执行</text>
+
+  <!-- Observe -->
+  <rect x="620" y="432" width="160" height="74" rx="12" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
+  <text x="700" y="462" text-anchor="middle" font-size="17" font-weight="bold" fill="#047857">3 观察 Observe</text>
+  <text x="700" y="484" text-anchor="middle" font-size="12" fill="#4B5563">读取执行结果 / 反馈</text>
+
+  <!-- Reflect -->
+  <rect x="180" y="432" width="160" height="74" rx="12" fill="#F3E8FF" stroke="#7C3AED" stroke-width="2"/>
+  <text x="260" y="462" text-anchor="middle" font-size="17" font-weight="bold" fill="#6D28D9">4 反思 Reflect</text>
+  <text x="260" y="484" text-anchor="middle" font-size="12" fill="#4B5563">判断结果是否符合预期</text>
+
+  <!-- 箭头循环 -->
+  <line x1="560" y1="196" x2="690" y2="266" stroke="#EA580C" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <line x1="700" y1="342" x2="700" y2="430" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="620" y1="475" x2="342" y2="475" stroke="#059669" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <line x1="260" y1="430" x2="260" y2="196" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <line x1="300" y1="196" x2="398" y2="196" stroke="#EA580C" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <text x="645" y="246" font-size="12" fill="#6B7280">目标推进</text>
+  <text x="712" y="390" font-size="12" fill="#6B7280">结果回传</text>
+  <text x="470" y="492" font-size="12" fill="#6B7280">未达标就重来</text>
+  <text x="252" y="315" font-size="12" fill="#6B7280">修正计划</text>
+
+  <!-- 失败兜底 -->
+  <line x1="700" y1="506" x2="700" y2="560" stroke="#DC2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+  <text x="712" y="540" font-size="12" fill="#DC2626">兜底</text>
+  <rect x="560" y="558" width="280" height="44" rx="10" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="700" y="578" text-anchor="middle" font-size="13" fill="#B91C1C">达到上限：放弃 / 提问 / 求助人类</text>
+  <text x="700" y="596" text-anchor="middle" font-size="11" fill="#6B7280">Harness 必须给的"刹车"</text>
+
+  <!-- 底部记忆条 -->
+  <rect x="140" y="570" width="260" height="44" rx="10" fill="#F9FAFB" stroke="#6B7280" stroke-width="1.5"/>
+  <text x="270" y="590" text-anchor="middle" font-size="13" font-weight="bold" fill="#374151">5 记忆 Memorize</text>
+  <text x="270" y="608" text-anchor="middle" font-size="11" fill="#6B7280">把经验写进长期记忆，下次复用</text>
+
+  <text x="850" y="620" text-anchor="end" font-size="11" fill="#9CA3AF">图 2 · Plan → Act → Observe → Reflect 闭环</text>
+</svg>

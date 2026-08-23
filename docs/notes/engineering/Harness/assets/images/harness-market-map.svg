@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect width="960" height="700" fill="#ffffff"/>
+
+  <text x="480" y="46" text-anchor="middle" font-size="24" font-weight="bold" fill="#1F2937">市面产品地图：谁能算 Harness？谁只是 Framework？</text>
+  <text x="480" y="72" text-anchor="middle" font-size="14" fill="#6B7280">按"你拿到的是一套可运行的 Agent，还是半成品的积木"来划分</text>
+
+  <!-- 左列 Framework -->
+  <rect x="60" y="120" width="400" height="520" rx="14" fill="#F9FAFB" stroke="#6B7280" stroke-width="2"/>
+  <text x="260" y="160" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">Framework · 积木盒</text>
+  <text x="260" y="182" text-anchor="middle" font-size="12" fill="#6B7280">给你图纸和零件，自己拼</text>
+
+  <!-- 框架产品 -->
+  <g>
+    <rect x="90" y="210" width="340" height="56" rx="10" fill="#EEF2FF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="110" y="236" font-size="14" font-weight="bold" fill="#1D4ED8">LangChain / LlamaIndex</text>
+    <text x="110" y="256" font-size="11" fill="#4B5563">最老牌，工具链齐全，但上手需要自己组装</text>
+  </g>
+  <g>
+    <rect x="90" y="278" width="340" height="56" rx="10" fill="#EEF2FF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="110" y="304" font-size="14" font-weight="bold" fill="#1D4ED8">AutoGen / Semantic Kernel</text>
+    <text x="110" y="324" font-size="11" fill="#4B5563">主打多智能体编排，偏"框架"而非"成品"</text>
+  </g>
+  <g>
+    <rect x="90" y="346" width="340" height="56" rx="10" fill="#EEF2FF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="110" y="372" font-size="14" font-weight="bold" fill="#1D4ED8">Dify / Coze（低代码）</text>
+    <text x="110" y="392" font-size="11" fill="#4B5563">可视化编排平台，介于框架与成品之间</text>
+  </g>
+
+  <rect x="90" y="420" width="340" height="190" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5"/>
+  <text x="110" y="448" font-size="13" font-weight="bold" fill="#C2410C">判定标准</text>
+  <text x="110" y="472" font-size="12" fill="#4B5563">· 给你一堆"类/接口/工具"，需要你写主流程</text>
+  <text x="110" y="494" font-size="12" fill="#4B5563">· 不包含完整的"循环 + 记忆 + 沙箱"</text>
+  <text x="110" y="516" font-size="12" fill="#4B5563">· 同一个库，不同人搭出不同 Agent</text>
+  <text x="110" y="548" font-size="12" font-weight="bold" fill="#DC2626">结论：Framework ≠ Harness</text>
+  <text x="110" y="570" font-size="11" fill="#6B7280">它是造 Harness 的"原料"，不是 Harness 本身</text>
+  <text x="110" y="596" font-size="11" fill="#6B7280">两者最常被混淆，也是本文最想纠正的点</text>
+
+  <!-- 右列 Harness -->
+  <rect x="500" y="120" width="400" height="520" rx="14" fill="#F9FAFB" stroke="#EA580C" stroke-width="2"/>
+  <text x="700" y="160" text-anchor="middle" font-size="20" font-weight="bold" fill="#C2410C">Harness · 整车</text>
+  <text x="700" y="182" text-anchor="middle" font-size="12" fill="#6B7280">造好能跑的 Agent 程序，开箱即用</text>
+
+  <g>
+    <rect x="530" y="210" width="340" height="56" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5"/>
+    <text x="550" y="236" font-size="14" font-weight="bold" fill="#C2410C">Claude Code（Anthropic）</text>
+    <text x="550" y="256" font-size="11" fill="#4B5563">把"AI 编程助手"做进终端，自带完整循环</text>
+  </g>
+  <g>
+    <rect x="530" y="278" width="340" height="56" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5"/>
+    <text x="550" y="304" font-size="14" font-weight="bold" fill="#C2410C">DeepSeek Harness（dsh）</text>
+    <text x="550" y="324" font-size="11" fill="#4B5563">开源 Agent 运行时，模型无关、插件化设计</text>
+  </g>
+  <g>
+    <rect x="530" y="346" width="340" height="56" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5"/>
+    <text x="550" y="372" font-size="14" font-weight="bold" fill="#C2410C">OpenManus / Manus</text>
+    <text x="550" y="392" font-size="11" fill="#4B5563">通用任务 Agent，浏览器 + 工具一体</text>
+  </g>
+  <g>
+    <rect x="530" y="414" width="340" height="56" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5"/>
+    <text x="550" y="440" font-size="14" font-weight="bold" fill="#C2410C">Cursor / WindSurf（IDE）</text>
+    <text x="550" y="460" font-size="11" fill="#4B5563">深度定制开发的 Harness，偏应用层成品</text>
+  </g>
+  <g>
+    <rect x="530" y="482" width="340" height="56" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5"/>
+    <text x="550" y="508" font-size="14" font-weight="bold" fill="#C2410C">GitHub Copilot Agent</text>
+    <text x="550" y="528" font-size="11" fill="#4B5563">产品化的 Harness，跑在云端，开箱即用</text>
+  </g>
+
+  <rect x="530" y="556" width="340" height="56" rx="10" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="550" y="582" font-size="13" font-weight="bold" fill="#B91C1C">关键洞察</text>
+  <text x="550" y="602" font-size="11" fill="#4B5563">主流商用产品几乎都是"Harness"，开源的才是"Framework"</text>
+
+  <!-- 底部箭头 -->
+  <line x1="460" y1="380" x2="498" y2="380" stroke="#6B7280" stroke-width="2"/>
+  <text x="479" y="370" text-anchor="middle" font-size="11" fill="#6B7280">用 Framework</text>
+  <text x="479" y="392" text-anchor="middle" font-size="11" fill="#6B7280">造 Harness</text>
+
+  <text x="900" y="680" text-anchor="end" font-size="11" fill="#9CA3AF">图 4 · 框架 vs 缰绳：一个积木盒，一个整车</text>
+</svg>

@@ -9,9 +9,11 @@
     "preview": "vitepress preview docs",
     "check": "npm run check:content && npm run check:assets",
     "check:content": "tsx scripts/validate-content.ts",
-    "check:assets": "tsx scripts/validate-assets.ts"
+    "check:assets": "tsx scripts/validate-assets.ts",
+    "svg:png": "tsx scripts/svg-to-png.ts"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^24.0.0",
     "gray-matter": "^4.0.3",
     "tsx": "^4.20.3",
