@@ -3,7 +3,7 @@ title: 大模型是大脑，Agent 是员工，那 Harness 是什么
 type: note
 category: engineering
 date: 2026-08-18
-order: 21
+order: 10
 summary: 不堆术语，把 Harness 拆清楚——它是管住 Agent 的"缰绳"，和大模型、Agent、Framework 三者到底什么关系，为什么商用产品几乎全是 Harness。
 tags:
   - Harness
@@ -311,9 +311,3 @@ tags:
 
 至于该换大模型还是换 Harness？记住这句话：**大脑是标配，缰绳才分高下。**
 
----
-
-字数统计：约 4300 字（非空白字符）
-风格类型：B 类技术深度解析 / 概念科普长文
-目标平台：技术社区 / 公众号 / 个人知识库
-去AI味自查：10/10 通过（未通过项：无）

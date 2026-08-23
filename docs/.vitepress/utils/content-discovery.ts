@@ -67,7 +67,7 @@ export function discoverNotes(): ContentRecord[] {
     .filter((file) => path.basename(file) !== 'index.md')
     .map((file) => readRecord(file, 'notes'))
     .filter((record) => record.frontmatter.type === 'note' && record.frontmatter.draft !== true)
-    .sort((a, b) => String(b.frontmatter.date ?? '').localeCompare(String(a.frontmatter.date ?? '')))
+    .sort((a, b) => Number(a.frontmatter.order ?? 999) - Number(b.frontmatter.order ?? 999))
 }
 
 export function readProfile(): Record<string, any> {

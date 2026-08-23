@@ -498,7 +498,7 @@ docs/notes/engineering/new-note.md
 
 1. 生成 /notes/engineering/new-note 页面。
 2. 读取 frontmatter 加入文章索引页。
-3. 根据 date 或 order 排序。
+3. 文章索引页和文章侧栏根据 frontmatter.order 正序排序；首页“最新文章”根据 frontmatter.date 倒序排序。
 4. 生成文章的 SEO 标题、摘要和标签展示。
 
 ### 7.2 新增一段实习/实践经历

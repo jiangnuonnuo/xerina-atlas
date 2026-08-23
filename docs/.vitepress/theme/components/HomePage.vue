@@ -8,7 +8,9 @@ import ProjectVisual from './ProjectVisual.vue'
 
 const featuredExperience = experiences.slice(0, 3)
 const featuredProjects = projects.slice(0, 3)
-const featuredNotes = notes.slice(0, 3)
+const featuredNotes = [...notes]
+  .sort((a, b) => String(b.frontmatter.date ?? '').localeCompare(String(a.frontmatter.date ?? '')))
+  .slice(0, 3)
 const honors = profile.honors || []
 
 function value(key: string, fallback = '') {
