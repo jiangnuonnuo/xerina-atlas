@@ -58,7 +58,7 @@ Agent 圈子里冒出一批"异端分子"，他们喊出了一句让很多老工
 
 Function Calling 的工作流程，本质上是**两次大模型调用**在打配合：
 
-![Function Calling 工作流：两次大模型调用在打配合](./assets/images/function-calling-flow.svg)
+![Function Calling 工作流：两次大模型调用在打配合](./CodeMode/assets/images/function-calling-flow.svg)
 
 拿"点菜"打个比方，这套流程你秒懂：
 
@@ -150,7 +150,7 @@ Code Mode 的"魔力"，就藏在它只暴露的 **2 个工具**里——这就�
 
 配合一张图，理解它如何用 2 个工具吃掉整个 API：
 
-![Code Mode 双核引擎：把 2500+ API 压缩成 2 个元工具](./assets/images/code-mode-dual-core.svg)
+![Code Mode 双核引擎：把 2500+ API 压缩成 2 个元工具](./CodeMode/assets/images/code-mode-dual-core.svg)
 
 关键就在 `search()` 这一步：**模型要什么，就写代码"搜"什么**，搜到了再用 `execute()` 执行。整套 MCP Server 的上下文占用被压到**固定 ~1000 token**，比传统的 117 万 token 减少了 **99.9%**。
 
@@ -174,7 +174,7 @@ Code Mode 的"魔力"，就藏在它只暴露的 **2 个工具**里——这就�
 
 答案是：**怕，所以把它关进"安全沙箱"。** 下面是 Cloudflare Code Mode SDK（`@cloudflare/codemode`，MIT 开源）的执行链路：
 
-![Code Mode 执行链路：Host Worker 到 Dynamic Worker 沙箱的 6 步流程](./assets/images/code-mode-execution-chain.svg)
+![Code Mode 执行链路：Host Worker 到 Dynamic Worker 沙箱的 6 步流程](./CodeMode/assets/images/code-mode-execution-chain.svg)
 
 执行链路，一共 6 步：
 
@@ -264,14 +264,14 @@ async () => {
 
 用一张"下馆子"的搞怪图收束两者的差异：
 
-![Function Calling vs Code Mode](./assets/images/codemode-vs-functioncalling.png)
+![Function Calling vs Code Mode](./CodeMode/assets/images/codemode-vs-functioncalling.png)
 
 - **Function Calling 是"点菜"**——靠谱、可控、师傅（外部程序）绝不乱来。但前提是**菜单里得有你想要的菜**，而且菜单越厚，你翻得越累，注意力被吃光。
 - **Code Mode 是"请了个会做饭的程序员回家"**——你只要说"做一桌分析报表的饭"，他直接进厨房（沙箱）自己配菜、自己炒、自己摆盘，**只把成品端出来**。自由度拉满，但**你得先给他备好一个不会把厨房烧了的"安全厨房"**。
 
 至于 token 差距有多夸张？看这张图就懂了：
 
-![Token 压缩对比](./assets/images/token-compression.png)
+![Token 压缩对比](./CodeMode/assets/images/token-compression.png)
 
 ---
 
@@ -293,7 +293,7 @@ async () => {
 
 想象一个 Agent 帮你做"数据分析日报"：
 
-![数据分析日报协作：Function Calling 取数 + Code Mode 加工](./assets/images/function-calling-plus-code-mode.svg)
+![数据分析日报协作：Function Calling 取数 + Code Mode 加工](./CodeMode/assets/images/function-calling-plus-code-mode.svg)
 
 1. **第一步，用 Function Calling**：稳稳地调"数据仓库接口"，把订单数据拿回来——这是明确、稳定、需要严格校验的外部调用，正是 Function Calling 的强项。
 2. **第二步，用 Code Mode**：拿到数据后，让模型在沙箱里写代码做清洗、聚合、算环比、生成图表——这种"多变、复杂、要组合多步"的活，正是 Code Mode 的主场。
@@ -304,7 +304,7 @@ async () => {
 
 Function Calling 和 Code Mode，就像"**秘书**"和"**专家**"：
 
-![秘书 vs 专家](./assets/images/secretary-vs-expert.png)
+![秘书 vs 专家](./CodeMode/assets/images/secretary-vs-expert.png)
 
 > **秘书**（Function Calling）替你对外联络、传话、跑腿，一板一眼，最让人放心；**专家**（Code Mode）关起门来替你研究、计算、写出解决方案，天马行空，效率拉满。
 >

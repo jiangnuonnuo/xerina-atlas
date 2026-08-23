@@ -16,7 +16,7 @@ tags:
 
 > 副标题：别再把 Wiki 当成「百度百科」了——它可能是 AI 时代最被低估的「基础设施」。
 
-![头图：维基百科只是冰山一角，水面下是庞大的 Wiki 知识网](/home-wiki-rag.png)
+![头图：维基百科只是冰山一角，水面下是庞大的 Wiki 知识网](./wiki-and-rag/assets/images/home-wiki-rag.png)
 
 ---
 
@@ -28,7 +28,7 @@ tags:
 
 如果你听完也有这股懵，恭喜你，这篇就是专门写给你看的。
 
-![运营小 A 的崩溃瞬间：Wiki 不就是维基百科吗？？](./assets/images/fun-confused-a.png)
+![运营小 A 的崩溃瞬间：Wiki 不就是维基百科吗？？](./wiki-and-rag/assets/images/fun-confused-a.png)
 
 今天我们不追热点、不堆黑话，就干一件事：**让一个小白，十分钟内真正搞懂 Wiki 是什么、怎么运转、有什么用，以及它和最近大火的 RAG 到底啥关系。**
 
@@ -46,7 +46,7 @@ tags:
 
 用过 ChatGPT 的人都知道，大模型写起小作文一套一套的，但一问到专业细节，它就开始"一本正经地胡说"。这就是行业常说的 **幻觉（Hallucination）**。
 
-![一本正经地胡说：自信满满却把书读反了的机器人](./assets/images/fun-hallucination.png)
+![一本正经地胡说：自信满满却把书读反了的机器人](./wiki-and-rag/assets/images/fun-hallucination.png)
 
 更麻烦的是，模型还有 **知识截止日期** ——它不会自动知道今天的新闻、你公司昨天更新的产品说明、或者你私下写的一份调研笔记。
 
@@ -79,7 +79,7 @@ tags:
 
 两者怎么配合，看这张图最直观：
 
-![RAG 原理：参数化记忆(模型权重) vs 非参数化记忆(外部知识库)，模型说人话、外部库说真话](./assets/images/rag-memory.png)
+![RAG 原理：参数化记忆(模型权重) vs 非参数化记忆(外部知识库)，模型说人话、外部库说真话](./wiki-and-rag/assets/images/rag-memory.png)
 
 记住一句话：**模型负责「说人话」，外部库负责「说真话」。RAG 的精髓，就是把「记在脑子里」和「查得到」分开——这正是它和 Wiki 相遇的地方。**
 
@@ -87,7 +87,7 @@ tags:
 
 RAG 跑起来大概是这样的：
 
-![RAG 全流程：用户提问 → 文本向量化 → 向量检索 → 召回文档 → 拼接上下文 → LLM 生成 → 答案](./assets/images/rag-pipeline.png)
+![RAG 全流程：用户提问 → 文本向量化 → 向量检索 → 召回文档 → 拼接上下文 → LLM 生成 → 答案](./wiki-and-rag/assets/images/rag-pipeline.png)
 
 翻译成大白话：
 
@@ -150,7 +150,7 @@ RAG 跑起来大概是这样的：
 
 下面这张图就是 Wiki 知识网的形象表达：
 
-![Wiki 知识网：一个中心主题辐射出多个互链的知识页面，人人可编辑](./assets/images/wiki-knowledge-web.png)
+![Wiki 知识网：一个中心主题辐射出多个互链的知识页面，人人可编辑](./wiki-and-rag/assets/images/wiki-knowledge-web.png)
 
 中心节点是主题枢纽，周围是互链的知识页面，所有人一起维护、一起链接。
 
@@ -181,11 +181,11 @@ Wikipedia 把 Wiki 这三条基因发挥到了极致。
 
 下面这张工作流图，把刚才六步连成了闭环：
 
-![Wiki 工作流：发现空白 → 编辑页面 → 写内容 → 加引用 → 互链 → 版本记录 → 他人审阅 → 沉淀知识库](./assets/images/wiki-workflow.png)
+![Wiki 工作流：发现空白 → 编辑页面 → 写内容 → 加引用 → 互链 → 版本记录 → 他人审阅 → 沉淀知识库](./wiki-and-rag/assets/images/wiki-workflow.png)
 
 再配一张「单个 Wiki 页面解剖图」，你就能明白为什么它比普通文档更可信：
 
-![Wiki 页面解剖：正文 + 引用来源 + 讨论页 + 编辑历史 + 分类标签 + 互链入口 + 中立原则](./assets/images/wiki-page-anatomy.png)
+![Wiki 页面解剖：正文 + 引用来源 + 讨论页 + 编辑历史 + 分类标签 + 互链入口 + 中立原则](./wiki-and-rag/assets/images/wiki-page-anatomy.png)
 
 一篇 Wiki 页面不是孤零零一段字，而是被「引用、讨论、历史、互链、标签」五件套武装起来的结构体。尤其是 **中立性原则**（立场要客观）和 **可供查证原则**（主张必须有来源），这两条像宪法一样约束着每一条内容——这恰恰是大模型自己生成文字时最缺的纪律。
 
@@ -269,7 +269,7 @@ Wiki 页面有标题、目录、段落、引用链接。RAG 检索时可以利�
 
 下面这张图把两者的区别整理得更清楚：
 
-![Wiki vs RAG 对比表：从本质、构建者、结构化、更新、优缺点等维度对比](./assets/images/wiki-vs-rag.png)
+![Wiki vs RAG 对比表：从本质、构建者、结构化、更新、优缺点等维度对比](./wiki-and-rag/assets/images/wiki-vs-rag.png)
 
 ### 4.3 文字再展开
 
@@ -291,11 +291,11 @@ Wiki 页面有标题、目录、段落、引用链接。RAG 检索时可以利�
 
 ### 4.4 为什么谁也替代不了谁？
 
-![发动机与油箱的世纪击掌：RAG 是发动机，Wiki 是油箱，谁也少不了谁](./assets/images/fun-rag-wiki-buddies.png)
+![发动机与油箱的世纪击掌：RAG 是发动机，Wiki 是油箱，谁也少不了谁](./wiki-and-rag/assets/images/fun-rag-wiki-buddies.png)
 
 光说「搭档」可能还是抽象，我们把三种组合摆出来对比一下，你就彻底明白了：
 
-![RAG 与 Wiki 互补：只有 RAG / 只有 Wiki / Wiki+RAG 三种组合的结果对比](./assets/images/rag-wiki-complement.png)
+![RAG 与 Wiki 互补：只有 RAG / 只有 Wiki / Wiki+RAG 三种组合的结果对比](./wiki-and-rag/assets/images/rag-wiki-complement.png)
 
 - **只有 RAG，没有 Wiki 整理**：知识还是一堆散乱的原始文档，切块、向量化后，检索到的常常是被拦腰截断、相关但不准确的片段。结果就是——快，但容易幻觉、没法溯源。RAG 再强，喂给它的是垃圾，出来的也是垃圾。
 - **只有 Wiki，没有 RAG 检索**：知识质量很高，但靠人手动搜索、逐页翻读。一个客服机器人一天要答上万次提问，靠人肉翻 Wiki 根本扛不住；而且问法一变，人工检索就抓瞎。
@@ -319,7 +319,7 @@ Wiki 页面有标题、目录、段落、引用链接。RAG 检索时可以利�
 
 这就像你每次考试，都把整间图书馆的书搬到考场里，然后在考场上临时翻、临时编。效率低，还易出错。
 
-![开卷考试现场翻书：把整座图书馆拖进考场的慌张机器人](./assets/images/fun-openbook-exam.png)
+![开卷考试现场翻书：把整座图书馆拖进考场的慌张机器人](./wiki-and-rag/assets/images/fun-openbook-exam.png)
 
 ### 5.2 LLM Wiki 的解法：先把知识「编译」成百科
 
@@ -331,7 +331,7 @@ Wiki 页面有标题、目录、段落、引用链接。RAG 检索时可以利�
 
 我把这个过程画成了一张图：
 
-![LLM Wiki 流程：原始文档 → LLM 抽取 → 写入 Wiki → 持续维护 → 提问检索 → LLM 生成（带引用）](./assets/images/llm-wiki-pipeline.png)
+![LLM Wiki 流程：原始文档 → LLM 抽取 → 写入 Wiki → 持续维护 → 提问检索 → LLM 生成（带引用）](./wiki-and-rag/assets/images/llm-wiki-pipeline.png)
 
 这个范式的优势很明显：
 

@@ -17,9 +17,13 @@ const docsRoot = path.resolve(fileURLToPath(new URL('../../', import.meta.url)))
 function readRecord(file: string, scope: ContentScope): ContentRecord {
   const relative = path.relative(path.join(docsRoot, scope), file)
   const parts = relative.split(path.sep)
-  const slug = parts.at(-1) === 'index.md' ? parts.at(-2)! : parts.at(-1)!.replace(/\.md$/, '')
-  const urlParts = parts.at(-1) === 'index.md' ? parts.slice(0, -1) : parts
-  const url = `/${scope}/${urlParts.join('/')}/`.replace(/\\/g, '/')
+  const filename = parts.at(-1)!
+  const isIndex = filename === 'index.md'
+  const slug = isIndex ? parts.at(-2)! : filename.replace(/\.md$/, '')
+  const urlParts = isIndex
+    ? parts.slice(0, -1)
+    : [...parts.slice(0, -1), filename.replace(/\.md$/, '')]
+  const url = `/${scope}/${urlParts.join('/')}${isIndex ? '/' : ''}`.replace(/\\/g, '/')
   const parsed = matter(fs.readFileSync(file, 'utf8'))
   return { slug, url, file, frontmatter: parsed.data }
 }
