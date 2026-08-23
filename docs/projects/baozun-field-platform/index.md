@@ -38,13 +38,13 @@ layout: project-doc
 
 ## 先看这一页
 
-如果你要系统理解项目需求、完整技术方案和核心实现，先读：
+关于整体项目的实现框架逻辑，即使总纲，内容文章部分在
 
 - **[00 · 字段目录平台项目技术总纲](/projects/baozun-field-platform/project-knowledge-directory)**：从全栈职责、端到端架构、关键取舍到完整文章目录的技术地图。
 
-然后阅读 **[01 · 完整需求定位与架构](/projects/baozun-field-platform/01-platform-catalog-architecture)**，建立项目边界、端到端链路和关键取舍。
+- **[01 · 完整需求定位与架构](/projects/baozun-field-platform/01-platform-catalog-architecture)**，建立项目边界、端到端链路和关键取舍。
 
-如果你要深聊技术，按这个顺序往下读：
+关于项目的技术实现，也是通过自身一步一脚印实践而得
 
 - **[10 · DOM-first 页面字段采集](/projects/baozun-field-platform/10-dom-field-capture)**：字段证据怎么来，覆盖与降级怎么处理。
 - **[20 · 受限 Agent 层级解析](/projects/baozun-field-platform/20-agent-hierarchy-parsing)**：Agent 怎么把证据变成可验收的候选字段树。

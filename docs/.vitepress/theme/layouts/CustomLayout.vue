@@ -10,6 +10,7 @@ import ExperienceIndexPage from '../components/ExperienceIndexPage.vue'
 import NotesIndexPage from '../components/NotesIndexPage.vue'
 import AboutPage from '../components/AboutPage.vue'
 import PortfolioPage from '../components/PortfolioPage.vue'
+import ImageLightbox from '../components/ImageLightbox.vue'
 import ProjectDocLayout from './ProjectDocLayout.vue'
 import ExperienceDetailLayout from './ExperienceDetailLayout.vue'
 
@@ -27,4 +28,5 @@ const layout = computed(() => frontmatter.value.layout || 'doc')
   <ProjectDocLayout v-else-if="layout === 'project-doc'" />
   <ExperienceDetailLayout v-else-if="layout === 'experience-detail'" />
   <TeekTheme.Layout v-else />
+  <ImageLightbox />
 </template>

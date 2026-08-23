@@ -45,6 +45,8 @@ export default defineConfig({
   ],
   themeConfig: {
     ...teekConfig.themeConfig,
+    // Use the site-wide double-click lightbox so project docs and articles behave the same.
+    articleAnalyze: { imageViewer: { enabled: false } },
     nav: [
       { text: '首页', link: '/' },
       { text: '实习经历', link: '/experience/' },
