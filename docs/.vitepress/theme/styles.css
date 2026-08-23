@@ -134,6 +134,8 @@ h1, h2, h3, p { margin-top: 0; }h1, h2, h3 { color: var(--ink-strong); font-fami
 .doc-content code:not(pre code) { padding: .18em .42em; border: 1px solid #f0dcc9; border-radius: 4px; color: var(--doc-orange); background: #fff8f1; font-family: "JetBrains Mono", monospace; font-size: .88em; }
 .doc-content pre { max-width: 760px; margin: 1.55rem 0 1.8rem; padding: 20px 22px; overflow: auto; border: 1px solid #2d536e; border-radius: 10px; background: #172d42; box-shadow: 0 12px 26px rgba(23, 45, 66, .12); }
 .doc-content pre code { color: #e3eff7; font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; font-size: 13px; line-height: 1.85; }
+/* Shiki emits light-theme token colors inline; project docs use a dark code surface. */
+.doc-content pre code span[style*="--shiki-light"] { color: var(--shiki-dark, #e3eff7) !important; }
 .doc-content blockquote { max-width: 760px; margin: 1.55rem 0; padding: 15px 19px; border-left: 4px solid var(--doc-teal); background: #eff9f7; color: #4b6875; }
 .doc-content blockquote p { margin-bottom: 0; color: inherit; }
 .doc-content hr { margin: 2.7rem 0; border: 0; border-top: 1px solid #e1e9ef; }
