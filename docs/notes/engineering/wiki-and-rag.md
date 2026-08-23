@@ -16,7 +16,7 @@ tags:
 
 > 副标题：别再把 Wiki 当成「百度百科」了——它可能是 AI 时代最被低估的「基础设施」。
 
-![头图：维基百科只是冰山一角，水面下是庞大的 Wiki 知识网](./assets/images/cover-wiki-rag.png)
+![头图：维基百科只是冰山一角，水面下是庞大的 Wiki 知识网](/home-wiki-rag.png)
 
 ---
 
