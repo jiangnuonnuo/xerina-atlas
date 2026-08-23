@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 290" width="1200" height="290">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;fill:#111827} .muted{fill:#6b7280} .small{font-size:12px} .title{font-size:23px;font-weight:700} .node{font-size:14px;font-weight:600}</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#ea580c"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="1200" height="290" fill="#ffffff"/>
+<text x="40" y="38" class="title">技术文章阅读顺序</text>
+<text x="40" y="62" class="small muted">从边界和证据开始，逐步进入解析、治理、交付和评估。</text>
+<rect x="50.0" y="130" width="120" height="76" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+<text x="110.0" y="160" text-anchor="middle" class="node">01</text>
+<text x="110.0" y="181" text-anchor="middle" class="small muted">需求与架构</text>
+<line x1="170.0" y1="168" x2="190.0" y2="168" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="190.0" y="130" width="120" height="76" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+<text x="250.0" y="160" text-anchor="middle" class="node">10</text>
+<text x="250.0" y="181" text-anchor="middle" class="small muted">DOM 采集</text>
+<line x1="310.0" y1="168" x2="330.0" y2="168" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="330.0" y="130" width="120" height="76" rx="10" fill="#faf5ff" stroke="#c084fc" stroke-width="2.2"/>
+<rect x="334.0" y="134" width="112" height="68" rx="7" fill="none" stroke="#c084fc" stroke-width="0.8" opacity="0.55"/>
+<text x="390.0" y="160" text-anchor="middle" class="node">20</text>
+<text x="390.0" y="181" text-anchor="middle" class="small muted">Agent 解析</text>
+<line x1="450.0" y1="168" x2="470.0" y2="168" stroke="#9333ea" stroke-width="2" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<rect x="470.0" y="130" width="120" height="76" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+<text x="530.0" y="160" text-anchor="middle" class="node">25</text>
+<text x="530.0" y="181" text-anchor="middle" class="small muted">交互工作台</text>
+<line x1="590.0" y1="168" x2="610.0" y2="168" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="610.0" y="130" width="120" height="76" rx="10" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
+<text x="670.0" y="160" text-anchor="middle" class="node">30</text>
+<text x="670.0" y="181" text-anchor="middle" class="small muted">目录治理</text>
+<line x1="730.0" y1="168" x2="750.0" y2="168" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)" data-graph-role="edge"/>
+<rect x="750.0" y="130" width="120" height="76" rx="10" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+<text x="810.0" y="160" text-anchor="middle" class="node">40</text>
+<text x="810.0" y="181" text-anchor="middle" class="small muted">字典交付</text>
+<line x1="870.0" y1="168" x2="890.0" y2="168" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)" data-graph-role="edge"/>
+<rect x="890.0" y="130" width="120" height="76" rx="10" fill="#faf5ff" stroke="#c084fc" stroke-width="2.2"/>
+<rect x="894.0" y="134" width="112" height="68" rx="7" fill="none" stroke="#c084fc" stroke-width="0.8" opacity="0.55"/>
+<text x="950.0" y="160" text-anchor="middle" class="node">50</text>
+<text x="950.0" y="181" text-anchor="middle" class="small muted">变化治理</text>
+<line x1="1010.0" y1="168" x2="1030.0" y2="168" stroke="#9333ea" stroke-width="2" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<rect x="1030.0" y="130" width="120" height="76" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+<text x="1090.0" y="160" text-anchor="middle" class="node">60</text>
+<text x="1090.0" y="181" text-anchor="middle" class="small muted">安全评估</text>
+</svg>

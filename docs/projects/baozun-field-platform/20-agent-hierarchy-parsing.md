@@ -14,15 +14,7 @@ layout: project-doc
 
 这套设计的核心不是让模型直接“生成数据库数据”，而是建立一层可检查、可修改、可放弃的字段草稿：
 
-```text
-DomSnapshot
-  → Agent 解析工作流
-  → FieldDraft
-  → SSE 实时预览
-  → 对话修改 / 直接编辑 / 追加 DOM
-  → 用户点击保存
-  → 正式字段目录
-```
+![Agent 解析到正式保存](./assets/agent-parse-pipeline.svg)
 
 模型输出与正式目录之间始终存在草稿隔离层。
 
@@ -44,7 +36,7 @@ DomSnapshot
 
 ## 工作流总体设计
 
-![内部低代码 Agent 字段解析工作流](./assets/agent-workflow-nodes.png)
+![内部低代码 Agent 字段解析工作流](./assets/agent-workflow-nodes.svg)
 
 工作流采用“低代码编排、高代码规则”的结构。低代码节点负责宏观流转和模型调用，字段领域服务负责确定性校验。复杂目录规则不会全部堆进 Prompt，也不会分散在难以测试的条件表达式中。
 
@@ -156,7 +148,7 @@ Agent 的正式输出不是 Markdown，也不是一段自然语言说明，而�
 
 解析是异步过程，前端创建任务后使用 SSE 观察进度。
 
-![DOM 解析、SSE 修订与显式保存时序](./assets/sse-edit-save-sequence.png)
+![DOM 解析、SSE 修订与显式保存时序](./assets/sse-edit-save-sequence.svg)
 
 接口交互分为两步：
 
@@ -267,7 +259,7 @@ Agent 返回基于 version = 3 的操作
 
 ## 草稿生命周期与正式数据库边界
 
-![字段草稿状态机与数据库边界](./assets/draft-lifecycle-state.png)
+![字段草稿状态机与数据库边界](./assets/draft-lifecycle-state.svg)
 
 草稿可以反复经历：
 

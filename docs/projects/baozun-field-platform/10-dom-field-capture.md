@@ -22,7 +22,7 @@ layout: project-doc
 
 这是一种渐进式自动化：主链路使用“人工选区 + DOM + Agent”，简单开放页面可以通过 Agent + Playwright 自动生成同样的 DOM 快照，极端结构则允许人工补充字段。
 
-![局部 DOM 半智能采集架构](./assets/dom-capture-architecture.png)
+![局部 DOM 半智能采集架构](./assets/dom-capture-architecture.svg)
 
 上图对应的核心设计是“两种 DOM 来源，一份解析契约”。下游工作流只接收 `DomSnapshot`，不关心快照来自插件还是 Playwright，因此自动化入口不会形成第二套解析逻辑。
 
@@ -44,7 +44,7 @@ layout: project-doc
 
 如果为每一种页面状态继续增加提示规则，最终会把模型变成一个成本更高、但确定性更弱的流程引擎。因此主方案让人工直接指出业务范围，跳过最不稳定的浏览器探索阶段，把模型能力集中在字段识别、类型判断和层级生成上。
 
-![字段采集方案适用边界](./assets/capture-strategy-comparison.png)
+![字段采集方案适用边界](./assets/capture-strategy-comparison.svg)
 
 三种方案各有明确边界：
 
@@ -125,7 +125,7 @@ DOM 来源统一后，解析工作流只依赖下面这类快照：
 
 浏览器中的 DOM 不能直接交给模型。它既包含大量与字段无关的 UI 噪声，也可能携带输入值、业务行数据和能够干扰提示的页面文本。
 
-![局部 DOM 到模型输入的数据处理链路](./assets/dom-fragment-processing.png)
+![局部 DOM 到模型输入的数据处理链路](./assets/dom-fragment-processing.svg)
 
 清洗分为插件预处理和服务端复检两层。
 
@@ -156,9 +156,7 @@ DOM 来源统一后，解析工作流只依赖下面这类快照：
 
 局部 DOM 并不要求一次覆盖完整页面。一个采集会话可以连续追加：
 
-```text
-订单基础信息 → 商品明细 → 支付信息 → 售后记录 → 退款抽屉
-```
+![局部 DOM 追加与草稿合并](./assets/dom-append-loop.svg)
 
 每次解析都产生字段增量，随后与当前草稿合并。合并不会只按字段名称判断，否则多个业务区域中的“状态”“金额”“时间”会被错误合并。字段草稿的候选指纹综合使用：
 

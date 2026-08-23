@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;fill:#111827} .muted{fill:#6b7280} .small{font-size:12px} .title{font-size:23px;font-weight:700} .node{font-size:14px;font-weight:600}</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#ea580c"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="1200" height="360" fill="#ffffff"/>
+<text x="40" y="38" class="title">局部 DOM 追加与草稿合并</text>
+<text x="40" y="62" class="small muted">每次只提交当前业务区域，缺少上下文时回到人工选区，不重启整条采集链路。</text>
+<rect x="60" y="130" width="190" height="70" rx="10" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="155.0" y="160" text-anchor="middle" class="node">人工选择业务区域</text>
+<text x="155.0" y="181" text-anchor="middle" class="small muted">订单基础 / 商品明细</text>
+<rect x="300" y="130" width="170" height="70" rx="10" fill="#f0fdfa" stroke="#2dd4bf" stroke-width="1.5"/>
+<text x="385.0" y="160" text-anchor="middle" class="node">DomSnapshot</text>
+<text x="385.0" y="181" text-anchor="middle" class="small muted">局部结构和上下文</text>
+<rect x="520" y="130" width="170" height="70" rx="10" fill="#faf5ff" stroke="#c084fc" stroke-width="2.2"/>
+<rect x="524" y="134" width="162" height="62" rx="7" fill="none" stroke="#c084fc" stroke-width="0.8" opacity="0.55"/>
+<text x="605.0" y="160" text-anchor="middle" class="node">Agent 解析</text>
+<text x="605.0" y="181" text-anchor="middle" class="small muted">字段增量</text>
+<rect x="740" y="130" width="170" height="70" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+<text x="825.0" y="160" text-anchor="middle" class="node">FieldDraft</text>
+<text x="825.0" y="181" text-anchor="middle" class="small muted">合并、去重、预览</text>
+<rect x="960" y="130" width="170" height="70" rx="10" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
+<text x="1045.0" y="160" text-anchor="middle" class="node">继续 / 保存</text>
+<text x="1045.0" y="181" text-anchor="middle" class="small muted">追加或提交</text>
+<line x1="250" y1="165" x2="300" y2="165" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<line x1="470" y1="165" x2="520" y2="165" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)" data-graph-role="edge"/>
+<line x1="690" y1="165" x2="740" y2="165" stroke="#9333ea" stroke-width="2" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<line x1="910" y1="165" x2="960" y2="165" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)" data-graph-role="edge"/>
+<path d="M 1045 200 L 1045 335 L 155 335 L 155 200" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="552.0" y="313" width="96" height="20" rx="4" fill="#fff" opacity="0.96"/>
+<text x="600" y="328" text-anchor="middle" class="small muted">追加下一选区</text>
+<rect x="450" y="255" width="300" height="60" rx="10" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
+<text x="600.0" y="285" text-anchor="middle" class="node">NEED_MORE_DOM</text>
+<text x="600.0" y="306" text-anchor="middle" class="small muted">缺少标题 / 页签 / 父级上下文</text>
+<path d="M 520 200 L 520 255" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-red)" data-graph-role="edge"/>
+<rect x="531.0" y="220" width="68" height="20" rx="4" fill="#fff" opacity="0.96"/>
+<text x="565" y="235" text-anchor="middle" class="small muted">证据不足</text>
+</svg>

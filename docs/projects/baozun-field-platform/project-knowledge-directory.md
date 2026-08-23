@@ -16,15 +16,7 @@ layout: project-doc
 
 整个项目关注的不是单点页面功能，而是下面这条全栈技术链路：
 
-```text
-页面字段采集
-  → 字段证据快照
-  → 规则与 Agent 层级解析
-  → 候选树审核工作台
-  → 目录树事务发布
-  → 字段字典异步交付
-  → 再采集与变化治理
-```
+![字段目录平台全链路](./assets/platform-lifecycle.svg)
 
 ## 1. 全栈职责与系统边界
 
@@ -44,56 +36,17 @@ layout: project-doc
 
 平台负责字段从“页面痕迹”到“目录资产”和“字典产物”的完整生命周期，但不修改被采集系统的业务逻辑，也不定义下游数据仓库的指标计算公式。
 
-```text
-被采集业务系统                     字段目录平台                     下游使用方
-页面与交互状态  ──字段证据──▶  解析、治理、版本、交付  ──字典──▶  业务/数据/治理系统
-```
+![字段目录平台系统边界](./assets/system-boundary.svg)
 
 ## 2. 总体技术架构
 
 ### 2.1 业务处理架构
 
-```text
-人工框选 / DOM 扫描 / 缩进文本导入
-                  │
-                  ▼
-        Field Evidence Snapshot
-                  │
-        ┌─────────┴─────────┐
-        ▼                   ▼
-  确定性规则解析       局部歧义 Agent 推断
-        └─────────┬─────────┘
-                  ▼
-       Candidate Tree + Confidence
-                  │
-          结构校验 + 人工审核
-                  ▼
-       Change Set + tree_version
-                  │
-             事务化发布
-                  ▼
-       邻接表 + 闭包表目录模型
-                  │
-       MySQL 快照 + SQLite 工作区
-                  ▼
-          SXSSF 流式字段字典
-```
+![字段平台业务处理架构](./assets/processing-architecture.svg)
 
 ### 2.2 工程分层
 
-```text
-interfaces
-  REST、SSE、认证、参数校验、DTO、前端交互协议
-       ↓
-application
-  采集编排、解析编排、审核发布、目录命令/查询、导出任务
-       ↓
-domain
-  Evidence、Candidate Tree、Catalog Policy、Change Set、Task State
-       ↑
-infrastructure
-  Browser、Model、MySQL、SQLite、XLSX、Storage、Scheduler
-```
+![模块化单体与端口适配分层](./assets/layered-architecture.svg)
 
 采用模块化单体和端口适配结构，确保领域规则不依赖浏览器驱动、模型 SDK、MyBatis 或文件系统。外部技术可以替换，目录不变量、变化发布和任务状态不随之改变。
 
@@ -316,20 +269,4 @@ Agent 的作用是编排证据加载、规则抽取、局部推断、结构校�
 
 八篇文章共同形成下面这条技术叙事，不再增加与项目功能无关的独立章节：
 
-```text
-01 需求与全栈架构
-   ↓
-10 页面字段证据采集
-   ↓
-20 规则与受限 Agent 解析
-   ↓
-25 交互工作台审核
-   ↓
-30 目录树事务治理
-   ↓
-40 字段字典异步交付
-   ↓
-50 再采集与变化发布
-   ↓
-60 安全、可靠性与评估
-```
+![技术文章阅读顺序](./assets/reading-sequence.svg)
