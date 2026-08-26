@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "mode": "flow",
+  "template_type": "flow",
+  "style": 11,
+  "semantic_profile": "event-transit",
+  "diagram_type": "event_stream",
+  "line_code": "LINE A · TASK RELIABILITY",
+  "quality_profile": "showcase",
+  "width": 1172,
+  "height": 720,
+  "title": "AI Task Reliability Line",
+  "subtitle": "classify failures, retry only recoverable work, and stop at a visible dead-letter boundary",
+  "topics": [
+    { "id": "task.events", "color": "#e4475b" },
+    { "id": "task.dlq", "color": "#c62828" }
+  ],
+  "containers": [
+    {
+      "id": "task-stream",
+      "x": 35,
+      "y": 140,
+      "width": 1102,
+      "height": 410,
+      "label": "task.events",
+      "subtitle": "main queue → delayed retry → final DLQ",
+      "header_prefix": "LINE A",
+      "header_separator": " · "
+    }
+  ],
+  "nodes": [
+    { "id": "producer", "kind": "transit_terminal", "transit_role": "producer", "topic_id": "task.events", "station_order": 0, "x": 60, "y": 258, "width": 150, "height": 78, "label": "任务提交", "sublabel": "producer", "rail_color": "#e4475b", "badge": "P1" },
+    { "id": "main-queue", "kind": "transit_station", "transit_role": "station", "topic_id": "task.events", "station_order": 1, "operation": "buffer work", "x": 278, "y": 258, "width": 150, "height": 78, "label": "业务队列", "sublabel": "buffer", "rail_color": "#e4475b", "badge": "Q" },
+    { "id": "consumer", "kind": "transit_station", "transit_role": "station", "topic_id": "task.events", "station_order": 2, "operation": "execute once", "x": 496, "y": 258, "width": 150, "height": 78, "label": "消费者", "sublabel": "ack after state", "rail_color": "#e4475b", "badge": "C" },
+    { "id": "retry-router", "kind": "transit_junction", "transit_role": "junction", "topic_id": "task.events", "station_order": 3, "operation": "classify + backoff", "x": 714, "y": 258, "width": 150, "height": 78, "label": "重试判断", "sublabel": "bounded retry", "rail_color": "#e4475b", "badge": "R" },
+    { "id": "retry-consumer", "kind": "transit_terminal", "transit_role": "consumer", "topic_id": "task.events", "station_order": 4, "consumer_group": "task-retry-v1", "x": 932, "y": 258, "width": 180, "height": 78, "label": "再次消费", "sublabel": "after delay", "rail_color": "#e4475b", "badge": "R3" },
+    { "id": "dlq", "kind": "transit_terminal", "transit_role": "dlq", "topic_id": "task.dlq", "x": 714, "y": 430, "width": 150, "height": 78, "label": "最终死信", "sublabel": "archive + alert", "stroke": "#c62828", "badge": "DLQ" },
+    { "id": "task-state", "kind": "transit_terminal", "transit_role": "state_store", "topic_id": "task.events", "x": 496, "y": 430, "width": 150, "height": 78, "label": "任务状态", "sublabel": "state machine", "rail_color": "#00897b", "badge": "DB" }
+  ],
+  "arrows": [
+    { "id": "rail-01", "source": "producer", "target": "main-queue", "source_port": "right", "target_port": "left", "flow": "control", "transit_type": "rail", "topic_id": "task.events", "motion_role": "topic-rail", "motion_stage": 1, "motion_order": 0 },
+    { "id": "rail-12", "source": "main-queue", "target": "consumer", "source_port": "right", "target_port": "left", "flow": "control", "transit_type": "rail", "topic_id": "task.events", "motion_role": "topic-rail", "motion_stage": 2, "motion_order": 0 },
+    { "id": "rail-23", "source": "consumer", "target": "retry-router", "source_port": "right", "target_port": "left", "flow": "control", "transit_type": "rail", "topic_id": "task.events", "motion_role": "topic-rail", "motion_stage": 3, "motion_order": 0 },
+    { "id": "rail-34", "source": "retry-router", "target": "retry-consumer", "source_port": "right", "target_port": "left", "flow": "control", "transit_type": "rail", "topic_id": "task.events", "motion_role": "topic-rail", "motion_stage": 4, "motion_order": 0 },
+    { "id": "to-dlq", "source": "retry-router", "target": "dlq", "source_port": "bottom", "target_port": "top", "flow": "feedback", "transit_type": "dead_letter", "topic_id": "task.dlq", "motion_role": "dead-letter", "motion_stage": 5, "motion_order": 0, "dashed": true },
+    { "id": "state-project", "source": "consumer", "target": "task-state", "source_port": "bottom", "target_port": "top", "flow": "write", "transit_type": "state", "topic_id": "task.events", "motion_role": "state-project", "motion_stage": 5, "motion_order": 1 }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 610,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "control", "label": "message rail" },
+    { "flow": "write", "label": "state projection" },
+    { "flow": "feedback", "label": "dead-letter route" }
+  ],
+  "footer": "Style 11 · Event Transit · bounded retry and visible failure boundary",
+  "footer_x": 48,
+  "footer_y": 695
+}

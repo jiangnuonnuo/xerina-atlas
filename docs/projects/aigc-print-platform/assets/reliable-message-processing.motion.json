@@ -1,0 +1,2013 @@
+{
+  "animation_contract": {
+    "connectors_visible_at_opening": false,
+    "draw_easing": "linear",
+    "draw_schedule": [
+      {
+        "frames": [
+          1,
+          6
+        ],
+        "order": 0,
+        "role": "topic-rail",
+        "stage": 1
+      },
+      {
+        "frames": [
+          7,
+          12
+        ],
+        "order": 0,
+        "role": "topic-rail",
+        "stage": 2
+      },
+      {
+        "frames": [
+          13,
+          18
+        ],
+        "order": 0,
+        "role": "topic-rail",
+        "stage": 3
+      },
+      {
+        "frames": [
+          19,
+          24
+        ],
+        "order": 0,
+        "role": "topic-rail",
+        "stage": 4
+      },
+      {
+        "frames": [
+          25,
+          32
+        ],
+        "order": 0,
+        "role": "dead-letter",
+        "stage": 5
+      },
+      {
+        "frames": [
+          29,
+          36
+        ],
+        "order": 1,
+        "role": "state-project",
+        "stage": 5
+      }
+    ],
+    "empty_opening_frame": 0,
+    "forbidden": [
+      "source-node-motion",
+      "source-text-motion",
+      "source-geometry-mutation",
+      "source-marker-mutation",
+      "camera-motion",
+      "animated-background"
+    ],
+    "maximum_concurrent_draws": 2,
+    "nodes_visible_every_frame": true,
+    "persistent_data_flow": {
+      "auxiliary": {
+        "count": 4,
+        "geometry_expansion": 0,
+        "movement": "opacity-only",
+        "period_frames": 10,
+        "primitive": "station-dwell-ring"
+      },
+      "body": {
+        "appended_below_labels_and_nodes": true,
+        "color": "inherit-source-stroke",
+        "dash_pattern": [
+          8,
+          33
+        ],
+        "filter_free": true,
+        "linecap": "round",
+        "linejoin": "round",
+        "marker_free": true,
+        "maximum_live_width": 2.2,
+        "opacity": 0.78,
+        "primitive": "event-transit-rail",
+        "resolved_widths_in_schedule_order": [
+          2.2,
+          2.2,
+          2.2,
+          2.2,
+          2.2,
+          2.2
+        ],
+        "stroke_width": "min(maximum_live_width, source_stroke)"
+      },
+      "dash_offset_per_rendered_frame": -5,
+      "dash_period": 41,
+      "direction": "source-to-target",
+      "direction_sentinels": [
+        {
+          "directions": [
+            "right"
+          ],
+          "key": "topic-rail/1/0"
+        },
+        {
+          "directions": [
+            "right"
+          ],
+          "key": "topic-rail/2/0"
+        },
+        {
+          "directions": [
+            "right"
+          ],
+          "key": "topic-rail/3/0"
+        },
+        {
+          "directions": [
+            "right"
+          ],
+          "key": "topic-rail/4/0"
+        },
+        {
+          "directions": [
+            "down"
+          ],
+          "key": "dead-letter/5/0"
+        },
+        {
+          "directions": [
+            "down"
+          ],
+          "key": "state-project/5/1"
+        }
+      ],
+      "expected_initial_phases": [
+        5,
+        10,
+        15,
+        20,
+        25,
+        28
+      ],
+      "fade_in_factors": [
+        0.3,
+        0.65,
+        1.0
+      ],
+      "fade_in_frames": [
+        36,
+        38
+      ],
+      "full_opacity_frames": [
+        38,
+        109
+      ],
+      "minimum_review_scale": "50%",
+      "period_step_coprime": true,
+      "phase_policy": "(motionStage * 5 + motionOrder * 3) mod 41",
+      "primitive": "event-transit-rail",
+      "rendered_frames": [
+        36,
+        114
+      ],
+      "reset_behavior": "live rails, signatures, and scene auxiliaries keep advancing while the shared reset opacity fades to 0.03",
+      "reset_opacity_samples": [
+        1.0,
+        0.7575,
+        0.515,
+        0.2725,
+        0.03
+      ],
+      "reset_range": [
+        110,
+        114
+      ],
+      "route_keys": [
+        {
+          "order": 0,
+          "role": "topic-rail",
+          "stage": 1
+        },
+        {
+          "order": 0,
+          "role": "topic-rail",
+          "stage": 2
+        },
+        {
+          "order": 0,
+          "role": "topic-rail",
+          "stage": 3
+        },
+        {
+          "order": 0,
+          "role": "topic-rail",
+          "stage": 4
+        },
+        {
+          "order": 0,
+          "role": "dead-letter",
+          "stage": 5
+        },
+        {
+          "order": 1,
+          "role": "state-project",
+          "stage": 5
+        }
+      ],
+      "signature": {
+        "animated_attributes": [
+          "transform",
+          "opacity"
+        ],
+        "appended_below_labels_and_nodes": true,
+        "direction": "source-to-target",
+        "endpoint_clearance": 7,
+        "geometry": {
+          "dead_letter": {
+            "shape": "red-outlined-exception-car"
+          },
+          "main": {
+            "car_count": 3,
+            "car_diameter": 5,
+            "car_gap": 3,
+            "shape": "three-car-event-train"
+          },
+          "state_project": {
+            "cell_count": 2,
+            "shape": "teal-two-cell-projection-car"
+          }
+        },
+        "path_advance_per_rendered_frame": 5,
+        "primitive": "event-train-or-branch-car",
+        "tangent_aware_rotation": true,
+        "wrap": "target-clearance-to-source-clearance"
+      },
+      "signature_advance_per_rendered_frame": 5,
+      "signature_count": 6,
+      "signature_primitive": "event-train-or-branch-car",
+      "stream_count": 6,
+      "travel_easing": "linear",
+      "travel_pixels_per_frame_at_100_percent": 5,
+      "travel_pixels_per_frame_at_50_percent": 2.5,
+      "travel_user_units_per_rendered_frame": 5
+    },
+    "primitive": "connector-draw-on-with-persistent-data-flow",
+    "reset_opacity_samples": [
+      1.0,
+      0.7575,
+      0.515,
+      0.2725,
+      0.03
+    ],
+    "reset_range": [
+      110,
+      114
+    ],
+    "route_label_opacity_states": 0,
+    "schedule_key": "(data-motion-role, data-motion-stage, data-motion-order)",
+    "settled_markers": "original marker appears only after route arrival",
+    "settled_topology_dynamic": true,
+    "source_edges_hidden_by_transient_css": true,
+    "text_geometry_motion": 0,
+    "topology_draw_on": true
+  },
+  "artifact": {
+    "bytes": 197826,
+    "encoder": "ffmpeg/gif-palette",
+    "format": "gif",
+    "mime_type": "image/gif",
+    "path": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/aigc-print-platform/assets/reliable-message-processing.gif",
+    "probe": {
+      "codec_name": "gif",
+      "container": {
+        "duration": "5.750000",
+        "format_name": "gif"
+      },
+      "duration": "5.750000",
+      "height": 590,
+      "nb_frames": "115",
+      "nb_read_frames": "115",
+      "pix_fmt": "bgra",
+      "r_frame_rate": "20/1",
+      "width": 960
+    },
+    "sha256": "c86f77c3cf375a5a51b0b04801bd0d65971f8f2377b9c9582f482af81f114b20",
+    "source_frame_count": 115
+  },
+  "dry_run": false,
+  "duration_seconds": 5.75,
+  "encoded_dimensions": {
+    "height": 590,
+    "width": 960
+  },
+  "fixture_sha256": "a9fbd96129c9fc54b97b80024cb954d03d471d4c2963f99e71eff276d15d6140",
+  "fps": 20,
+  "frame_count": 115,
+  "frame_uniqueness_contract": {
+    "adjacent_duplicates_allowed": false,
+    "intentional_reset_boundary_opacity": 1.0,
+    "intentional_reset_boundary_repeat_frame": 110,
+    "long_timeline_repeat_scope": [
+      38,
+      109
+    ],
+    "minimum_unique_rasters_for_long_timeline": 75,
+    "opening_construction_and_reset_tail_globally_distinct": true,
+    "strict_all_unique_through_frame_count": 75
+  },
+  "height": 590,
+  "input_kind": "svg",
+  "loop": {
+    "adjacent_duplicate_count": 0,
+    "all_frames_unique": true,
+    "delta_quality": {
+      "adjacent_max": 0.00029198509803921567,
+      "adjacent_median": 0.00011794470588235294,
+      "adjacent_min": 3.4756823529411764e-06,
+      "adjacent_p95": 0.0001294035294117647,
+      "changed_area_method": "accumulated adjacent luma delta greater than 2 percent",
+      "changed_area_ratio": 0.00961686274509804,
+      "metric": "normalized-luma-mean-absolute-difference",
+      "seam": 3.9139529411764704e-05,
+      "seam_within_adjacent_p95": true
+    },
+    "embedded_loop_count": 0,
+    "encoded_frames": {
+      "adjacent_duplicate_count": 0,
+      "adjacent_duplicate_pairs": [],
+      "algorithm": "framemd5",
+      "all_frames_unique": true,
+      "first_frame_hash": "f2edb006083dda15d6bee8529063cca7",
+      "frame_count": 115,
+      "intentional_reset_boundary_opacity": 1.0,
+      "intentional_reset_boundary_repeat_count": 0,
+      "intentional_reset_boundary_repeat_evidence": [],
+      "intentional_reset_boundary_repeat_frame": 110,
+      "last_frame_hash": "4f564d0127e0f60415f594c12ea57aeb",
+      "minimum_unique_frame_count": 75,
+      "opening_construction_and_reset_tail_globally_distinct": true,
+      "repeat_scope": [
+        38,
+        109
+      ],
+      "repeat_scope_policy": "non-adjacent-repeats-inside-full-opacity-plus-reset-start-boundary",
+      "repeated_frame_group_count": 0,
+      "repeated_frame_index_evidence": [],
+      "repeats_confined_to_full_opacity": true,
+      "repeats_confined_to_permitted_scope": true,
+      "unique_frame_count": 115
+    },
+    "first_frame_sha256": "a58b53a0e24f09ff22658fb68b2ab593b7c3e3cb971121ef83cff121a34b19b6",
+    "intentional_reset_boundary_repeat_count": 0,
+    "intentional_reset_boundary_repeat_evidence": [],
+    "last_frame_sha256": "7a871a6f8eb6a416a857327465044a07e8ae0933a3538d12112e50a5867f4a4a",
+    "minimum_unique_frame_count": 75,
+    "opening_construction_and_reset_tail_globally_distinct": true,
+    "playback": "embedded-infinite",
+    "raw_frames": {
+      "adjacent_duplicate_count": 0,
+      "adjacent_duplicate_pairs": [],
+      "algorithm": "sha256",
+      "all_frames_unique": true,
+      "first_frame_hash": "a58b53a0e24f09ff22658fb68b2ab593b7c3e3cb971121ef83cff121a34b19b6",
+      "frame_count": 115,
+      "intentional_reset_boundary_opacity": 1.0,
+      "intentional_reset_boundary_repeat_count": 0,
+      "intentional_reset_boundary_repeat_evidence": [],
+      "intentional_reset_boundary_repeat_frame": 110,
+      "last_frame_hash": "7a871a6f8eb6a416a857327465044a07e8ae0933a3538d12112e50a5867f4a4a",
+      "minimum_unique_frame_count": 75,
+      "opening_construction_and_reset_tail_globally_distinct": true,
+      "repeat_scope": [
+        38,
+        109
+      ],
+      "repeat_scope_policy": "non-adjacent-repeats-inside-full-opacity-plus-reset-start-boundary",
+      "repeated_frame_group_count": 0,
+      "repeated_frame_index_evidence": [],
+      "repeats_confined_to_full_opacity": true,
+      "repeats_confined_to_permitted_scope": true,
+      "unique_frame_count": 115
+    },
+    "repeat_scope": [
+      38,
+      109
+    ],
+    "repeat_scope_policy": "non-adjacent-repeats-inside-full-opacity-plus-reset-start-boundary",
+    "repeated_frame_index_evidence": [],
+    "repeats_confined_to_full_opacity": true,
+    "repeats_confined_to_permitted_scope": true,
+    "sampling": "uniform-frame-centers",
+    "unique_frame_count": 115
+  },
+  "loop_playback": "embedded-infinite",
+  "mime_type": "image/gif",
+  "motion_class": "semantic",
+  "motion_grammar": {
+    "curves": {
+      "draw": "linear",
+      "persistent-data-flow": "linear",
+      "reset": "linear"
+    },
+    "draw_on": {
+      "connectors_visible_at_opening": false,
+      "draw_easing": "linear",
+      "draw_schedule": [
+        {
+          "frames": [
+            1,
+            6
+          ],
+          "order": 0,
+          "role": "topic-rail",
+          "stage": 1
+        },
+        {
+          "frames": [
+            7,
+            12
+          ],
+          "order": 0,
+          "role": "topic-rail",
+          "stage": 2
+        },
+        {
+          "frames": [
+            13,
+            18
+          ],
+          "order": 0,
+          "role": "topic-rail",
+          "stage": 3
+        },
+        {
+          "frames": [
+            19,
+            24
+          ],
+          "order": 0,
+          "role": "topic-rail",
+          "stage": 4
+        },
+        {
+          "frames": [
+            25,
+            32
+          ],
+          "order": 0,
+          "role": "dead-letter",
+          "stage": 5
+        },
+        {
+          "frames": [
+            29,
+            36
+          ],
+          "order": 1,
+          "role": "state-project",
+          "stage": 5
+        }
+      ],
+      "empty_opening_frame": 0,
+      "forbidden": [
+        "source-node-motion",
+        "source-text-motion",
+        "source-geometry-mutation",
+        "source-marker-mutation",
+        "camera-motion",
+        "animated-background"
+      ],
+      "maximum_concurrent_draws": 2,
+      "nodes_visible_every_frame": true,
+      "persistent_data_flow": {
+        "auxiliary": {
+          "count": 4,
+          "geometry_expansion": 0,
+          "movement": "opacity-only",
+          "period_frames": 10,
+          "primitive": "station-dwell-ring"
+        },
+        "body": {
+          "appended_below_labels_and_nodes": true,
+          "color": "inherit-source-stroke",
+          "dash_pattern": [
+            8,
+            33
+          ],
+          "filter_free": true,
+          "linecap": "round",
+          "linejoin": "round",
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "opacity": 0.78,
+          "primitive": "event-transit-rail",
+          "resolved_widths_in_schedule_order": [
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2
+          ],
+          "stroke_width": "min(maximum_live_width, source_stroke)"
+        },
+        "dash_offset_per_rendered_frame": -5,
+        "dash_period": 41,
+        "direction": "source-to-target",
+        "direction_sentinels": [
+          {
+            "directions": [
+              "right"
+            ],
+            "key": "topic-rail/1/0"
+          },
+          {
+            "directions": [
+              "right"
+            ],
+            "key": "topic-rail/2/0"
+          },
+          {
+            "directions": [
+              "right"
+            ],
+            "key": "topic-rail/3/0"
+          },
+          {
+            "directions": [
+              "right"
+            ],
+            "key": "topic-rail/4/0"
+          },
+          {
+            "directions": [
+              "down"
+            ],
+            "key": "dead-letter/5/0"
+          },
+          {
+            "directions": [
+              "down"
+            ],
+            "key": "state-project/5/1"
+          }
+        ],
+        "expected_initial_phases": [
+          5,
+          10,
+          15,
+          20,
+          25,
+          28
+        ],
+        "fade_in_factors": [
+          0.3,
+          0.65,
+          1.0
+        ],
+        "fade_in_frames": [
+          36,
+          38
+        ],
+        "full_opacity_frames": [
+          38,
+          109
+        ],
+        "minimum_review_scale": "50%",
+        "period_step_coprime": true,
+        "phase_policy": "(motionStage * 5 + motionOrder * 3) mod 41",
+        "primitive": "event-transit-rail",
+        "rendered_frames": [
+          36,
+          114
+        ],
+        "reset_behavior": "live rails, signatures, and scene auxiliaries keep advancing while the shared reset opacity fades to 0.03",
+        "reset_opacity_samples": [
+          1.0,
+          0.7575,
+          0.515,
+          0.2725,
+          0.03
+        ],
+        "reset_range": [
+          110,
+          114
+        ],
+        "route_keys": [
+          {
+            "order": 0,
+            "role": "topic-rail",
+            "stage": 1
+          },
+          {
+            "order": 0,
+            "role": "topic-rail",
+            "stage": 2
+          },
+          {
+            "order": 0,
+            "role": "topic-rail",
+            "stage": 3
+          },
+          {
+            "order": 0,
+            "role": "topic-rail",
+            "stage": 4
+          },
+          {
+            "order": 0,
+            "role": "dead-letter",
+            "stage": 5
+          },
+          {
+            "order": 1,
+            "role": "state-project",
+            "stage": 5
+          }
+        ],
+        "signature": {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "direction": "source-to-target",
+          "endpoint_clearance": 7,
+          "geometry": {
+            "dead_letter": {
+              "shape": "red-outlined-exception-car"
+            },
+            "main": {
+              "car_count": 3,
+              "car_diameter": 5,
+              "car_gap": 3,
+              "shape": "three-car-event-train"
+            },
+            "state_project": {
+              "cell_count": 2,
+              "shape": "teal-two-cell-projection-car"
+            }
+          },
+          "path_advance_per_rendered_frame": 5,
+          "primitive": "event-train-or-branch-car",
+          "tangent_aware_rotation": true,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        "signature_advance_per_rendered_frame": 5,
+        "signature_count": 6,
+        "signature_primitive": "event-train-or-branch-car",
+        "stream_count": 6,
+        "travel_easing": "linear",
+        "travel_pixels_per_frame_at_100_percent": 5,
+        "travel_pixels_per_frame_at_50_percent": 2.5,
+        "travel_user_units_per_rendered_frame": 5
+      },
+      "primitive": "connector-draw-on-with-persistent-data-flow",
+      "reset_opacity_samples": [
+        1.0,
+        0.7575,
+        0.515,
+        0.2725,
+        0.03
+      ],
+      "reset_range": [
+        110,
+        114
+      ],
+      "route_label_opacity_states": 0,
+      "schedule_key": "(data-motion-role, data-motion-stage, data-motion-order)",
+      "settled_markers": "original marker appears only after route arrival",
+      "settled_topology_dynamic": true,
+      "source_edges_hidden_by_transient_css": true,
+      "text_geometry_motion": 0,
+      "topology_draw_on": true
+    },
+    "duration_seconds": 5.75,
+    "frame_duration_ms": 50.0,
+    "phases": {
+      "draw": {
+        "frames": [
+          1,
+          36
+        ],
+        "seconds": [
+          0.075,
+          1.825
+        ]
+      },
+      "empty": {
+        "frames": [
+          0,
+          0
+        ],
+        "seconds": [
+          0.025,
+          0.025
+        ]
+      },
+      "full_opacity": {
+        "frames": [
+          38,
+          109
+        ],
+        "seconds": [
+          1.925,
+          5.475
+        ]
+      },
+      "reset": {
+        "frames": [
+          110,
+          114
+        ],
+        "seconds": [
+          5.525,
+          5.725
+        ]
+      },
+      "stream": {
+        "frames": [
+          36,
+          114
+        ],
+        "seconds": [
+          1.825,
+          5.725
+        ]
+      }
+    },
+    "sample_index_expression": "time * fps - 0.5",
+    "sampling": "uniform-frame-centers",
+    "version": "3.4"
+  },
+  "motion_grammar_version": "3.4",
+  "motion_scene": "event-transit",
+  "ok": true,
+  "output": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/aigc-print-platform/assets/reliable-message-processing.gif",
+  "output_format": "gif",
+  "preset": "event-transit",
+  "rendered_pixels": 65136000,
+  "renderer": {
+    "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "duration_seconds": 5.75,
+    "effects": 20,
+    "engine": "chromium-svg-draw-on-persistent-data-flow",
+    "fps": 20,
+    "frame_count": 115,
+    "height": 590,
+    "input_kind": "svg",
+    "loop_frame_policy": "integer-frame-index-centers-with-steady-state-plus-reset-boundary-repeat-scope",
+    "module": "FIREWORKS_PUPPETEER_PATH",
+    "module_version": "25.9.0",
+    "ok": true,
+    "paint_barrier": "fonts-ready-plus-two-animation-frames-before-capture",
+    "preset": "event-transit",
+    "resolved_module": "/private/tmp/fireworks-runtime.HKwXV8/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+    "sandbox": "enabled",
+    "scene_report": {
+      "accepted_station_geometry_mutated": false,
+      "animated_background_count": 0,
+      "auxiliary_primitives": [
+        {
+          "count": 4,
+          "primitive": "station-dwell-ring",
+          "rings": [
+            {
+              "arrival_frame": 6,
+              "edge_id": "rail-01",
+              "fixed_geometry": {
+                "height": 86,
+                "width": 158,
+                "x": 274,
+                "y": 254
+              },
+              "geometry_expansion_per_frame": 0,
+              "movement": "opacity-only",
+              "outside_node_border": true,
+              "period_frames": 10,
+              "target_node_id": "main-queue"
+            },
+            {
+              "arrival_frame": 12,
+              "edge_id": "rail-12",
+              "fixed_geometry": {
+                "height": 86,
+                "width": 158,
+                "x": 492,
+                "y": 254
+              },
+              "geometry_expansion_per_frame": 0,
+              "movement": "opacity-only",
+              "outside_node_border": true,
+              "period_frames": 10,
+              "target_node_id": "consumer"
+            },
+            {
+              "arrival_frame": 18,
+              "edge_id": "rail-23",
+              "fixed_geometry": {
+                "height": 86,
+                "width": 158,
+                "x": 710,
+                "y": 254
+              },
+              "geometry_expansion_per_frame": 0,
+              "movement": "opacity-only",
+              "outside_node_border": true,
+              "period_frames": 10,
+              "target_node_id": "retry-router"
+            },
+            {
+              "arrival_frame": 24,
+              "edge_id": "rail-34",
+              "fixed_geometry": {
+                "height": 86,
+                "width": 188,
+                "x": 928,
+                "y": 254
+              },
+              "geometry_expansion_per_frame": 0,
+              "movement": "opacity-only",
+              "outside_node_border": true,
+              "period_frames": 10,
+              "target_node_id": "retry-consumer"
+            }
+          ],
+          "source_geometry_mutated": false
+        }
+      ],
+      "camera_motion_count": 0,
+      "connectors_visible_at_opening": false,
+      "direction_sentinels": [
+        {
+          "actual": [
+            "right"
+          ],
+          "dash_offset_per_rendered_frame": -5,
+          "expected": [
+            "right"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/1/0",
+          "signature_advance_per_rendered_frame": 5,
+          "stage": 1
+        },
+        {
+          "actual": [
+            "right"
+          ],
+          "dash_offset_per_rendered_frame": -5,
+          "expected": [
+            "right"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/2/0",
+          "signature_advance_per_rendered_frame": 5,
+          "stage": 2
+        },
+        {
+          "actual": [
+            "right"
+          ],
+          "dash_offset_per_rendered_frame": -5,
+          "expected": [
+            "right"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/3/0",
+          "signature_advance_per_rendered_frame": 5,
+          "stage": 3
+        },
+        {
+          "actual": [
+            "right"
+          ],
+          "dash_offset_per_rendered_frame": -5,
+          "expected": [
+            "right"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/4/0",
+          "signature_advance_per_rendered_frame": 5,
+          "stage": 4
+        },
+        {
+          "actual": [
+            "down"
+          ],
+          "dash_offset_per_rendered_frame": -5,
+          "expected": [
+            "down"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "dead-letter",
+          "schedule_key": "dead-letter/5/0",
+          "signature_advance_per_rendered_frame": 5,
+          "stage": 5
+        },
+        {
+          "actual": [
+            "down"
+          ],
+          "dash_offset_per_rendered_frame": -5,
+          "expected": [
+            "down"
+          ],
+          "order": 1,
+          "passed": true,
+          "role": "state-project",
+          "schedule_key": "state-project/5/1",
+          "signature_advance_per_rendered_frame": 5,
+          "stage": 5
+        }
+      ],
+      "draw_clones": 6,
+      "draw_contract": {
+        "easing": "linear",
+        "marker_after_arrival": true,
+        "marker_during_draw": false,
+        "source_geometry": "exact immutable edge clone"
+      },
+      "draw_schedule": [
+        {
+          "easing": "linear",
+          "edge_id": "rail-01",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            1,
+            6
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/1/0",
+          "stage": 1
+        },
+        {
+          "easing": "linear",
+          "edge_id": "rail-12",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            7,
+            12
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/2/0",
+          "stage": 2
+        },
+        {
+          "easing": "linear",
+          "edge_id": "rail-23",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            13,
+            18
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/3/0",
+          "stage": 3
+        },
+        {
+          "easing": "linear",
+          "edge_id": "rail-34",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            19,
+            24
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/4/0",
+          "stage": 4
+        },
+        {
+          "easing": "linear",
+          "edge_id": "to-dlq",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            25,
+            32
+          ],
+          "role": "dead-letter",
+          "schedule_key": "dead-letter/5/0",
+          "stage": 5
+        },
+        {
+          "easing": "linear",
+          "edge_id": "state-project",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 1,
+          "rendered_frames": [
+            29,
+            36
+          ],
+          "role": "state-project",
+          "schedule_key": "state-project/5/1",
+          "stage": 5
+        }
+      ],
+      "dynamic_not_thicker_than_source": true,
+      "empty_opening_frame": 0,
+      "extra_scene_primitives": [
+        "event-train",
+        "exception-car",
+        "projection-car",
+        "station-dwell-ring"
+      ],
+      "grammar_version": "3.4",
+      "halo_count": 0,
+      "live_rail_width_ceiling": 2.2,
+      "live_rail_width_ceiling_passed": true,
+      "maximum_concurrent_draws": 2,
+      "maximum_live_rail_width": 2.2,
+      "node_motion": 0,
+      "node_motion_count": 0,
+      "nodes_visible_every_frame": true,
+      "owner_decoration_clone_opening_visible_count": 0,
+      "owner_decoration_source_opening_visible_count": 0,
+      "owner_decorations": [
+        {
+          "clone_count": 2,
+          "edge_id": "rail-01",
+          "hidden_before_settle": true,
+          "settle_frame": 6,
+          "source_geometry_mutated": false,
+          "source_ids": [
+            "rail-01-rail-casing",
+            "rail-01-direction"
+          ]
+        },
+        {
+          "clone_count": 2,
+          "edge_id": "rail-12",
+          "hidden_before_settle": true,
+          "settle_frame": 12,
+          "source_geometry_mutated": false,
+          "source_ids": [
+            "rail-12-rail-casing",
+            "rail-12-direction"
+          ]
+        },
+        {
+          "clone_count": 2,
+          "edge_id": "rail-23",
+          "hidden_before_settle": true,
+          "settle_frame": 18,
+          "source_geometry_mutated": false,
+          "source_ids": [
+            "rail-23-rail-casing",
+            "rail-23-direction"
+          ]
+        },
+        {
+          "clone_count": 2,
+          "edge_id": "rail-34",
+          "hidden_before_settle": true,
+          "settle_frame": 24,
+          "source_geometry_mutated": false,
+          "source_ids": [
+            "rail-34-rail-casing",
+            "rail-34-direction"
+          ]
+        }
+      ],
+      "packet_head_count": 0,
+      "persistent_packet_heads": [],
+      "persistent_stream_contract": {
+        "body": {
+          "color": "inherit-source-stroke",
+          "dash_pattern": [
+            8,
+            33
+          ],
+          "dynamic_not_thicker_than_source": true,
+          "filter_free": true,
+          "linecap": "round",
+          "linejoin": "round",
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "opacity": 0.78,
+          "primitive": "event-transit-rail",
+          "resolved_widths_in_schedule_order": [
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2
+          ],
+          "source_widths_in_schedule_order": [
+            2.8,
+            2.8,
+            2.8,
+            2.8,
+            2.8,
+            2.8
+          ],
+          "stroke_width": "min(2.2, source_stroke)"
+        },
+        "dash_offset_per_rendered_frame": -5,
+        "dash_period": 41,
+        "direction": "source-to-target",
+        "expected_initial_phases": [
+          5,
+          10,
+          15,
+          20,
+          25,
+          28
+        ],
+        "fade_in_factors": [
+          0.3,
+          0.65,
+          1
+        ],
+        "fade_in_frames": [
+          36,
+          38
+        ],
+        "full_opacity_frames": [
+          38,
+          109
+        ],
+        "minimum_review_scale": "50%",
+        "period_step_coprime": true,
+        "phase_policy": "(motionStage * 5 + motionOrder * 3) mod 41",
+        "phase_repeat_within_stream_interval": true,
+        "primitive": "event-transit-rail",
+        "rendered_frames": [
+          36,
+          114
+        ],
+        "reset_behavior": "live rails, signatures, and scene auxiliaries keep advancing while the shared reset opacity fades to 0.03",
+        "reset_opacity_samples": [
+          1,
+          0.7575,
+          0.515,
+          0.2725,
+          0.03
+        ],
+        "reset_range": [
+          110,
+          114
+        ],
+        "signature": {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "direction": "source-to-target",
+          "endpoint_clearance": 7,
+          "geometry_by_route": [
+            {
+              "geometry": {
+                "car_count": 3,
+                "car_diameter": 5,
+                "car_gap": 3,
+                "shape": "three-car-event-train"
+              },
+              "primitive": "event-train",
+              "schedule_key": "topic-rail/1/0"
+            },
+            {
+              "geometry": {
+                "car_count": 3,
+                "car_diameter": 5,
+                "car_gap": 3,
+                "shape": "three-car-event-train"
+              },
+              "primitive": "event-train",
+              "schedule_key": "topic-rail/2/0"
+            },
+            {
+              "geometry": {
+                "car_count": 3,
+                "car_diameter": 5,
+                "car_gap": 3,
+                "shape": "three-car-event-train"
+              },
+              "primitive": "event-train",
+              "schedule_key": "topic-rail/3/0"
+            },
+            {
+              "geometry": {
+                "car_count": 3,
+                "car_diameter": 5,
+                "car_gap": 3,
+                "shape": "three-car-event-train"
+              },
+              "primitive": "event-train",
+              "schedule_key": "topic-rail/4/0"
+            },
+            {
+              "geometry": {
+                "diameter": 8,
+                "shape": "red-outlined-exception-car"
+              },
+              "primitive": "exception-car",
+              "schedule_key": "dead-letter/5/0"
+            },
+            {
+              "geometry": {
+                "cell_count": 2,
+                "cell_gap": 3,
+                "cell_width": 5,
+                "shape": "teal-two-cell-projection-car"
+              },
+              "primitive": "projection-car",
+              "schedule_key": "state-project/5/1"
+            }
+          ],
+          "path_advance_per_rendered_frame": 5,
+          "primitive": "event-train-or-branch-car",
+          "signature_kind": "event-transit",
+          "tangent_aware_rotation": true,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        "signature_advance_per_rendered_frame": 5,
+        "signature_count": 6,
+        "signature_primitive": "event-train-or-branch-car",
+        "stream_count": 6,
+        "stream_interval_frame_count": 79,
+        "travel_easing": "linear",
+        "travel_pixels_per_frame_at_50_percent": 2.5,
+        "travel_pixels_per_frame_at_960px": 5,
+        "travel_pixels_per_second_at_50_percent_20fps": 50,
+        "travel_pixels_per_second_at_960px_20fps": 100,
+        "travel_user_units_per_rendered_frame": 5
+      },
+      "persistent_streams": [
+        {
+          "color": "#e4475b",
+          "dash_offset_per_rendered_frame": -5,
+          "dash_pattern": [
+            8,
+            33
+          ],
+          "dash_period": 41,
+          "direction": "source-to-target",
+          "dynamic_not_thicker_than_source": true,
+          "edge_id": "rail-01",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 5,
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "motion_order": 0,
+          "motion_stage": 1,
+          "opacity": 0.78,
+          "phase_policy": "(motionStage * 5 + motionOrder * 3) mod 41",
+          "primitive": "event-transit-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/1/0",
+          "source_stroke_width": 2.8,
+          "stroke_width": 2.2,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#e4475b",
+          "dash_offset_per_rendered_frame": -5,
+          "dash_pattern": [
+            8,
+            33
+          ],
+          "dash_period": 41,
+          "direction": "source-to-target",
+          "dynamic_not_thicker_than_source": true,
+          "edge_id": "rail-12",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 10,
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "motion_order": 0,
+          "motion_stage": 2,
+          "opacity": 0.78,
+          "phase_policy": "(motionStage * 5 + motionOrder * 3) mod 41",
+          "primitive": "event-transit-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/2/0",
+          "source_stroke_width": 2.8,
+          "stroke_width": 2.2,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#e4475b",
+          "dash_offset_per_rendered_frame": -5,
+          "dash_pattern": [
+            8,
+            33
+          ],
+          "dash_period": 41,
+          "direction": "source-to-target",
+          "dynamic_not_thicker_than_source": true,
+          "edge_id": "rail-23",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 15,
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "motion_order": 0,
+          "motion_stage": 3,
+          "opacity": 0.78,
+          "phase_policy": "(motionStage * 5 + motionOrder * 3) mod 41",
+          "primitive": "event-transit-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/3/0",
+          "source_stroke_width": 2.8,
+          "stroke_width": 2.2,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#e4475b",
+          "dash_offset_per_rendered_frame": -5,
+          "dash_pattern": [
+            8,
+            33
+          ],
+          "dash_period": 41,
+          "direction": "source-to-target",
+          "dynamic_not_thicker_than_source": true,
+          "edge_id": "rail-34",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 20,
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "motion_order": 0,
+          "motion_stage": 4,
+          "opacity": 0.78,
+          "phase_policy": "(motionStage * 5 + motionOrder * 3) mod 41",
+          "primitive": "event-transit-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/4/0",
+          "source_stroke_width": 2.8,
+          "stroke_width": 2.2,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#c62828",
+          "dash_offset_per_rendered_frame": -5,
+          "dash_pattern": [
+            8,
+            33
+          ],
+          "dash_period": 41,
+          "direction": "source-to-target",
+          "dynamic_not_thicker_than_source": true,
+          "edge_id": "to-dlq",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 25,
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "motion_order": 0,
+          "motion_stage": 5,
+          "opacity": 0.78,
+          "phase_policy": "(motionStage * 5 + motionOrder * 3) mod 41",
+          "primitive": "event-transit-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "dead-letter",
+          "schedule_key": "dead-letter/5/0",
+          "source_stroke_width": 2.8,
+          "stroke_width": 2.2,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#00897b",
+          "dash_offset_per_rendered_frame": -5,
+          "dash_pattern": [
+            8,
+            33
+          ],
+          "dash_period": 41,
+          "direction": "source-to-target",
+          "dynamic_not_thicker_than_source": true,
+          "edge_id": "state-project",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 28,
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "motion_order": 1,
+          "motion_stage": 5,
+          "opacity": 0.78,
+          "phase_policy": "(motionStage * 5 + motionOrder * 3) mod 41",
+          "primitive": "event-transit-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "state-project",
+          "schedule_key": "state-project/5/1",
+          "source_stroke_width": 2.8,
+          "stroke_width": 2.2,
+          "travel_easing": "linear"
+        }
+      ],
+      "preset": "event-transit",
+      "primitive": "connector-draw-on-with-persistent-data-flow",
+      "reset_opacity_samples": [
+        1,
+        0.7575,
+        0.515,
+        0.2725,
+        0.03
+      ],
+      "reset_range": [
+        110,
+        114
+      ],
+      "ripple_count": 0,
+      "route_label_clones": 0,
+      "route_label_opacity_states": 0,
+      "scene_identity": "Event Transit",
+      "schedule_key": "(data-motion-role, data-motion-stage, data-motion-order)",
+      "settled_marker_clones": 6,
+      "settled_owner_decoration_clone_count": 8,
+      "settled_topology_dynamic": true,
+      "signature_kind": "event-transit",
+      "signature_travel_at_100_percent": 5,
+      "signature_travel_at_50_percent": 2.5,
+      "source_edges": 6,
+      "source_edges_hidden_by_transient_css": true,
+      "source_geometry_mutation_count": 0,
+      "source_marker_mutation_count": 0,
+      "source_owner_decoration_count": 8,
+      "source_route_labels": 0,
+      "source_text_mutation_count": 0,
+      "specialized_signature_count": 6,
+      "specialized_signatures": [
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            17.5,
+            50.5
+          ],
+          "direction": "source-to-target",
+          "edge_id": "rail-01",
+          "endpoint_clearance": 7,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "car_count": 3,
+            "car_diameter": 5,
+            "car_gap": 3,
+            "shape": "three-car-event-train"
+          },
+          "geometry_forward_extent": 10.5,
+          "geometry_rear_extent": 10.5,
+          "initial_path_distance": 22.5,
+          "initial_point": {
+            "x": 232.5,
+            "y": 297
+          },
+          "initial_tangent_rotation": 0,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 5,
+          "path_length": 68,
+          "primitive": "event-train",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/1/0",
+          "signature_family": "event-transit",
+          "source_color": "#e4475b",
+          "travel_pixels_per_rendered_frame_at_50_percent": 2.5,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            17.5,
+            50.5
+          ],
+          "direction": "source-to-target",
+          "edge_id": "rail-12",
+          "endpoint_clearance": 7,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "car_count": 3,
+            "car_diameter": 5,
+            "car_gap": 3,
+            "shape": "three-car-event-train"
+          },
+          "geometry_forward_extent": 10.5,
+          "geometry_rear_extent": 10.5,
+          "initial_path_distance": 27.5,
+          "initial_point": {
+            "x": 455.5,
+            "y": 297
+          },
+          "initial_tangent_rotation": 0,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 5,
+          "path_length": 68,
+          "primitive": "event-train",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/2/0",
+          "signature_family": "event-transit",
+          "source_color": "#e4475b",
+          "travel_pixels_per_rendered_frame_at_50_percent": 2.5,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            17.5,
+            50.5
+          ],
+          "direction": "source-to-target",
+          "edge_id": "rail-23",
+          "endpoint_clearance": 7,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "car_count": 3,
+            "car_diameter": 5,
+            "car_gap": 3,
+            "shape": "three-car-event-train"
+          },
+          "geometry_forward_extent": 10.5,
+          "geometry_rear_extent": 10.5,
+          "initial_path_distance": 32.5,
+          "initial_point": {
+            "x": 678.5,
+            "y": 297
+          },
+          "initial_tangent_rotation": 0,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 5,
+          "path_length": 68,
+          "primitive": "event-train",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/3/0",
+          "signature_family": "event-transit",
+          "source_color": "#e4475b",
+          "travel_pixels_per_rendered_frame_at_50_percent": 2.5,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            17.5,
+            50.5
+          ],
+          "direction": "source-to-target",
+          "edge_id": "rail-34",
+          "endpoint_clearance": 7,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "car_count": 3,
+            "car_diameter": 5,
+            "car_gap": 3,
+            "shape": "three-car-event-train"
+          },
+          "geometry_forward_extent": 10.5,
+          "geometry_rear_extent": 10.5,
+          "initial_path_distance": 37.5,
+          "initial_point": {
+            "x": 901.5,
+            "y": 297
+          },
+          "initial_tangent_rotation": 0,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 5,
+          "path_length": 68,
+          "primitive": "event-train",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "topic-rail",
+          "schedule_key": "topic-rail/4/0",
+          "signature_family": "event-transit",
+          "source_color": "#e4475b",
+          "travel_pixels_per_rendered_frame_at_50_percent": 2.5,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            11,
+            83
+          ],
+          "direction": "source-to-target",
+          "edge_id": "to-dlq",
+          "endpoint_clearance": 7,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "diameter": 8,
+            "shape": "red-outlined-exception-car"
+          },
+          "geometry_forward_extent": 4,
+          "geometry_rear_extent": 4,
+          "initial_path_distance": 36,
+          "initial_point": {
+            "x": 789,
+            "y": 372
+          },
+          "initial_tangent_rotation": 90,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 5,
+          "path_length": 94,
+          "primitive": "exception-car",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "dead-letter",
+          "schedule_key": "dead-letter/5/0",
+          "signature_family": "event-transit",
+          "source_color": "#c62828",
+          "travel_pixels_per_rendered_frame_at_50_percent": 2.5,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            13.5,
+            80.5
+          ],
+          "direction": "source-to-target",
+          "edge_id": "state-project",
+          "endpoint_clearance": 7,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "cell_count": 2,
+            "cell_gap": 3,
+            "cell_width": 5,
+            "shape": "teal-two-cell-projection-car"
+          },
+          "geometry_forward_extent": 6.5,
+          "geometry_rear_extent": 6.5,
+          "initial_path_distance": 41.5,
+          "initial_point": {
+            "x": 571,
+            "y": 377.5
+          },
+          "initial_tangent_rotation": 90,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 5,
+          "path_length": 94,
+          "primitive": "projection-car",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "state-project",
+          "schedule_key": "state-project/5/1",
+          "signature_family": "event-transit",
+          "source_color": "#00897b",
+          "travel_pixels_per_rendered_frame_at_50_percent": 2.5,
+          "wrap": "target-clearance-to-source-clearance"
+        }
+      ],
+      "static_dom_guard": true,
+      "station_dwell_ring_count": 4,
+      "stream_count": 6,
+      "text_geometry_motion": 0,
+      "text_motion": 0,
+      "text_motion_count": 0,
+      "topology_draw_on": true,
+      "trace_span_reveals": [],
+      "waterfall_scanner": null
+    },
+    "width": 960
+  },
+  "report": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/aigc-print-platform/assets/reliable-message-processing.motion.json",
+  "required_encoder": "ffmpeg/gif",
+  "review_reference_source_sha256": "e4ca3aa987b2495868765a0b66d11763a67890f13079c513f58451a40d5432e4",
+  "review_status": "user-approved",
+  "runtime": {
+    "encoders": [
+      "gif"
+    ],
+    "ffmpeg": "/tmp/fireworks-runtime.HKwXV8/node_modules/@ffmpeg-installer/darwin-arm64/ffmpeg",
+    "ffprobe": "/tmp/fireworks-runtime.HKwXV8/node_modules/ffprobe-static/bin/darwin/arm64/ffprobe",
+    "format": {
+      "gif": true
+    },
+    "node": "/Users/jiang/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "ok": true,
+    "renderer": {
+      "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "deterministic_timeline": true,
+      "input": "semantic-svg",
+      "module": "FIREWORKS_PUPPETEER_PATH",
+      "module_version": "25.9.0",
+      "motion_model": "connector-draw-on-with-persistent-data-flow",
+      "ok": true,
+      "presets": [
+        "memory-weave",
+        "tool-grounding",
+        "service-blueprint",
+        "memory-lifecycle",
+        "agent-orchestration",
+        "governed-runtime",
+        "token-stream",
+        "golden-circuit",
+        "review-trace",
+        "cloud-flow",
+        "event-transit",
+        "ops-pulse"
+      ],
+      "resolved_module": "/private/tmp/fireworks-runtime.HKwXV8/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+      "sandbox_default": "enabled"
+    },
+    "worker": "/private/tmp/fireworks-motion-patched/svg2gif.js"
+  },
+  "scene_signature": {
+    "distinctive_primitives": [
+      "semantic-route-build",
+      "event-transit-rail",
+      "event-train",
+      "exception-car",
+      "projection-car",
+      "station-dwell-ring"
+    ],
+    "name": "event-transit-three-car-event-trains"
+  },
+  "seamless_loop_contract": "75 frames or fewer: every raster is unique; more than 75 frames: non-adjacent repeats are allowed within the full-opacity interval, plus the sole intentional reset-boundary exception at reset_start with opacity 1.00, with at least 75 unique rasters; seam MAD must not exceed p95 adjacent-frame MAD",
+  "semantic_profile": "event-transit",
+  "semantics": {
+    "branches": 2,
+    "edges": 6,
+    "edges_without_flow": 0,
+    "motion_metadata": "explicit",
+    "nodes": 7,
+    "rails": 4,
+    "resolved_schedule": [
+      {
+        "edge_id": "rail-01",
+        "order": 0,
+        "role": "topic-rail",
+        "source_stroke": "#e4475b",
+        "stage": 1
+      },
+      {
+        "edge_id": "rail-12",
+        "order": 0,
+        "role": "topic-rail",
+        "source_stroke": "#e4475b",
+        "stage": 2
+      },
+      {
+        "edge_id": "rail-23",
+        "order": 0,
+        "role": "topic-rail",
+        "source_stroke": "#e4475b",
+        "stage": 3
+      },
+      {
+        "edge_id": "rail-34",
+        "order": 0,
+        "role": "topic-rail",
+        "source_stroke": "#e4475b",
+        "stage": 4
+      },
+      {
+        "edge_id": "to-dlq",
+        "order": 0,
+        "role": "dead-letter",
+        "source_stroke": "#c62828",
+        "stage": 5
+      },
+      {
+        "edge_id": "state-project",
+        "order": 1,
+        "role": "state-project",
+        "source_stroke": "#00897b",
+        "stage": 5
+      }
+    ],
+    "schedule_key": "(data-motion-role, data-motion-stage, data-motion-order)",
+    "staged_edges": 6,
+    "stations": 5
+  },
+  "size_guidance": {
+    "artifact_target_bytes": 500000,
+    "artifact_within_target": true,
+    "warnings": []
+  },
+  "source": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/aigc-print-platform/assets/reliable-message-processing.svg",
+  "source_checks": {
+    "composition": {
+      "details": [],
+      "ok": true
+    },
+    "geometry": {
+      "details": [],
+      "ok": true
+    },
+    "markers": {
+      "details": [],
+      "ok": true
+    },
+    "xml": {
+      "details": [],
+      "ok": true
+    }
+  },
+  "source_integrity": {
+    "sha256": "ef8e7db78c81efc7c38421087a7258bb6f9e333af69b7ffdba5459033f60eaea",
+    "sha256_after": "ef8e7db78c81efc7c38421087a7258bb6f9e333af69b7ffdba5459033f60eaea",
+    "sha256_before": "ef8e7db78c81efc7c38421087a7258bb6f9e333af69b7ffdba5459033f60eaea",
+    "unchanged": true
+  },
+  "source_sha256": "ef8e7db78c81efc7c38421087a7258bb6f9e333af69b7ffdba5459033f60eaea",
+  "style_contract": {
+    "approval_recorded_on": "2026-07-16",
+    "scope": "signature-speed-path-geometry-and-construction-schedule",
+    "source_policy": "semantic-schedule-and-geometry-not-exact-byte-hash",
+    "status": "user-approved"
+  },
+  "style_contract_status": "user-approved",
+  "style_id": 11,
+  "timing_revision": {
+    "approved_at": "2026-07-17",
+    "baseline": {
+      "duration_seconds": 3.75,
+      "frame_count": 75
+    },
+    "candidate": {
+      "added_full_opacity_frames": [
+        70,
+        109
+      ],
+      "duration_seconds": 5.75,
+      "frame_count": 115
+    },
+    "id": "+2s-settled-flow",
+    "only_pending_item": false,
+    "status": "user-approved"
+  },
+  "visual_theme": "Event Transit",
+  "width": 960
+}
