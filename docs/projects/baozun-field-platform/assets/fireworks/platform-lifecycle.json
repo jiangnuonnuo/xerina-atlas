@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 440,
+  "title": "字段目录平台全链路",
+  "subtitle": "从页面证据到可维护目录，再到可交付字典的闭环。",
+  "nodes": [
+    { "id": "capture", "kind": "rect", "x": 30, "y": 170, "width": 140, "height": 82, "label": "DOM-SCOUT 采证", "sublabel": "人工选区 / 自动入口", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "snapshot", "kind": "document", "x": 190, "y": 170, "width": 140, "height": 82, "label": "DomSnapshot", "sublabel": "统一证据契约", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "agent", "kind": "rect", "x": 350, "y": 170, "width": 140, "height": 82, "label": "Agent 字段解析", "sublabel": "工作流 + Schema", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "draft", "kind": "double_rect", "x": 510, "y": 170, "width": 140, "height": 82, "label": "FieldTreeDraft", "sublabel": "预览 / 修订 / 确认", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "catalog", "kind": "cylinder", "x": 670, "y": 170, "width": 140, "height": 82, "label": "目录事务发布", "sublabel": "tree_version", "fill": "#eff6ff", "stroke": "#3b82f6" },
+    { "id": "export", "kind": "rect", "x": 830, "y": 170, "width": 140, "height": 82, "label": "字典异步交付", "sublabel": "快照 / SXSSF", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "change", "kind": "document", "x": 990, "y": 170, "width": 140, "height": 82, "label": "持续维护", "sublabel": "再采集 / 审核", "fill": "#f0fdf4", "stroke": "#4ade80" }
+  ],
+  "arrows": [
+    { "id": "capture-snapshot", "source": "capture", "target": "snapshot", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "snapshot-agent", "source": "snapshot", "target": "agent", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "agent-draft", "source": "agent", "target": "draft", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "draft-catalog", "source": "draft", "target": "catalog", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "catalog-export", "source": "catalog", "target": "export", "source_port": "right", "target_port": "left", "flow": "read" },
+    { "id": "export-change", "source": "export", "target": "change", "source_port": "right", "target_port": "left", "flow": "write" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 60,
+  "legend_y": 355,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "证据与候选" },
+    { "flow": "write", "label": "确认后的持久化" },
+    { "flow": "read", "label": "一致性读取" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · platform lifecycle",
+  "footer_x": 800,
+  "footer_y": 355
+}

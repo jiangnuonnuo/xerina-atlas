@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 470,
+  "title": "自适应缩进批量建树",
+  "subtitle": "前端先归一和预览缩进，再向服务端提交嵌套命令。",
+  "nodes": [
+    { "id": "raw", "kind": "document", "x": 50, "y": 170, "width": 220, "height": 100, "label": "原始文本", "sublabel": "菜单 / 分组 / 字段 · 空格 / Tab", "fill": "#eff6ff", "stroke": "#60a5fa" },
+    { "id": "normalize", "kind": "rect", "x": 320, "y": 170, "width": 220, "height": 100, "label": "归一 / 校验", "sublabel": "公共缩进 · 重复 · 行号 · 限额", "fill": "#f0fdfa", "stroke": "#2dd4bf", "flat": true },
+    { "id": "preview", "kind": "double_rect", "x": 590, "y": 170, "width": 220, "height": 100, "label": "归一预览", "sublabel": "树形层级 · 错误行 · 忽略统计", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "command", "kind": "rect", "x": 860, "y": 170, "width": 220, "height": 100, "label": "嵌套命令", "sublabel": "确认后发送 CatalogCommand", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "db", "kind": "cylinder", "x": 455, "y": 340, "width": 220, "height": 75, "label": "服务端建树事务", "sublabel": "父子 · 名称唯一 · 深度 · 节点数", "fill": "#eff6ff", "stroke": "#3b82f6" },
+    { "id": "note", "kind": "rect", "x": 770, "y": 340, "width": 220, "height": 75, "label": "正式目录", "sublabel": "预览不等于写入", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true }
+  ],
+  "arrows": [
+    { "id": "raw-normalize", "source": "raw", "target": "normalize", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "normalize-preview", "source": "normalize", "target": "preview", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "preview-command", "source": "preview", "target": "command", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "command-db", "source": "command", "target": "db", "source_port": "bottom", "target_port": "top", "flow": "write" },
+    { "id": "db-note", "source": "db", "target": "note", "source_port": "right", "target_port": "left", "flow": "write" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 60,
+  "legend_y": 435,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "输入与预览数据" },
+    { "flow": "control", "label": "人工确认" },
+    { "flow": "write", "label": "确认后的事务写入" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · preview is not persistence",
+  "footer_x": 760,
+  "footer_y": 435
+}

@@ -41,3 +41,18 @@ layout: project-doc
 - [异步任务与削峰填谷](./20-async-task)
 - [消息可靠性与任务状态机](./30-reliable-message)
 - [OSS 直传与权益库存](./40-oss-and-inventory)
+
+## 深入阅读（完整可落地方案）
+
+技术细节完整版，按"背景 → 架构 → 流程 → 消息队列 → 一致性 → 异常 → 边界 → 选型 → 部署"编排，适合面试深挖与技术评审：
+
+- [项目背景与业务痛点](./10-project-background)
+- [总体架构设计](./11-overall-architecture)
+- [核心业务流程](./12-core-business-flows)
+- [消息队列设计（RabbitMQ 完整可靠性方案）](./13-message-queue-design)
+- [数据一致性与幂等设计](./14-data-consistency-and-idempotency)
+- [异常处理与错误处理规范](./15-exception-handling)
+- [边界处理与状态机收敛](./16-boundary-handling)
+- [技术选型与关键方案说明](./17-tech-selection)
+- [部署架构与关键配置](./18-deployment-and-config)
+- [修订说明与简历指标映射](./19-revision-and-metrics)

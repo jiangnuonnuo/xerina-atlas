@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-motion-scene="" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f97316"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+    <filter id="shadowSoft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <filter id="shadowGlass" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#020617" flood-opacity="0.28"/>
+    </filter>
+    <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #6b7280; }
+    .section { font-size: 13px; font-weight: 700; fill: #2563eb; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #94a3b8; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .node-type { font-size: 12px; font-weight: 700; fill: #9ca3af; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #94a3b8; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #94a3b8; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="1200.0" height="520.0" fill="#ffffff"/>
+  <text x="600.0" y="56" text-anchor="middle" class="title">导出任务状态机</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">任务领取、重试、取消和终态均由数据库状态条件更新约束。</text>
+  <path id="pending-running" data-graph-role="edge" data-edge-id="pending-running" data-source="pending" data-target="running" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 285,161 L 405,161" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="running-success" data-graph-role="edge" data-edge-id="running-success" data-source="running" data-target="success" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 585,161 L 605.4,161 L 605.4,121 L 815,121" fill="none" stroke="#10b981" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowB)"/>
+  <path id="running-retrying" data-graph-role="edge" data-edge-id="running-retrying" data-source="running" data-target="retrying" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 513,202 L 513,222.4 L 504,222.4 L 504,310" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="retrying-running" data-graph-role="edge" data-edge-id="retrying-running" data-source="retrying" data-target="running" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 486,310 L 486,222.4 L 477,222.4 L 477,202" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="pending-canceled" data-graph-role="edge" data-edge-id="pending-canceled" data-source="pending" data-target="canceled" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 195,202 L 195,310" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="retrying-failed" data-graph-role="edge" data-edge-id="retrying-failed" data-source="retrying" data-target="failed" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 585,351 L 815,351" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="running-failed-bridge-mask" data-graph-role="bridge-mask" data-owner="running-failed" d="M 495,202 L 495,226 L 905,226 L 905,310" fill="none" stroke="#ffffff" stroke-width="6.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="running-failed" data-graph-role="edge" data-edge-id="running-failed" data-source="running" data-target="failed" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="504,226" d="M 495,202 L 495,226 L 905,226 L 905,310" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <g id="node-pending" data-graph-role="node" data-node-id="pending" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="105,120,285,202">
+  <rect x="105.0" y="120.0" width="180.0" height="82.0" rx="10.0" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.8"/>
+  <text x="195.0" y="161.0" text-anchor="middle" class="node-title" font-size="18.0">PENDING</text>
+  <text x="195.0" y="183.0" text-anchor="middle" class="node-sub">等待调度</text>
+  </g>
+  <g id="node-running" data-graph-role="node" data-node-id="running" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="405,120,585,202">
+  <rect x="405.0" y="120.0" width="180.0" height="82.0" rx="10.0" fill="#fff7ed" stroke="#fb923c" stroke-width="2.0"/>
+  <rect x="411.0" y="126.0" width="168.0" height="70.0" rx="7.0" fill="none" stroke="#fb923c" stroke-width="1.2" opacity="0.65"/>
+  <text x="495.0" y="161.0" text-anchor="middle" class="node-title" font-size="18.0">RUNNING</text>
+  <text x="495.0" y="183.0" text-anchor="middle" class="node-sub">单执行器领取</text>
+  </g>
+  <g id="node-success" data-graph-role="node" data-node-id="success" data-semantic-role="document" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="815,80,995,162">
+  <path d="M 815.0 80.0 L 977.0 80.0 L 995.0 98.0 L 995.0 162.0 L 815.0 162.0 Z" fill="#f0fdf4" stroke="#4ade80" stroke-width="2.0" filter="url(#shadowSoft)"/>
+  <path d="M 977.0 80.0 L 977.0 98.0 L 995.0 98.0" fill="none" stroke="#4ade80" stroke-width="2.0"/>
+  <line x1="833.0" y1="106.0" x2="967.0" y2="106.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="833.0" y1="120.0" x2="967.0" y2="120.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="833.0" y1="134.0" x2="967.0" y2="134.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="833.0" y1="148.0" x2="967.0" y2="148.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <text x="905.0" y="188.0" text-anchor="middle" class="node-title" font-size="18.0">SUCCESS</text>
+  <text x="905.0" y="206.0" text-anchor="middle" class="node-sub">文件已提交</text>
+  </g>
+  <g id="node-retrying" data-graph-role="node" data-node-id="retrying" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="405,310,585,392">
+  <rect x="405.0" y="310.0" width="180.0" height="82.0" rx="10.0" fill="#faf5ff" stroke="#a78bfa" stroke-width="1.8"/>
+  <text x="495.0" y="351.0" text-anchor="middle" class="node-title" font-size="18.0">RETRYING</text>
+  <text x="495.0" y="373.0" text-anchor="middle" class="node-sub">指数退避</text>
+  </g>
+  <g id="node-failed" data-graph-role="node" data-node-id="failed" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="815,310,995,392">
+  <rect x="815.0" y="310.0" width="180.0" height="82.0" rx="10.0" fill="#fef2f2" stroke="#f87171" stroke-width="1.8"/>
+  <text x="905.0" y="351.0" text-anchor="middle" class="node-title" font-size="18.0">FAILED</text>
+  <text x="905.0" y="373.0" text-anchor="middle" class="node-sub">不可重试或耗尽</text>
+  </g>
+  <g id="node-canceled" data-graph-role="node" data-node-id="canceled" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="105,310,285,392">
+  <rect x="105.0" y="310.0" width="180.0" height="82.0" rx="10.0" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.8"/>
+  <text x="195.0" y="351.0" text-anchor="middle" class="node-title" font-size="18.0">CANCELED</text>
+  <text x="195.0" y="373.0" text-anchor="middle" class="node-sub">仅等待态可取消</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="50" y="441" width="312.96" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="60.0" y1="455.0" x2="90.0" y2="455.0" stroke="#7c3aed" stroke-width="2.4" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="100.0" y="459.0" class="legend">调度/状态控制</text>
+    <line data-graph-role="decoration" x1="206.96" y1="455.0" x2="236.96" y2="455.0" stroke="#10b981" stroke-width="2.4" marker-end="url(#arrowB)"/>
+    <text data-graph-role="decoration" x="246.96" y="459.0" class="legend">文件与成功元数据</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="780,443,1158,459">
+  <text x="780.0" y="455.0" class="footnote">Fireworks Tech Graph · Style 1 · export task lifecycle</text>
+  </g>
+</svg>

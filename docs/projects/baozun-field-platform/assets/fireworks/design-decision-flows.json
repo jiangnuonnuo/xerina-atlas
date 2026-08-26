@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1400,
+  "height": 700,
+  "title": "四条关键方案的演进路线",
+  "subtitle": "每条路线都从低成本验证进入可审计、可恢复的正式工程链路。",
+  "nodes": [
+    { "id": "capture-a", "kind": "rect", "x": 90, "y": 120, "width": 280, "height": 82, "label": "逐节点录入", "sublabel": "准确 · 效率低", "fill": "#f8fafc", "stroke": "#94a3b8", "flat": true },
+    { "id": "capture-b", "kind": "rect", "x": 560, "y": 120, "width": 280, "height": 82, "label": "Easy Copy DOM", "sublabel": "验证局部 DOM 路线", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "capture-c", "kind": "double_rect", "x": 1030, "y": 120, "width": 280, "height": 82, "label": "DOM-SCOUT 定制", "sublabel": "多选 · 清洗 · 审计", "fill": "#f0fdfa", "stroke": "#2dd4bf", "flat": true },
+    { "id": "parse-a", "kind": "rect", "x": 90, "y": 260, "width": 280, "height": 82, "label": "固定模板", "sublabel": "覆盖面有限", "fill": "#f8fafc", "stroke": "#94a3b8", "flat": true },
+    { "id": "parse-b", "kind": "rect", "x": 560, "y": 260, "width": 280, "height": 82, "label": "全量模型", "sublabel": "噪声与上下文成本高", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "parse-c", "kind": "double_rect", "x": 1030, "y": 260, "width": 280, "height": 82, "label": "受限 Agent", "sublabel": "证据约束 · 后端校验", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "write-a", "kind": "rect", "x": 90, "y": 400, "width": 280, "height": 82, "label": "逐节点保存", "sublabel": "中间结果污染正式库", "fill": "#f8fafc", "stroke": "#94a3b8", "flat": true },
+    { "id": "write-b", "kind": "rect", "x": 560, "y": 400, "width": 280, "height": 82, "label": "草稿操作", "sublabel": "可编辑 · 待确认", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "write-c", "kind": "cylinder", "x": 1030, "y": 400, "width": 280, "height": 82, "label": "CatalogCommand", "sublabel": "确认后事务写入", "fill": "#eff6ff", "stroke": "#3b82f6" },
+    { "id": "deliver-a", "kind": "rect", "x": 90, "y": 540, "width": 280, "height": 82, "label": "同步响应", "sublabel": "占用 HTTP 与数据库资源", "fill": "#f8fafc", "stroke": "#94a3b8", "flat": true },
+    { "id": "deliver-b", "kind": "rect", "x": 560, "y": 540, "width": 280, "height": 82, "label": "异步任务", "sublabel": "状态可恢复", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "deliver-c", "kind": "document", "x": 1030, "y": 540, "width": 280, "height": 82, "label": "分阶段工作区", "sublabel": "快照 · SQLite · XLSX", "fill": "#f0fdf4", "stroke": "#4ade80" }
+  ],
+  "arrows": [
+    { "id": "capture-a-b", "source": "capture-a", "target": "capture-b", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "capture-b-c", "source": "capture-b", "target": "capture-c", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "parse-a-b", "source": "parse-a", "target": "parse-b", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "parse-b-c", "source": "parse-b", "target": "parse-c", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "write-a-b", "source": "write-a", "target": "write-b", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "write-b-c", "source": "write-b", "target": "write-c", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "deliver-a-b", "source": "deliver-a", "target": "deliver-b", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "deliver-b-c", "source": "deliver-b", "target": "deliver-c", "source_port": "right", "target_port": "left", "flow": "write" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 90,
+  "legend_y": 60,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "方案演进与候选数据" },
+    { "flow": "write", "label": "进入正式事务或交付" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · design decision flows",
+  "footer_x": 960,
+  "footer_y": 680
+}

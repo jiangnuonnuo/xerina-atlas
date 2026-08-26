@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 760,
+  "title": "字段治理交互工作台状态边界",
+  "subtitle": "树查询、草稿确认、证据观察和导出任务共享一个工作台，但事实来源各自独立。",
+  "containers": [
+    { "id": "browser", "x": 40, "y": 100, "width": 1120, "height": 170, "label": "Browser / Workbench UI", "header_prefix": "01" },
+    { "id": "services", "x": 40, "y": 320, "width": 1120, "height": 170, "label": "REST + SSE / Application Services", "header_prefix": "02" },
+    { "id": "state", "x": 40, "y": 540, "width": 1120, "height": 140, "label": "Server State / Source of Truth", "header_prefix": "03" }
+  ],
+  "nodes": [
+    { "id": "tree-ui", "kind": "rect", "x": 70, "y": 150, "width": 210, "height": 82, "label": "目录树面板", "sublabel": "懒加载 · 搜索 · 面包屑", "fill": "#eff6ff", "stroke": "#93c5fd", "flat": true },
+    { "id": "draft-ui", "kind": "rect", "x": 330, "y": 150, "width": 210, "height": 82, "label": "FieldTreeDraft", "sublabel": "编辑 · 差异 · 人工确认", "fill": "#faf5ff", "stroke": "#c4b5fd", "flat": true },
+    { "id": "evidence-ui", "kind": "rect", "x": 590, "y": 150, "width": 210, "height": 82, "label": "证据观察面板", "sublabel": "DomSnapshot · 告警 · SSE", "fill": "#f0fdfa", "stroke": "#99f6e4", "flat": true },
+    { "id": "task-ui", "kind": "rect", "x": 850, "y": 150, "width": 210, "height": 82, "label": "任务交付面板", "sublabel": "进度 · 失败 · 下载", "fill": "#fff7ed", "stroke": "#fdba74", "flat": true },
+    { "id": "tree-api", "kind": "rect", "x": 70, "y": 370, "width": 210, "height": 82, "label": "Catalog Query API", "sublabel": "roots / children / ancestors", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "draft-api", "kind": "double_rect", "x": 330, "y": 370, "width": 210, "height": 82, "label": "Draft API", "sublabel": "compile · validate · revise", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "event-api", "kind": "rect", "x": 590, "y": 370, "width": 210, "height": 82, "label": "Event Gateway", "sublabel": "SSE stage summaries", "fill": "#f0fdfa", "stroke": "#2dd4bf", "flat": true },
+    { "id": "task-api", "kind": "rect", "x": 850, "y": 370, "width": 210, "height": 82, "label": "Export Task API", "sublabel": "202 · poll · download", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "catalog-state", "kind": "cylinder", "x": 115, "y": 590, "width": 210, "height": 62, "label": "MySQL catalog", "sublabel": "nodes + closure", "fill": "#eff6ff", "stroke": "#3b82f6" },
+    { "id": "draft-state", "kind": "document", "x": 390, "y": 590, "width": 210, "height": 62, "label": "Draft workspace", "sublabel": "proposal + revision", "fill": "#faf5ff", "stroke": "#8b5cf6" },
+    { "id": "evidence-state", "kind": "document", "x": 665, "y": 590, "width": 210, "height": 62, "label": "Evidence store", "sublabel": "snapshot + audit", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "task-state", "kind": "cylinder", "x": 940, "y": 590, "width": 210, "height": 62, "label": "Task + file metadata", "sublabel": "status · checksum · URL", "fill": "#fff7ed", "stroke": "#f97316" }
+  ],
+  "arrows": [
+    { "id": "tree-request", "source": "tree-ui", "target": "tree-api", "source_port": "bottom", "target_port": "top", "flow": "read", "label": "keyset read" },
+    { "id": "draft-request", "source": "draft-ui", "target": "draft-api", "source_port": "bottom", "target_port": "top", "flow": "write", "label": "draft edit" },
+    { "id": "evidence-request", "source": "evidence-ui", "target": "event-api", "source_port": "bottom", "target_port": "top", "flow": "data", "label": "observe" },
+    { "id": "task-request", "source": "task-ui", "target": "task-api", "source_port": "bottom", "target_port": "top", "flow": "control", "label": "task control" },
+    { "id": "tree-storage", "source": "tree-api", "target": "catalog-state", "source_port": "bottom", "target_port": "top", "flow": "read", "label": "lightweight nodes" },
+    { "id": "draft-storage", "source": "draft-api", "target": "draft-state", "source_port": "bottom", "target_port": "top", "flow": "write", "label": "revisioned draft" },
+    { "id": "evidence-storage", "source": "event-api", "target": "evidence-state", "source_port": "bottom", "target_port": "top", "flow": "data", "label": "stage evidence" },
+    { "id": "task-storage", "source": "task-api", "target": "task-state", "source_port": "bottom", "target_port": "top", "flow": "control", "label": "task state" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 715,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "read", "label": "只读查询" },
+    { "flow": "write", "label": "草稿写入" },
+    { "flow": "data", "label": "证据/事件" },
+    { "flow": "control", "label": "任务控制" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · draft is not catalog",
+  "footer_x": 750,
+  "footer_y": 715
+}

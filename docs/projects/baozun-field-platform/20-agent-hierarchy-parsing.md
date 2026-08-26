@@ -318,9 +318,9 @@ Repair Agent 只能返回局部补丁：
 
 允许的动作包括 `SET_PARENT`、`RENAME`、`SET_TYPE`、`DROP_AMBIGUOUS_NODE` 和 `ASK_REVIEW`；不允许 `SET_LEVEL`、`SET_CHILDREN`、`WRITE_CATALOG` 或全量覆盖 JSON。
 
-修复后必须重新执行：
+修复后的重新编译和校验闭环见图：
 
-`RepairPatch → HierarchyProposal → Normalizer / Compiler → Candidate Validator`。
+![Agent 校验失败后的有限修复闭环](./assets/agent-repair-loop.svg)
 
 每个任务最多两次局部修复。超过次数后保留最后一次可编译草稿，标记 `PARTIAL` 和 `reviewRequired=true`，交给业务人员确认或重新采集 DOM。
 
@@ -353,6 +353,7 @@ SSE 断开后，前端按 `taskId + revision` 重新读取服务端草稿，不�
 4. **输出 Schema**：只允许节点自己的字段和枚举；
 5. **修复上下文**：仅在 Repair Agent 中加入 `RepairFeedback` 和问题节点。
 
+页面 HTML、标题和业务说明始终是不可信数据，不能覆盖系统规则、工具权限和输出格式。对外文档只描述 Prompt 结构和约束，不暴露公司内部具体提示词。
 
 ### 7.2 工具白名单
 

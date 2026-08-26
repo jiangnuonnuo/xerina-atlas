@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 720,
+  "title": "DOM-SCOUT 半智能字段采集架构",
+  "subtitle": "人工定界和插件清洗是主链路，自动浏览只在受限边界内提供加速。",
+  "containers": [
+    { "id": "sources", "x": 40, "y": 100, "width": 1120, "height": 160, "label": "01 · Evidence Sources", "header_prefix": "01" },
+    { "id": "adapter", "x": 40, "y": 310, "width": 1120, "height": 160, "label": "02 · Input Adapter", "header_prefix": "02" },
+    { "id": "platform", "x": 40, "y": 520, "width": 1120, "height": 120, "label": "03 · Field Platform", "header_prefix": "03" }
+  ],
+  "nodes": [
+    { "id": "manual", "kind": "rect", "x": 80, "y": 150, "width": 220, "height": 75, "label": "Field DOM Scout", "sublabel": "多选区 · 父子导航 · 预览", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "copy", "kind": "rect", "x": 345, "y": 150, "width": 220, "height": 75, "label": "Easy Copy DOM", "sublabel": "无插件降级入口", "fill": "#f0fdfa", "stroke": "#2dd4bf", "flat": true },
+    { "id": "playwright", "kind": "rect", "x": 610, "y": 150, "width": 220, "height": 75, "label": "Agent + Playwright", "sublabel": "开放页面 · 动作预算", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "stop", "kind": "hexagon", "x": 875, "y": 150, "width": 220, "height": 75, "label": "停止条件", "sublabel": "步骤 / 质量 / 风险边界", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "snapshot", "kind": "document", "x": 120, "y": 360, "width": 230, "height": 75, "label": "DomSnapshot", "sublabel": "上下文 · 简化 HTML · 结构事实", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "sanitize", "kind": "rect", "x": 485, "y": 360, "width": 230, "height": 75, "label": "Schema + 脱敏", "sublabel": "限额 · 属性白名单 · 风险预览", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "agent-input", "kind": "rect", "x": 850, "y": 360, "width": 230, "height": 75, "label": "Agent 输入工作台", "sublabel": "粘贴证据 · 业务说明 · 结果预览", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true },
+    { "id": "task", "kind": "double_rect", "x": 200, "y": 560, "width": 220, "height": 55, "label": "采集任务", "sublabel": "来源 · 审计 · 可回放", "fill": "#eff6ff", "stroke": "#3b82f6", "flat": true },
+    { "id": "evidence-store", "kind": "document", "x": 490, "y": 560, "width": 220, "height": 55, "label": "证据存储", "sublabel": "不可信页面数据", "fill": "#f0fdfa", "stroke": "#0d9488" },
+    { "id": "parse-task", "kind": "rect", "x": 780, "y": 560, "width": 220, "height": 55, "label": "解析任务", "sublabel": "交给受限 Agent", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true }
+  ],
+  "arrows": [
+    { "id": "manual-snapshot", "source": "manual", "target": "snapshot", "source_port": "bottom", "target_port": "top", "flow": "data" },
+    { "id": "copy-snapshot", "source": "copy", "target": "snapshot", "source_port": "bottom", "target_port": "top", "flow": "data" },
+    { "id": "playwright-snapshot", "source": "playwright", "target": "snapshot", "source_port": "bottom", "target_port": "top", "flow": "data" },
+    { "id": "stop-snapshot", "source": "stop", "target": "snapshot", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "id": "snapshot-sanitize", "source": "snapshot", "target": "sanitize", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "sanitize-input", "source": "sanitize", "target": "agent-input", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "snapshot-task", "source": "snapshot", "target": "task", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "id": "snapshot-store", "source": "snapshot", "target": "evidence-store", "source_port": "bottom", "target_port": "top", "flow": "write" },
+    { "id": "input-parse", "source": "agent-input", "target": "parse-task", "source_port": "bottom", "target_port": "top", "flow": "control" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 675,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "证据流" },
+    { "flow": "write", "label": "落盘与审计" },
+    { "flow": "control", "label": "任务/停止控制" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · evidence before agent",
+  "footer_x": 780,
+  "footer_y": 675
+}

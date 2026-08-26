@@ -1,5 +1,5 @@
 ---
-title: 半自动化采集
+title: 字段目录平台
 type: project
 category: engineering
 categoryLabel: 字段目录平台
@@ -33,7 +33,7 @@ layout: project-doc
 
 ## 字段目录平台
 
-> 这是一份字段目录平台的全栈技术专栏。它系统拆解 DOM-SCOUT 内部定制采集、受限 Agent 业务语义解析、交互工作台、目录树事务并发、异步字典交付和页面变化治理。
+> 这是一份字段目录平台的全栈技术专栏。它系统拆解 DOM-SCOUT 内部定制采集、受限 Agent 业务语义解析、交互工作台、目录树事务并发、数据库并发和异步 XLSX 字典交付。
 
 ---
 
@@ -51,9 +51,7 @@ layout: project-doc
 - **[20 · 受限 Agent 层级解析](/projects/baozun-field-platform/20-agent-hierarchy-parsing)**：Agent 怎么把证据变成可验收的候选字段树。
 - **[25 · 字段治理交互工作台](/projects/baozun-field-platform/25-full-stack-workbench)**：采集、解析、目录审核和导出任务如何形成统一交互闭环。
 - **[30 · 平台字段目录结构治理](/projects/baozun-field-platform/30-platform-field-structure-management)**：目录树不变量、生命周期与一致性。
-- **[40 · 字段字典数据交付](/projects/baozun-field-platform/40-field-dictionary-data-delivery)**：从快照到异步导出与原子交付。
-- **[50 · 采集与变更治理](/projects/baozun-field-platform/50-collection-and-change-governance)**：再采集、变化集与业务人员审核。
-- **[60 · 可靠性、安全与评估](/projects/baozun-field-platform/60-reliability-security-and-evaluation)**：横切能力与边界。
+- **[40 · 数据库并发与 XLSX 字典交付](/projects/baozun-field-platform/40-field-dictionary-data-delivery)**：从数据库快照到异步导出、原子交付与高并发边界。
 
 ---
 
@@ -67,9 +65,7 @@ layout: project-doc
 | [20 · 受限 Agent 层级解析](/projects/baozun-field-platform/20-agent-hierarchy-parsing) | 解析编排、提示、反馈 | 可验收的候选字段树 |
 | [25 · 字段治理交互工作台](/projects/baozun-field-platform/25-full-stack-workbench) | 采集、解析、审核、目录和导出交互 | 一条完整的前后端状态链路 |
 | [30 · 平台字段目录结构治理](/projects/baozun-field-platform/30-platform-field-structure-management) | 树不变量、生命周期、一致性 | 目录结构的"地基" |
-| [40 · 字段字典数据交付](/projects/baozun-field-platform/40-field-dictionary-data-delivery) | 快照、导出、原子交付 | 可复现的交付物 |
-| [50 · 采集与变更治理](/projects/baozun-field-platform/50-collection-and-change-governance) | 再采集、变化集、审核 | 目录如何"长青" |
-| [60 · 可靠性、安全与评估](/projects/baozun-field-platform/60-reliability-security-and-evaluation) | 可靠性、安全、评估 | 工程化的边界意识 |
+| [40 · 数据库并发与 XLSX 字典交付](/projects/baozun-field-platform/40-field-dictionary-data-delivery) | 数据库并发、快照、XLSX、原子交付 | 不影响采集的可复现交付物 |
 
 ---
 
@@ -79,19 +75,16 @@ layout: project-doc
   title="字段目录平台端到端全景"
   src="/media/projects/baozun-field-platform/diagrams/platform-overview/index.html?embed=1"
   poster="/media/projects/baozun-field-platform/diagrams/platform-overview/preview.png"
-  description="从字段采集、层级解析、目录治理、字典交付到变更审核的闭环能力地图。"
+  description="从字段采集、层级解析、草稿确认、目录治理到字典交付的闭环能力地图。"
 />
 
 ---
 
 ## 建议阅读顺序
 
-建议按这个顺序读：
+建议先阅读项目总纲和 01 章，再按图进入采集、解析、工作台、目录治理和交付。
 
-1. **00 → 01**：先理解项目目标、职责、边界与术语。
-2. **30 → 40**：优先吃透目录治理和字段字典交付。
-3. **10 → 20**：再理解字段证据、确定性解析和受限 Agent。
-4. **50 → 60**：最后补齐变化发布、评估、安全与运维闭环。
+![技术文章阅读顺序](./assets/reading-sequence.svg)
 
 ---
 

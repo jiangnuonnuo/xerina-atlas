@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "mode": "data-flow",
+  "template_type": "data-flow",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 440,
+  "title": "DOM-SCOUT 选区到模型输入的数据链路",
+  "subtitle": "插件缩小噪声和数据风险，输入适配层再校验，模型只看到简化快照。",
+  "nodes": [
+    { "id": "region", "kind": "rect", "x": 30, "y": 170, "width": 150, "height": 82, "label": "选区证据", "sublabel": "多选区 · 页面状态", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "clean", "kind": "rect", "x": 205, "y": 170, "width": 150, "height": 82, "label": "客户端清洗", "sublabel": "删噪 · 重叠归一", "fill": "#f0fdfa", "stroke": "#2dd4bf", "flat": true },
+    { "id": "mask", "kind": "rect", "x": 380, "y": 170, "width": 150, "height": 82, "label": "值预掩码", "sublabel": "Cookie · Token · 查询参数", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "facts", "kind": "rect", "x": 555, "y": 170, "width": 150, "height": 82, "label": "结构事实", "sublabel": "label · ARIA · 表头", "fill": "#f0fdfa", "stroke": "#14b8a6", "flat": true },
+    { "id": "snapshot", "kind": "document", "x": 730, "y": 170, "width": 150, "height": 82, "label": "DomSnapshot", "sublabel": "nodeId · hash · 来源", "fill": "#faf5ff", "stroke": "#a78bfa" },
+    { "id": "schema", "kind": "double_rect", "x": 905, "y": 170, "width": 150, "height": 82, "label": "输入复核", "sublabel": "Schema · 限额 · 预览", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "agent", "kind": "rect", "x": 1080, "y": 170, "width": 100, "height": 82, "label": "Agent", "sublabel": "仅看标准快照", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true }
+  ],
+  "arrows": [
+    { "id": "region-clean", "source": "region", "target": "clean", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "clean-mask", "source": "clean", "target": "mask", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "mask-facts", "source": "mask", "target": "facts", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "facts-snapshot", "source": "facts", "target": "snapshot", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "snapshot-schema", "source": "snapshot", "target": "schema", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "schema-agent", "source": "schema", "target": "agent", "source_port": "right", "target_port": "left", "flow": "data" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 60,
+  "legend_y": 355,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "净化后的证据" },
+    { "flow": "control", "label": "契约与风险校验" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · sanitized DOM fragment",
+  "footer_x": 760,
+  "footer_y": 355
+}

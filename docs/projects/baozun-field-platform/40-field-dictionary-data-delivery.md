@@ -1,65 +1,157 @@
 ---
-title: 40 · 字段字典数据交付
+title: 40 · 数据库并发与 XLSX 字典交付
 type: project-chapter
 project: baozun-field-platform
 order: 40
-group: 数据交付
-description: 从一致性快照到异步导出，再到原子交付的全过程。
+group: 数据与并发
+description: 从 MySQL 一致性快照、SQLite 阶段工作区到 Apache POI 流式 XLSX 和原子文件交付，说明导出如何与采集、目录写入并行而互不阻塞。
 layout: project-doc
 ---
 
-## 字段字典数据交付
+## 数据库并发与 XLSX 字典交付
 
-> 目录是"内部资产"，字典是"对外交付物"。这一节讲从一致性快照到异步导出，再到原子交付的全过程。
+![导出与数据库并发边界](./assets/export-xlsx-pipeline.svg)
 
----
+## 1. 设计目标和不可变事实
 
-## 从快照到产物
+导出必须同时满足以下约束：
 
-字段字典不能直接从"正在写的目录"导出，要从**一致性快照**导出：
+- 导出结果对应一个明确的 `platform.tree_version`，同一任务内不能混读不同时间点的节点；
+- 创建导出任务只登记意图并返回 `202 Accepted`，不能在请求线程同步扫描 MySQL 或生成工作簿；
+- MySQL 只承担短暂、受保护的只读快照读取，不能持有目录写锁；
+- 采集任务、解析任务和目录写入使用自己的事务与线程资源，不因 XLSX 磁盘处理被排队；
+- 本地清洗和工作簿写入可以失败、重试、恢复，不能要求再次占用 MySQL 长事务；
+- 文件未完整写入、校验或提交前，下载接口不能暴露半成品；
+- 任务状态、文件元数据和实际文件必须可以相互核对，清理文件不能抹掉任务历史。
 
-- 快照冻结某一时刻的目录状态；
-- 导出基于快照，不阻塞写入；
-- 快照之间可比对，支撑变更集。
 
-<InteractiveDiagram
-  title="字段字典从快照到正式产物的流水线"
-  src="/media/projects/baozun-field-platform/diagrams/delivery-pipeline/index.html?embed=1"
-  poster="/media/projects/baozun-field-platform/diagrams/delivery-pipeline/preview.png"
-  description="一致性快照、检查点、流式写入与原子提交。"
-/>
+## 2. 数据库表和职责
 
-## 异步导出任务
+| 表 | 关键职责 | 并发相关字段/索引 |
+| --- | --- | --- |
+| `platforms` | 平台身份、启停和快照版本 | `code` 唯一；`tree_version`；列表索引 |
+| `catalog_nodes` | 目录轻量节点 | `(platform_id,parent_id,deleted,sort_order,id)` 直接子节点索引；树扫描索引 |
+| `catalog_node_details` | URL、定位器和字段定义 | `node_id` 主键；树读取不联表 |
+| `catalog_node_closure` | 祖先、后代和深度 | 祖先/后代双向索引；导出基线不修改它 |
+| `export_tasks` | 对外任务、状态、进度和重试 | `task_id` 唯一；`(status,next_run_at,id)` 调度索引 |
+| `export_task_details` | 文件位置、大小、校验和、保留期 | `task_id` 主键；存储位置唯一；清理索引 |
 
-导出是独立任务，不是同步返回：
+目录和任务表都使用逻辑外键，不在当前 schema 建立物理 `FOREIGN KEY`。服务层在事务中校验平台、节点和任务归属，巡检任务负责发现跨表孤儿。任务表的内部自增 `id` 只用于数据库排序，接口和未来消息关联使用 32 位无横线 `task_id`，避免把内部序列暴露给调用方。
 
-- 从快照**流式写入**字典文件 / 表；
-- 状态可查：待执行 / 执行中 / 完成 / 失败；
-- 失败可重试，从断点续传；
-- 多消费方各自订阅自己的导出。
+## 3. 导出任务创建和数据库幂等
 
-## 导出任务的生命周期
+### 3.1 请求只做准入和登记
 
-导出任务有明确生命周期，便于观测与干预：
+导出请求校验任务类型：`FULL_EXPORT` 不允许携带 `platformId`；`PLATFORM_EXPORT` 必须指向启用且未删除的平台。通过权限、平台存在性和容量准入后，事务写入 `export_tasks` 与 `export_task_details`，预分配稳定的存储 key：
 
-- **待执行**：已创建，等待资源；
-- **执行中**：流式写入中；
-- **等待重试**：遇到可恢复系统错误，并记录下一次执行时间；
-- **成功 / 失败 / 取消**：终态。
+```text
+<taskId>/field-dictionary.xlsx
+```
 
-<InteractiveDiagram
-  title="字段字典导出任务的生命周期"
-  src="/media/projects/baozun-field-platform/diagrams/export-task-lifecycle/index.html?embed=1"
-  poster="/media/projects/baozun-field-platform/diagrams/export-task-lifecycle/preview.png"
-  description="待执行、执行中、等待重试、成功、失败、取消。"
-/>
+随后立即返回任务编号、状态 `PENDING` 和查询地址。中文文件名只作为展示元数据，实际存储路径使用安全的任务编号，避免路径穿越和同名覆盖。
 
-## 原子交付
+### 3.2 `Idempotency-Key`
 
-最终交付要**原子**：消费方要么看到完整新版本，要么看到旧版本，不能看到半成品。
+幂等键最大 128 个字符。当前实现用“创建人 + 分隔符 + 幂等键”的 SHA-256 前 16 字节生成确定性任务编号：
 
-- 写入目标先落"临时区"；
-- 全部成功后**一次性切换**版本指针；
-- 切换失败可回滚到上一版本。
+- 相同创建人、相同幂等键和相同命令返回原任务；
+- 相同幂等键但任务类型、平台或其他命令不一致，返回 `EXPORT_IDEMPOTENCY_CONFLICT`；
+- 没有幂等键时生成随机任务编号，并以数据库唯一索引冲突为依据有限重试。
 
-> 一句话收尾：交付的难点不在"生成字典"，而在"生成可复现、可回滚、可信任的字典"。
+幂等键解决的是重复点击、网络超时重试和重复消息，不等于任务执行锁。执行锁由状态条件更新解决。
+
+## 4. 任务状态机、领取和恢复
+
+### 4.1 状态转换
+
+状态转换和终态边界见图：
+
+![导出任务状态机](./assets/export-task-state-machine.svg)
+
+`PENDING` 和 `RETRYING` 由调度器扫描；执行器以条件更新原子领取：只有状态仍是可执行状态且 `next_run_at <= startedAt` 时，单个执行器才能改为 `RUNNING`。重复投递即使进入多个线程，也只有一个更新成功；未领取成功的线程直接退出。
+
+进度更新只接受 `RUNNING` 任务，并用单调更新避免旧线程把计数写回较小值。当前进度更新按时间和最小步长节流，配置基线为 2 秒或 5000 行；进度更新失败只记录告警，不改变最终成功/失败判断。
+
+### 4.2 调度、重试和中断恢复
+
+调度器启动时把超过恢复阈值仍为 `RUNNING` 的任务改为 `RETRYING`，随后每 2 分钟按 `next_run_at、id` 扫描 `PENDING/RETRYING` 任务，批量投递到本地有界执行器。当前执行器为 2 个工作线程、队列 4；队列满时不丢任务，任务继续留在数据库，等待下一轮扫描。
+
+可恢复的 IO、连接或临时资源错误进入重试，最多 3 次，使用配置的指数退避（初始 5 秒、上限 60 秒）；输入不存在、工作簿超过 Excel 行数、结构数据不可修复等业务错误直接 `FAILED`。成功、最终失败或取消都清理临时工作区；重试优先复用已经提交的 SQLite 快照和 `rows/*.bin`，避免重复占用 MySQL。
+
+当前调度器是单实例本地实现。多实例部署仍可依赖 `tryMarkRunning` 避免同一任务重复执行，但需要消息队列、数据库租约或分布式调度补足“谁负责扫描、租约多久、实例宕机如何接管”等问题。
+
+## 5. MySQL 一致性快照：不影响采集和目录写入
+
+### 5.1 读取边界
+
+`MySqlExportSourceReader` 在 `readOnly=true、REPEATABLE_READ` 事务中读取平台和节点。先读取平台 `id、name、sort_order、tree_version`，再按稳定顺序通过 MyBatis forward-only cursor 逐个平台读取节点，节点顺序为 `node_level、parent_id、sort_order、id`。每批默认 1000 行，写入本地快照后继续读取。
+
+这是非锁定一致性读：导出不执行 `FOR UPDATE`，不锁住目录节点，采集或人工目录写入可以在导出进行时继续提交。导出看到的是事务建立时的一致性视图；之后发生的采集结果、草稿确认或目录修改进入下一次导出，不会半路改变本次任务的源数据。
+
+### 5.2 为什么不会把连接拖垮
+
+一致性快照仍会长时间占用一个 MySQL 连接，并可能延长 InnoDB undo 清理压力，因此不能把“无写锁”误认为“没有成本”。当前通过四道限制控制影响：
+
+1. 导出任务在后台执行，不占用采集 HTTP 请求线程；
+2. MySQL 源读取信号量当前最多允许 1 个任务同时持有快照；
+3. Hikari 连接池配置上限为 12、最小空闲 4，导出不能吞掉全部连接；
+4. 快照事务超时基线为 600 秒，获取信号量和读取超时都必须快速转为可识别失败。
+
+MySQL URL 启用 `useServerPrepStmts=true、useCursorFetch=true、defaultFetchSize=1000`，避免把全量节点加载到 JDBC 或 JVM 内存。源读取完成并提交本地快照后立即释放连接，SQLite、映射和 POI 阶段不再持有 MySQL 事务。
+
+### 5.3 采集链路的隔离
+
+采集端产生 `DomSnapshot`，Agent 解析产生 `HierarchyProposal/FieldTreeDraft`，人工确认后才进入目录写事务；这些操作不等待 XLSX 完成。导出只读取已经提交的正式目录，不能读取未确认草稿，也不能把导出进度写回目录节点表。这样采集继续产生证据、目录继续接受确认，导出只得到明确版本的可复现交付物。
+
+## 6. SQLite 阶段工作区和恢复协议
+
+### 6.1 快照文件
+
+源数据先写 `snapshot.db.part`，SQLite 使用 `journal_mode=DELETE、synchronous=NORMAL、temp_store=FILE、cache_size=-32768`，表至少包括 `snapshot_platforms` 和 `snapshot_nodes` 及平台/节点查询索引。写入完成后关闭 writer，并通过原子移动发布为 `snapshot.db`，再原子写入 `manifest.json`，阶段标记为 `SNAPSHOT_READY`。
+
+发布前的 `.part` 文件不参与后续阶段。进程中断后只删除或覆盖未完成的临时文件；发现已发布 manifest 时可以从快照继续，不必重新开启 MySQL 一致性事务。
+
+### 6.2 本地 DFS 清洗
+
+本地阶段先按平台统计源节点、有效路径节点和叶子行，再为平台创建流式映射器。平台名称为空的平台单独隔离并记录告警，不让它污染其他平台的路径列。
+
+有效树从 `parent_id IS NULL、node_level=1、TRIM(name) <> ''` 的根开始递归；子节点必须满足父级存在、层级连续且名称非空。遇到不完整路径时跳过异常分支并记录 `sourceNodes、validNodes、skippedNodes、exportedRows`，不把无父级字段伪装成根字段。DFS 只保留当前路径，不把整棵嵌套树复制到 JVM；叶节点转换成 `FieldDictionaryRowModel`，以 `DataOutputStream` 写入 `rows/<platformId>.bin`。
+
+所有平台行文件生成并校验数量后，manifest 进入 `ROWS_READY`。本地清洗和 POI 写入共用本地处理信号量，当前最多 1 个本地重处理阶段，避免 SQLite 文件和临时 XLSX 同时产生不可控磁盘压力。
+
+## 7. XLSX 生成的实现细节
+
+### 7.1 流式工作簿
+
+工作簿使用 Apache POI `SXSSFWorkbook(null, 100, true, true)`，内存窗口保留 100 行，行文件按平台顺序读取，不把所有结果加载到内存。输出先写入 `output/field-dictionary.xlsx.part`，工作簿关闭时回收 POI 临时文件。
+
+
+### 7.2 行数和内容安全
+
+Excel 2007 单表上限由 `SpreadsheetVersion.EXCEL2007.getLastRowIndex()` 校验，数据行加表头超过上限时抛出不可重试的工作簿容量错误。每个叶子结果只生成一行；源节点数、有效路径节点数、映射行数和最终写入行数在阶段间比对，不一致则任务失败，不能交付部分文件。
+
+值全部按字符串写入，避免以 `=、+、-、@` 开头的业务文本被 Excel 当成公式执行。工作簿不负责公式计算和外部链接；列宽、自动筛选和中文表头是交付格式，字段类型/角色等空列在后续映射实现前保持明确为空。
+
+## 8. 原子文件提交和下载
+
+文件阶段检查以下条件：路径在工作区允许范围内、文件是普通文件、大小大于零、SHA-256 已计算。然后把 `.part` 文件原子移动到 `<bucket>/<taskId>/field-dictionary.xlsx`，写入 `export_task_details` 的 storage key、文件名、大小、内容类型、etag/sha256 和上传时间，最后才把 `export_tasks.status` 更新为 `SUCCESS`。
+
+下载接口必须同时满足：任务属于当前调用方权限范围、状态为 `SUCCESS`、`uploaded_at` 非空、`file_deleted=0`、实际文件存在且大小与元数据一致。任一条件失败都不返回文件；原子移动不受支持时只能使用受控替换移动，并确保成功元数据提交前不会暴露 final key。
+
+保留策略每日按 Asia/Shanghai 执行，当前文件保留 7 天；临时工作区每小时清理，TTL 为 24 小时。清理只删除物理文件并设置 `file_deleted/file_deleted_at`，保留任务状态、失败原因、校验和和审计信息，便于历史查询。
+
+## 9. 数据库操作的并发矩阵
+
+| 操作 | 事务/锁 | 是否影响采集 | 失败处理 |
+| --- | --- | --- | --- |
+| 创建导出任务 | 短事务写任务和详情；唯一键兜底幂等 | 否 | 冲突返回稳定错误 |
+| 领取任务 | 条件更新将 `PENDING/RETRYING` 领取为 `RUNNING` | 否 | 未领取线程退出 |
+| 更新进度 | 仅更新 RUNNING，单调合并并节流 | 否 | 告警，最终状态不受影响 |
+| 读取导出源 | MySQL RR 非锁定快照；一个 permit | 只占一个读连接，不阻塞写入 | 超时/连接错误按重试策略处理 |
+| 目录结构写 | 30 章的 READ COMMITTED、稳定锁序、CAS | 导出不持有写锁 | 死锁/结构变化有限重试 |
+| 提交文件元数据 | 文件校验后短事务写详情/终态 | 否 | 文件不完整则不成功 |
+| 保留期清理 | 按任务详情条件更新/删除文件 | 否 | 单文件失败不阻断下一批 |
+
+数据库连接池、Tomcat 线程池、导出本地执行器和源读取信号量必须分别限流。不能通过把连接池调大来解决磁盘写慢，也不能通过增加导出线程来绕过 MySQL 快照 permit；容量瓶颈必须在正确的资源边界上排队。
+
+> 可信交付的关键不是把 XLSX 尽快写出来，而是让数据库快照、任务状态、本地阶段文件、工作簿内容和最终下载元数据形成一条可验证的链；这条链建立后，采集、目录维护和导出才能在高并发下各自推进而不互相污染。

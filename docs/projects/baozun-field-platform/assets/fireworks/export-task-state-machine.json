@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 520,
+  "title": "导出任务状态机",
+  "subtitle": "任务领取、重试、取消和终态均由数据库状态条件更新约束。",
+  "nodes": [
+    { "id": "pending", "kind": "rect", "x": 105, "y": 120, "width": 180, "height": 82, "label": "PENDING", "sublabel": "等待调度", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "running", "kind": "double_rect", "x": 405, "y": 120, "width": 180, "height": 82, "label": "RUNNING", "sublabel": "单执行器领取", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "success", "kind": "document", "x": 815, "y": 80, "width": 180, "height": 82, "label": "SUCCESS", "sublabel": "文件已提交", "fill": "#f0fdf4", "stroke": "#4ade80" },
+    { "id": "retrying", "kind": "rect", "x": 405, "y": 310, "width": 180, "height": 82, "label": "RETRYING", "sublabel": "指数退避", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "failed", "kind": "rect", "x": 815, "y": 310, "width": 180, "height": 82, "label": "FAILED", "sublabel": "不可重试或耗尽", "fill": "#fef2f2", "stroke": "#f87171", "flat": true },
+    { "id": "canceled", "kind": "rect", "x": 105, "y": 310, "width": 180, "height": 82, "label": "CANCELED", "sublabel": "仅等待态可取消", "fill": "#f3f4f6", "stroke": "#9ca3af", "flat": true }
+  ],
+  "arrows": [
+    { "id": "pending-running", "source": "pending", "target": "running", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "running-success", "source": "running", "target": "success", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "running-retrying", "source": "running", "target": "retrying", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "id": "retrying-running", "source": "retrying", "target": "running", "source_port": "top", "target_port": "bottom", "flow": "control", "corridor_x": [650] },
+    { "id": "pending-canceled", "source": "pending", "target": "canceled", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "id": "retrying-failed", "source": "retrying", "target": "failed", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "running-failed", "source": "running", "target": "failed", "source_port": "bottom", "target_port": "top", "flow": "control", "corridor_x": [700] }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 60,
+  "legend_y": 455,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "control", "label": "调度/状态控制" },
+    { "flow": "write", "label": "文件与成功元数据" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · export task lifecycle",
+  "footer_x": 780,
+  "footer_y": 455
+}

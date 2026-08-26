@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 430,
+  "title": "拖拽移动与乐观更新",
+  "subtitle": "浏览器只提交移动意图，结构合法性和版本冲突由服务端决定。",
+  "nodes": [
+    { "id": "start", "kind": "rect", "x": 40, "y": 170, "width": 150, "height": 82, "label": "拖拽开始", "sublabel": "记录 nodeId", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "snapshot", "kind": "document", "x": 220, "y": 170, "width": 150, "height": 82, "label": "原父级快照", "sublabel": "parent · order · version", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "preview", "kind": "rect", "x": 400, "y": 170, "width": 150, "height": 82, "label": "本地预览", "sublabel": "显示目标位置", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "intent", "kind": "double_rect", "x": 580, "y": 170, "width": 150, "height": 82, "label": "提交意图", "sublabel": "nodeId + parentId + 基线", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "server", "kind": "hexagon", "x": 760, "y": 170, "width": 150, "height": 82, "label": "服务端校验", "sublabel": "CAS · 无环 · 闭包", "fill": "#eff6ff", "stroke": "#3b82f6", "flat": true },
+    { "id": "success", "kind": "rect", "x": 940, "y": 105, "width": 150, "height": 82, "label": "成功刷新", "sublabel": "新版本 · 新分支", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true },
+    { "id": "conflict", "kind": "rect", "x": 940, "y": 235, "width": 150, "height": 82, "label": "冲突回滚", "sublabel": "重载分支 · 人工选择", "fill": "#fef2f2", "stroke": "#f87171", "flat": true }
+  ],
+  "arrows": [
+    { "id": "start-snapshot", "source": "start", "target": "snapshot", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "snapshot-preview", "source": "snapshot", "target": "preview", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "preview-intent", "source": "preview", "target": "intent", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "intent-server", "source": "intent", "target": "server", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "server-success", "source": "server", "target": "success", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "server-conflict", "source": "server", "target": "conflict", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "conflict-snapshot", "source": "conflict", "target": "snapshot", "source_port": "left", "target_port": "bottom", "flow": "read" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 60,
+  "legend_y": 365,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "control", "label": "浏览器交互状态" },
+    { "flow": "data", "label": "回滚快照" },
+    { "flow": "write", "label": "正式命令" },
+    { "flow": "read", "label": "冲突后重新读取" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · intent before mutation",
+  "footer_x": 760,
+  "footer_y": 365
+}

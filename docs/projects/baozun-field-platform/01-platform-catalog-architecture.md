@@ -64,7 +64,7 @@ Easy Copy DOM 能完成“点选一个节点并复制 `outerHTML`”，适合低
 主方案因此升级为 **DOM-SCOUT + 内部字段证据适配层**。DOM-SCOUT 提供可视化高亮、多选、父子级导航、结构化格式、可访问性摘要、定位器指纹和 Token 预估；内部定制层负责字段场景专用格式、敏感值预清洗、页面上下文和 Agent 输入归一。内部 Agent 仍负责字段含义与业务层级，插件不做业务语义判断。
 
 <InteractiveDiagram
-  title="采集方案演进：固定输入 → DOM-SCOUT 业务证据采集器"
+  title="采集方案演进：固定输入与 DOM-SCOUT 业务证据采集器"
   src="/media/projects/baozun-field-platform/diagrams/strategy-pivot/index.html?embed=1"
   poster="/media/projects/baozun-field-platform/diagrams/strategy-pivot/preview.png"
   description="从固定输入、Agent + Playwright 全量探索、Easy Copy DOM 验证，演进到 DOM-SCOUT 内部定制采集与 Agent 语义解析。"
