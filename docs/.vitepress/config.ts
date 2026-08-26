@@ -41,7 +41,7 @@ export default defineConfig({
   ignoreDeadLinks: false,
   head: [
     ['meta', { name: 'theme-color', content: '#f7fafc' }],
-    ['link', { rel: 'icon', href: '/brand/code-mark.svg' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/brand/xerina-avatar.png' }],
   ],
   themeConfig: {
     ...teekConfig.themeConfig,

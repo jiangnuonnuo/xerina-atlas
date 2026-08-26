@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 760,
+  "title": "Agent Orchestration: DOM Evidence to FieldTreeDraft",
+  "subtitle": "fixed roles · bounded repair · backend validation · SSE confirmation",
+  "containers": [
+    { "id": "agent", "x": 40, "y": 100, "width": 1120, "height": 210, "label": "01 · AGENT PARSING" },
+    { "id": "backend", "x": 40, "y": 335, "width": 1120, "height": 175, "label": "02 · BACKEND COMPILE AND VALIDATE" },
+    { "id": "frontend", "x": 40, "y": 555, "width": 1120, "height": 135, "label": "03 · FRONTEND CONFIRMATION" }
+  ],
+  "nodes": [
+    { "id": "snapshot", "kind": "document", "x": 60, "y": 150, "width": 160, "height": 68, "type_label": "INPUT", "label": "DomSnapshot", "sublabel": "cleaned HTML + facts", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "evidence", "kind": "double_rect", "x": 250, "y": 150, "width": 180, "height": 68, "type_label": "AGENT 1", "label": "二次取证", "sublabel": "EvidencePack", "fill": "#faf5ff", "stroke": "#c084fc" },
+    { "id": "hierarchy", "kind": "double_rect", "x": 460, "y": 150, "width": 180, "height": 68, "type_label": "AGENT 2", "label": "层级分析", "sublabel": "parentProposalId", "fill": "#faf5ff", "stroke": "#a78bfa" },
+    { "id": "semantics", "kind": "double_rect", "x": 670, "y": 150, "width": 180, "height": 68, "type_label": "AGENT 3", "label": "命名 / 类型", "sublabel": "semantic proposal", "fill": "#faf5ff", "stroke": "#c084fc" },
+    { "id": "reflection", "kind": "double_rect", "x": 880, "y": 150, "width": 180, "height": 68, "type_label": "AGENT 4", "label": "反思", "sublabel": "pass / issue", "fill": "#fff7ed", "stroke": "#fb923c" },
+    { "id": "proposal", "kind": "double_rect", "x": 470, "y": 235, "width": 220, "height": 68, "type_label": "AGENT OUTPUT", "label": "HierarchyProposal", "sublabel": "not a UI tree", "fill": "#fff7ed", "stroke": "#f59e0b" },
+    { "id": "compiler", "kind": "double_rect", "x": 250, "y": 390, "width": 220, "height": 68, "type_label": "BACKEND", "label": "Normalizer / Compiler", "sublabel": "FieldTreeDraft", "fill": "#f0fdfa", "stroke": "#2dd4bf" },
+    { "id": "validator", "kind": "double_rect", "x": 530, "y": 390, "width": 200, "height": 68, "type_label": "BACKEND", "label": "Candidate Validator", "sublabel": "contract + tree rules", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "gate", "kind": "hexagon", "x": 790, "y": 390, "width": 160, "height": 68, "type_label": "GATE", "label": "校验通过？", "sublabel": "pass / issue", "fill": "#fff7ed", "stroke": "#f59e0b", "flat": true },
+    { "id": "repair", "kind": "double_rect", "x": 1000, "y": 390, "width": 140, "height": 68, "type_label": "REACT", "label": "局部修复", "sublabel": "bounded patch", "fill": "#fff7ed", "stroke": "#f97316" },
+    { "id": "tree_draft", "kind": "speech", "x": 490, "y": 590, "width": 220, "height": 68, "type_label": "SSE OUTPUT", "label": "FieldTreeDraft", "sublabel": "manual renderer + confirm", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true }
+  ],
+  "arrows": [
+    { "id": "snapshot-evidence", "source": "snapshot", "target": "evidence", "source_port": "right", "target_port": "left", "flow": "read" },
+    { "id": "evidence-hierarchy", "source": "evidence", "target": "hierarchy", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "hierarchy-semantics", "source": "hierarchy", "target": "semantics", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "semantics-reflection", "source": "semantics", "target": "reflection", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "reflection-proposal", "source": "reflection", "target": "proposal", "source_port": "bottom", "target_port": "top", "flow": "data" },
+    { "id": "reflection-repair", "source": "reflection", "target": "repair", "source_port": "bottom", "target_port": "top", "flow": "feedback" },
+    { "id": "proposal-compiler", "source": "proposal", "target": "compiler", "source_port": "bottom", "target_port": "top", "flow": "data" },
+    { "id": "compiler-validator", "source": "compiler", "target": "validator", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "validator-gate", "source": "validator", "target": "gate", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "gate-tree-draft", "source": "gate", "target": "tree_draft", "source_port": "bottom", "target_port": "top", "flow": "write" },
+    { "id": "gate-repair", "source": "gate", "target": "repair", "source_port": "right", "target_port": "left", "flow": "feedback" },
+    { "id": "repair-proposal", "source": "repair", "target": "proposal", "source_port": "top", "target_port": "right", "flow": "feedback" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 715,
+  "legend": [
+    { "flow": "read", "label": "DOM evidence" },
+    { "flow": "data", "label": "proposal / compile" },
+    { "flow": "feedback", "label": "repair feedback" },
+    { "flow": "write", "label": "SSE tree draft" }
+  ],
+  "footer": "Agent owns semantic decisions; backend owns transitions, rendering contract and formal catalog boundary",
+  "footer_x": 48,
+  "footer_y": 745
+}

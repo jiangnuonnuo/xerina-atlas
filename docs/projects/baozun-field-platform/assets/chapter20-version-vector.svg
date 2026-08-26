@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="architecture" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="560" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">评估报告的版本与配置坐标</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">只有同时记录插件、清洗、Schema、工作流、Prompt 和模型配置，结果才可解释与回滚</text>
+<g data-graph-role="container"><rect x="48" y="104" width="500" height="270" rx="14" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2" stroke-dasharray="6 4"/><text x="70" y="132" font-size="13" fill="#6b7f95" font-weight="600">EVIDENCE PIPELINE</text></g>
+<g data-graph-role="container"><rect x="600" y="104" width="500" height="270" rx="14" fill="#f7f2ff" stroke="#c8b6df" stroke-width="1.2" stroke-dasharray="6 4"/><text x="622" y="132" font-size="13" fill="#6b7f95" font-weight="600">EXECUTION CONFIGURATION</text></g>
+<g data-graph-role="node" data-graph-bounds="78,160,268,232">
+<rect x="78" y="160" width="190" height="72" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="102" cy="185" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="102" y="189" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="126" y="190" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">pluginVersion</text>
+<text x="98" y="214" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">插件能力</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="328,160,518,232">
+<rect x="328" y="160" width="190" height="72" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="352" cy="185" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="352" y="189" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">2</text>
+<text x="376" y="190" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">cleanerVersion</text>
+<text x="348" y="214" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">清洗策略</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="78,270,268,342">
+<rect x="78" y="270" width="190" height="72" rx="14" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.5"/>
+<circle cx="102" cy="295" r="13" fill="#b7c9dc" opacity="0.18"/>
+<text x="102" y="299" font-size="11" fill="#b7c9dc" font-weight="700" text-anchor="middle">3</text>
+<text x="126" y="300" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">schemaVersion</text>
+<text x="98" y="324" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">输入输出契约</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="630,160,820,232">
+<rect x="630" y="160" width="190" height="72" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="654" cy="185" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="654" y="189" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">4</text>
+<text x="678" y="190" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">workflowVersion</text>
+<text x="650" y="214" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">节点编排</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="880,160,1070,232">
+<rect x="880" y="160" width="190" height="72" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="904" cy="185" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="904" y="189" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">5</text>
+<text x="928" y="190" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">promptVersion</text>
+<text x="900" y="214" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">规则与示例</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="755,270,945,342">
+<rect x="755" y="270" width="190" height="72" rx="14" fill="#fff4f4" stroke="#d99191" stroke-width="1.5"/>
+<circle cx="779" cy="295" r="13" fill="#d99191" opacity="0.18"/>
+<text x="779" y="299" font-size="11" fill="#d99191" font-weight="700" text-anchor="middle">6</text>
+<text x="803" y="300" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">modelConfig</text>
+<text x="775" y="324" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">模型与降级</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="420,420,780,506">
+<rect x="420" y="420" width="360" height="86" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="444" cy="445" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="444" y="449" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">Σ</text>
+<text x="468" y="450" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">可解释评估报告</text>
+<text x="440" y="488" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">定位问题 · 复现结果 · 安全回滚</text>
+</g>
+<path id="version-1" d="M173,232 V250 H300 V390 H500 V420" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="version-2" d="M423,232 V370 H550 V420" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<path id="version-3" d="M173,342 V390 H460 V420" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="version-4" d="M725,232 V370 H650 V420" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<path id="version-5" d="M975,232 V390 H700 V420" fill="none" stroke="#d8ad75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-amber)" data-graph-role="edge"/>
+<path id="version-6" d="M850,342 V390 H740 V420" fill="none" stroke="#d99191" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-red)" data-graph-role="edge"/>
+</svg>

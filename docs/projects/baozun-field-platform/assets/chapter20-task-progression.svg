@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 690" width="1200" height="690" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="690" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">一次解析任务怎样向前推进</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">节点输出先写检查点，再发布事件，最后推进下一节点；校验失败只允许一次受限修复</text>
+<g data-graph-role="node" data-graph-bounds="30,132,162,244">
+<rect x="30" y="132" width="132" height="112" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="54" cy="157" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="54" y="161" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="78" y="162" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">START</text>
+<text x="50" y="226" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">创建任务</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="198,132,330,244">
+<rect x="198" y="132" width="132" height="112" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="222" cy="157" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="222" y="161" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">2</text>
+<text x="246" y="162" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">加载快照</text>
+<text x="218" y="226" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">权威 DomSnapshot</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="366,132,498,244">
+<rect x="366" y="132" width="132" height="112" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="390" cy="157" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="390" y="161" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">3</text>
+<text x="414" y="162" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">归一证据</text>
+<text x="386" y="226" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">标准化证据图</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="534,132,666,244">
+<rect x="534" y="132" width="132" height="112" rx="14" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.5"/>
+<circle cx="558" cy="157" r="13" fill="#b7c9dc" opacity="0.18"/>
+<text x="558" y="161" font-size="11" fill="#b7c9dc" font-weight="700" text-anchor="middle">4</text>
+<text x="582" y="162" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">按业务容器切分</text>
+<text x="554" y="226" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">分段上下文</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="702,132,834,244">
+<rect x="702" y="132" width="132" height="112" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="726" cy="157" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="726" y="161" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">5</text>
+<text x="750" y="162" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">确定性抽取</text>
+<text x="722" y="226" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">事实与关系</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="870,132,1002,244">
+<rect x="870" y="132" width="132" height="112" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="894" cy="157" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="894" y="161" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">6</text>
+<text x="918" y="162" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">Prompt + Agent</text>
+<text x="890" y="226" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">语义与工具</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="1038,132,1170,244">
+<rect x="1038" y="132" width="132" height="112" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="1062" cy="157" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="1062" y="161" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">7</text>
+<text x="1086" y="162" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">合并候选</text>
+<text x="1058" y="226" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">新草稿版本</text>
+</g>
+<path id="progress-top-0" d="M162,188 H198" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="progress-top-1" d="M330,188 H366" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="progress-top-2" d="M498,188 H534" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="progress-top-3" d="M666,188 H702" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="progress-top-4" d="M834,188 H870" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<path id="progress-top-5" d="M1002,188 H1038" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<path id="progress-to-validator" d="M1104,244 V300 H600 V350" fill="none" stroke="#d8ad75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-amber)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="760" y="286" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">validate</text></g>
+<g data-graph-role="node" data-graph-bounds="450,350,750,442">
+<rect x="450" y="350" width="300" height="92" rx="14" fill="#fff4f4" stroke="#d99191" stroke-width="1.5"/>
+<circle cx="474" cy="375" r="13" fill="#d99191" opacity="0.18"/>
+<text x="474" y="379" font-size="11" fill="#d99191" font-weight="700" text-anchor="middle">8</text>
+<text x="498" y="380" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">Candidate Validator</text>
+<text x="470" y="424" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">结构质量门 + 原因码</text>
+</g>
+<path id="validator-ready" d="M500,442 V480 H220 V522" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="350" y="475" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">ready</text></g>
+<path id="validator-partial" d="M600,442 V522" fill="none" stroke="#d8ad75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-amber)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="630" y="485" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">partial</text></g>
+<path id="validator-repair" d="M700,442 V480 H980 V522" fill="none" stroke="#d99191" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-red)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="850" y="475" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">repair once</text></g>
+<g data-graph-role="node" data-graph-bounds="90,522,350,608">
+<rect x="90" y="522" width="260" height="86" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="114" cy="547" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="114" y="551" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">A</text>
+<text x="138" y="552" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">DRAFT_READY</text>
+<text x="110" y="590" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">进入预览与人工确认</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="470,522,730,608">
+<rect x="470" y="522" width="260" height="86" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="494" cy="547" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="494" y="551" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">B</text>
+<text x="518" y="552" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">PARTIAL</text>
+<text x="490" y="590" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">保留候选，补采或审核</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="850,522,1110,608">
+<rect x="850" y="522" width="260" height="86" rx="14" fill="#fff4f4" stroke="#d99191" stroke-width="1.5"/>
+<circle cx="874" cy="547" r="13" fill="#d99191" opacity="0.18"/>
+<text x="874" y="551" font-size="11" fill="#d99191" font-weight="700" text-anchor="middle">C</text>
+<text x="898" y="552" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">FAILED</text>
+<text x="870" y="590" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">修复后仍非法才终止</text>
+</g>
+<g data-graph-role="reserved" data-graph-bounds="30,620,1130,674"><rect x="30" y="620" width="1100" height="54" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="48" y="643" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">执行约束</text>
+<text x="48" y="662" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">节点只消费上游输入，检查点是恢复和幂等的事实来源。</text>
+</g>
+</svg>

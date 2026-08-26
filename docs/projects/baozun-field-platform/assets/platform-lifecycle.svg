@@ -12,11 +12,11 @@
 <text x="40" y="38" class="title">字段目录平台全链路</text>
 <text x="40" y="62" class="small muted">从页面证据到可维护目录，再到可交付字典的闭环。</text>
 <rect x="65.0" y="130" width="140" height="76" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
-<text x="135.0" y="160" text-anchor="middle" class="node">页面字段采集</text>
+<text x="135.0" y="160" text-anchor="middle" class="node">DOM-SCOUT 采证</text>
 <text x="135.0" y="181" text-anchor="middle" class="small muted">人工选区 / 自动入口</text>
 <line x1="205.0" y1="168" x2="220.0" y2="168" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="220.0" y="130" width="140" height="76" rx="10" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
-<text x="290.0" y="160" text-anchor="middle" class="node">Evidence Snapshot</text>
+<text x="290.0" y="160" text-anchor="middle" class="node">DomSnapshot</text>
 <text x="290.0" y="181" text-anchor="middle" class="small muted">统一证据契约</text>
 <line x1="360.0" y1="168" x2="375.0" y2="168" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)" data-graph-role="edge"/>
 <rect x="375.0" y="130" width="140" height="76" rx="10" fill="#faf5ff" stroke="#c084fc" stroke-width="2.2"/>
@@ -25,7 +25,7 @@
 <text x="445.0" y="181" text-anchor="middle" class="small muted">工作流 + Schema</text>
 <line x1="515.0" y1="168" x2="530.0" y2="168" stroke="#9333ea" stroke-width="2" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
 <rect x="530.0" y="130" width="140" height="76" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
-<text x="600.0" y="160" text-anchor="middle" class="node">候选树工作台</text>
+<text x="600.0" y="160" text-anchor="middle" class="node">FieldTreeDraft 工作台</text>
 <text x="600.0" y="181" text-anchor="middle" class="small muted">预览 / 修订</text>
 <line x1="670.0" y1="168" x2="685.0" y2="168" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="685.0" y="130" width="140" height="76" rx="10" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="architecture" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="420" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">字段解析链路的责任边界</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">每一层只承担自己能够证明或控制的事实，最终目录保存由独立事务边界负责</text>
+<g data-graph-role="node" data-graph-bounds="38,152,218,276">
+<rect x="38" y="152" width="180" height="124" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="62" cy="177" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="62" y="181" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="86" y="182" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">插件</text>
+<text x="58" y="242" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">选区</text>
+<text x="58" y="258" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">结构证据</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="266,152,446,276">
+<rect x="266" y="152" width="180" height="124" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="290" cy="177" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="290" y="181" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">2</text>
+<text x="314" y="182" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">规则</text>
+<text x="286" y="242" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">确定性关系</text>
+<text x="286" y="258" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">安全边界</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="494,152,674,276">
+<rect x="494" y="152" width="180" height="124" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="518" cy="177" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="518" y="181" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">3</text>
+<text x="542" y="182" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">Agent</text>
+<text x="514" y="242" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">业务语义</text>
+<text x="514" y="258" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">字段层级</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="722,152,902,276">
+<rect x="722" y="152" width="180" height="124" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="746" cy="177" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="746" y="181" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">4</text>
+<text x="770" y="182" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">业务人员</text>
+<text x="742" y="242" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">审核</text>
+<text x="742" y="258" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">修订</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="950,152,1130,276">
+<rect x="950" y="152" width="180" height="124" rx="14" fill="#fff4f4" stroke="#d99191" stroke-width="1.5"/>
+<circle cx="974" cy="177" r="13" fill="#d99191" opacity="0.18"/>
+<text x="974" y="181" font-size="11" fill="#d99191" font-weight="700" text-anchor="middle">5</text>
+<text x="998" y="182" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">目录服务</text>
+<text x="970" y="242" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">事务化</text>
+<text x="970" y="258" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">正式保存</text>
+</g>
+<path id="boundary-0" d="M218,214 H266" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="242" y="195" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">evidence</text></g>
+<path id="boundary-1" d="M446,214 H494" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="470" y="195" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">facts</text></g>
+<path id="boundary-2" d="M674,214 H722" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="698" y="195" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">draft</text></g>
+<path id="boundary-3" d="M902,214 H950" fill="none" stroke="#d8ad75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-amber)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="926" y="195" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">confirm</text></g>
+<g data-graph-role="reserved" data-graph-bounds="38,320,1130,374"><rect x="38" y="320" width="1092" height="54" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="56" y="343" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">不可越界</text>
+<text x="56" y="362" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">Agent 不直接改正式目录；业务人员确认后，目录服务才创建 CatalogCommand 并事务提交。</text>
+</g>
+</svg>

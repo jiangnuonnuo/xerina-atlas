@@ -33,7 +33,7 @@ function resumeUrl() {
   <header class="site-header">
     <div class="container nav-shell">
       <a class="brand" :href="withBase('/')" aria-label="回到 Xerina 首页">
-        <span class="brand-mark"><img :src="withBase('/brand/code-mark.svg')" alt="" /></span>
+        <span class="brand-mark"><img :src="withBase('/brand/xerina-avatar.png')" alt="" /></span>
         <span class="brand-copy">
           <strong>Xerina</strong>
           <small>ATLAS / PORTFOLIO</small>

@@ -112,18 +112,18 @@ h1, h2, h3, p { margin-top: 0; }h1, h2, h3 { color: var(--ink-strong); font-fami
 .doc-article-header { padding: 34px 48px 32px; background: linear-gradient(180deg, rgba(247, 251, 254, .96), rgba(255, 255, 255, .94)); }
 .doc-article-header .section-index { color: var(--doc-blue); }
 .doc-article-header h1 { margin-bottom: 15px; color: #173d5c; font-family: var(--doc-reading-font); font-size: clamp(42px, 5vw, 54px); font-weight: 700; letter-spacing: -.045em; line-height: 1.2; }
-.doc-article-lede { max-width: 760px; color: #5d7183; font-size: 16px; line-height: 1.9; }
+.doc-article-lede { max-width: none; color: #5d7183; font-size: 16px; line-height: 1.9; }
 .doc-article-meta { color: #7b91a3; }
 .doc-content { padding: 36px 48px 86px; }
-.doc-content > div { max-width: 1180px; }
+.doc-content > div { max-width: none; }
 .doc-content h2, .doc-content h3, .doc-content h4 { font-family: var(--doc-reading-font); }
 .doc-content h2 { position: relative; margin: 42px 0 18px; padding: 0 0 12px 16px; border-bottom: 1px solid #e4ebf0; color: #174e77; font-size: 29px; font-weight: 700; letter-spacing: -.035em; line-height: 1.42; scroll-margin-top: 170px; }
 .doc-content h2:first-child { margin-top: 0; }
 .doc-content h2::before { content: ""; position: absolute; top: .24em; bottom: .24em; left: 0; width: 4px; border-radius: 3px; background: linear-gradient(180deg, var(--doc-blue), var(--doc-teal)); }
 .doc-content h3 { margin: 32px 0 13px; color: #286c84; font-size: 21px; font-weight: 650; letter-spacing: -.02em; line-height: 1.5; scroll-margin-top: 170px; }
 .doc-content h4 { margin: 26px 0 10px; color: #3f7282; font-size: 17px; font-weight: 650; }
-.doc-content p { max-width: 72ch; margin: 0 0 1.18rem; color: #42586a; font-size: 16px; line-height: 2.02; letter-spacing: .008em; }
-.doc-content ul, .doc-content ol { max-width: 72ch; margin: 0 0 1.35rem; padding: .15rem 0 .15rem 1.45rem; color: #42586a; }
+.doc-content p { max-width: 100%; margin: 0 0 1.18rem; color: #42586a; font-size: 16px; line-height: 2.02; letter-spacing: .008em; }
+.doc-content ul, .doc-content ol { max-width: 100%; margin: 0 0 1.35rem; padding: .15rem 0 .15rem 1.45rem; color: #42586a; }
 .doc-content ul { list-style: disc; }
 .doc-content ol { list-style: decimal; }
 .doc-content li { margin: .48rem 0; padding-left: .32rem; font-size: 16px; line-height: 1.9; }
@@ -137,7 +137,7 @@ h1, h2, h3, p { margin-top: 0; }h1, h2, h3 { color: var(--ink-strong); font-fami
 .doc-content pre code { color: #e3eff7; font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; font-size: 13px; line-height: 1.85; }
 /* Shiki emits light-theme token colors inline; project docs use a dark code surface. */
 .doc-content pre code span[style*="--shiki-light"] { color: var(--shiki-dark, #e3eff7) !important; }
-.doc-content blockquote { max-width: 760px; margin: 1.55rem 0; padding: 15px 19px; border-left: 4px solid var(--doc-teal); background: #eff9f7; color: #4b6875; }
+.doc-content blockquote { max-width: 100%; margin: 1.55rem 0; padding: 15px 19px; border-left: 4px solid var(--doc-teal); background: #eff9f7; color: #4b6875; }
 .doc-content blockquote p { margin-bottom: 0; color: inherit; }
 .doc-content hr { margin: 2.7rem 0; border: 0; border-top: 1px solid #e1e9ef; }
 .doc-content table { display: block; max-width: 100%; margin: 1.55rem 0 1.8rem; overflow-x: auto; border-collapse: collapse; color: #42586a; font-size: 14px; line-height: 1.75; }

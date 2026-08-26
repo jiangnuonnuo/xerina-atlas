@@ -21,7 +21,7 @@
 <text x="315.0" y="181" text-anchor="middle" class="small muted">低代码节点流转</text>
 <line x1="397.5" y1="168" x2="422.5" y2="168" stroke="#9333ea" stroke-width="2" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
 <rect x="422.5" y="130" width="165" height="76" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
-<text x="505.0" y="160" text-anchor="middle" class="node">FieldDraft</text>
+<text x="505.0" y="160" text-anchor="middle" class="node">FieldTreeDraft</text>
 <text x="505.0" y="181" text-anchor="middle" class="small muted">结构化草稿</text>
 <line x1="587.5" y1="168" x2="612.5" y2="168" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="612.5" y="130" width="165" height="76" rx="10" fill="#faf5ff" stroke="#c084fc" stroke-width="2.2"/>

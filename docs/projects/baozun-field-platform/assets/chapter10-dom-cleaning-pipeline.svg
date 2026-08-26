@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="430" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">插件清洗当前 DOM 的确定性处理链路</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">插件只处理结构、属性和值安全，不直接判断 FIELD 或 SECTION 等业务语义</text>
+<g data-graph-role="node" data-graph-bounds="40,165,180,297">
+<rect x="40" y="165" width="140" height="132" rx="14" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.5"/>
+<circle cx="64" cy="190" r="13" fill="#b7c9dc" opacity="0.18"/>
+<text x="64" y="194" font-size="11" fill="#b7c9dc" font-weight="700" text-anchor="middle">1</text>
+<text x="88" y="195" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">原始 DOM</text>
+<text x="60" y="279" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">当前页面结构</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="202,165,342,297">
+<rect x="202" y="165" width="140" height="132" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="226" cy="190" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="226" y="194" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">2</text>
+<text x="250" y="195" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">选区归一化</text>
+<text x="222" y="279" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">确定稳定根节点</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="364,165,504,297">
+<rect x="364" y="165" width="140" height="132" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="388" cy="190" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="388" y="194" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">3</text>
+<text x="412" y="195" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">标签与属性</text>
+<text x="412" y="215" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">白名单</text>
+<text x="384" y="279" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">保留可解释属性</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="526,165,666,297">
+<rect x="526" y="165" width="140" height="132" rx="14" fill="#fff4f4" stroke="#d99191" stroke-width="1.5"/>
+<circle cx="550" cy="190" r="13" fill="#d99191" opacity="0.18"/>
+<text x="550" y="194" font-size="11" fill="#d99191" font-weight="700" text-anchor="middle">4</text>
+<text x="574" y="195" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">噪声节点</text>
+<text x="574" y="215" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">删除</text>
+<text x="546" y="279" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">去除脚本、样式</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="688,165,828,297">
+<rect x="688" y="165" width="140" height="132" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="712" cy="190" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="712" y="194" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">5</text>
+<text x="736" y="195" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">值掩码与</text>
+<text x="736" y="215" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">表格压缩</text>
+<text x="708" y="279" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">删除真实业务值</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="850,165,990,297">
+<rect x="850" y="165" width="140" height="132" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="874" cy="190" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="874" y="194" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">6</text>
+<text x="898" y="195" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">父子关系</text>
+<text x="898" y="215" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">修复</text>
+<text x="870" y="279" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">保留结构顺序</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="1012,165,1152,297">
+<rect x="1012" y="165" width="140" height="132" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="1036" cy="190" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="1036" y="194" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">7</text>
+<text x="1060" y="195" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">简化 DOM</text>
+<text x="1060" y="215" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">证据</text>
+<text x="1032" y="279" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">交给 Agent</text>
+</g>
+<path id="clean-0" d="M180,231 H202" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="clean-1" d="M342,231 H364" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="clean-2" d="M504,231 H526" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="clean-3" d="M666,231 H688" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<path id="clean-4" d="M828,231 H850" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<path id="clean-5" d="M990,231 H1012" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="reserved" data-graph-bounds="40,328,1152,384"><rect x="40" y="328" width="1112" height="56" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="58" y="351" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">输出</text>
+<text x="58" y="372" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">DomSnapshot = 简化 HTML + 页面上下文 + 结构事实 + 清洗统计 + 告警</text>
+</g>
+</svg>

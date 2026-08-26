@@ -9,36 +9,36 @@
 <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
 </defs>
 <rect width="1200" height="650" fill="#ffffff"/>
-<text x="40" y="42" class="title">局部 DOM 到模型输入的数据处理链路</text>
-<text x="40" y="67" class="subtitle muted">模型看到的是保留字段语义的结构摘要，而不是未经处理的整页 HTML。</text>
+<text x="40" y="42" class="title">DOM-SCOUT 选区到模型输入的数据处理链路</text>
+<text x="40" y="67" class="subtitle muted">插件先清洗当前选区；输入适配层校验并提取结构事实；模型只看到简化 DomSnapshot。</text>
 <path d="M 230 220 L 275 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="204.0" y="196" width="96" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
-<text x="252" y="211" text-anchor="middle" class="small muted">HTML片段</text>
+<text x="252" y="211" text-anchor="middle" class="small muted">选区简化证据</text>
 <path d="M 465 220 L 510 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="453.0" y="196" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
-<text x="487" y="211" text-anchor="middle" class="small muted">净化结构</text>
+<text x="487" y="211" text-anchor="middle" class="small muted">预清洗结果</text>
 <path d="M 700 220 L 745 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="688.0" y="196" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
-<text x="722" y="211" text-anchor="middle" class="small muted">上下文树</text>
+<text x="722" y="211" text-anchor="middle" class="small muted">可信结构</text>
 <path d="M 935 220 L 980 220" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)" data-graph-role="edge"/>
 <rect x="923.0" y="196" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
 <text x="957" y="211" text-anchor="middle" class="small muted">标准快照</text>
 <rect x="40" y="165" width="190" height="110" rx="10" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
-<text x="135.0" y="195" text-anchor="middle" class="node-title">选区原始 DOM</text>
-<text x="135.0" y="216" text-anchor="middle" class="small muted">页面标题</text>
-<text x="135.0" y="234" text-anchor="middle" class="small muted">用户选择的业务区块</text>
+<text x="135.0" y="195" text-anchor="middle" class="node-title">Field DOM Scout</text>
+<text x="135.0" y="216" text-anchor="middle" class="small muted">多选区与页面状态</text>
+<text x="135.0" y="234" text-anchor="middle" class="small muted">上下文、版本、定位候选</text>
 <rect x="275" y="165" width="190" height="110" rx="10" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.5"/>
-<text x="370.0" y="195" text-anchor="middle" class="node-title">安全净化</text>
-<text x="370.0" y="216" text-anchor="middle" class="small muted">移除脚本与事件</text>
-<text x="370.0" y="234" text-anchor="middle" class="small muted">剥离输入值和敏感数据</text>
+<text x="370.0" y="195" text-anchor="middle" class="node-title">客户端最小化</text>
+<text x="370.0" y="216" text-anchor="middle" class="small muted">值预掩码与重叠归一</text>
+<text x="370.0" y="234" text-anchor="middle" class="small muted">超限阻断与风险预览</text>
 <rect x="510" y="165" width="190" height="110" rx="10" fill="#f0fdfa" stroke="#2dd4bf" stroke-width="1.5"/>
-<text x="605.0" y="195" text-anchor="middle" class="node-title">语义保留</text>
-<text x="605.0" y="216" text-anchor="middle" class="small muted">label / role / name</text>
-<text x="605.0" y="234" text-anchor="middle" class="small muted">标题路径与表头关系</text>
+<text x="605.0" y="195" text-anchor="middle" class="node-title">输入归一与复核</text>
+<text x="605.0" y="216" text-anchor="middle" class="small muted">属性白名单与二次脱敏</text>
+<text x="605.0" y="234" text-anchor="middle" class="small muted">非执行解析与来源 nodeId</text>
 <rect x="745" y="165" width="190" height="110" rx="10" fill="#faf5ff" stroke="#c084fc" stroke-width="1.5"/>
-<text x="840.0" y="195" text-anchor="middle" class="node-title">结构切分</text>
-<text x="840.0" y="216" text-anchor="middle" class="small muted">表单 / 表格 / 详情</text>
-<text x="840.0" y="234" text-anchor="middle" class="small muted">按业务容器分段</text>
+<text x="840.0" y="195" text-anchor="middle" class="node-title">结构事实抽取</text>
+<text x="840.0" y="216" text-anchor="middle" class="small muted">label / ARIA / table header</text>
+<text x="840.0" y="234" text-anchor="middle" class="small muted">只记录关系，不判断业务类型</text>
 <rect x="980" y="165" width="180" height="110" rx="10" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
 <text x="1070.0" y="195" text-anchor="middle" class="node-title">DomSnapshot</text>
 <text x="1070.0" y="216" text-anchor="middle" class="small muted">稳定 nodeId</text>
@@ -50,7 +50,7 @@
 <circle cx="92" cy="390" r="5" fill="#ef4444" transform="translate(0,0)"/>
 <text x="110" y="395" class="label" transform="translate(0,0)">script / style / SVG path / 注释</text>
 <circle cx="92" cy="390" r="5" fill="#ef4444" transform="translate(0,34)"/>
-<text x="110" y="395" class="label" transform="translate(0,34)">input.value、Cookie、Token 等实际值</text>
+<text x="110" y="395" class="label" transform="translate(0,34)">Cookie、Token、URL 查询参数</text>
 <circle cx="92" cy="390" r="5" fill="#ef4444" transform="translate(0,68)"/>
 <text x="110" y="395" class="label" transform="translate(0,68)">动态 class、内联事件、无意义包装层</text>
 <circle cx="92" cy="390" r="5" fill="#ef4444" transform="translate(0,102)"/>
@@ -63,5 +63,5 @@
 <text x="680" y="395" class="label" transform="translate(0,68)">table header、容器包含关系、字段顺序</text>
 <circle cx="662" cy="390" r="5" fill="#22c55e" transform="translate(0,102)"/>
 <text x="680" y="395" class="label" transform="translate(0,102)">sourceNodeId：用于预览回指与证据定位</text>
-<text x="600" y="610" text-anchor="middle" class="small muted">插件先做一次裁剪，后端再次校验；客户端输入始终按不可信数据处理。</text>
+<text x="600" y="610" text-anchor="middle" class="small muted">插件清洗降低输入噪声和离页风险；输入适配层仍需复核；页面内容始终按不可信数据处理。</text>
 </svg>

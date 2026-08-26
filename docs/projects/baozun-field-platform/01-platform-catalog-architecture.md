@@ -4,7 +4,7 @@ type: project-chapter
 project: baozun-field-platform
 order: 2
 group: 架构与定位
-description: 问题边界、全栈职责、端到端链路与架构取舍。
+description: 问题边界、DOM-SCOUT 内部定制方案、受限 Agent 职责、端到端链路与架构取舍。
 layout: project-doc
 ---
 
@@ -28,11 +28,11 @@ layout: project-doc
 
 ## 全栈职责与边界
 
-我负责平台的**全栈研发与智能化方案设计**，工作覆盖：
+平台的**全栈研发与智能化方案**覆盖：
 
-- **采集端**：人工框选、DOM-first 自动采集、页面状态探索与字段证据预览；
-- **智能解析端**：确定性规则、受限 Agent、候选树校验、反馈重算与进度推送；
-- **平台前端**：目录树懒加载、批量录入、拖拽移动、候选差异审核与导出任务工作台；
+- **采集端**：DOM-SCOUT 内部定制插件、人工多选区与证据预览、受限 Playwright 自动入口、Easy Copy DOM 降级；
+- **智能解析端**：DOM 清洗、受限 Agent、HierarchyProposal 编译为 FieldTreeDraft、反馈重算与进度推送；
+- **平台前端**：目录树懒加载、批量录入、拖拽移动、草稿差异审核与导出任务工作台；
 - **平台后端**：目录领域模型、闭包表事务、并发控制、异步导出与文件交付；
 - **工程治理**：认证、接口契约、测试、部署、可观测性、安全和评估指标。
 
@@ -43,6 +43,8 @@ layout: project-doc
 字段从页面到目录，再交付为字典，链路是：
 
 ![页面到目录的端到端链路](./assets/end-to-end-chain.svg)
+
+Agent 运行边界的 Fireworks Tech Graph 版本：[查看企业 Agent 底座与字段项目编排架构](./assets/agent-runtime-architecture.svg)，<a href="/media/projects/baozun-field-platform/diagrams/agent-runtime-architecture/index.html" target="_blank" rel="noreferrer">打开交互版</a>。它用于补充说明：插件采集、项目工作流和 Prompt 属于本项目编排，模型网关、检查点、工具注册和事件推送属于企业内部 Agent 底座。
 
 下面这张图给出端到端全景：
 
@@ -55,24 +57,30 @@ layout: project-doc
 
 ## 关键取舍
 
-### 1. 采集：固定输入 vs DOM-first
+### 1. 采集：通用复制插件 vs 业务证据采集器
 
-最早想用"固定缩进 / 固定模板"喂给解析，但页面结构千奇百怪，维护模板比解析还累。后来转向 **DOM-first**：直接从渲染后的 DOM 抽证据，让"页面怎么长"由页面自己说了算。
+Easy Copy DOM 能完成“点选一个节点并复制 `outerHTML`”，适合低成本验证局部 DOM 路线，但它把选区、上下文补充、复制粘贴和格式校验拆成多次人工操作，无法直接表达多选区、元素指纹、采集版本和页面状态。
+
+主方案因此升级为 **DOM-SCOUT + 内部字段证据适配层**。DOM-SCOUT 提供可视化高亮、多选、父子级导航、结构化格式、可访问性摘要、定位器指纹和 Token 预估；内部定制层负责字段场景专用格式、敏感值预清洗、页面上下文和 Agent 输入归一。内部 Agent 仍负责字段含义与业务层级，插件不做业务语义判断。
 
 <InteractiveDiagram
-  title="采集方案演进：固定输入 → DOM-first"
+  title="采集方案演进：固定输入 → DOM-SCOUT 业务证据采集器"
   src="/media/projects/baozun-field-platform/diagrams/strategy-pivot/index.html?embed=1"
   poster="/media/projects/baozun-field-platform/diagrams/strategy-pivot/preview.png"
-  description="从人工固定缩进、纯 Agent 探索到 DOM-first 人机闭环。"
+  description="从固定输入、Agent + Playwright 全量探索、Easy Copy DOM 验证，演进到 DOM-SCOUT 内部定制采集与 Agent 语义解析。"
 />
 
-### 2. 解析：纯 Agent 探索 vs 受限 Agent
+这里的“取代”有明确边界：DOM-SCOUT 内部版可以取代 Easy Copy DOM 成为主选区与结构清洗入口，但不能取代页面状态判断、Agent 业务语义、FieldTreeDraft 编译校验和人工审核。Easy Copy DOM 在双轨验证期保留为无插件降级方案，达到质量门后再退出默认入口。
 
-纯 Agent 自由探索页面，结果不可控、不可验收。我们用**受限 Agent**：输入只吃证据、动作只产出候选树、输出必须可验收。把"智能"框在"可信任"的边界里。
+### 2. 解析：纯 Agent 探索 vs 受限多 Agent
+
+Agent + Playwright 全量探索适合结构简单、状态有限的页面，但在复杂业务系统中容易受到登录状态、动态渲染和上下文成本影响。主流程采用**受限 Agent**：输入只接收清洗后的 DomSnapshot，输出先形成 HierarchyProposal，再由后端编译为可编辑 FieldTreeDraft，不能直接写正式目录。
+
+“内部微调”也分成两类：插件侧是序列化、清洗、权限和格式的工程定制；Agent 侧优先使用 Evidence、Hierarchy、Field Semantics、Reflection 和 ReAct 节点的角色化 Prompt、业务术语库、目录查询工具和固定评估集。只有积累足够的人工修订样本，并证明错误来自稳定的领域模式而非缺少 DOM 证据时，才评估模型微调，避免用训练掩盖采集问题。
 
 ### 3. 治理：关系库 vs 文档树
 
-字段目录本质是树。用关系表存父子，写入简单但祖先链查询贵；用文档树存整棵，查询快但并发写入难。我们取中间：**直接父级关系 + 祖先链按需展开**，并维护结构不变量。
+字段目录本质是树。用关系表存父子，写入简单但祖先链查询贵；用文档树存整棵，查询快但并发写入难。方案取中间路径：**直接父级关系 + 祖先链按需展开**，并维护结构不变量。
 
 ### 4. 交付：同步返回 vs 异步导出
 

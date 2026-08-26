@@ -12,14 +12,14 @@
 <text x="40" y="42" class="title">字段草稿状态机与数据库边界</text>
 <text x="40" y="67" class="subtitle muted">解析、追加和修改都发生在临时工作副本中；只有 COMMIT 成功才进入正式字段目录。</text>
 <rect x="40" y="100" width="930" height="540" rx="12" fill="#eff6ff" fill-opacity="0.45" stroke="#93c5fd" stroke-width="1.4" stroke-dasharray="7,5"/>
-<text x="56" y="125" font-size="13" font-weight="700" fill="#93c5fd">临时工作区：前端状态 / TTL 草稿缓存 / Agent 上下文</text>
+<text x="56" y="125" font-size="13" font-weight="700" fill="#93c5fd">临时工作区：服务端草稿 / 前端缓存 / Agent 上下文</text>
 <rect x="1000" y="100" width="160" height="540" rx="12" fill="#f0fdf4" fill-opacity="0.45" stroke="#4ade80" stroke-width="1.4" stroke-dasharray="7,5"/>
 <text x="1016" y="125" font-size="13" font-weight="700" fill="#4ade80">正式目录</text>
 <circle cx="80" cy="220" r="9" fill="#111827"/>
 <path d="M 89 220 L 130 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <path d="M 270 220 L 320 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="247.0" y="195" width="96" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
-<text x="295" y="210" text-anchor="middle" class="small muted">提交 DOM</text>
+<text x="295" y="210" text-anchor="middle" class="small muted">接收证据</text>
 <path d="M 460 220 L 510 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="437.0" y="195" width="96" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
 <text x="485" y="210" text-anchor="middle" class="small muted">SSE 草稿</text>
@@ -37,7 +37,7 @@
 <text x="634" y="330" text-anchor="middle" class="small muted">缺少上下文</text>
 <path d="M 505 430 L 390 430 L 390 265" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="347.0" y="407" width="166" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
-<text x="430" y="422" text-anchor="middle" class="small muted">追加 DOM 后重解析</text>
+<text x="430" y="422" text-anchor="middle" class="small muted">追加证据后重解析</text>
 <path d="M 785 265 L 785 390" fill="none" stroke="#9333ea" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
 <rect x="796.0" y="315" width="68" height="20" rx="4" fill="#ffffff" opacity="0.96"/>
 <text x="830" y="330" text-anchor="middle" class="small muted">对话修改</text>
@@ -67,8 +67,8 @@
 <text x="1080.0" y="210" text-anchor="middle" class="node-title">COMMITTED</text>
 <text x="1080.0" y="231" text-anchor="middle" class="small muted">新 treeVersion</text>
 <rect x="505" y="390" width="150" height="80" rx="10" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
-<text x="580.0" y="420" text-anchor="middle" class="node-title">NEED_MORE_DOM</text>
-<text x="580.0" y="441" text-anchor="middle" class="small muted">提示补充选区</text>
+<text x="580.0" y="420" text-anchor="middle" class="node-title">PARTIAL_REVIEW</text>
+<text x="580.0" y="441" text-anchor="middle" class="small muted">保留候选，提示补充选区</text>
 <rect x="710" y="390" width="150" height="80" rx="10" fill="#faf5ff" stroke="#c084fc" stroke-width="2.2"/>
 <rect x="714" y="394" width="142" height="72" rx="7" fill="none" stroke="#c084fc" stroke-width="0.8" opacity="0.55"/>
 <text x="785.0" y="420" text-anchor="middle" class="node-title">CORRECTING</text>

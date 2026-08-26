@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="data-flow" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="620" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">页面状态指纹的组成</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">同一个 SPA 路由可能对应多个页面状态；指纹用于识别重复采集，不是正式页面身份</text>
+<g data-graph-role="node" data-graph-bounds="60,125,290,207">
+<rect x="60" y="125" width="230" height="82" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="84" cy="150" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="84" y="154" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="108" y="155" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">规范化 route</text>
+<text x="80" y="189" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">不含查询参数</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="330,125,560,207">
+<rect x="330" y="125" width="230" height="82" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="354" cy="150" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="354" y="154" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">2</text>
+<text x="378" y="155" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">activeTab</text>
+<text x="350" y="189" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">当前页签</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="870,125,1140,207">
+<rect x="870" y="125" width="270" height="82" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="894" cy="150" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="894" y="154" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">3</text>
+<text x="918" y="155" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">可见弹窗 / 抽屉标题</text>
+<text x="890" y="189" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">当前可见业务状态</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="60,420,290,502">
+<rect x="60" y="420" width="230" height="82" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="84" cy="445" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="84" y="449" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">4</text>
+<text x="108" y="450" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">展开容器标识</text>
+<text x="80" y="484" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">折叠区当前状态</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="330,420,560,502">
+<rect x="330" y="420" width="230" height="82" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="354" cy="445" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="354" y="449" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">5</text>
+<text x="378" y="450" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">选区根节点摘要</text>
+<text x="350" y="484" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">稳定结构摘要</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="870,420,1140,502">
+<rect x="870" y="420" width="270" height="82" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="894" cy="445" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="894" y="449" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">6</text>
+<text x="918" y="450" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">清洗后 DOM hash</text>
+<text x="890" y="484" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">结构结果摘要</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="470,245,730,357">
+<rect x="470" y="245" width="260" height="112" rx="14" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.5"/>
+<circle cx="494" cy="270" r="13" fill="#b7c9dc" opacity="0.18"/>
+<text x="494" y="274" font-size="11" fill="#b7c9dc" font-weight="700" text-anchor="middle">Σ</text>
+<text x="518" y="275" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">stateFingerprint</text>
+<text x="490" y="323" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">合并页面状态与选区证据</text>
+<text x="490" y="339" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">用于识别重复采集</text>
+</g>
+<path id="fingerprint-1" d="M175,207 V225 H390 V300 H470" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="fingerprint-2" d="M445,207 V225 H600 V245" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<path id="fingerprint-3" d="M1005,207 V225 H690 V245" fill="none" stroke="#d8ad75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-amber)" data-graph-role="edge"/>
+<path id="fingerprint-4" d="M175,420 V390 H380 V357 H510" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<path id="fingerprint-5" d="M445,420 V370 H600 V357" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="fingerprint-6" d="M1005,420 V390 H820 V370 H690 V357" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="reserved" data-graph-bounds="60,532,1140,590"><rect x="60" y="532" width="1080" height="58" rx="12" fill="#fff4f4" stroke="#d99191" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="78" y="555" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">排除</text>
+<text x="78" y="578" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">业务真实值 · 时间戳 · 随机 class · 与字段结构无关的动态数字</text>
+</g>
+</svg>

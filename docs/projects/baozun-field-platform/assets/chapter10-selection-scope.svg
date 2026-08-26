@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="430" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">选择能够表达业务边界的区域</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">Parent / Child 调整用于避免选择过小或过大的 DOM 节点</text>
+<g data-graph-role="node" data-graph-bounds="460,105,740,175">
+<rect x="460" y="105" width="280" height="70" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="484" cy="130" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="484" y="134" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="508" y="135" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">页面选区模式</text>
+<text x="480" y="157" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">悬停候选 · 点击加入</text>
+</g>
+<path id="scope-branch-left" d="M560,175 V205 H310 V235" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="430" y="198" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">推荐</text></g>
+<path id="scope-branch-right" d="M640,175 V205 H890 V235" fill="none" stroke="#d99191" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-red)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="770" y="198" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">避免</text></g>
+<g data-graph-role="node" data-graph-bounds="90,235,520,361">
+<rect x="90" y="235" width="430" height="126" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="114" cy="260" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="114" y="264" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">✓</text>
+<text x="138" y="265" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">退款信息区域</text>
+<text x="110" y="327" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">包含标题和上下文</text>
+<text x="110" y="343" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">表达完整业务边界</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="680,235,1110,361">
+<rect x="680" y="235" width="430" height="126" rx="14" fill="#fff4f4" stroke="#d99191" stroke-width="1.5"/>
+<circle cx="704" cy="260" r="13" fill="#d99191" opacity="0.18"/>
+<text x="704" y="264" font-size="11" fill="#d99191" font-weight="700" text-anchor="middle">×</text>
+<text x="728" y="265" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">退款状态文字节点</text>
+<text x="700" y="327" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">缺少业务标题</text>
+<text x="700" y="343" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">难以判断所属分组</text>
+</g>
+<g data-graph-role="reserved" data-graph-bounds="220,368,980,422"><rect x="220" y="368" width="760" height="54" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="238" y="391" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">选择原则</text>
+<text x="238" y="410" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">足够表达业务边界，不追求把整页 body 一次性纳入。</text>
+</g>
+</svg>

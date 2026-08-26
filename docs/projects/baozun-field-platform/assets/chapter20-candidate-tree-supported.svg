@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="architecture" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="500" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">有分组证据时的候选字段树</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">同级 DOM 的标签—值关系只有在上下文共同支持时，才上升为业务分组</text>
+<g data-graph-role="node" data-graph-bounds="48,168,318,280">
+<rect x="48" y="168" width="270" height="112" rx="14" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.5"/>
+<circle cx="72" cy="193" r="13" fill="#b7c9dc" opacity="0.18"/>
+<text x="72" y="197" font-size="11" fill="#b7c9dc" font-weight="700" text-anchor="middle">1</text>
+<text x="96" y="198" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">同级 DOM 证据</text>
+<text x="68" y="246" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">退款状态 · [VALUE]</text>
+<text x="68" y="262" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">退款金额 · [VALUE]</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="400,168,710,280">
+<rect x="400" y="168" width="310" height="112" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="424" cy="193" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="424" y="197" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">2</text>
+<text x="448" y="198" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">上下文共同支持</text>
+<text x="420" y="246" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">页签 · 上级标题</text>
+<text x="420" y="262" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">目标目录 · 业务术语</text>
+</g>
+<path id="tree-supported-1" d="M318,224 H400" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="359" y="206" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">facts</text></g>
+<path id="tree-supported-2" d="M710,224 H820" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="765" y="206" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">promote</text></g>
+<g data-graph-role="reserved" data-graph-bounds="820,108,1150,350"><rect x="820" y="108" width="330" height="242" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<text x="844" y="140" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">业务字段树</text>
+<text x="854" y="190" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">售后记录</text>
+<path d="M870,202 V306" stroke="#7eb8ac" stroke-width="1.5"/>
+<path d="M870,224 H906 M870,270 H906" stroke="#7eb8ac" stroke-width="1.5"/>
+<text x="906" y="230" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">退款信息</text>
+<text x="930" y="262" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start">退款状态</text>
+<text x="930" y="304" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start">退款金额</text>
+</g>
+<g data-graph-role="reserved" data-graph-bounds="48,388,1150,446"><rect x="48" y="388" width="1102" height="58" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="66" y="411" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">生成条件</text>
+<text x="66" y="434" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">只有字段文本、页签、标题、目标目录和术语共同支持分组时，Agent 才生成中间层。</text>
+</g>
+</svg>

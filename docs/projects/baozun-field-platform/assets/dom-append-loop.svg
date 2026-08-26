@@ -22,7 +22,7 @@
 <text x="605.0" y="160" text-anchor="middle" class="node">Agent 解析</text>
 <text x="605.0" y="181" text-anchor="middle" class="small muted">字段增量</text>
 <rect x="740" y="130" width="170" height="70" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
-<text x="825.0" y="160" text-anchor="middle" class="node">FieldDraft</text>
+<text x="825.0" y="160" text-anchor="middle" class="node">FieldTreeDraft</text>
 <text x="825.0" y="181" text-anchor="middle" class="small muted">合并、去重、预览</text>
 <rect x="960" y="130" width="170" height="70" rx="10" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
 <text x="1045.0" y="160" text-anchor="middle" class="node">继续 / 保存</text>
@@ -35,9 +35,9 @@
 <rect x="552.0" y="313" width="96" height="20" rx="4" fill="#fff" opacity="0.96"/>
 <text x="600" y="328" text-anchor="middle" class="small muted">追加下一选区</text>
 <rect x="450" y="255" width="300" height="60" rx="10" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
-<text x="600.0" y="285" text-anchor="middle" class="node">NEED_MORE_DOM</text>
-<text x="600.0" y="306" text-anchor="middle" class="small muted">缺少标题 / 页签 / 父级上下文</text>
+<text x="600.0" y="285" text-anchor="middle" class="node">PARTIAL + REVIEW</text>
+<text x="600.0" y="306" text-anchor="middle" class="small muted">保留候选，提示补充标题 / 页签</text>
 <path d="M 520 200 L 520 255" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-red)" data-graph-role="edge"/>
 <rect x="531.0" y="220" width="68" height="20" rx="4" fill="#fff" opacity="0.96"/>
-<text x="565" y="235" text-anchor="middle" class="small muted">证据不足</text>
+<text x="565" y="235" text-anchor="middle" class="small muted">待确认提醒</text>
 </svg>

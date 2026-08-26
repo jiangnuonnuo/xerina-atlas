@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="420" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">DOM-SCOUT 驱动的局部 DOM 字段采集</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">人工确定范围，插件生成结构证据，Agent 负责业务语义，最终由人工确认</text>
+<g data-graph-role="node" data-graph-bounds="48,160,224,288">
+<rect x="48" y="160" width="176" height="128" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="72" cy="185" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="72" y="189" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="96" y="190" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">业务人员</text>
+<text x="68" y="254" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">打开目标页面</text>
+<text x="68" y="270" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">选择业务区域</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="280,160,456,288">
+<rect x="280" y="160" width="176" height="128" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="304" cy="185" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="304" y="189" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">2</text>
+<text x="328" y="190" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">DOM-SCOUT</text>
+<text x="300" y="254" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">读取选区</text>
+<text x="300" y="270" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">自动清洗 DOM</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="512,160,688,288">
+<rect x="512" y="160" width="176" height="128" rx="14" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.5"/>
+<circle cx="536" cy="185" r="13" fill="#b7c9dc" opacity="0.18"/>
+<text x="536" y="189" font-size="11" fill="#b7c9dc" font-weight="700" text-anchor="middle">3</text>
+<text x="560" y="190" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">结构证据</text>
+<text x="532" y="254" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">简化 HTML</text>
+<text x="532" y="270" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">+ 页面上下文</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="744,160,920,288">
+<rect x="744" y="160" width="176" height="128" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="768" cy="185" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="768" y="189" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">4</text>
+<text x="792" y="190" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">内部 Agent</text>
+<text x="764" y="254" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">判断业务含义</text>
+<text x="764" y="270" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">识别字段层级</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="976,160,1152,288">
+<rect x="976" y="160" width="176" height="128" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="1000" cy="185" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="1000" y="189" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">5</text>
+<text x="1024" y="190" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">FieldDraft</text>
+<text x="996" y="254" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">审核 · 修改</text>
+<text x="996" y="270" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">保存结果</text>
+</g>
+<path id="capture-0" d="M224,224 H280" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="252" y="205" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">选区</text></g>
+<path id="capture-1" d="M456,224 H512" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="484" y="205" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">清洗</text></g>
+<path id="capture-2" d="M688,224 H744" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="716" y="205" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">语义</text></g>
+<path id="capture-3" d="M920,224 H976" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="948" y="205" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">确认</text></g>
+<g data-graph-role="reserved" data-graph-bounds="48,322,1152,382"><rect x="48" y="322" width="1104" height="60" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="66" y="345" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">边界</text>
+<text x="66" y="370" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">DOM 父子结构由插件保留；业务字段父子结构由内部 Agent 结合上下文判断。</text>
+</g>
+</svg>

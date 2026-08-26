@@ -1,364 +1,410 @@
 ---
-title: 20 · 基于内部低代码平台的 Agent 字段解析
+title: 20 · Agent 编排：从 DOM 证据到可确认字段树
 type: project-chapter
 project: baozun-field-platform
 order: 20
 group: 解析
-description: 将局部 DOM 解析为可编辑字段草稿，通过 SSE 预览、对话修订和显式保存形成可信闭环。
+description: 以 DOM-SCOUT 清洗结果为输入，通过二次取证、层级分析、字段语义、反思、后端校验和受限修复，编排出可由现有人工采集树组件确认的 FieldTreeDraft。
 layout: project-doc
 ---
 
-## 基于内部低代码平台的 Agent 字段解析
+## Agent 编排：从 DOM 证据到可确认字段树
 
-上一章解决了 Agent 的输入：用户通过插件选择局部 DOM，或者由 Agent + Playwright 为简单页面生成 DOM 快照。本章关注后半段链路：内部 Agent 工作流如何把 `DomSnapshot` 解析成字段树，前端如何实时预览和修改，以及为什么只有用户点击保存后结果才进入正式字段目录。
+第 10 章解决“业务人员如何选择页面范围并得到干净 DOM 证据”。本章只解决后半段：**内部 Agent 如何把这份证据编排成真正的业务层级，并安全地推送给前端确认。**
 
-这套设计的核心不是让模型直接“生成数据库数据”，而是建立一层可检查、可修改、可放弃的字段草稿：
+这不是让一个 Agent 自由浏览页面，而是把 Agent 放在固定的业务流程中：每个 Agent 只处理一个局部问题，节点之间用结构化产物交接，后端负责确定性校验和前端树转换，失败时只把可定位的错误反馈给修复 Agent。
 
-![Agent 解析到正式保存](./assets/agent-parse-pipeline.svg)
+![Agent 编排：DOM 证据到 FieldTreeDraft](./assets/agent-execution-lifecycle.svg)
 
-模型输出与正式目录之间始终存在草稿隔离层。
+交互版本：<a href="/media/projects/baozun-field-platform/diagrams/agent-execution-lifecycle/index.html" target="_blank" rel="noreferrer">打开 Agent 编排、校验与修复流程图</a>。
 
-## 系统职责边界
+## 1. 先看完整运行链路
 
-项目依托公司内部低代码 Agent 设计平台完成模型接入和工作流运行，不重复建设通用 Agent 基础设施。
+一次解析任务的主链路固定为：
 
-| 责任范围 | 内部 Agent 设计平台 | 字段目录项目 |
-| --- | --- | --- |
-| 模型能力 | 模型网关、参数配置、调用限额 | 为字段场景选择模型配置 |
-| 工作流 | 开始、条件、循环、Agent、HTTP、结束节点 | 设计字段解析节点和条件路由 |
-| 运行能力 | 实例调度、超时、重试、运行日志 | 维护业务 taskId 与实例 ID 映射 |
-| 提示管理 | Prompt 版本和变量注入 | 字段规则、DOM 数据边界、输出 Schema |
-| 领域工具 | 提供工具接入方式 | 目录查询、术语映射、候选树校验 |
-| 前端交互 | 不负责字段业务界面 | 采集对话框、SSE 预览、字段树编辑 |
-| 数据写入 | 不直接访问正式字段目录 | 权限校验、事务保存、闭包表和版本控制 |
+1. 工作流创建 `ParseTaskContext`，绑定快照、目标父级和运行预算；
+2. Evidence Agent 对 DOM-SCOUT 结果进行二次取证；
+3. Hierarchy Agent 判断业务分组、组件和相对父子关系；
+4. Field Semantics Agent 判断标准名称、编码候选和数据类型；
+5. Reflection Agent 检查证据、层级和字段语义是否互相矛盾；
+6. Agent 组装 `HierarchyProposal`，结束模型推理阶段；
+7. 后端 Normalizer / Compiler 把提案转换为人工采集页面同构的 `FieldTreeDraft`；
+8. Candidate Validator 执行确定性校验；
+9. 校验通过后，SSE 推送 `FieldTreeDraft` 给前端确认；
+10. 校验失败时生成 `RepairFeedback`，交给受限 ReAct 修复节点局部重算。
 
-一句话概括是：**平台提供 Agent 运行时，字段项目提供业务工作流和最终事实来源。**
+Agent 不能跳过层级分析直接写前端树，也不能跳过后端校验直接发 SSE。修复成功后仍然必须重新经过编译和校验。
 
-## 工作流总体设计
+## 2. 编排上下文：Agent 每次运行拿到什么
 
-![内部低代码 Agent 字段解析工作流](./assets/agent-workflow-nodes.svg)
+### 2.1 ParseTaskContext
 
-工作流采用“低代码编排、高代码规则”的结构。低代码节点负责宏观流转和模型调用，字段领域服务负责确定性校验。复杂目录规则不会全部堆进 Prompt，也不会分散在难以测试的条件表达式中。
-
-### 节点级流程
-
-| 节点 | 类型 | 输入 | 输出 | 失败路由 |
-| --- | --- | --- | --- | --- |
-| 开始 | 内置开始节点 | `taskId`、`snapshotId`、`draftId` | 工作流上下文 | 输入缺失直接结束 |
-| 加载快照 | 自定义 HTTP 节点 | `snapshotId` | 清洗后的 `DomSnapshot` | 快照不存在或版本不兼容 |
-| 识别类型 | 条件节点 | DOM 结构摘要 | FORM、TABLE、DETAIL、MIXED | 不能分类时进入 MIXED |
-| 结构切分 | 循环节点 | DOM 业务容器 | 带上下文的 DOM 分段 | 分段超限时返回质量告警 |
-| Agent 提取 | Agent 节点 | 分段、规则、目录摘要 | 字段候选和父级候选 | 超时重试；证据不足不猜测 |
-| 合并去重 | 业务节点 | 新字段候选、当前草稿 | 新草稿版本 | 草稿版本冲突时重新加载 |
-| Candidate Validator | 业务节点 | 候选字段树 | 校验结果和原因码 | 可修复错误限定重试一次 |
-| 草稿输出 | 结束节点 | 已校验 `FieldDraft` | `DRAFT_READY` | 不触发正式目录写入 |
-| 补充 DOM | 结果分支 | 缺失证据说明 | `NEED_MORE_DOM` | 等待用户追加选区 |
-
-输入按业务容器切分，而不是按固定 Token 长度机械截断。表单项、表头和所属标题必须位于同一分段，否则模型虽然能识别字段名称，却容易丢失父级关系。
-
-## 为什么这里仍然称为 Agent
-
-整个宏观流程由工作流固定，但 Agent 节点在局部任务中仍然具有受控决策能力。它可以根据当前 DOM 类型和歧义情况决定是否调用：
-
-- `lookup_catalog_fields`：查询现有目录中相似字段；
-- `lookup_business_terms`：查询字段名称、编码和类型映射；
-- `inspect_dom_fragment`：补读当前快照中的局部结构；
-- `validate_candidate_tree`：提前检查候选结构；
-- `request_more_dom`：明确说明缺少哪类页面上下文。
-
-Agent 的循环受最大步骤数和超时限制，工具输入输出都使用固定 Schema。它不能调用浏览器中的任意能力，不能执行目录写入，也不能绕过候选树校验器。
-
-如果把工具顺序完全固定、每一步都不需要模型选择，就应该称为普通工作流；这里保留 Agent，是因为同名字段归属、控件语义和已有目录匹配仍然需要根据局部证据动态选择查询工具和判断路径。
-
-## Prompt 上下文如何组织
-
-Prompt 不直接拼接整页 HTML，而是由五层上下文组成：
-
-1. **系统规则**：说明字段、分组、类型和父级的判断边界；
-2. **DOM 数据**：经过清洗的当前分段，并明确标记为不可信页面内容；
-3. **目录上下文**：目标目录附近的节点摘要，而不是整棵目录树；
-4. **输出契约**：FieldDraft Schema、枚举值和错误返回形式；
-5. **修订上下文**：校验错误、当前草稿版本或用户修改指令。
-
-DOM 数据使用清晰的开始和结束标识包围，页面文字不能改变系统规则。模型也不会得到数据库连接、用户凭证或与当前目录无关的数据。
-
-为了控制后续对话的上下文，修订请求只发送相关字段子树、当前草稿版本、最近对话和必要摘要，不会在每次修改时重新提交全部 DOM 和完整历史。
-
-## FieldDraft 数据契约
-
-Agent 的正式输出不是 Markdown，也不是一段自然语言说明，而是符合 Schema 的字段草稿。
+工作流开始时先创建上下文，后续所有节点只读取自己需要的字段：
 
 ```json
 {
-  "draftId": "draft_1001",
-  "draftVersion": 3,
-  "baseTreeVersion": 12,
-  "snapshotIds": ["snap_01", "snap_02"],
-  "fields": [
-    {
-      "draftFieldId": "df_group_refund",
-      "nodeType": "GROUP",
-      "name": "退款信息",
-      "parentId": null,
-      "sourceRefs": ["snap_01:n_01"]
-    },
-    {
-      "draftFieldId": "df_refund_status",
-      "nodeType": "FIELD",
-      "name": "退款状态",
-      "code": "refundStatus",
-      "dataType": "STRING",
-      "parentId": "df_group_refund",
-      "sourceRefs": ["snap_01:n_02"],
-      "confidence": "HIGH"
-    }
-  ],
-  "warnings": []
-}
-```
-
-`draftFieldId` 在草稿生命周期内保持稳定。后续对话修改通过 ID 定位节点，不能只使用可能重名的字段名称。
-
-`baseTreeVersion` 记录打开采集会话时的正式目录版本。它不参与模型推理，但会在最终保存时用于并发冲突检查。
-
-`sourceRefs` 将候选字段关联回 DOM 快照和来源节点，前端点击字段时可以展示对应页面文本和结构证据。人工新增字段可以使用 `MANUAL_INPUT` 来源并附加说明，不伪造 DOM 引用。
-
-## 候选字段树质量门
-
-模型能够生成结构化 JSON，不代表字段树可以直接使用。Candidate Validator 在服务端执行确定性规则：
-
-- 每个字段只能有一个直接父节点；
-- 父节点必须存在于当前草稿或目标目录；
-- 字段树不能出现环；
-- 节点深度不能超过平台限制；
-- `nodeType` 和 `dataType` 必须属于允许枚举；
-- 同一父节点下不能产生冲突编码；
-- DOM 提取字段必须保留至少一个来源引用；
-- 删除、移动已有字段等高风险操作不能由首次解析隐式产生。
-
-校验结果分为三类：
-
-- **通过**：输出 `DRAFT_READY`；
-- **可修复结构错误**：把稳定原因码交给修订节点，限定重试一次；
-- **证据不足**：输出 `NEED_MORE_DOM`，由用户补充页面选区。
-
-“证据不足”和“系统失败”必须分开。前者是正常业务分支，后者才进入错误处理。
-
-## SSE 如何把结果推回前端
-
-解析是异步过程，前端创建任务后使用 SSE 观察进度。
-
-![DOM 解析、SSE 修订与显式保存时序](./assets/sse-edit-save-sequence.svg)
-
-接口交互分为两步：
-
-```http
-POST /api/dom-parse-tasks
-GET  /api/dom-parse-tasks/{taskId}/events
-```
-
-创建接口立即返回 `taskId`，Spring Boot 后端启动内部工作流，并把 `taskId`、`workflowInstanceId`、工作流版本和快照 ID 关联起来。前端随后建立 SSE 连接。
-
-事件类型保持业务语义，不暴露模型内部思维过程：
-
-```text
-TASK_STARTED
-WORKFLOW_NODE_STARTED
-DOM_SEGMENTED
-FIELD_UPSERT
-VALIDATION_WARNING
-NEED_MORE_DOM
-DRAFT_READY
-TASK_FAILED
-TASK_COMPLETED
-```
-
-单个字段增量事件包含单调递增的 `sequence` 和 `draftVersion`：
-
-```text
-event: FIELD_UPSERT
-id: 37
-data: {
   "taskId": "parse_1001",
-  "sequence": 37,
-  "draftVersion": 2,
-  "field": {
-    "draftFieldId": "df_refund_status",
-    "name": "退款状态",
-    "dataType": "STRING"
-  }
+  "snapshotId": "snap_01",
+  "targetParentId": 519,
+  "sourceType": "DOM_SCOUT",
+  "inputSchemaVersion": "dom-snapshot.v2",
+  "promptBundleVersion": "field-hierarchy.v3",
+  "workflowVersion": "agent-orchestration.v2",
+  "attempt": 1,
+  "maxRepairAttempts": 2,
+  "requestedBy": "operator_01"
 }
 ```
 
-内部平台即使提供 Token 级流式输出，后端也不会把半截 JSON 直接推给字段树组件。解析网关先聚合出完整字段对象，完成 Schema 校验后再转换成 `FIELD_UPSERT`，避免前端在每个 Token 到达时反复修复非法 JSON。
+其中 `targetParentId` 是业务人员在人工采集页面中确定的挂载父级，Agent 只能在这个锚点下判断局部层级，不能为了让树完整而擅自创建整条目录祖先链。
 
-SSE 是单向通道，只负责服务器向浏览器推送任务进度。创建任务、对话修改和最终保存仍然使用普通 HTTP 请求。相比 WebSocket，这种职责划分更符合“请求由用户发起、过程由服务端持续通知”的交互模型。
+### 2.2 运行状态和中间产物
 
-连接通过心跳保持，事件携带 ID。浏览器重连时提交 `Last-Event-ID`；即使增量事件无法完整回放，前端也可以重新查询当前完整 FieldDraft，因此 SSE 断开不会改变解析任务和草稿事实。
+服务端为每个任务保存当前阶段和已完成产物：
 
-## 对话修改如何工作
+| 阶段 | 状态 | 产物 |
+| --- | --- | --- |
+| 初始化 | `STARTED` | `ParseTaskContext` |
+| 二次取证 | `EVIDENCE_READY` | `EvidencePack` |
+| 层级分析 | `HIERARCHY_READY` | `HierarchyDraft` |
+| 字段语义 | `SEMANTICS_READY` | `SemanticDraft` |
+| 反思 | `REFLECTION_READY` | `ReflectionReport` |
+| 提案组装 | `PROPOSAL_READY` | `HierarchyProposal` |
+| 后端转换 | `COMPILED` | `FieldTreeDraft` |
+| 校验 | `VALIDATED` / `VALIDATION_ISSUE` | `ValidationResult` |
+| 修复 | `REPAIRING` | `RepairFeedback`、`RepairPatch` |
+| 输出 | `READY_FOR_REVIEW` / `PARTIAL` | SSE 可推送草稿 |
 
-用户可以在对话框中输入：
+节点失败时保留上一个成功产物，不重复执行无关阶段。例如，类型枚举错误只重跑语义或修复节点，不重新读取整份 DOM。
 
-> 删除“操作”字段，把“退款状态”移动到“退款信息”下，并把“申请时间”改成日期时间类型。
+## 3. Agent 节点如何编排
 
-Agent 不重新生成整棵字段树，而是输出领域变更操作：
+### 3.1 Evidence Agent：先把证据补完整
+
+**输入**：`DomSnapshot`、`sourceRefs`、`structuralFacts`、选区上下文。
+
+**职责**：
+
+- 补读已保留节点的祖先和兄弟关系；
+- 确认标签—控件、表头—列、ARIA 关系；
+- 判断标题、页签、弹窗和选区边界是否足够支持后续层级判断；
+- 输出证据覆盖率和缺口，不做字段命名。
+
+**可用工具**：`read_snapshot_fragment`、`locate_related_node`、`read_structural_fact`。
+
+**输出**：`EvidencePack`。
 
 ```json
 {
-  "baseDraftVersion": 3,
-  "operations": [
+  "snapshotId": "snap_01",
+  "relations": [
+    {"type": "LABEL_FOR_CONTROL", "labelRef": "snap_01:n1", "controlRef": "snap_01:n2"},
+    {"type": "UNDER_SECTION_HEADING", "nodeRef": "snap_01:n2", "headingRef": "snap_01:h1"}
+  ],
+  "coverage": "SUFFICIENT",
+  "gaps": [],
+  "evidenceRefs": ["snap_01:h1", "snap_01:n1", "snap_01:n2"]
+}
+```
+
+Evidence Agent 不能恢复插件已经删除的真实值，也不能把“看起来像标题”的文本直接命名为业务分组。证据不足时返回 `EVIDENCE_GAP`，由后续反思决定补采还是部分完成。
+
+### 3.2 Hierarchy Agent：只判断业务父子
+
+**输入**：`EvidencePack`、`targetParentId`、目录路径摘要和业务说明。
+
+**职责**：
+
+- 判断哪些节点是 `SECTION`、`COMPONENT`、`FIELD`；
+- 判断同级字段是否属于同一个业务分组；
+- 用 `parentProposalId` 表达相对父级；
+- 保留 DOM 顺序作为候选顺序，不直接生成前端 `level`。
+
+**判断规则**：
+
+- 有标题和多个相关字段证据，才建立 `SECTION`；
+- 地址、联系人、商品明细等有明确对象边界时，才建立 `COMPONENT`；
+- 没有分组证据时，字段直接挂到 `targetParentId`；
+- DOM 嵌套只作为证据，不能直接等同业务父子；
+- 同名字段先保留为不同候选，不因文本相似自动合并。
+
+**输出**：`HierarchyDraft`。它表达业务层级候选，但不包含前端 `children`、展开状态或正式 ID。
+
+### 3.3 Field Semantics Agent：再判断名称和类型
+
+**输入**：`HierarchyDraft`、字段局部证据、业务术语、已有目录摘要。
+
+**职责**：
+
+- 生成标准字段名称；
+- 给出编码候选；
+- 判断 `STRING`、`DATE`、`DATETIME`、`NUMBER`、`BOOLEAN` 等数据类型；
+- 识别与已有字段的潜在同义关系；
+- 对无法确认的结论设置 `reviewRequired`。
+
+Field Semantics Agent 不能改变采集边界，不能移动到另一个未提供证据的父级，也不能输出前端渲染属性。
+
+### 3.4 Reflection Agent：只发现问题，不偷偷改结果
+
+**输入**：`EvidencePack`、`HierarchyDraft`、`SemanticDraft`。
+
+**检查项**：
+
+1. 每个结论是否有真实 `evidenceRefs`；
+2. 是否出现多个父级、环或越过目标父级；
+3. 名称、编码和数据类型是否互相冲突；
+4. 同级节点是否重复或明显不同义；
+5. 当前证据是否足以让业务人员确认。
+
+**输出**：`ReflectionReport`，只返回 `PASS` 或结构化 `ISSUE`，不直接覆盖前面节点的产物。
+
+```json
+{
+  "status": "ISSUE",
+  "issues": [
     {
-      "operation": "DELETE_FIELD",
-      "fieldId": "df_operation"
-    },
-    {
-      "operation": "MOVE_FIELD",
-      "fieldId": "df_refund_status",
-      "newParentId": "df_group_refund"
-    },
-    {
-      "operation": "CHANGE_TYPE",
-      "fieldId": "df_apply_time",
-      "dataType": "DATETIME"
+      "code": "MISSING_SECTION_EVIDENCE",
+      "nodeIds": ["p_refund_status", "p_refund_amount"],
+      "suggestedAction": "RE_EVIDENCE",
+      "reviewRequired": true
     }
   ]
 }
 ```
 
-支持的操作被限制在字段领域：
+### 3.5 Proposal Assembler：结束 Agent 主推理
 
-- `RENAME_FIELD`
-- `CHANGE_CODE`
-- `CHANGE_TYPE`
-- `MOVE_FIELD`
-- `DELETE_FIELD`
-- `CREATE_GROUP`
-- `MERGE_FIELDS`
-- `SPLIT_FIELD`
+当反思通过后，编排器把各阶段结果合成为 `HierarchyProposal`。这是 Agent 阶段的最终产物：
 
-服务端先校验操作，再应用到草稿并生成新版本。这样比重新生成整棵树更稳定，也保留了撤销、重放和变更说明。
-
-## 直接编辑如何与对话编辑共存
-
-字段树预览支持直接修改名称、编码和类型，拖拽父级，删除误识别字段，以及手工新增分组。直接编辑和对话编辑最终都转成同一组领域操作，并作用在同一份版本化草稿上。
-
-版本控制解决异步覆盖问题：
-
-```text
-对话请求基于 draftVersion = 3
-        ↓
-用户先完成一次直接编辑，草稿变成 version = 4
-        ↓
-Agent 返回基于 version = 3 的操作
-        ↓
-服务端拒绝直接套用，要求基于 version = 4 重新执行
+```json
+{
+  "proposalId": "proposal_1001",
+  "snapshotId": "snap_01",
+  "targetParentId": 519,
+  "revision": 2,
+  "nodes": [
+    {
+      "proposalNodeId": "p_refund",
+      "parentProposalId": null,
+      "semanticKind": "SECTION",
+      "name": "退款信息",
+      "dataType": null,
+      "evidenceRefs": ["snap_01:h1"],
+      "confidence": "HIGH"
+    },
+    {
+      "proposalNodeId": "p_refund_status",
+      "parentProposalId": "p_refund",
+      "semanticKind": "FIELD",
+      "name": "退款状态",
+      "dataType": "STRING",
+      "evidenceRefs": ["snap_01:n2"],
+      "confidence": "HIGH"
+    }
+  ]
+}
 ```
 
-初次解析期间前端可以预览字段增量，但在 `DRAFT_READY` 前不开放结构性编辑，从交互上进一步减少流式解析与人工编辑竞争同一字段的情况。
+Agent 不返回 `level`、`children`、前端 ID、展开状态、权限状态或目录写入命令。这样 Agent 可以负责真正的业务层级判断，但不能接管前端树和正式数据。
 
-## 草稿生命周期与正式数据库边界
+## 4. Agent 产物如何经过后端进入前端
 
-![字段草稿状态机与数据库边界](./assets/draft-lifecycle-state.svg)
+### 4.1 Normalizer / Compiler
 
-草稿可以反复经历：
+后端把 `HierarchyProposal` 编译为当前人工采集页面使用的 `FieldTreeDraft`：
 
-- 追加新的 DOM 快照；
-- Agent 重新解析增量区域；
-- 用户通过对话生成修改操作；
-- 用户直接修改字段树；
-- 质量门失败后返回编辑。
+1. 严格解析 Agent JSON，拒绝缺字段、非法枚举和超限结果；
+2. 校验 `proposalNodeId` 唯一，并生成草稿级稳定 `id`；
+3. 以 `targetParentId` 为根锚点；
+4. 根据 `parentProposalId` 计算 `parentId`、`level` 和 `children`；
+5. 按 `orderHint` 与 DOM 来源顺序确定展示顺序；
+6. 附加 `sourceRefs`、`reviewRequired`、告警和可编辑状态；
+7. 输出前端可以直接渲染的 `FieldTreeDraft`。
 
-这些操作只改变临时工作副本。临时数据可以位于前端状态、带 TTL 的草稿缓存和 Agent 工作流上下文中，但不会更新正式目录节点和闭包关系。
+后端不替 Agent 猜一个新的业务分组。发现语义冲突时返回错误给修复流程，而不是静默改成另一种含义。
 
-只有用户点击保存，前端才提交：
+### 4.2 FieldTreeDraft 是人工采集同构结果
 
 ```json
 {
   "draftId": "draft_1001",
-  "draftVersion": 7,
-  "baseTreeVersion": 12,
-  "idempotencyKey": "commit:draft_1001:v7",
-  "fields": []
+  "revision": 3,
+  "status": "READY_FOR_REVIEW",
+  "renderer": "MANUAL_FIELD_TREE_V1",
+  "targetParentId": 519,
+  "nodes": [
+    {
+      "id": "draft_refund",
+      "parentId": 519,
+      "level": 1,
+      "nodeKind": "SECTION",
+      "label": "退款信息",
+      "children": [
+        {
+          "id": "draft_refund_status",
+          "parentId": "draft_refund",
+          "level": 2,
+          "nodeKind": "FIELD",
+          "label": "退款状态",
+          "fieldType": "STRING",
+          "children": [],
+          "sourceRefs": ["snap_01:n2"],
+          "reviewRequired": false,
+          "display": {"expandable": false, "editable": true}
+        }
+      ],
+      "sourceRefs": ["snap_01:h1"],
+      "reviewRequired": false,
+      "display": {"expandable": true, "editable": true}
+    }
+  ]
 }
 ```
 
-服务端保存流程包括：
+前端只依赖 `id`、`parentId`、`level`、`children`、节点类型和审核状态。因此人工逐节点采集和 Agent 快速解析可以共用同一个一级、二级树渲染器，区别只在草稿来源和审核提示。
 
-1. 校验用户对目标平台的写权限；
-2. 校验 `draftVersion`，防止保存旧草稿；
-3. 重新执行字段树结构校验；
-4. 比较正式目录当前 `tree_version` 与 `baseTreeVersion`；
-5. 将草稿转换成新增、改名、移动等目录命令；
-6. 按父节点优先顺序写入邻接关系；
-7. 在同一事务中更新闭包表；
-8. 递增平台 `tree_version` 并记录变更；
-9. 提交事务后返回新的目录版本。
+## 5. 校验失败后的 Agent 二次生成
 
-任意一步失败都会回滚。Agent 工作流没有正式目录写权限，SSE 事件也不能触发保存，因此模型超时、浏览器刷新和用户放弃草稿都不会污染已有目录。
+### 5.1 Candidate Validator 是流程闸门
 
-## 失败、重试与用户反馈
+Candidate Validator 不依赖模型，执行确定性规则：
 
-| 错误码 | 含义 | 是否自动重试 | 前端处理 |
-| --- | --- | --- | --- |
-| `DOM_SNAPSHOT_INVALID` | 快照缺字段或 Schema 不兼容 | 否 | 提示重新采集 |
-| `DOM_FRAGMENT_TOO_LARGE` | 选区超过处理上限 | 否 | 提示缩小业务区域 |
-| `MODEL_RATE_LIMIT` | 模型网关限流 | 是，退避重试 | 保留任务和输入 |
-| `MODEL_TIMEOUT` | 单次 Agent 调用超时 | 是，限定次数 | 展示当前解析阶段 |
-| `MODEL_SCHEMA_INVALID` | 输出不符合 FieldDraft Schema | 可修复一次 | 失败后保留原草稿 |
-| `NEED_MORE_DOM` | 缺少标题、页签或父级证据 | 否 | 引导追加 DOM |
-| `DRAFT_VERSION_CONFLICT` | 异步结果基于旧草稿 | 否 | 重新基于新版本修订 |
-| `SSE_DISCONNECTED` | 观察通道中断 | 自动重连 | 重取当前完整草稿 |
-| `TREE_VERSION_CONFLICT` | 正式目录已被其他操作修改 | 否 | 重新加载并展示差异 |
-| `COMMIT_VALIDATION_FAILED` | 最终结构校验失败 | 否 | 返回字段级错误 |
+- `id`、`parentId` 和 `children` 是否能构成一棵树；
+- 是否存在多个父级、环、越过目标父级或超过最大深度；
+- `nodeKind` 和 `fieldType` 是否属于允许枚举；
+- 每个 Agent 结论是否能回指至少一个 `sourceRef`；
+- 同一父级下是否存在冲突名称或编码；
+- `FieldTreeDraft` 是否满足 `MANUAL_FIELD_TREE_V1` 前端契约。
 
-基础设施错误和业务证据不足不能使用同一种重试。限流、网络抖动可以自动重试；缺少父级上下文时重复调用同一个模型不会增加信息，只会重复消耗 Token，因此必须回到用户补充 DOM。
+常见原因码：`MALFORMED_AGENT_OUTPUT`、`PARENT_NOT_FOUND`、`MULTIPLE_PARENT`、`CYCLE_DETECTED`、`INVALID_NODE_KIND`、`SOURCE_REF_MISSING`、`DUPLICATE_SIBLING`、`DEPTH_EXCEEDED`、`FRONTEND_CONTRACT_ERROR`。
 
-## 方案演进中的关键问题
+### 5.2 RepairFeedback 回到修复 Agent
 
-### 1. 把完整 DOM 和全部目录都塞进 Prompt
+后端把错误压缩成 Agent 可以执行的修复上下文，不把整份服务端日志塞回 Prompt：
 
-这样做会同时增加 Token、噪声和敏感数据范围。最终改为局部 DOM、结构清洗和局部目录查询，Agent 根据需要调用工具补充上下文。
+```json
+{
+  "stage": "BACKEND_VALIDATE",
+  "proposalId": "proposal_1001",
+  "baseRevision": 2,
+  "errors": [
+    {
+      "code": "PARENT_NOT_FOUND",
+      "path": "nodes[1].parentProposalId",
+      "proposalNodeId": "p_refund_status",
+      "actual": "p_refund_missing",
+      "expected": "existing proposalNodeId or null",
+      "evidenceRefs": ["snap_01:n2"]
+    }
+  ],
+  "allowedActions": ["REPAIR_PARENT", "ASK_REVIEW"]
+}
+```
 
-### 2. 流式输出直接拼 JSON
+Repair Agent 只能返回局部补丁：
 
-半截 JSON 会让前端树不断进入非法状态。最终由解析网关聚合并校验完整字段对象，再发送领域事件。
+```json
+{
+  "baseRevision": 2,
+  "actions": [
+    {
+      "op": "SET_PARENT",
+      "proposalNodeId": "p_refund_status",
+      "parentProposalId": "p_refund"
+    }
+  ]
+}
+```
 
-### 3. 每次对话重新生成整棵树
+允许的动作包括 `SET_PARENT`、`RENAME`、`SET_TYPE`、`DROP_AMBIGUOUS_NODE` 和 `ASK_REVIEW`；不允许 `SET_LEVEL`、`SET_CHILDREN`、`WRITE_CATALOG` 或全量覆盖 JSON。
 
-整树重生成容易丢失人工修改，也难以解释“这次到底改了什么”。最终使用稳定字段 ID 和领域操作 Patch。
+修复后必须重新执行：
 
-### 4. 解析结果与正式目录缺少草稿隔离
+`RepairPatch → HierarchyProposal → Normalizer / Compiler → Candidate Validator`。
 
-如果解析完成后直接写入，模型输出即使结构合法，也不代表符合当前业务目录。方案因此增加草稿隔离和显式保存，正式写入必须经过权限、目录版本和事务校验。
+每个任务最多两次局部修复。超过次数后保留最后一次可编译草稿，标记 `PARTIAL` 和 `reviewRequired=true`，交给业务人员确认或重新采集 DOM。
 
-### 5. 只依赖前端草稿版本
+## 6. SSE 如何把 Agent 结果交给前端
 
-多个异步请求可能覆盖彼此。最终由服务端校验 `baseDraftVersion`，旧版本操作不能静默应用。
+SSE 只推送后端已经处理过的业务事件，不推送模型思维链和未经编译的 Agent JSON：
 
-### 6. 工作流在线修改影响运行中任务
+| 事件 | 触发时机 | 前端行为 |
+| --- | --- | --- |
+| `TASK_STARTED` | 上下文创建完成 | 展示任务开始 |
+| `EVIDENCE_READY` | 二次取证完成 | 展示证据摘要 |
+| `PROPOSAL_COMPILED` | HierarchyProposal 编译完成 | 展示“正在校验” |
+| `TREE_DRAFT_READY` | FieldTreeDraft 校验通过 | 用现有人工树组件渲染 |
+| `REPAIR_STARTED` | 后端生成 RepairFeedback | 标记问题节点处理中 |
+| `TREE_DRAFT_UPDATED` | 修复后重新编译通过 | 用新 revision 替换草稿 |
+| `REVIEW_REQUIRED` | 证据不足或修复耗尽 | 保留树并突出人工确认项 |
+| `TASK_FAILED` | 无法形成可用草稿 | 展示错误和补采入口 |
 
-工作流实例绑定 `workflowVersion`、`promptVersion`、`schemaVersion` 和模型配置。新版本只影响新任务，旧任务仍然使用创建时的配置，便于复现问题。
+SSE 断开后，前端按 `taskId + revision` 重新读取服务端草稿，不依赖浏览器缓存恢复 Agent 状态，也不覆盖已经发生的人工编辑。
 
-## 如何评估解析质量
+## 7. Prompt 和工具怎样保证 Agent 可控
 
-评估集由固定 DOM 快照和人工标注字段树组成，至少覆盖表单、表格、详情区、混合布局、同名字段和缺少上下文等类型。每次调整工作流、Prompt 或模型配置后记录：
+### 7.1 Prompt 的固定结构
 
-- 字段识别准确率和召回率；
-- 父级关系准确率；
-- 字段类型准确率；
-- FieldDraft 结构合法率；
-- 首次解析后人工修改率；
-- `NEED_MORE_DOM` 的原因分布；
-- 单个快照的模型调用次数与 Token；
-- SSE 重连后的草稿一致性；
-- 对话操作应用成功率；
-- 保存前目录版本冲突率。
+每个节点使用相同的上下文分层，但角色规则不同：
 
-评估报告同时记录 `workflowVersion`、`promptVersion`、`schemaVersion` 和模型配置，避免只保留最终分数却无法复现实验条件。
+1. **系统规则**：当前节点能判断什么、不能判断什么；
+2. **任务上下文**：目标父级、页面标题、页签、业务说明；
+3. **结构证据**：本节点需要的 `DomSnapshot` 或上游中间产物；
+4. **输出 Schema**：只允许节点自己的字段和枚举；
+5. **修复上下文**：仅在 Repair Agent 中加入 `RepairFeedback` 和问题节点。
+
+
+### 7.2 工具白名单
+
+| Agent | 工具 | 工具目的 |
+| --- | --- | --- |
+| Evidence Agent | `read_snapshot_fragment`、`locate_related_node` | 读取已采集证据 |
+| Hierarchy Agent | `read_catalog_context` | 查询目标父级附近的目录摘要 |
+| Field Semantics Agent | `lookup_business_terms`、`lookup_catalog_fields` | 查询术语和潜在同义字段 |
+| Reflection Agent | `check_evidence_refs` | 检查来源引用是否存在 |
+| Repair Agent | `build_repair_patch` | 根据后端允许动作生成局部补丁 |
+
+Agent 没有任意浏览器控制、数据库连接、正式目录写入和任意 HTTP 调用权限。
+
+## 8. 完整示例：退款信息区域
+
+业务人员在售后页签展开“退款信息”，用 DOM-SCOUT 选择包含标题、状态和金额的容器，并指定目标父级“售后记录”。
+
+1. Evidence Agent 发现标题—字段和标签—控件关系，输出 `EvidencePack`；
+2. Hierarchy Agent 判断“退款信息”是 `SECTION`，“退款状态”和“退款金额”是其子字段；
+3. Field Semantics Agent 为两个字段补充标准名称和类型；
+4. Reflection Agent 检查所有节点都能回指标题或控件证据；
+5. 编排器输出 `HierarchyProposal`；
+6. 后端生成一级“退款信息”、二级“退款状态”和“退款金额”的 `FieldTreeDraft`；
+7. Candidate Validator 通过后发送 `TREE_DRAFT_READY`；
+8. 前端使用现有人工采集树渲染，业务人员修改或确认；
+9. 确认操作才转换为 `CatalogCommand`。
+
+如果“退款状态”的 `parentProposalId` 指向不存在的节点，后端返回 `PARENT_NOT_FOUND`，Repair Agent 只修复这个父级关系，再重新编译和校验，不重新读取整页 DOM，也不重写无关字段。
+
+## 9. 失败、边界和评价指标
+
+| 场景 | Agent / 后端处理 | 最终结果 |
+| --- | --- | --- |
+| `DomSnapshot` 为空 | 在 Agent 启动前终止，返回 `DOM_FRAGMENT_EMPTY` | 要求重新选择区域 |
+| 证据不足 | Evidence Agent 标记缺口，Reflection Agent 建议补采或人工确认 | `REVIEW_REQUIRED` / `PARTIAL` |
+| Agent 输出格式错误 | 后端生成 `MALFORMED_AGENT_OUTPUT`，允许一次格式修复 | 不直接渲染 |
+| 父级、环或重复冲突 | Validator 生成 `RepairFeedback`，Repair Agent 局部修复 | 修复后重新校验 |
+| 类型无法确定 | 保留安全候选并设置 `reviewRequired` | 可渲染但需确认 |
+| 修复次数耗尽 | 保存最后可编译草稿和原因码 | `PARTIAL` |
+| SSE 断开 | 按任务和 revision 查询服务端草稿 | 恢复当前树 |
+| 用户在修复期间编辑 | 以最新草稿版本为基线重新校验 | 不覆盖人工修改 |
+
+Agent 编排的核心指标是：
+
+- `HierarchyProposal` 生成成功率；
+- `FieldTreeDraft` 编译成功率和前端渲染成功率；
+- 父级关系准确率、证据回指有效率；
+- 局部修复成功率和平均修复次数；
+- 人工修改率、确认耗时和 `PARTIAL` 比例。
 
 ## 本章结论
 
-这套 Agent 方案的价值不在于替代字段平台的业务规则，而在于把非结构化 DOM 转换成可编辑的字段草稿。内部低代码平台负责模型和工作流运行，字段项目负责 DOM 契约、领域工具、SSE 事件、草稿版本、前端修订和最终目录事务。
+本章的核心不是“调用了几个模型”，而是把业务层级判断组织成一条可控的 Agent 编排：Evidence Agent 补证据，Hierarchy Agent 判父子，Field Semantics Agent 判名称和类型，Reflection Agent 找问题，Proposal Assembler 固化语义结果，后端编译和校验为人工同构 `FieldTreeDraft`，SSE 推送确认，Repair Agent 只根据错误码做有限局部修复。
 
-最终形成的可信边界是：**Agent 可以解析和建议，用户可以对话修改或直接编辑，只有显式保存才能改变正式字段目录。**
+Agent 负责业务解释，工作流负责顺序和预算，后端负责契约和确定性质量门，前端负责展示与人工确认。四者边界清楚，方案才能既能快速解析层级，又不会让 Agent 全盘接管系统。

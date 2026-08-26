@@ -25,7 +25,7 @@
 <text x="96" y="370" font-size="13" font-weight="700" fill="#c084fc">domain</text>
 <rect x="280" y="375" width="640" height="42" rx="10" fill="#ffffff" stroke="#c084fc" stroke-width="2.2"/>
 <rect x="284" y="379" width="632" height="34" rx="7" fill="none" stroke="#c084fc" stroke-width="0.8" opacity="0.55"/>
-<text x="600.0" y="405" text-anchor="middle" class="node">Evidence、Candidate Tree、Catalog Policy、Change Set、Task State</text>
+<text x="600.0" y="405" text-anchor="middle" class="node">DomSnapshot、HierarchyProposal、FieldTreeDraft、CatalogCommand、Task State</text>
 <line x1="600" y1="435" x2="600" y2="465" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
 <rect x="80" y="465" width="1040" height="90" rx="12" fill="#fff7ed" fill-opacity="0.45" stroke="#fb923c" stroke-width="1.4" stroke-dasharray="7,5"/>
 <text x="96" y="490" font-size="13" font-weight="700" fill="#fb923c">infrastructure</text>
