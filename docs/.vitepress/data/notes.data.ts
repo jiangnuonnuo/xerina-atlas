@@ -18,6 +18,6 @@ export default createContentLoader<NoteItem[]>('notes/**/*.md', {
         frontmatter: item.frontmatter,
         excerpt: item.excerpt,
       }))
-      .sort((a, b) => Number(a.frontmatter.order ?? 999) - Number(b.frontmatter.order ?? 999))
+      .sort((a, b) => Number(b.frontmatter.order ?? -Infinity) - Number(a.frontmatter.order ?? -Infinity))
   },
 })

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="1200" height="820">
+<style>text{font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Microsoft YaHei","Microsoft JhengHei","SimHei",sans-serif}</style>
+<defs>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/></marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c"/></marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9333ea"/></marker>
+</defs>
+<rect width="1200" height="820" fill="#ffffff"/>
+<text x="600.0" y="48" font-size="27px" fill="#111827" font-weight="700" text-anchor="middle">HashMap 底层结构（JDK 1.8）</text>
+<text x="600.0" y="80" font-size="14px" fill="#6b7280" font-weight="400" text-anchor="middle">散列表 = Node&lt;K,V&gt;[] table + 链表 + 红黑树；table 延迟到第一次写入时创建</text>
+<line x1="56" y1="104" x2="1144" y2="104" stroke="#d1d5db" stroke-width="2"/>
+<text x="64" y="144" font-size="17px" fill="#2563eb" font-weight="700" text-anchor="start">① table 是桶数组：每个下标对应一个桶</text>
+<rect x="64" y="168" width="120" height="92" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+<text x="124" y="199" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="middle">桶 0</text>
+<text x="124" y="230" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="middle">null</text>
+<rect x="200" y="168" width="120" height="92" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+<text x="260" y="199" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="middle">桶 1</text>
+<text x="260" y="230" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="middle">null</text>
+<rect x="336" y="168" width="120" height="92" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8"/>
+<text x="396" y="199" font-size="13px" fill="#ea580c" font-weight="700" text-anchor="middle">桶 2</text>
+<text x="396" y="230" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="middle">冲突节点</text>
+<rect x="472" y="168" width="120" height="92" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+<text x="532" y="199" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="middle">桶 3</text>
+<text x="532" y="230" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="middle">null</text>
+<rect x="608" y="168" width="120" height="92" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+<text x="668" y="199" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="middle">桶 4</text>
+<text x="668" y="230" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="middle">null</text>
+<rect x="744" y="168" width="120" height="92" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8"/>
+<text x="804" y="199" font-size="13px" fill="#ea580c" font-weight="700" text-anchor="middle">桶 5</text>
+<text x="804" y="230" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="middle">冲突节点</text>
+<rect x="880" y="168" width="120" height="92" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+<text x="940" y="199" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="middle">桶 6</text>
+<text x="940" y="230" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="middle">null</text>
+<rect x="1016" y="168" width="120" height="92" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8"/>
+<text x="1076" y="199" font-size="13px" fill="#ea580c" font-weight="700" text-anchor="middle">桶 7</text>
+<text x="1076" y="230" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="middle">冲突节点</text>
+<text x="64" y="296" font-size="13px" fill="#6b7280" font-weight="700" text-anchor="start">定位公式</text>
+<text x="168" y="296" font-size="16px" fill="#2563eb" font-weight="700" text-anchor="start" font-family="monospace">index = (n - 1) &amp; hash</text>
+<text x="470" y="296" font-size="13px" fill="#6b7280" font-weight="400" text-anchor="start">n 为 2 的幂，位与才能等价于取模</text>
+<line x1="56" y1="328" x2="1144" y2="328" stroke="#d1d5db" stroke-width="2"/>
+<text x="64" y="366" font-size="17px" fill="#2563eb" font-weight="700" text-anchor="start">② 桶内节点形态：冲突少是链表，冲突深才树化</text>
+<rect x="64" y="392" width="336" height="302" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8"/>
+<text x="88" y="426" font-size="17px" fill="#16a34a" font-weight="700" text-anchor="start">Node&lt;K,V&gt;</text>
+<line x1="88" y1="444" x2="376" y2="444" stroke="#16a34a" stroke-width="1"/>
+<rect x="432" y="392" width="336" height="302" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="1.8"/>
+<text x="456" y="426" font-size="17px" fill="#dc2626" font-weight="700" text-anchor="start">TreeNode&lt;K,V&gt;</text>
+<line x1="456" y1="444" x2="744" y2="444" stroke="#dc2626" stroke-width="1"/>
+<rect x="800" y="392" width="336" height="302" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8"/>
+<text x="824" y="426" font-size="17px" fill="#ea580c" font-weight="700" text-anchor="start">三个阈值</text>
+<line x1="824" y1="444" x2="1112" y2="444" stroke="#ea580c" stroke-width="1"/>
+<text x="88" y="480" font-size="13px" fill="#111827" font-weight="400" text-anchor="start" font-family="monospace">int hash</text>
+<text x="88" y="514" font-size="13px" fill="#111827" font-weight="400" text-anchor="start" font-family="monospace">K key</text>
+<text x="88" y="548" font-size="13px" fill="#111827" font-weight="400" text-anchor="start" font-family="monospace">V value</text>
+<text x="88" y="582" font-size="13px" fill="#111827" font-weight="400" text-anchor="start" font-family="monospace">Node next</text>
+<text x="226" y="480" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">扰动后的哈希</text>
+<text x="226" y="514" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">equals 判断身份</text>
+<text x="226" y="548" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">映射值</text>
+<text x="226" y="582" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">链表后继指针</text>
+<text x="456" y="480" font-size="13px" fill="#111827" font-weight="400" text-anchor="start">继承 Node 字段</text>
+<text x="456" y="514" font-size="13px" fill="#111827" font-weight="400" text-anchor="start" font-family="monospace">left / right</text>
+<text x="456" y="548" font-size="13px" fill="#111827" font-weight="400" text-anchor="start" font-family="monospace">parent / red</text>
+<text x="456" y="590" font-size="13px" fill="#dc2626" font-weight="700" text-anchor="start">红黑树查找 O(log k)</text>
+<text x="456" y="624" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">同时保留 next，便于遍历和退化</text>
+<text x="824" y="480" font-size="13px" fill="#dc2626" font-weight="700" text-anchor="start" font-family="monospace">TREEIFY_THRESHOLD = 8</text>
+<text x="824" y="514" font-size="13px" fill="#16a34a" font-weight="700" text-anchor="start" font-family="monospace">UNTREEIFY_THRESHOLD = 6</text>
+<text x="824" y="548" font-size="13px" fill="#ea580c" font-weight="700" text-anchor="start" font-family="monospace">MIN_TREEIFY_CAPACITY = 64</text>
+<text x="824" y="596" font-size="13px" fill="#111827" font-weight="400" text-anchor="start">链表 ≥ 8 且容量 ≥ 64</text>
+<text x="824" y="628" font-size="13px" fill="#6b7280" font-weight="400" text-anchor="start">才真正 treeify；否则先 resize</text>
+<rect x="64" y="732" width="1024" height="52" rx="12" fill="#f8fafc" stroke="#d1d5db" stroke-width="1.2"/>
+<text x="88" y="764" font-size="13px" fill="#6b7280" font-weight="400" text-anchor="start">注意：HashMap 不承诺顺序；LinkedHashMap 复用这些节点并额外维护双向链表。</text>
+</svg>

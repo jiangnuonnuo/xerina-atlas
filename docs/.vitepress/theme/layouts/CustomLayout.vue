@@ -27,6 +27,10 @@ const layout = computed(() => frontmatter.value.layout || 'doc')
   <div v-else-if="layout === 'portfolio-index'" class="atlas-site"><SiteHeader /><PortfolioPage /><SiteFooter /></div>
   <ProjectDocLayout v-else-if="layout === 'project-doc'" />
   <ExperienceDetailLayout v-else-if="layout === 'experience-detail'" />
+  <div v-else-if="frontmatter.type === 'note'" class="note-default-surface">
+    <SiteHeader />
+    <div class="note-default-theme"><TeekTheme.Layout /></div>
+  </div>
   <TeekTheme.Layout v-else />
   <ImageLightbox />
 </template>

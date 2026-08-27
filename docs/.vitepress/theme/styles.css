@@ -295,3 +295,8 @@ h1, h2, h3, p { margin-top: 0; }h1, h2, h3 { color: var(--ink-strong); font-fami
 .skills-node-c { bottom: 0; left: 16%; }
 .skills-word { position: absolute; bottom: 20px; left: 23px; color: #285985; font-family: "Space Grotesk", sans-serif; font-size: 42px; font-weight: 700; line-height: .9; letter-spacing: -.08em; }
 .skills-caption { position: absolute; top: 20px; right: 20px; color: #547492; font-family: "JetBrains Mono", monospace; font-size: 9px; line-height: 1.55; letter-spacing: .1em; }
+
+/* Notes keep VitePress's original article and right-side outline; only the site header is shared. */
+.note-default-surface { min-height: 100vh; background: var(--paper); color: var(--ink); }
+.note-default-theme .VPNav, .note-default-theme .VPNavScreen { display: none; }
+.note-default-theme .VPContent { padding-top: 0; }

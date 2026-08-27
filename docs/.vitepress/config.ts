@@ -72,7 +72,7 @@ export default defineConfig({
             { text: '文章首页', link: '/notes/' },
             ...notes
               .slice()
-              .sort((a, b) => (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999))
+              .sort((a, b) => Number(b.frontmatter.order ?? -Infinity) - Number(a.frontmatter.order ?? -Infinity))
               .map((note) => ({
                 text: note.frontmatter.title,
                 link: note.url,

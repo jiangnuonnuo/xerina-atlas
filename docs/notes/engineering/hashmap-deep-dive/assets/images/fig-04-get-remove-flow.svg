@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 980" width="1200" height="980">
+<style>text{font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Microsoft YaHei","Microsoft JhengHei","SimHei",sans-serif}</style>
+<defs>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/></marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c"/></marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9333ea"/></marker>
+</defs>
+<rect width="1200" height="980" fill="#ffffff"/>
+<text x="600.0" y="48" font-size="27px" fill="#111827" font-weight="700" text-anchor="middle">get / remove：定位相同，修改状态不同</text>
+<text x="600.0" y="80" font-size="14px" fill="#6b7280" font-weight="400" text-anchor="middle">两条路径都先算 hash 和桶下标；get 只读，remove 会摘链、减 size 并增加 modCount</text>
+<line x1="56" y1="104" x2="1144" y2="104" stroke="#d1d5db" stroke-width="2"/>
+<rect x="390" y="132" width="420" height="82" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+<text x="600" y="163" font-size="14px" fill="#2563eb" font-weight="700" text-anchor="middle">共享前置</text>
+<text x="600" y="191" font-size="14px" fill="#111827" font-weight="600" text-anchor="middle" font-family="monospace">h = hash(key)；i = (n - 1) &amp; h</text>
+<rect x="64" y="260" width="480" height="570" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" data-graph-role="container"/>
+<text x="88" y="296" font-size="18px" fill="#16a34a" font-weight="700" text-anchor="start">get(key)</text>
+<line x1="88" y1="314" x2="520" y2="314" stroke="#16a34a" stroke-width="1"/>
+<rect x="656" y="260" width="480" height="570" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8" data-graph-role="container"/>
+<text x="680" y="296" font-size="18px" fill="#ea580c" font-weight="700" text-anchor="start">remove(key)</text>
+<line x1="680" y1="314" x2="1112" y2="314" stroke="#ea580c" stroke-width="1"/>
+<path d="M 484,214 L 484,236 L 304,236 L 304,260" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<path d="M 716,214 L 716,236 L 896,236 L 896,260" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+<rect x="88" y="342" width="432" height="68" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.2"/>
+<text x="106" y="369" font-size="13px" fill="#16a34a" font-weight="700" text-anchor="start">桶为空？</text>
+<text x="106" y="391" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">是 → 返回 null</text>
+<line x1="304" y1="410" x2="304" y2="440" stroke="#16a34a" stroke-width="1.7" marker-end="url(#arrow-green)"/>
+<rect x="88" y="440" width="432" height="68" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.2"/>
+<text x="106" y="467" font-size="13px" fill="#16a34a" font-weight="700" text-anchor="start">首节点命中？</text>
+<text x="106" y="489" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">是 → 返回 value</text>
+<line x1="304" y1="508" x2="304" y2="538" stroke="#16a34a" stroke-width="1.7" marker-end="url(#arrow-green)"/>
+<rect x="88" y="538" width="432" height="68" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.2"/>
+<text x="106" y="565" font-size="13px" fill="#16a34a" font-weight="700" text-anchor="start">TreeNode？</text>
+<text x="106" y="587" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">是 → 红黑树查找</text>
+<line x1="304" y1="606" x2="304" y2="636" stroke="#16a34a" stroke-width="1.7" marker-end="url(#arrow-green)"/>
+<rect x="88" y="636" width="432" height="68" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.2"/>
+<text x="106" y="663" font-size="13px" fill="#16a34a" font-weight="700" text-anchor="start">否则遍历 next</text>
+<text x="106" y="685" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">hash 相等后再 equals</text>
+<line x1="304" y1="704" x2="304" y2="734" stroke="#16a34a" stroke-width="1.7" marker-end="url(#arrow-green)"/>
+<rect x="88" y="734" width="432" height="68" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.2"/>
+<text x="106" y="761" font-size="13px" fill="#16a34a" font-weight="700" text-anchor="start">查不到</text>
+<text x="106" y="783" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">返回 null</text>
+<rect x="680" y="342" width="432" height="68" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
+<text x="698" y="369" font-size="13px" fill="#ea580c" font-weight="700" text-anchor="start">桶为空？</text>
+<text x="698" y="391" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">是 → 返回 null</text>
+<line x1="896" y1="410" x2="896" y2="440" stroke="#ea580c" stroke-width="1.7" marker-end="url(#arrow-orange)"/>
+<rect x="680" y="440" width="432" height="68" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
+<text x="698" y="467" font-size="13px" fill="#ea580c" font-weight="700" text-anchor="start">找到目标节点？</text>
+<text x="698" y="489" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">否 → 返回 null</text>
+<line x1="896" y1="508" x2="896" y2="538" stroke="#ea580c" stroke-width="1.7" marker-end="url(#arrow-orange)"/>
+<rect x="680" y="538" width="432" height="68" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
+<text x="698" y="565" font-size="13px" fill="#ea580c" font-weight="700" text-anchor="start">链表还是树？</text>
+<text x="698" y="587" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">按结构摘链或删树节点</text>
+<line x1="896" y1="606" x2="896" y2="636" stroke="#ea580c" stroke-width="1.7" marker-end="url(#arrow-orange)"/>
+<rect x="680" y="636" width="432" height="68" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
+<text x="698" y="663" font-size="13px" fill="#ea580c" font-weight="700" text-anchor="start">更新状态</text>
+<text x="698" y="685" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">--size；++modCount</text>
+<line x1="896" y1="704" x2="896" y2="734" stroke="#ea580c" stroke-width="1.7" marker-end="url(#arrow-orange)"/>
+<rect x="680" y="734" width="432" height="68" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
+<text x="698" y="761" font-size="13px" fill="#ea580c" font-weight="700" text-anchor="start">返回旧 value</text>
+<text x="698" y="783" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">结构性修改完成</text>
+<rect x="64" y="860" width="1072" height="70" rx="12" fill="#f8fafc" stroke="#d1d5db" stroke-width="1.2"/>
+<text x="88" y="890" font-size="13px" fill="#111827" font-weight="700" text-anchor="start">关键区别</text>
+<text x="190" y="890" font-size="13px" fill="#6b7280" font-weight="400" text-anchor="start">get 不改变 size/modCount；remove 会改变结构，因此会让已有迭代器感知到并发修改。</text>
+<text x="88" y="914" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">get 的命中条件始终是 hash 先相等，再通过 == 或 equals 判断 key 身份。</text>
+<text x="64" y="950" font-size="12px" fill="#6b7280" font-weight="700" text-anchor="start">图例</text>
+<line x1="72" y1="970" x2="110" y2="970" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/><text x="120" y="975" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">共享定位</text>
+<line x1="72" y1="970" x2="110" y2="970" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/><text x="120" y="975" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">只读查找</text>
+<line x1="72" y1="970" x2="110" y2="970" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)"/><text x="120" y="975" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">结构修改</text>
+</svg>

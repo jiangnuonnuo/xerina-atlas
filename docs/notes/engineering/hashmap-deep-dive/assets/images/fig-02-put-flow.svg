@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1220" width="1200" height="1220">
+<style>text{font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Microsoft YaHei","Microsoft JhengHei","SimHei",sans-serif}</style>
+<defs>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/></marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c"/></marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9333ea"/></marker>
+</defs>
+<rect width="1200" height="1220" fill="#ffffff"/>
+<text x="600.0" y="48" font-size="27px" fill="#111827" font-weight="700" text-anchor="middle">put(key, value) 一次完整流程</text>
+<text x="600.0" y="80" font-size="14px" fill="#6b7280" font-weight="400" text-anchor="middle">JDK 1.8 的 putVal：初始化、定位、覆盖、插入、树化和扩容都在一条链路里</text>
+<line x1="56" y1="104" x2="1144" y2="104" stroke="#d1d5db" stroke-width="2"/>
+<rect x="64" y="132" width="1072" height="92" rx="14" fill="#faf5ff" stroke="#9333ea" stroke-width="1.6"/>
+<text x="88" y="160" font-size="14px" fill="#9333ea" font-weight="700" text-anchor="start">1 计算扰动后的 hash</text>
+<text x="88" y="188" font-size="13px" fill="#111827" font-weight="600" text-anchor="start" font-family="monospace">h = key.hashCode() ^ (key.hashCode() &gt;&gt;&gt; 16)</text>
+<text x="760" y="188" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">null key 的 hash 视为 0</text>
+<line x1="600" y1="224" x2="600" y2="260" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+<rect x="64" y="260" width="1072" height="92" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="1.6"/>
+<text x="88" y="288" font-size="14px" fill="#2563eb" font-weight="700" text-anchor="start">2 定位桶下标</text>
+<text x="88" y="316" font-size="13px" fill="#111827" font-weight="600" text-anchor="start" font-family="monospace">i = (n - 1) &amp; hash</text>
+<text x="760" y="316" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">n 是 table.length；table 为空时先 resize</text>
+<line x1="600" y1="352" x2="600" y2="388" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+<rect x="64" y="388" width="1072" height="92" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.6"/>
+<text x="88" y="416" font-size="14px" fill="#16a34a" font-weight="700" text-anchor="start">3 桶为空？</text>
+<text x="88" y="444" font-size="13px" fill="#111827" font-weight="600" text-anchor="start" font-family="monospace">tab[i] == null  →  newNode(hash, key, value, null)</text>
+<text x="760" y="444" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">没有冲突，直接插入</text>
+<line x1="600" y1="480" x2="600" y2="516" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+<rect x="64" y="516" width="1072" height="92" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="1.6"/>
+<text x="88" y="544" font-size="14px" fill="#ea580c" font-weight="700" text-anchor="start">4 首节点是否命中？</text>
+<text x="88" y="572" font-size="13px" fill="#111827" font-weight="600" text-anchor="start" font-family="monospace">hash 相等 &amp;&amp; (key == k || key.equals(k))</text>
+<text x="760" y="572" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">命中：只替换 value，不新增 size</text>
+<line x1="600" y1="608" x2="600" y2="644" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+<rect x="64" y="644" width="1072" height="92" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="1.6"/>
+<text x="88" y="672" font-size="14px" fill="#dc2626" font-weight="700" text-anchor="start">5 桶内是什么结构？</text>
+<text x="88" y="700" font-size="13px" fill="#111827" font-weight="600" text-anchor="start" font-family="monospace">TreeNode → putTreeVal()；否则遍历 Node.next</text>
+<text x="760" y="700" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">链表尾插；找到相同 key 则覆盖</text>
+<line x1="600" y1="736" x2="600" y2="772" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+<rect x="64" y="772" width="1072" height="92" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="1.6"/>
+<text x="88" y="800" font-size="14px" fill="#ea580c" font-weight="700" text-anchor="start">6 冲突是否过深？</text>
+<text x="88" y="828" font-size="13px" fill="#111827" font-weight="600" text-anchor="start" font-family="monospace">binCount &gt;= 7  →  treeifyBin(tab, hash)</text>
+<text x="760" y="828" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">容量 &lt; 64 时 treeifyBin 会优先 resize</text>
+<line x1="600" y1="864" x2="600" y2="900" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+<rect x="64" y="900" width="1072" height="92" rx="14" fill="#f8fafc" stroke="#2563eb" stroke-width="1.6"/>
+<text x="88" y="928" font-size="14px" fill="#2563eb" font-weight="700" text-anchor="start">7 更新状态并检查阈值</text>
+<text x="88" y="956" font-size="13px" fill="#111827" font-weight="600" text-anchor="start" font-family="monospace">++modCount; ++size; if (size &gt; threshold) resize()</text>
+<text x="760" y="956" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">覆盖旧值不增加 size；新节点才结构性修改</text>
+<rect x="64" y="1030" width="1072" height="112" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="1.4"/>
+<text x="88" y="1064" font-size="14px" fill="#ea580c" font-weight="700" text-anchor="start">面试加分点</text>
+<text x="88" y="1092" font-size="13px" fill="#111827" font-weight="400" text-anchor="start">put 返回旧 value；新插入通常返回 null。putIfAbsent 通过 onlyIfAbsent 控制是否覆盖。</text>
+<text x="88" y="1118" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">HashMap 为 LinkedHashMap 留了 afterNodeAccess / afterNodeInsertion 等钩子，但自身实现为空。</text>
+<text x="64" y="1166" font-size="12px" fill="#6b7280" font-weight="700" text-anchor="start">图例</text>
+<line x1="72" y1="1186" x2="110" y2="1186" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/><text x="120" y="1191" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">执行顺序</text>
+</svg>
