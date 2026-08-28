@@ -1,0 +1,34 @@
+{
+  "schema_version": 1, "mode": "architecture", "template_type": "architecture", "style": 1,
+  "motion_scene": "service-blueprint", "quality_profile": "standard", "width": 960, "height": 700,
+  "title": "AI MCP Gateway · Runtime Boundary", "subtitle": "配置发布、会话承载与能力执行的单体分层",
+  "containers": [
+    {"id":"edge","x":40,"y":120,"width":880,"height":100,"label":"接入层"},
+    {"id":"application","x":40,"y":270,"width":880,"height":130,"label":"应用与领域层"},
+    {"id":"adapters","x":40,"y":450,"width":880,"height":140,"label":"适配与基础设施层"}
+  ],
+  "nodes": [
+    {"id":"admin","kind":"rect","x":70,"y":155,"width":190,"height":54,"label":"管理端","sublabel":"网关 / 数据源 / 能力包","fill":"#eff6ff","stroke":"#93c5fd"},
+    {"id":"mcp","kind":"double_rect","x":385,"y":155,"width":210,"height":54,"label":"MCP 接入","sublabel":"Streamable HTTP + SSE","fill":"#f5f3ff","stroke":"#a78bfa"},
+    {"id":"client","kind":"rect","x":700,"y":155,"width":180,"height":54,"label":"MCP 客户端","sublabel":"initialize / tools / call","fill":"#f0fdf4","stroke":"#86efac"},
+    {"id":"workbench","kind":"rect","x":70,"y":320,"width":190,"height":54,"label":"运营用例","sublabel":"导入、测试、发布","fill":"#fff7ed","stroke":"#fdba74"},
+    {"id":"session","kind":"double_rect","x":385,"y":320,"width":210,"height":54,"label":"会话与消息","sublabel":"JSON-RPC + 生命周期","fill":"#f5f3ff","stroke":"#a78bfa"},
+    {"id":"package","kind":"rect","x":700,"y":320,"width":180,"height":54,"label":"能力包运行时","sublabel":"已发布工具投影","fill":"#fff7ed","stroke":"#fdba74"},
+    {"id":"mysql","kind":"cylinder","x":70,"y":500,"width":190,"height":60,"label":"MySQL","sublabel":"配置与发布事实","fill":"#eff6ff","stroke":"#60a5fa"},
+    {"id":"redis","kind":"cylinder","x":385,"y":500,"width":210,"height":60,"label":"Redis","sublabel":"会话 / 版本 / 同步","fill":"#fef2f2","stroke":"#fca5a5"},
+    {"id":"upstream","kind":"rect","x":700,"y":500,"width":180,"height":60,"label":"上游能力","sublabel":"HTTP / MCP / LLM","fill":"#f0fdfa","stroke":"#5eead4"}
+  ],
+  "arrows": [
+    {"id":"a1","source":"client","target":"mcp","source_port":"left","target_port":"right","flow":"read","motion_role":"ingress","motion_stage":1,"motion_order":0,"label":"MCP 请求"},
+    {"id":"a2","source":"admin","target":"workbench","source_port":"bottom","target_port":"top","flow":"control","motion_role":"policy","motion_stage":2,"motion_order":0,"label":"配置命令"},
+    {"id":"a3","source":"mcp","target":"session","source_port":"bottom","target_port":"top","flow":"control","motion_role":"fanout","motion_stage":3,"motion_order":0,"label":"会话路由"},
+    {"id":"a4","source":"workbench","target":"mysql","source_port":"bottom","target_port":"top","flow":"write","motion_role":"data-write","motion_stage":4,"motion_order":0,"label":"持久化"},
+    {"id":"a5","source":"session","target":"redis","source_port":"bottom","target_port":"top","flow":"write","motion_role":"data-write","motion_stage":4,"motion_order":1,"label":"会话状态"},
+    {"id":"a6","source":"package","target":"upstream","source_port":"bottom","target_port":"top","flow":"data","motion_role":"event","motion_stage":5,"motion_order":0,"label":"工具执行"},
+    {"id":"a7","source":"redis","target":"package","source_port":"right","target_port":"bottom","flow":"read","motion_role":"telemetry","motion_stage":6,"motion_order":0,"label":"版本投影"},
+    {"id":"a8","source":"upstream","target":"session","source_port":"top","target_port":"right","flow":"feedback","motion_role":"response","motion_stage":7,"motion_order":0,"label":"结果回传"}
+  ],
+  "legend_orientation":"horizontal","legend_x":48,"legend_y":640,
+  "legend":[{"flow":"read","label":"请求 / 读取"},{"flow":"control","label":"控制编排"},{"flow":"write","label":"状态写入"},{"flow":"data","label":"能力数据"},{"flow":"feedback","label":"结果回传"}],
+  "footer":"公开文档版 · 仅保留业务边界与数据流"
+}

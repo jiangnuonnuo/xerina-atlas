@@ -1,0 +1,13 @@
+{
+  "artifact": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-mcp-gateway/assets/capability-lifecycle.gif",
+  "source_svg": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-mcp-gateway/assets/capability-lifecycle.svg",
+  "source_png": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-mcp-gateway/assets/capability-lifecycle.png",
+  "generator": "fireworks-tech-graph semantic diagram with reviewed flow overlay",
+  "format": "GIF",
+  "loop_playback": "infinite",
+  "frame_count": 24,
+  "fps": 10,
+  "routes": 5,
+  "visual_review": "passed",
+  "motion_meaning": "moving markers follow documented request, state, execution, or response routes"
+}
