@@ -1,0 +1,345 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 3,
+  "motion_scene": "service-blueprint",
+  "quality_profile": "showcase",
+  "width": 960,
+  "height": 720,
+  "title": "AIGC 权益额度控制",
+  "subtitle": "资格、名额、额度与事件的并发边界",
+  "containers": [
+    {
+      "id": "edge",
+      "x": 40,
+      "y": 110,
+      "width": 880,
+      "height": 110,
+      "label": "入口",
+      "header_prefix": "01"
+    },
+    {
+      "id": "services",
+      "x": 40,
+      "y": 270,
+      "width": 880,
+      "height": 130,
+      "label": "业务边界",
+      "header_prefix": "02"
+    },
+    {
+      "id": "data",
+      "x": 40,
+      "y": 420,
+      "width": 680,
+      "height": 130,
+      "label": "持久化事实"
+    },
+    {
+      "id": "observability",
+      "x": 740,
+      "y": 420,
+      "width": 180,
+      "height": 130,
+      "label": "SLO"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "clients",
+      "kind": "rect",
+      "x": 60,
+      "y": 146,
+      "width": 160,
+      "height": 54,
+      "label": "AIGC 请求",
+      "sublabel": "图片数 / 参数",
+      "fill": "#0b3b5e",
+      "stroke": "#94a3b8",
+      "flat": true
+    },
+    {
+      "id": "gateway",
+      "kind": "double_rect",
+      "x": 300,
+      "y": 146,
+      "width": 160,
+      "height": 54,
+      "label": "统一受理",
+      "sublabel": "idempotent",
+      "fill": "#0a4b78",
+      "stroke": "#38bdf8",
+      "flat": true
+    },
+    {
+      "id": "auth",
+      "kind": "hexagon",
+      "x": 570,
+      "y": 146,
+      "width": 160,
+      "height": 54,
+      "label": "规则判定",
+      "sublabel": "activity + quota",
+      "fill": "#0b3b5e",
+      "stroke": "#f59e0b",
+      "flat": true
+    },
+    {
+      "id": "order",
+      "kind": "rect",
+      "x": 80,
+      "y": 330,
+      "width": 140,
+      "height": 50,
+      "label": "名额控制",
+      "sublabel": "team capacity",
+      "fill": "#0a4b78",
+      "stroke": "#38bdf8",
+      "flat": true
+    },
+    {
+      "id": "catalog",
+      "kind": "rect",
+      "x": 310,
+      "y": 330,
+      "width": 140,
+      "height": 50,
+      "label": "额度控制",
+      "sublabel": "freeze / release",
+      "fill": "#0a4b78",
+      "stroke": "#38bdf8",
+      "flat": true
+    },
+    {
+      "id": "billing",
+      "kind": "rect",
+      "x": 540,
+      "y": 330,
+      "width": 140,
+      "height": 50,
+      "label": "事实落库",
+      "sublabel": "local commit",
+      "fill": "#0a4b78",
+      "stroke": "#38bdf8",
+      "flat": true
+    },
+    {
+      "id": "events",
+      "kind": "hexagon",
+      "x": 760,
+      "y": 330,
+      "width": 140,
+      "height": 50,
+      "label": "RabbitMQ",
+      "sublabel": "grant event",
+      "fill": "#123c5a",
+      "stroke": "#a855f7",
+      "flat": true
+    },
+    {
+      "id": "postgres",
+      "kind": "cylinder",
+      "x": 80,
+      "y": 480,
+      "width": 140,
+      "height": 50,
+      "label": "活动账本",
+      "sublabel": "capacity facts",
+      "fill": "#082f49",
+      "stroke": "#38bdf8"
+    },
+    {
+      "id": "redis",
+      "kind": "cylinder",
+      "x": 310,
+      "y": 480,
+      "width": 140,
+      "height": 50,
+      "label": "Redis + Lua",
+      "sublabel": "atomic gate",
+      "fill": "#082f49",
+      "stroke": "#38bdf8"
+    },
+    {
+      "id": "warehouse",
+      "kind": "cylinder",
+      "x": 540,
+      "y": 480,
+      "width": 140,
+      "height": 50,
+      "label": "额度流水",
+      "sublabel": "ledger facts",
+      "fill": "#082f49",
+      "stroke": "#38bdf8"
+    },
+    {
+      "id": "metrics",
+      "kind": "rect",
+      "x": 765,
+      "y": 480,
+      "width": 130,
+      "height": 50,
+      "label": "对账监控",
+      "sublabel": "reconcile / SLO",
+      "fill": "#123c5a",
+      "stroke": "#10b981",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "client-request",
+      "source": "clients",
+      "target": "gateway",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "read",
+      "motion_role": "ingress",
+      "motion_stage": 1,
+      "motion_order": 0,
+      "label": "request"
+    },
+    {
+      "id": "policy-check",
+      "source": "gateway",
+      "target": "auth",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "policy",
+      "motion_stage": 2,
+      "motion_order": 0,
+      "label": "check"
+    },
+    {
+      "id": "a-route-order",
+      "source": "gateway",
+      "target": "order",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "read",
+      "motion_role": "fanout",
+      "motion_stage": 3,
+      "motion_order": 0
+    },
+    {
+      "id": "b-route-catalog",
+      "source": "gateway",
+      "target": "catalog",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "read",
+      "motion_role": "fanout",
+      "motion_stage": 3,
+      "motion_order": 1
+    },
+    {
+      "id": "c-route-billing",
+      "source": "gateway",
+      "target": "billing",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "read",
+      "motion_role": "fanout",
+      "motion_stage": 3,
+      "motion_order": 2
+    },
+    {
+      "id": "order-store",
+      "source": "order",
+      "target": "postgres",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "motion_role": "data-write",
+      "motion_stage": 4,
+      "motion_order": 0,
+      "label": "persist"
+    },
+    {
+      "id": "catalog-cache",
+      "source": "catalog",
+      "target": "redis",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "motion_role": "data-write",
+      "motion_stage": 4,
+      "motion_order": 1,
+      "label": "atomic"
+    },
+    {
+      "id": "billing-store",
+      "source": "billing",
+      "target": "warehouse",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "motion_role": "data-write",
+      "motion_stage": 4,
+      "motion_order": 2,
+      "label": "ledger"
+    },
+    {
+      "id": "publish-event",
+      "source": "billing",
+      "target": "events",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "feedback",
+      "motion_role": "event",
+      "motion_stage": 5,
+      "motion_order": 0,
+      "label": "event"
+    },
+    {
+      "id": "observe",
+      "source": "events",
+      "target": "metrics",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "feedback",
+      "motion_role": "telemetry",
+      "motion_stage": 6,
+      "motion_order": 0,
+      "label": "audit"
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 600,
+  "legend_locked": true,
+  "legend": [
+    {
+      "flow": "read",
+      "label": "request"
+    },
+    {
+      "flow": "control",
+      "label": "policy"
+    },
+    {
+      "flow": "data",
+      "label": "atomic / ledger"
+    },
+    {
+      "flow": "feedback",
+      "label": "event / audit"
+    }
+  ],
+  "blueprint_title_block": {
+    "title": "AIGC BENEFIT",
+    "subtitle": "QUOTA CONTROL",
+    "center_caption": "STYLE 3",
+    "left_caption": "REV: 1.0",
+    "right_caption": "DWG: QUOTA-001",
+    "width": 220,
+    "height": 76,
+    "x": 700,
+    "y": 620
+  },
+  "footer": "Style 3 · Blueprint · atomic gate, durable facts, and reconciliation",
+  "footer_x": 48,
+  "footer_y": 700
+}

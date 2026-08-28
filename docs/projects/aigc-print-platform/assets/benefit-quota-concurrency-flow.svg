@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="960" height="720" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="3" data-visual-theme="Blueprint" data-diagram-type="architecture" data-motion-scene="service-blueprint" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="showcase" data-max-bends-per-edge="2" data-max-total-bends="8" data-max-route-stretch="1.35" data-max-bridged-crossings="0" data-min-node-gap="40.0" data-min-container-gutter="20.0" data-min-label-clearance="4.0" data-min-segment-length="16.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fde047"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#bae6fd"/>
+    </marker>
+    <pattern id="blueprintGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#0ea5e9" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+    <style>
+    text { font-family: 'SF Mono', 'Fira Code', Menlo, 'Microsoft YaHei', 'SimHei', monospace; }
+    .title { font-size: 30px; font-weight: 700; fill: #e0f2fe; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #7dd3fc; }
+    .section { font-size: 13px; font-weight: 700; fill: #67e8f9; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .node-title { font-weight: 700; fill: #e0f2fe; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #7dd3fc; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #e0f2fe; }
+    .legend { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #7dd3fc; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #e0f2fe; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="720.0" fill="#082f49"/>
+  <text x="480.0" y="56" text-anchor="middle" class="title">AIGC 权益额度控制</text>
+  <text x="480.0" y="82" text-anchor="middle" class="subtitle">资格、名额、额度与事件的并发边界</text>
+  <g id="edge" data-graph-role="container" data-container-id="edge" data-semantic-role="boundary" data-graph-bounds="40,110,920,220">
+  <rect data-graph-role="container" x="40.0" y="110.0" width="880.0" height="110.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="134.0" class="section">01 // 入口</text>
+    <rect id="edge-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="116" width="95.52" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="services" data-graph-role="container" data-container-id="services" data-semantic-role="boundary" data-graph-bounds="40,270,920,400">
+  <rect data-graph-role="container" x="40.0" y="270.0" width="880.0" height="130.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="294.0" class="section">02 // 业务边界</text>
+    <rect id="services-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="276" width="121.52" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="data" data-graph-role="container" data-container-id="data" data-semantic-role="boundary" data-graph-bounds="40,420,720,550">
+  <rect data-graph-role="container" x="40.0" y="420.0" width="680.0" height="130.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="444.0" class="section">持久化事实</text>
+    <rect id="data-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="426" width="95" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="observability" data-graph-role="container" data-container-id="observability" data-semantic-role="boundary" data-graph-bounds="740,420,920,550">
+  <rect data-graph-role="container" x="740.0" y="420.0" width="180.0" height="130.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="758.0" y="444.0" class="section">SLO</text>
+    <rect id="observability-header" data-graph-role="reserved" data-reserved-kind="container-header" x="748" y="426" width="52.62" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="client-request" data-graph-role="edge" data-edge-id="client-request" data-source="clients" data-target="gateway" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="ingress" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 220,173 L 300,173" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="policy-check" data-graph-role="edge" data-edge-id="policy-check" data-source="gateway" data-target="auth" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="policy" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 460,173 L 570,173" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="a-route-order" data-graph-role="edge" data-edge-id="a-route-order" data-source="gateway" data-target="order" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="fanout" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 362,200 L 362,306 L 150,306 L 150,330" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="b-route-catalog" data-graph-role="edge" data-edge-id="b-route-catalog" data-source="gateway" data-target="catalog" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="fanout" data-motion-stage="3" data-motion-order="1" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 380,200 L 380,330" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="c-route-billing" data-graph-role="edge" data-edge-id="c-route-billing" data-source="gateway" data-target="billing" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="fanout" data-motion-stage="3" data-motion-order="2" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 398,200 L 398,224 L 610,224 L 610,330" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="order-store" data-graph-role="edge" data-edge-id="order-store" data-source="order" data-target="postgres" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="data-write" data-motion-stage="4" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 150,380 L 150,480" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="catalog-cache" data-graph-role="edge" data-edge-id="catalog-cache" data-source="catalog" data-target="redis" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="data-write" data-motion-stage="4" data-motion-order="1" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 380,380 L 380,480" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="billing-store" data-graph-role="edge" data-edge-id="billing-store" data-source="billing" data-target="warehouse" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="data-write" data-motion-stage="4" data-motion-order="2" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 610,380 L 610,480" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="publish-event" data-graph-role="edge" data-edge-id="publish-event" data-source="billing" data-target="events" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="event" data-motion-stage="5" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 680,355 L 760,355" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <path id="observe" data-graph-role="edge" data-edge-id="observe" data-source="events" data-target="metrics" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="telemetry" data-motion-stage="6" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 830,380 L 830,480" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <g id="node-clients" data-graph-role="node" data-node-id="clients" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,146,220,200">
+  <rect x="60.0" y="146.0" width="160.0" height="54.0" rx="8.0" fill="#0b3b5e" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="140.0" y="173.0" text-anchor="middle" class="node-title" font-size="18.0">AIGC 请求</text>
+  <text x="140.0" y="195.0" text-anchor="middle" class="node-sub">图片数 / 参数</text>
+  </g>
+  <g id="node-gateway" data-graph-role="node" data-node-id="gateway" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="300,146,460,200">
+  <rect x="300.0" y="146.0" width="160.0" height="54.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="2.0"/>
+  <rect x="306.0" y="152.0" width="148.0" height="42.0" rx="5.0" fill="none" stroke="#38bdf8" stroke-width="1.2" opacity="0.65"/>
+  <text x="380.0" y="173.0" text-anchor="middle" class="node-title" font-size="18.0">统一受理</text>
+  <text x="380.0" y="195.0" text-anchor="middle" class="node-sub">idempotent</text>
+  </g>
+  <g id="node-auth" data-graph-role="node" data-node-id="auth" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="570,146,730,200">
+  <path d="M 592.0 146.0 L 708.0 146.0 L 730.0 173.0 L 708.0 200.0 L 592.0 200.0 L 570.0 173.0 Z" fill="#0b3b5e" stroke="#f59e0b" stroke-width="2.0"/>
+  <text x="650.0" y="173.0" text-anchor="middle" class="node-title" font-size="18.0">规则判定</text>
+  <text x="650.0" y="195.0" text-anchor="middle" class="node-sub">activity + quota</text>
+  </g>
+  <g id="node-order" data-graph-role="node" data-node-id="order" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="80,330,220,380">
+  <rect x="80.0" y="330.0" width="140.0" height="50.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="150.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">名额控制</text>
+  <text x="150.0" y="377.0" text-anchor="middle" class="node-sub">team capacity</text>
+  </g>
+  <g id="node-catalog" data-graph-role="node" data-node-id="catalog" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="310,330,450,380">
+  <rect x="310.0" y="330.0" width="140.0" height="50.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="380.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">额度控制</text>
+  <text x="380.0" y="377.0" text-anchor="middle" class="node-sub">freeze / release</text>
+  </g>
+  <g id="node-billing" data-graph-role="node" data-node-id="billing" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="540,330,680,380">
+  <rect x="540.0" y="330.0" width="140.0" height="50.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="610.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">事实落库</text>
+  <text x="610.0" y="377.0" text-anchor="middle" class="node-sub">local commit</text>
+  </g>
+  <g id="node-events" data-graph-role="node" data-node-id="events" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="760,330,900,380">
+  <path d="M 782.0 330.0 L 878.0 330.0 L 900.0 355.0 L 878.0 380.0 L 782.0 380.0 L 760.0 355.0 Z" fill="#123c5a" stroke="#a855f7" stroke-width="2.0"/>
+  <text x="830.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">RabbitMQ</text>
+  <text x="830.0" y="377.0" text-anchor="middle" class="node-sub">grant event</text>
+  </g>
+  <g id="node-postgres" data-graph-role="node" data-node-id="postgres" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="80,480,220,530">
+  <ellipse cx="150.0" cy="486.25" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <rect x="80.0" y="486.25" width="140.0" height="37.5" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="150.0" cy="523.75" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="150.0" cy="499.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="150.0" cy="510.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="150.0" y="499.0" text-anchor="middle" class="node-title" font-size="18.0">活动账本</text>
+  <text x="150.0" y="523.0" text-anchor="middle" class="node-sub">capacity facts</text>
+  </g>
+  <g id="node-redis" data-graph-role="node" data-node-id="redis" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="310,480,450,530">
+  <ellipse cx="380.0" cy="486.25" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <rect x="310.0" y="486.25" width="140.0" height="37.5" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="380.0" cy="523.75" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="380.0" cy="499.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="380.0" cy="510.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="380.0" y="499.0" text-anchor="middle" class="node-title" font-size="18.0">Redis + Lua</text>
+  <text x="380.0" y="523.0" text-anchor="middle" class="node-sub">atomic gate</text>
+  </g>
+  <g id="node-warehouse" data-graph-role="node" data-node-id="warehouse" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="540,480,680,530">
+  <ellipse cx="610.0" cy="486.25" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <rect x="540.0" y="486.25" width="140.0" height="37.5" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="610.0" cy="523.75" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="610.0" cy="499.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="610.0" cy="510.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="610.0" y="499.0" text-anchor="middle" class="node-title" font-size="18.0">额度流水</text>
+  <text x="610.0" y="523.0" text-anchor="middle" class="node-sub">ledger facts</text>
+  </g>
+  <g id="node-metrics" data-graph-role="node" data-node-id="metrics" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="765,480,895,530">
+  <rect x="765.0" y="480.0" width="130.0" height="50.0" rx="8.0" fill="#123c5a" stroke="#10b981" stroke-width="1.8"/>
+  <text x="830.0" y="505.0" text-anchor="middle" class="node-title" font-size="18.0">对账监控</text>
+  <text x="830.0" y="527.0" text-anchor="middle" class="node-sub">reconcile / SLO</text>
+  </g>
+  <g id="client-request-label" data-graph-role="label" data-owner="client-request" data-graph-bounds="228.64,142,291.36,162">
+  <rect x="228.64" y="142.0" width="62.72" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="260.0" y="156.0" text-anchor="middle" class="arrow-label">request</text>
+  </g>
+  <g id="policy-check-label" data-graph-role="label" data-owner="policy-check" data-graph-bounds="490.6,142,539.4,162">
+  <rect x="490.6" y="142.0" width="48.8" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="515.0" y="156.0" text-anchor="middle" class="arrow-label">check</text>
+  </g>
+  <g id="order-store-label" data-graph-role="label" data-owner="order-store" data-graph-bounds="153,416,212.6,436">
+  <rect x="153.0" y="416.0" width="59.599999999999994" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="182.8" y="430.0" text-anchor="middle" class="arrow-label">persist</text>
+  </g>
+  <g id="catalog-cache-label" data-graph-role="label" data-owner="catalog-cache" data-graph-bounds="324.36,416,377,436">
+  <rect x="324.36" y="416.0" width="52.64" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="350.68" y="430.0" text-anchor="middle" class="arrow-label">atomic</text>
+  </g>
+  <g id="billing-store-label" data-graph-role="label" data-owner="billing-store" data-graph-bounds="554.36,416,607,436">
+  <rect x="554.36" y="416.0" width="52.64" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="580.68" y="430.0" text-anchor="middle" class="arrow-label">ledger</text>
+  </g>
+  <g id="publish-event-label" data-graph-role="label" data-owner="publish-event" data-graph-bounds="695.6,324,744.4,344">
+  <rect x="695.6" y="324.0" width="48.8" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="720.0" y="338.0" text-anchor="middle" class="arrow-label">event</text>
+  </g>
+  <g id="observe-label" data-graph-role="label" data-owner="observe" data-graph-bounds="813.32,420,859,440">
+  <rect x="813.32" y="420.0" width="45.67999999999999" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="836.16" y="434.0" text-anchor="middle" class="arrow-label">audit</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="38" y="586" width="533.2" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="48.0" y1="600.0" x2="78.0" y2="600.0" stroke="#38bdf8" stroke-width="2.1" marker-end="url(#arrowC)"/>
+    <text data-graph-role="decoration" x="88.0" y="604.0" class="legend">request</text>
+    <line data-graph-role="decoration" x1="164.72" y1="600.0" x2="194.72" y2="600.0" stroke="#67e8f9" stroke-width="2.1" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="204.72" y="604.0" class="legend">policy</text>
+    <line data-graph-role="decoration" x1="268.24" y1="600.0" x2="298.24" y2="600.0" stroke="#fde047" stroke-width="2.1" marker-end="url(#arrowE)"/>
+    <text data-graph-role="decoration" x="308.24" y="604.0" class="legend">atomic / ledger</text>
+    <line data-graph-role="decoration" x1="429.12" y1="600.0" x2="459.12" y2="600.0" stroke="#fb7185" stroke-width="2.1" marker-end="url(#arrowG)"/>
+    <text data-graph-role="decoration" x="469.12" y="604.0" class="legend">event / audit</text>
+  </g>
+  <g id="blueprint-title-block" data-graph-role="reserved" data-graph-bounds="694,614,926,702">
+  <rect x="700.0" y="620.0" width="220.0" height="76.0" fill="#0b3552" stroke="#0ea5e9" stroke-width="1.2"/>
+  <line x1="700.0" y1="638.0" x2="920.0" y2="638.0" stroke="#0ea5e9" stroke-width="1"/>
+  <line x1="700.0" y1="674.0" x2="920.0" y2="674.0" stroke="#0ea5e9" stroke-width="1"/>
+  <line x1="773.3333333333334" y1="674.0" x2="773.3333333333334" y2="696.0" stroke="#0ea5e9" stroke-width="0.7"/>
+  <line x1="846.6666666666666" y1="674.0" x2="846.6666666666666" y2="696.0" stroke="#0ea5e9" stroke-width="0.7"/>
+  <text x="810.0" y="633.0" text-anchor="middle" font-size="10" font-weight="600" fill="#7dd3fc">QUOTA CONTROL</text>
+  <text x="810.0" y="662.0" text-anchor="middle" font-size="18" font-weight="700" fill="#e0f2fe">AIGC BENEFIT</text>
+  <text x="736.6666666666666" y="688.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#7dd3fc">REV: 1.0</text>
+  <text x="810.0" y="688.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#67e8f9">STYLE 3</text>
+  <text x="883.3333333333334" y="688.0" text-anchor="middle" font-size="7.78" font-weight="600" fill="#7dd3fc">DWG: QUOTA-001</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,688,524,704">
+  <text x="48.0" y="700.0" class="footnote">Style 3 · Blueprint · atomic gate, durable facts, and reconciliation</text>
+  </g>
+</svg>

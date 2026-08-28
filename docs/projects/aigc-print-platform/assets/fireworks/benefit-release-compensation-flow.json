@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "mode": "flow",
+  "template_type": "flow",
+  "style": 11,
+  "semantic_profile": "event-transit",
+  "diagram_type": "event_stream",
+  "line_code": "LINE C · COMPENSATION",
+  "quality_profile": "showcase",
+  "width": 1172,
+  "height": 720,
+  "title": "失败与超时回补链路",
+  "subtitle": "条件关闭 → 名额回补 → 对账后重新开放库存",
+  "topics": [
+    {
+      "id": "benefit.events",
+      "color": "#e4475b"
+    },
+    {
+      "id": "benefit.dlq",
+      "color": "#c62828"
+    }
+  ],
+  "containers": [
+    {
+      "id": "benefit-stream",
+      "x": 35,
+      "y": 140,
+      "width": 1102,
+      "height": 410,
+      "label": "benefit.events",
+      "subtitle": "业务状态 · 原子预扣 · RabbitMQ · 可补偿",
+      "header_prefix": "LINE C",
+      "header_separator": " · "
+    }
+  ],
+  "nodes": [
+    {
+      "id": "timeout-scan",
+      "kind": "transit_terminal",
+      "transit_role": "producer",
+      "topic_id": "benefit.events",
+      "station_order": 0,
+      "operation": "business transition",
+      "x": 60,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "超时识别",
+      "sublabel": "pending records",
+      "rail_color": "#e4475b",
+      "badge": "定时"
+    },
+    {
+      "id": "close-record",
+      "kind": "transit_station",
+      "transit_role": "station",
+      "topic_id": "benefit.events",
+      "station_order": 1,
+      "operation": "business transition",
+      "x": 278,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "条件关闭",
+      "sublabel": "state guard",
+      "rail_color": "#e4475b",
+      "badge": "幂等"
+    },
+    {
+      "id": "slot-release",
+      "kind": "transit_junction",
+      "transit_role": "junction",
+      "topic_id": "benefit.events",
+      "station_order": 2,
+      "operation": "business transition",
+      "x": 496,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "名额回补",
+      "sublabel": "capacity restore",
+      "rail_color": "#e4475b",
+      "badge": "回补"
+    },
+    {
+      "id": "reconcile-check",
+      "kind": "transit_station",
+      "transit_role": "station",
+      "topic_id": "benefit.events",
+      "station_order": 3,
+      "operation": "business transition",
+      "x": 714,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "对账确认",
+      "sublabel": "Redis + DB",
+      "rail_color": "#e4475b",
+      "badge": "校验"
+    },
+    {
+      "id": "reusable-stock",
+      "kind": "transit_terminal",
+      "transit_role": "consumer",
+      "topic_id": "benefit.events",
+      "station_order": 4,
+      "operation": "business transition",
+      "x": 932,
+      "y": 258,
+      "width": 180,
+      "height": 78,
+      "label": "可复用库存",
+      "sublabel": "next valid join",
+      "rail_color": "#e4475b",
+      "badge": "恢复",
+      "consumer_group": "benefit-grant-v1"
+    },
+    {
+      "id": "release-dlq",
+      "kind": "transit_terminal",
+      "transit_role": "dlq",
+      "topic_id": "benefit.dlq",
+      "x": 496,
+      "y": 430,
+      "width": 150,
+      "height": 78,
+      "label": "补偿异常",
+      "sublabel": "manual replay",
+      "stroke": "#c62828",
+      "badge": "死信"
+    },
+    {
+      "id": "release-ledger",
+      "kind": "transit_terminal",
+      "transit_role": "state_store",
+      "topic_id": "benefit.events",
+      "x": 714,
+      "y": 430,
+      "width": 150,
+      "height": 78,
+      "label": "释放流水",
+      "sublabel": "audit fact",
+      "rail_color": "#00897b",
+      "badge": "可审计"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "release-rail-01",
+      "source": "timeout-scan",
+      "target": "close-record",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "release-rail-12",
+      "source": "close-record",
+      "target": "slot-release",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "release-rail-23",
+      "source": "slot-release",
+      "target": "reconcile-check",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 3,
+      "motion_order": 0
+    },
+    {
+      "id": "release-rail-34",
+      "source": "reconcile-check",
+      "target": "reusable-stock",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 4,
+      "motion_order": 0
+    },
+    {
+      "id": "release-to-dlq",
+      "source": "slot-release",
+      "target": "release-dlq",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "feedback",
+      "transit_type": "dead_letter",
+      "topic_id": "benefit.dlq",
+      "motion_role": "dead-letter",
+      "motion_stage": 5,
+      "motion_order": 0,
+      "dashed": true
+    },
+    {
+      "id": "release-state",
+      "source": "reconcile-check",
+      "target": "release-ledger",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "write",
+      "transit_type": "state",
+      "topic_id": "benefit.events",
+      "motion_role": "state-project",
+      "motion_stage": 5,
+      "motion_order": 1
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 610,
+  "legend_locked": true,
+  "legend": [
+    {
+      "flow": "control",
+      "label": "business rail"
+    },
+    {
+      "flow": "write",
+      "label": "state projection"
+    },
+    {
+      "flow": "feedback",
+      "label": "replay / rollback"
+    }
+  ],
+  "footer": "Style 11 · Event Transit · compensation is part of inventory design",
+  "footer_x": 48,
+  "footer_y": 695
+}

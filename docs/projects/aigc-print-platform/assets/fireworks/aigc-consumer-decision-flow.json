@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 3,
+  "quality_profile": "standard",
+  "width": 960,
+  "height": 620,
+  "title": "Consumer Execution Flow",
+  "subtitle": "producer persists the task first; consumer claims, executes, and acks after state",
+  "containers": [
+    { "id": "consume", "x": 40, "y": 110, "width": 880, "height": 390, "label": "Message Consumption", "header_prefix": "01" }
+  ],
+  "nodes": [
+    { "id": "message", "kind": "rect", "x": 70, "y": 180, "width": 150, "height": 56, "label": "收到消息", "sublabel": "taskId + requestId", "fill": "#0b3b5e", "stroke": "#94a3b8", "flat": true },
+    { "id": "local-check", "kind": "hexagon", "x": 300, "y": 180, "width": 170, "height": 56, "label": "本地检查", "sublabel": "unique + state CAS", "fill": "#0b3b5e", "stroke": "#f59e0b", "flat": true },
+    { "id": "consumer", "kind": "double_rect", "x": 560, "y": 180, "width": 170, "height": 56, "label": "消费者执行", "sublabel": "claim + submit", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "upstream", "kind": "hexagon", "x": 760, "y": 360, "width": 150, "height": 56, "label": "上游防重", "sublabel": "same id → same task", "fill": "#321a2c", "stroke": "#fb7185", "flat": true },
+    { "id": "skip", "kind": "rect", "x": 70, "y": 360, "width": 170, "height": 56, "label": "跳过并确认", "sublabel": "terminal / duplicate", "fill": "#123c5a", "stroke": "#22c55e", "flat": true },
+    { "id": "persist", "kind": "rect", "x": 300, "y": 360, "width": 170, "height": 56, "label": "保存执行结果", "sublabel": "external id + state", "fill": "#123c5a", "stroke": "#22c55e", "flat": true }
+  ],
+  "arrows": [
+    { "id": "message-check", "source": "message", "target": "local-check", "source_port": "right", "target_port": "left", "flow": "read", "label": "load" },
+    { "id": "check-consumer", "source": "local-check", "target": "consumer", "source_port": "right", "target_port": "left", "flow": "control", "label": "claim" },
+    { "id": "check-skip", "source": "local-check", "target": "skip", "source_port": "bottom", "target_port": "top", "flow": "control", "label": "terminal / lost claim" },
+    { "id": "consumer-upstream", "source": "consumer", "target": "upstream", "source_port": "bottom", "target_port": "top", "flow": "feedback", "label": "submit with id" },
+    { "id": "consumer-persist", "source": "consumer", "target": "persist", "source_port": "bottom", "target_port": "top", "flow": "data", "label": "save" },
+    { "id": "redelivery", "source": "upstream", "target": "persist", "source_port": "left", "target_port": "right", "flow": "feedback", "label": "same task id", "route_points": [[700, 388], [520, 388]] }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 550,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "read", "label": "load" },
+    { "flow": "control", "label": "local guard" },
+    { "flow": "data", "label": "persist" },
+    { "flow": "feedback", "label": "upstream dedupe" }
+  ],
+  "footer": "Producer owns task acceptance; consumer owns execution state and acks only after persistence",
+  "footer_x": 48,
+  "footer_y": 600
+}

@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="960" height="720" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="3" data-visual-theme="Blueprint" data-diagram-type="architecture" data-motion-scene="" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fde047"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#bae6fd"/>
+    </marker>
+    <pattern id="blueprintGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#0ea5e9" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+    <style>
+    text { font-family: 'SF Mono', 'Fira Code', Menlo, 'Microsoft YaHei', 'SimHei', monospace; }
+    .title { font-size: 30px; font-weight: 700; fill: #e0f2fe; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #7dd3fc; }
+    .section { font-size: 13px; font-weight: 700; fill: #67e8f9; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .node-title { font-weight: 700; fill: #e0f2fe; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #7dd3fc; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #e0f2fe; }
+    .legend { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #7dd3fc; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #e0f2fe; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="720.0" fill="#082f49"/>
+  <text x="480.0" y="56" text-anchor="middle" class="title">Producer-First Task Delivery</text>
+  <text x="480.0" y="82" text-anchor="middle" class="subtitle">persist the task first, confirm the broker, then consume idempotently</text>
+  <g id="producer" data-graph-role="container" data-container-id="producer" data-semantic-role="boundary" data-graph-bounds="40,105,920,270">
+  <rect data-graph-role="container" x="40.0" y="105.0" width="880.0" height="165.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="129.0" class="section">01 // PRODUCER PATH · DATABASE FIRST, MESSAGE AFTER</text>
+    <rect id="producer-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="111" width="388.02" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="consumer" data-graph-role="container" data-container-id="consumer" data-semantic-role="boundary" data-graph-bounds="40,310,920,485">
+  <rect data-graph-role="container" x="40.0" y="310.0" width="880.0" height="175.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="334.0" class="section">02 // CONSUMER PATH · EXECUTE ONCE EFFECTIVELY</text>
+    <rect id="consumer-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="316" width="356.56" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="recovery" data-graph-role="container" data-container-id="recovery" data-semantic-role="boundary" data-graph-bounds="40,520,920,625">
+  <rect data-graph-role="container" x="40.0" y="520.0" width="880.0" height="105.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="544.0" class="section">03 // FAILURE BOUNDARY · NO DB/MQ TRANSACTION</text>
+    <rect id="recovery-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="526" width="345.64" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="publish-delivery" data-graph-role="edge" data-edge-id="publish-delivery" data-source="publish" data-target="delivery" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="3" data-route-stretch="1.223" data-bridges="" d="M 680,228 L 680,285 L 125,285 L 48,285 L 48,365 L 125,365" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="entry-identity" data-graph-role="edge" data-edge-id="entry-identity" data-source="entry" data-target="identity" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 190,199 L 245,199" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="identity-task" data-graph-role="edge" data-edge-id="identity-task" data-source="identity" data-target="task" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 375,199 L 430,199" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="task-publish" data-graph-role="edge" data-edge-id="task-publish" data-source="task" data-target="publish" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 560,199 L 615,199" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="publish-confirm" data-graph-role="edge" data-edge-id="publish-confirm" data-source="publish" data-target="confirm" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 745,199 L 800,199" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="delivery-local" data-graph-role="edge" data-edge-id="delivery-local" data-source="delivery" data-target="local" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 190,394 L 245,394" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="local-submit" data-graph-role="edge" data-edge-id="local-submit" data-source="local" data-target="submit" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 375,394 L 430,394" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="submit-dedupe" data-graph-role="edge" data-edge-id="submit-dedupe" data-source="submit" data-target="dedupe" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 560,394 L 615,394" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <path id="dedupe-ack" data-graph-role="edge" data-edge-id="dedupe-ack" data-source="dedupe" data-target="ack" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 745,394 L 800,394" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="pending-retry" data-graph-role="edge" data-edge-id="pending-retry" data-source="pending" data-target="retry" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 300,580 L 390,580" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="retry-repair" data-graph-role="edge" data-edge-id="retry-repair" data-source="retry" data-target="repair" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 570,580 L 660,580" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <g id="node-entry" data-graph-role="node" data-node-id="entry" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,170,190,228">
+  <rect x="60.0" y="170.0" width="130.0" height="58.0" rx="8.0" fill="#0b3b5e" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="125.0" y="199.0" text-anchor="middle" class="node-title" font-size="18.0">任务入口</text>
+  <text x="125.0" y="221.0" text-anchor="middle" class="node-sub">validate request</text>
+  </g>
+  <g id="node-identity" data-graph-role="node" data-node-id="identity" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="245,170,375,228">
+  <rect x="245.0" y="170.0" width="130.0" height="58.0" rx="8.0" fill="#0b3b5e" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="310.0" y="199.0" text-anchor="middle" class="node-title" font-size="17.58">稳定 taskId</text>
+  <text x="310.0" y="221.0" text-anchor="middle" class="node-sub">requestId + unique</text>
+  </g>
+  <g id="node-task" data-graph-role="node" data-node-id="task" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="430,170,560,228">
+  <ellipse cx="495.0" cy="177.25" rx="32.5" ry="7.25" fill="#123c5a" stroke="#06d6a0" stroke-width="2.2"/>
+  <rect x="430.0" y="177.25" width="130.0" height="43.5" fill="#123c5a" stroke="#06d6a0" stroke-width="2.2"/>
+  <ellipse cx="495.0" cy="220.75" rx="32.5" ry="7.25" fill="#123c5a" stroke="#06d6a0" stroke-width="2.2"/>
+  <ellipse cx="495.0" cy="192.04" rx="32.5" ry="7.25" fill="none" stroke="#06d6a0" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="495.0" cy="204.8" rx="32.5" ry="7.25" fill="none" stroke="#06d6a0" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="495.0" y="193.0" text-anchor="middle" class="node-title" font-size="18.0">任务库入库</text>
+  <text x="495.0" y="217.0" text-anchor="middle" class="node-sub">PENDING + unique</text>
+  </g>
+  <g id="node-publish" data-graph-role="node" data-node-id="publish" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="615,170,745,228">
+  <rect x="615.0" y="170.0" width="130.0" height="58.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="2.0"/>
+  <rect x="621.0" y="176.0" width="118.0" height="46.0" rx="5.0" fill="none" stroke="#38bdf8" stroke-width="1.2" opacity="0.65"/>
+  <text x="680.0" y="199.0" text-anchor="middle" class="node-title" font-size="13.0">RabbitMQ 发布</text>
+  <text x="680.0" y="221.0" text-anchor="middle" class="node-sub">persistent message</text>
+  </g>
+  <g id="node-confirm" data-graph-role="node" data-node-id="confirm" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="800,170,920,228">
+  <path d="M 822.0 170.0 L 898.0 170.0 L 920.0 199.0 L 898.0 228.0 L 822.0 228.0 L 800.0 199.0 Z" fill="#123c5a" stroke="#06d6a0" stroke-width="2.0"/>
+  <text x="860.0" y="199.0" text-anchor="middle" class="node-title" font-size="12.0">Publisher Confirm</text>
+  <text x="860.0" y="221.0" text-anchor="middle" class="node-sub">broker accepted</text>
+  </g>
+  <g id="node-delivery" data-graph-role="node" data-node-id="delivery" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,365,190,423">
+  <rect x="60.0" y="365.0" width="130.0" height="58.0" rx="8.0" fill="#0b3b5e" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="125.0" y="394.0" text-anchor="middle" class="node-title" font-size="18.0">消息投递</text>
+  <text x="125.0" y="416.0" text-anchor="middle" class="node-sub">manual ack</text>
+  </g>
+  <g id="node-local" data-graph-role="node" data-node-id="local" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="245,365,375,423">
+  <path d="M 267.0 365.0 L 353.0 365.0 L 375.0 394.0 L 353.0 423.0 L 267.0 423.0 L 245.0 394.0 Z" fill="#0b3b5e" stroke="#f59e0b" stroke-width="2.0"/>
+  <text x="310.0" y="394.0" text-anchor="middle" class="node-title" font-size="12.36">本地 taskId 防重</text>
+  <text x="310.0" y="416.0" text-anchor="middle" class="node-sub">check + claim</text>
+  </g>
+  <g id="node-submit" data-graph-role="node" data-node-id="submit" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="430,365,560,423">
+  <rect x="430.0" y="365.0" width="130.0" height="58.0" rx="8.0" fill="#321a2c" stroke="#fb7185" stroke-width="2.0"/>
+  <rect x="436.0" y="371.0" width="118.0" height="46.0" rx="5.0" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.65"/>
+  <text x="495.0" y="394.0" text-anchor="middle" class="node-title" font-size="18.0">上游提交</text>
+  <text x="495.0" y="416.0" text-anchor="middle" class="node-sub">same taskId</text>
+  </g>
+  <g id="node-dedupe" data-graph-role="node" data-node-id="dedupe" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="615,365,745,423">
+  <path d="M 637.0 365.0 L 723.0 365.0 L 745.0 394.0 L 723.0 423.0 L 637.0 423.0 L 615.0 394.0 Z" fill="#321a2c" stroke="#fb7185" stroke-width="2.0"/>
+  <text x="680.0" y="394.0" text-anchor="middle" class="node-title" font-size="12.36">上游 taskId 防重</text>
+  <text x="680.0" y="416.0" text-anchor="middle" class="node-sub">one effective task</text>
+  </g>
+  <g id="node-ack" data-graph-role="node" data-node-id="ack" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="800,365,920,423">
+  <rect x="800.0" y="365.0" width="120.0" height="58.0" rx="8.0" fill="#123c5a" stroke="#06d6a0" stroke-width="1.8"/>
+  <text x="860.0" y="394.0" text-anchor="middle" class="node-title" font-size="12.51">结果落库后 ack</text>
+  <text x="860.0" y="416.0" text-anchor="middle" class="node-sub">external id + state</text>
+  </g>
+  <g id="node-pending" data-graph-role="node" data-node-id="pending" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="120,555,300,605">
+  <rect x="120.0" y="555.0" width="180.0" height="50.0" rx="8.0" fill="#321a2c" stroke="#f59e0b" stroke-width="1.8"/>
+  <text x="210.0" y="580.0" text-anchor="middle" class="node-title" font-size="17.65">PUBLISH_PENDING</text>
+  <text x="210.0" y="602.0" text-anchor="middle" class="node-sub">confirm failed / unknown</text>
+  </g>
+  <g id="node-retry" data-graph-role="node" data-node-id="retry" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="390,555,570,605">
+  <rect x="390.0" y="555.0" width="180.0" height="50.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="2.0"/>
+  <rect x="396.0" y="561.0" width="168.0" height="38.0" rx="5.0" fill="none" stroke="#38bdf8" stroke-width="1.2" opacity="0.65"/>
+  <text x="480.0" y="580.0" text-anchor="middle" class="node-title" font-size="18.0">同 taskId 重发</text>
+  <text x="480.0" y="602.0" text-anchor="middle" class="node-sub">no new business id</text>
+  </g>
+  <g id="node-repair" data-graph-role="node" data-node-id="repair" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="660,555,840,605">
+  <rect x="660.0" y="555.0" width="180.0" height="50.0" rx="8.0" fill="#321a2c" stroke="#fb7185" stroke-width="1.8"/>
+  <text x="750.0" y="580.0" text-anchor="middle" class="node-title" font-size="18.0">死信 / 人工修复</text>
+  <text x="750.0" y="602.0" text-anchor="middle" class="node-sub">visible recovery path</text>
+  </g>
+  <g id="entry-identity-label" data-graph-role="label" data-owner="entry-identity" data-graph-bounds="189.62,145,245.38,165">
+  <rect x="189.62" y="145.0" width="55.76" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="217.5" y="159.0" text-anchor="middle" class="arrow-label">accept</text>
+  </g>
+  <g id="identity-task-label" data-graph-role="label" data-owner="identity-task" data-graph-bounds="360.1,145,444.9,165">
+  <rect x="360.1" y="145.0" width="84.80000000000001" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="402.5" y="159.0" text-anchor="middle" class="arrow-label">insert once</text>
+  </g>
+  <g id="task-publish-label" data-graph-role="label" data-owner="task-publish" data-graph-bounds="559.26,145,615.74,165">
+  <rect x="559.26" y="145.0" width="56.48" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="587.5" y="159.0" text-anchor="middle" class="arrow-label">publish</text>
+  </g>
+  <g id="publish-confirm-label" data-graph-role="label" data-owner="publish-confirm" data-graph-bounds="742.7,145,802.3,165">
+  <rect x="742.7" y="145.0" width="59.599999999999994" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="772.5" y="159.0" text-anchor="middle" class="arrow-label">confirm</text>
+  </g>
+  <g id="publish-delivery-label" data-graph-role="label" data-owner="publish-delivery" data-graph-bounds="374.26,254,430.74,274">
+  <rect x="374.26" y="254.0" width="56.480000000000004" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="402.5" y="268.0" text-anchor="middle" class="arrow-label">deliver</text>
+  </g>
+  <g id="delivery-local-label" data-graph-role="label" data-owner="delivery-local" data-graph-bounds="176.06,428,258.94,448">
+  <rect x="176.06" y="428.0" width="82.88" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="217.5" y="442.0" text-anchor="middle" class="arrow-label">load / claim</text>
+  </g>
+  <g id="local-submit-label" data-graph-role="label" data-owner="local-submit" data-graph-bounds="373.9,428,431.1,448">
+  <rect x="373.9" y="428.0" width="57.199999999999996" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="402.5" y="442.0" text-anchor="middle" class="arrow-label">eligible</text>
+  </g>
+  <g id="submit-dedupe-label" data-graph-role="label" data-owner="submit-dedupe" data-graph-bounds="545.1,340,629.9,360">
+  <rect x="545.1" y="340.0" width="84.80000000000001" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="587.5" y="354.0" text-anchor="middle" class="arrow-label">same taskId</text>
+  </g>
+  <g id="dedupe-ack-label" data-graph-role="label" data-owner="dedupe-ack" data-graph-bounds="730.1,340,814.9,360">
+  <rect x="730.1" y="340.0" width="84.80000000000001" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="772.5" y="354.0" text-anchor="middle" class="arrow-label">save result</text>
+  </g>
+  <g id="pending-retry-label" data-graph-role="label" data-owner="pending-retry" data-graph-bounds="320.6,567,369.4,587">
+  <rect x="320.6" y="567.0" width="48.8" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="345.0" y="581.0" text-anchor="middle" class="arrow-label">retry</text>
+  </g>
+  <g id="retry-repair-label" data-graph-role="label" data-owner="retry-repair" data-graph-bounds="576.68,549,653.32,569">
+  <rect x="576.68" y="549.0" width="76.64" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="615.0" y="563.0" text-anchor="middle" class="arrow-label">exhausted</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="38" y="636" width="538.4" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="48.0" y1="650.0" x2="78.0" y2="650.0" stroke="#fde047" stroke-width="2.1" marker-end="url(#arrowE)"/>
+    <text data-graph-role="decoration" x="88.0" y="654.0" class="legend">task / result data</text>
+    <line data-graph-role="decoration" x1="230.24" y1="650.0" x2="260.24" y2="650.0" stroke="#67e8f9" stroke-width="2.1" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="270.24" y="654.0" class="legend">idempotent control</text>
+    <line data-graph-role="decoration" x1="414.64" y1="650.0" x2="444.64" y2="650.0" stroke="#fb7185" stroke-width="2.1" marker-end="url(#arrowG)"/>
+    <text data-graph-role="decoration" x="454.64" y="654.0" class="legend">upstream dedupe</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,688,685,704">
+  <text x="48.0" y="700.0" class="footnote">Confirm is broker acceptance; unique taskId and upstream dedupe make repeated delivery safe</text>
+  </g>
+</svg>

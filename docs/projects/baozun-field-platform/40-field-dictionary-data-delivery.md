@@ -10,7 +10,13 @@ layout: project-doc
 
 ## 数据库并发与 XLSX 字典交付
 
+本章是 30 章之后保留的唯一实现章节，集中说明数据库设计、数据库操作并发、异步导出和文件交付。目标不是把一个大查询包进 HTTP 响应，而是把“读取某一时刻的目录”“在本地完成清洗”“生成可下载 XLSX”“让采集与目录写入继续服务”拆成可恢复的边界。
+
 ![导出与数据库并发边界](./assets/export-xlsx-pipeline.svg)
+
+![导出子字段 DFS 流式遍历动态图](./assets/catalog-dfs-export.gif)
+
+[导出子字段 DFS 静态 SVG 图](./assets/catalog-dfs-export.svg)
 
 ## 1. 设计目标和不可变事实
 
@@ -24,6 +30,7 @@ layout: project-doc
 - 文件未完整写入、校验或提交前，下载接口不能暴露半成品；
 - 任务状态、文件元数据和实际文件必须可以相互核对，清理文件不能抹掉任务历史。
 
+正式目录的结构不变量和树写入事务见 30 章；这里把它当成只读输入，不重复发明另一套树规则。
 
 ## 2. 数据库表和职责
 
@@ -59,6 +66,10 @@ layout: project-doc
 - 没有幂等键时生成随机任务编号，并以数据库唯一索引冲突为依据有限重试。
 
 幂等键解决的是重复点击、网络超时重试和重复消息，不等于任务执行锁。执行锁由状态条件更新解决。
+
+### 3.3 准入和多实例边界
+
+当前配置限制全局活动任务数 6、单创建人活动任务数 6；单实例内用计数和有界执行器快速拒绝过量请求。数据库唯一键保证任务编号不重复，但单实例内存计数不能提供多实例全局配额。部署多实例时，准入应迁移到数据库配额/租约、集中式限流或队列，而不是继续依赖 JVM 内存计数。
 
 ## 4. 任务状态机、领取和恢复
 
@@ -103,11 +114,11 @@ MySQL URL 启用 `useServerPrepStmts=true、useCursorFetch=true、defaultFetchSi
 
 采集端产生 `DomSnapshot`，Agent 解析产生 `HierarchyProposal/FieldTreeDraft`，人工确认后才进入目录写事务；这些操作不等待 XLSX 完成。导出只读取已经提交的正式目录，不能读取未确认草稿，也不能把导出进度写回目录节点表。这样采集继续产生证据、目录继续接受确认，导出只得到明确版本的可复现交付物。
 
-## 6. SQLite 阶段工作区和恢复协议
+## 6. SQLite 阶段工作区、DFS 清洗和恢复协议
 
 ### 6.1 快照文件
 
-源数据先写 `snapshot.db.part`，SQLite 使用 `journal_mode=DELETE、synchronous=NORMAL、temp_store=FILE、cache_size=-32768`，表至少包括 `snapshot_platforms` 和 `snapshot_nodes` 及平台/节点查询索引。写入完成后关闭 writer，并通过原子移动发布为 `snapshot.db`，再原子写入 `manifest.json`，阶段标记为 `SNAPSHOT_READY`。
+任务工作区位于 `data/result/.tmp/<taskId>`。源数据先写 `snapshot.db.part`，SQLite 使用 `journal_mode=DELETE、synchronous=NORMAL、temp_store=FILE、cache_size=-32768`，表至少包括 `snapshot_platforms` 和 `snapshot_nodes` 及平台/节点查询索引。写入完成后关闭 writer，并通过原子移动发布为 `snapshot.db`，再原子写入 `manifest.json`，阶段标记为 `SNAPSHOT_READY`。
 
 发布前的 `.part` 文件不参与后续阶段。进程中断后只删除或覆盖未完成的临时文件；发现已发布 manifest 时可以从快照继续，不必重新开启 MySQL 一致性事务。
 
@@ -115,7 +126,97 @@ MySQL URL 启用 `useServerPrepStmts=true、useCursorFetch=true、defaultFetchSi
 
 本地阶段先按平台统计源节点、有效路径节点和叶子行，再为平台创建流式映射器。平台名称为空的平台单独隔离并记录告警，不让它污染其他平台的路径列。
 
-有效树从 `parent_id IS NULL、node_level=1、TRIM(name) <> ''` 的根开始递归；子节点必须满足父级存在、层级连续且名称非空。遇到不完整路径时跳过异常分支并记录 `sourceNodes、validNodes、skippedNodes、exportedRows`，不把无父级字段伪装成根字段。DFS 只保留当前路径，不把整棵嵌套树复制到 JVM；叶节点转换成 `FieldDictionaryRowModel`，以 `DataOutputStream` 写入 `rows/<platformId>.bin`。
+![本地 DFS 清洗判断链路](./assets/catalog-dfs-cleaning-flow.svg)
+
+[查看本地 DFS 清洗图稿源文件](./assets/fireworks/catalog-dfs-cleaning-flow.json)
+
+有效树从 `parent_id IS NULL、node_level=1、TRIM(name) <> ''` 的根开始递归；子节点必须满足父级存在、层级连续且名称非空。遇到不完整路径时跳过异常分支并记录 `sourceNodes、validNodes、skippedNodes、exportedRows`，不把无父级字段伪装成根字段。这里的 DFS 不是把整棵嵌套树复制到 JVM，而是先在 SQLite 快照中得到稳定的前序流，再在 JVM 中只保留当前路径；叶节点转换成 `FieldDictionaryRowModel`，以 `DataOutputStream` 写入 `rows/<platformId>.bin`。
+
+#### 6.2.1 子字段发现的真实遍历模型
+
+项目中的“子字段”不是通过“查询一个节点，再为每个节点递归查询子节点”的 N+1 方式发现的，也不是 Java 代码递归构造完整树。真实实现分为两个连续阶段：SQLite 负责把正式目录快照组织成 DFS 前序流，`FieldDictionaryStreamingMapperModel` 负责消费这个有序流并维护祖先路径。只有确认当前节点没有任何结构子节点时，当前节点才被视为可以导出的字段叶子。
+
+SQLite 使用递归 CTE `valid_tree` 表达树的传递闭包。其执行逻辑如下：
+
+1. **种子节点**：只选当前平台中 `parent_id IS NULL`、`node_level = 1` 且 `TRIM(name) <> ''` 的一级根节点。没有有效根的孤儿节点不会被提升成新的根，也不会因为“找不到父级”而被伪装成一级字段。
+2. **递归找子节点**：用 `child.parent_id = valid_tree.id` 连接直接子节点，同时要求 `child.platform_id` 相同、`child.node_level = valid_tree.node_level + 1` 且子节点名称非空。也就是说，子字段必须从一条有效的父级路径上连续到达；断层、跨平台挂载和空名称分支不会进入有效路径流。
+3. **生成排序路径**：每个节点把自己的 `(sort_order, id)` 编码成固定宽度片段，并追加到父节点的 `tree_path`。当前实现使用 `printf('%011d:%020d', sort_order + 2147483648, id)`：前者将有符号排序值平移到非负区间，后者作为稳定的同序号裁决键，固定宽度则避免字符串排序出现 `10` 排在 `2` 前面的错误。
+4. **按路径排序**：最终按 `tree_path ASC` 输出。父节点的路径是子孙路径的前缀，因此父节点先于所有后代；同一父节点下的兄弟按 `(sort_order, id)` 稳定排序。这等价于“先访问节点，再按顺序访问每棵子树”的 DFS 前序遍历。
+5. **流式消费**：SQLite `ResultSet` 每次只交给映射器一个 `ExportTraversalNodeModel`。结果不需要在 JVM 中保存为 `List<TreeNode>`，也不需要为每个父节点再次访问 MySQL 或 SQLite。
+
+因此，严格地说，这是“SQLite 递归 CTE 计算树的有效传递闭包 + `tree_path` 排序得到 DFS 前序 + JVM `Deque` 维护当前祖先栈”的组合，而不是单独的一段 Java DFS 递归代码。递归发生在本地快照查询中，路径状态发生在流式映射器中。
+
+#### 6.2.2 `Deque` 如何维护当前祖先路径
+
+映射器维护一个按根到当前节点排列的 `Deque<NodeName> ancestors`。栈中的元素不是整棵树节点，而是生成字段路径所需的“层级 + 名称”。对于 DFS 前序流中的每个节点，使用以下规则：
+
+1. 先弹出所有 `level >= current.nodeLevel` 的栈尾元素；
+2. 当前节点存在结构子节点时，把当前节点压入栈尾，但不产出 Excel 行；
+3. 当前节点没有结构子节点时，不把它压入祖先栈，而是复制当前祖先名称，加上当前叶节点名称，生成一行字典记录；
+4. 生成叶子行后继续读取下一个前序节点，栈自然回退到该节点的父路径。
+
+之所以使用 `>=` 而不是只弹出 `>`，是因为同级兄弟必须先弹出前一个兄弟；当遍历从深层子节点返回到祖先时，更深层级也必须全部弹出。叶节点不入栈是有意设计：叶节点是字段名称，不是后续字段的菜单祖先，避免下一个兄弟字段错误地继承上一个字段名称。
+
+等价逻辑如下，实际代码使用项目中的模型和字段名实现：
+
+```java
+for (ExportTraversalNodeModel current : orderedDfsStream) {
+    while (!ancestors.isEmpty()
+            && ancestors.peekLast().level() >= current.nodeLevel()) {
+        ancestors.removeLast();
+    }
+
+    String name = current.name().trim();
+    if (!current.structuralLeaf()) {
+        ancestors.addLast(new NodeName(current.nodeLevel(), name));
+        continue;
+    }
+
+    FieldDictionaryRowModel row = toDictionaryRow(
+            platformMenus, copy(ancestors), name);
+    rowWriter.write(row);
+}
+```
+
+例如，节点顺序如下：
+
+```text
+一级(10)
+├─ 二级A(10)
+│  └─ 字段a(10)
+└─ 二级B(20)
+   └─ 子组(10)
+      └─ 字段b(10)
+```
+
+SQLite 输出顺序是 `一级 → 二级A → 字段a → 二级B → 子组 → 字段b`。映射器先压入 `一级、二级A`，遇到 `字段a` 时产出 `[一级, 二级A] + 字段a`；随后 `二级B` 的层级与 `二级A` 相同，先弹出 `二级A` 再压入 `二级B`；进入 `子组` 后，遇到 `字段b` 产出 `[一级, 二级B, 子组] + 字段b`。这正是“沿树向下压栈、沿树向上回退”的 DFS 路径语义。
+
+空间复杂度只与最大树深度和当前输出行有关：`Deque` 保留 `O(depth)` 个祖先，叶节点生成菜单列时会复制当前路径，行文件和 SXSSF 窗口承担后续阶段的落盘/流式缓冲；不会因平台节点总数 `N` 增长而把整棵树保留在 JVM 中。单个节点的栈调整是摊还线性的，叶节点的路径复制成本为 `O(depth)`，整体更接近 `O(N + L × depth)`，其中 `L` 是叶节点数。
+
+#### 6.2.3 `structural_leaf`、异常分支和边界处理
+
+`structural_leaf` 的判断基于 `snapshot_nodes` 中是否存在当前节点的任意直接子节点，而不只是判断递归 CTE 中是否存在“有效子节点”。这是一个保守边界：
+
+- 没有任何原始直接子节点的有效节点是叶子，生成一行字段字典记录；
+- 只要原始快照中存在子节点，当前节点就不是叶子，即使该子节点因空名称、层级断裂或其他结构错误没有进入 `valid_tree`，父节点也不会被错误地同时导出成字段；
+- 被 CTE 排除的异常子节点不会被拼接进路径，也不会继续递归到它的后代；异常统计必须让运维看到数据问题，而不是用“放宽规则”制造看似完整的导出结果。
+
+边界规则需要与 30 章的目录结构不变量保持一致：
+
+- `platform_id` 是树的隔离边界；所有递归连接和叶子判断都必须带平台条件，不能让同一 `id` 在不同平台之间串树；
+- 根节点必须是一级且名称非空；孤儿、错误层级节点不能自动补成根；
+- 子节点必须严格比父节点深一级；不能跳过中间层级把三级节点直接挂到一级节点下；
+- 名称统一 `trim` 后判空并写入输出，空白名称不能成为菜单段或字段名；
+- 兄弟排序采用 `sort_order`，以 `id` 做稳定的并列裁决；不允许依赖数据库没有保证的物理返回顺序；
+- 30 章定义的最大层级约束应在快照准入/结构校验阶段拦截超限数据。递归 CTE 的职责是按有效父子关系展开，不是通用的环检测器；发现层级、孤儿、重复父子关系或超深数据时，应记录结构错误并阻止不可信结果交付。
+
+这里的“叶子”是**结构叶子**，不等同于“该节点名称看起来像字段”。是否导出只由有效路径、原始子节点关系和字段字典映射规则共同决定；父节点有子节点时不能因为名称像字段就提前导出，子节点名称为空也不能把父节点降级为字段。
+
+#### 6.2.4 DFS 阶段与恢复、并发的关系
+
+DFS 只运行在已经原子发布的 `snapshot.db` 上。MySQL 的 `REPEATABLE_READ` 事务只负责把一致性视图复制到本地快照；快照写完并发布后立即释放 MySQL 连接，后续递归 CTE、祖先栈、`rows/*.bin` 和 SXSSF 工作簿都不持有 MySQL 事务或目录写锁。因此导出不会因为子字段展开时间变长而延长目录写入锁的持有时间，也不会把导出查询和采集写入绑在同一个事务里。
+
+每个平台独立生成 `rows/<platformId>.bin`。平台名称为空时单独隔离并记录告警；一个平台的异常路径或行文件损坏不能静默混入其他平台。阶段完成后校验 `sourceNodes、validPathNodes、leafRows、mappedRows、writtenRows`，再把 manifest 推进到 `ROWS_READY`；重试优先复用已经提交的快照和已校验的行文件。这样 DFS 的确定性不仅用于找子字段，也用于让失败恢复、重复执行和最终 XLSX 行数比对使用同一条可复现的输入流。
 
 所有平台行文件生成并校验数量后，manifest 进入 `ROWS_READY`。本地清洗和 POI 写入共用本地处理信号量，当前最多 1 个本地重处理阶段，避免 SQLite 文件和临时 XLSX 同时产生不可控磁盘压力。
 
@@ -125,6 +226,14 @@ MySQL URL 启用 `useServerPrepStmts=true、useCursorFetch=true、defaultFetchSi
 
 工作簿使用 Apache POI `SXSSFWorkbook(null, 100, true, true)`，内存窗口保留 100 行，行文件按平台顺序读取，不把所有结果加载到内存。输出先写入 `output/field-dictionary.xlsx.part`，工作簿关闭时回收 POI 临时文件。
 
+当前固定 16 列为：
+
+```text
+一级菜单、二级菜单、三级菜单、四级菜单、五级菜单、六级菜单、路径、数仓表名、
+字段英文名、字段中文名、字段类型、字段角色、是否核心字段、是否可筛选、是否可分组、推荐聚合方式
+```
+
+当前实现按字符串或空白单元格写入一级至六级菜单、路径和字段中文名；数仓表名、字段英文名、字段类型、字段角色及后续治理属性列保留为空，不能在文档中宣称这些列已经完成映射。表头使用宋体加粗，设置固定列宽和自动筛选，所有用户可控值写成 `STRING`，不生成公式。
 
 ### 7.2 行数和内容安全
 
@@ -139,19 +248,5 @@ Excel 2007 单表上限由 `SpreadsheetVersion.EXCEL2007.getLastRowIndex()` 校�
 下载接口必须同时满足：任务属于当前调用方权限范围、状态为 `SUCCESS`、`uploaded_at` 非空、`file_deleted=0`、实际文件存在且大小与元数据一致。任一条件失败都不返回文件；原子移动不受支持时只能使用受控替换移动，并确保成功元数据提交前不会暴露 final key。
 
 保留策略每日按 Asia/Shanghai 执行，当前文件保留 7 天；临时工作区每小时清理，TTL 为 24 小时。清理只删除物理文件并设置 `file_deleted/file_deleted_at`，保留任务状态、失败原因、校验和和审计信息，便于历史查询。
-
-## 9. 数据库操作的并发矩阵
-
-| 操作 | 事务/锁 | 是否影响采集 | 失败处理 |
-| --- | --- | --- | --- |
-| 创建导出任务 | 短事务写任务和详情；唯一键兜底幂等 | 否 | 冲突返回稳定错误 |
-| 领取任务 | 条件更新将 `PENDING/RETRYING` 领取为 `RUNNING` | 否 | 未领取线程退出 |
-| 更新进度 | 仅更新 RUNNING，单调合并并节流 | 否 | 告警，最终状态不受影响 |
-| 读取导出源 | MySQL RR 非锁定快照；一个 permit | 只占一个读连接，不阻塞写入 | 超时/连接错误按重试策略处理 |
-| 目录结构写 | 30 章的 READ COMMITTED、稳定锁序、CAS | 导出不持有写锁 | 死锁/结构变化有限重试 |
-| 提交文件元数据 | 文件校验后短事务写详情/终态 | 否 | 文件不完整则不成功 |
-| 保留期清理 | 按任务详情条件更新/删除文件 | 否 | 单文件失败不阻断下一批 |
-
-数据库连接池、Tomcat 线程池、导出本地执行器和源读取信号量必须分别限流。不能通过把连接池调大来解决磁盘写慢，也不能通过增加导出线程来绕过 MySQL 快照 permit；容量瓶颈必须在正确的资源边界上排队。
 
 > 可信交付的关键不是把 XLSX 尽快写出来，而是让数据库快照、任务状态、本地阶段文件、工作簿内容和最终下载元数据形成一条可验证的链；这条链建立后，采集、目录维护和导出才能在高并发下各自推进而不互相污染。

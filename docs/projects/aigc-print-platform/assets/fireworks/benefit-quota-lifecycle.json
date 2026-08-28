@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "mode": "flow",
+  "template_type": "flow",
+  "style": 11,
+  "semantic_profile": "event-transit",
+  "diagram_type": "event_stream",
+  "line_code": "LINE B · QUOTA USAGE",
+  "quality_profile": "showcase",
+  "width": 1172,
+  "height": 720,
+  "title": "AIGC 额度生命周期",
+  "subtitle": "按图片数量与参数计费，失败只回退未使用额度",
+  "topics": [
+    {
+      "id": "benefit.events",
+      "color": "#e4475b"
+    },
+    {
+      "id": "benefit.dlq",
+      "color": "#c62828"
+    }
+  ],
+  "containers": [
+    {
+      "id": "benefit-stream",
+      "x": 35,
+      "y": 140,
+      "width": 1102,
+      "height": 410,
+      "label": "benefit.events",
+      "subtitle": "业务状态 · 原子预扣 · RabbitMQ · 可补偿",
+      "header_prefix": "LINE B",
+      "header_separator": " · "
+    }
+  ],
+  "nodes": [
+    {
+      "id": "aigc-submit",
+      "kind": "transit_terminal",
+      "transit_role": "producer",
+      "topic_id": "benefit.events",
+      "station_order": 0,
+      "operation": "business transition",
+      "x": 60,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "AIGC 任务",
+      "sublabel": "images + params",
+      "rail_color": "#e4475b",
+      "badge": "计费"
+    },
+    {
+      "id": "charge-calc",
+      "kind": "transit_station",
+      "transit_role": "station",
+      "topic_id": "benefit.events",
+      "station_order": 1,
+      "operation": "business transition",
+      "x": 278,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "费用计算",
+      "sublabel": "rule snapshot",
+      "rail_color": "#e4475b",
+      "badge": "规则"
+    },
+    {
+      "id": "quota-reserve",
+      "kind": "transit_station",
+      "transit_role": "station",
+      "topic_id": "benefit.events",
+      "station_order": 2,
+      "operation": "business transition",
+      "x": 496,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "额度预扣",
+      "sublabel": "available → frozen",
+      "rail_color": "#e4475b",
+      "badge": "Lua"
+    },
+    {
+      "id": "image-run",
+      "kind": "transit_junction",
+      "transit_role": "junction",
+      "topic_id": "benefit.events",
+      "station_order": 3,
+      "operation": "business transition",
+      "x": 714,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "生图执行",
+      "sublabel": "async worker",
+      "rail_color": "#e4475b",
+      "badge": "上游"
+    },
+    {
+      "id": "quota-settle",
+      "kind": "transit_terminal",
+      "transit_role": "consumer",
+      "topic_id": "benefit.events",
+      "station_order": 4,
+      "operation": "business transition",
+      "x": 932,
+      "y": 258,
+      "width": 180,
+      "height": 78,
+      "label": "消耗确认",
+      "sublabel": "frozen → used",
+      "rail_color": "#e4475b",
+      "badge": "成功",
+      "consumer_group": "benefit-grant-v1"
+    },
+    {
+      "id": "task-failure",
+      "kind": "transit_terminal",
+      "transit_role": "dlq",
+      "topic_id": "benefit.dlq",
+      "x": 714,
+      "y": 430,
+      "width": 150,
+      "height": 78,
+      "label": "任务失败",
+      "sublabel": "retry / callback",
+      "stroke": "#c62828",
+      "badge": "异常"
+    },
+    {
+      "id": "quota-release",
+      "kind": "transit_terminal",
+      "transit_role": "state_store",
+      "topic_id": "benefit.events",
+      "x": 932,
+      "y": 430,
+      "width": 180,
+      "height": 78,
+      "label": "额度回退",
+      "sublabel": "release unused",
+      "rail_color": "#00897b",
+      "badge": "释放"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "quota-rail-01",
+      "source": "aigc-submit",
+      "target": "charge-calc",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "quota-rail-12",
+      "source": "charge-calc",
+      "target": "quota-reserve",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "quota-rail-23",
+      "source": "quota-reserve",
+      "target": "image-run",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 3,
+      "motion_order": 0
+    },
+    {
+      "id": "quota-rail-34",
+      "source": "image-run",
+      "target": "quota-settle",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 4,
+      "motion_order": 0
+    },
+    {
+      "id": "quota-to-dlq",
+      "source": "image-run",
+      "target": "task-failure",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "feedback",
+      "transit_type": "dead_letter",
+      "topic_id": "benefit.dlq",
+      "motion_role": "dead-letter",
+      "motion_stage": 5,
+      "motion_order": 0,
+      "dashed": true
+    },
+    {
+      "id": "quota-release-link",
+      "source": "quota-settle",
+      "target": "quota-release",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "write",
+      "transit_type": "state",
+      "topic_id": "benefit.events",
+      "motion_role": "state-project",
+      "motion_stage": 5,
+      "motion_order": 1
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 610,
+  "legend_locked": true,
+  "legend": [
+    {
+      "flow": "control",
+      "label": "business rail"
+    },
+    {
+      "flow": "write",
+      "label": "state projection"
+    },
+    {
+      "flow": "feedback",
+      "label": "replay / rollback"
+    }
+  ],
+  "footer": "Style 11 · Event Transit · reserve, settle, release",
+  "footer_x": 48,
+  "footer_y": 695
+}

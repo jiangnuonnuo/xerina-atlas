@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="960" height="620" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="3" data-visual-theme="Blueprint" data-diagram-type="architecture" data-motion-scene="" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fde047"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#bae6fd"/>
+    </marker>
+    <pattern id="blueprintGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#0ea5e9" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+    <style>
+    text { font-family: 'SF Mono', 'Fira Code', Menlo, 'Microsoft YaHei', 'SimHei', monospace; }
+    .title { font-size: 30px; font-weight: 700; fill: #e0f2fe; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #7dd3fc; }
+    .section { font-size: 13px; font-weight: 700; fill: #67e8f9; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .node-title { font-weight: 700; fill: #e0f2fe; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #7dd3fc; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #e0f2fe; }
+    .legend { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #7dd3fc; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #e0f2fe; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="620.0" fill="#082f49"/>
+  <text x="480.0" y="56" text-anchor="middle" class="title">Task State Machine</text>
+  <text x="480.0" y="82" text-anchor="middle" class="subtitle">local task state, upstream idempotency, and bounded terminal states</text>
+  <g id="lifecycle" data-graph-role="container" data-container-id="lifecycle" data-semantic-role="boundary" data-graph-bounds="40,110,920,500">
+  <rect data-graph-role="container" x="40.0" y="110.0" width="880.0" height="390.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="134.0" class="section">01 // TASK LIFECYCLE</text>
+    <rect id="lifecycle-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="116" width="168.84" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="retry-processing" data-graph-role="edge" data-edge-id="retry-processing" data-source="retry" data-target="processing" data-edge-kind="flow" data-topic-id="" data-flow="async" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="3" data-route-stretch="1.407" data-bridges="" d="M 300,388 L 250,388 L 250,270 L 385,270 L 394,270 L 394,236" fill="none" stroke="#c084fc" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowF)"/>
+  <path id="unknown-processing-bridge-mask" data-graph-role="bridge-mask" data-owner="unknown-processing" d="M 560,388 L 510,388 L 510,270 L 395,270 L 395,280 L 385,280 L 385,270 L 385,256.4 L 412,256.4 L 412,236" fill="none" stroke="#082f49" stroke-width="6.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="unknown-processing" data-graph-role="edge" data-edge-id="unknown-processing" data-source="unknown" data-target="processing" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="7" data-route-stretch="1.247" data-bridges="385,270;394,256.4" d="M 560,388 L 510,388 L 510,270 L 395,270 L 395,280 L 385,280 L 385,270 L 385,256.4 L 412,256.4 L 412,236" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <path id="processing-failed" data-graph-role="edge" data-edge-id="processing-failed" data-source="processing" data-target="failed" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="3" data-route-stretch="1.0" data-bridges="" d="M 470,199 L 520,199 L 520,208 L 520,300 L 835,300 L 835,360" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <path id="pending-processing" data-graph-role="edge" data-edge-id="pending-processing" data-source="pending" data-target="processing" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 220,208 L 300,208" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="processing-success-bridge-mask" data-graph-role="bridge-mask" data-owner="processing-success" d="M 470,217 L 490.4,217 L 490.4,208 L 515,208 A 5 5 0 0 0 525,208 L 560,208" fill="none" stroke="#082f49" stroke-width="6.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="processing-success" data-graph-role="edge" data-edge-id="processing-success" data-source="processing" data-target="success" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="520,208" d="M 470,217 L 490.4,217 L 490.4,208 L 515,208 A 5 5 0 0 0 525,208 L 560,208" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="processing-retry-bridge-mask" data-graph-role="bridge-mask" data-owner="processing-retry" d="M 358,236 L 358,265 A 5 5 0 0 1 358,275 L 358,291 L 385,291 L 385,360" fill="none" stroke="#082f49" stroke-width="6.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="processing-retry" data-graph-role="edge" data-edge-id="processing-retry" data-source="processing" data-target="retry" data-edge-kind="flow" data-topic-id="" data-flow="async" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="358,270" d="M 358,236 L 358,265 A 5 5 0 0 1 358,275 L 358,291 L 385,291 L 385,360" fill="none" stroke="#c084fc" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowF)"/>
+  <path id="processing-unknown-bridge-mask" data-graph-role="bridge-mask" data-owner="processing-unknown" d="M 376,236 L 363,236 A 5 5 0 0 1 353,236 L 244,236 L 244,440 L 560,440 L 560,393 A 5 5 0 0 0 560,383 L 560,339.6 L 635,339.6 L 635,360" fill="none" stroke="#082f49" stroke-width="6.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="processing-unknown" data-graph-role="edge" data-edge-id="processing-unknown" data-source="processing" data-target="unknown" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="5" data-route-stretch="2.214" data-bridges="560,388;358,236" d="M 376,236 L 363,236 A 5 5 0 0 1 353,236 L 244,236 L 244,440 L 560,440 L 560,393 A 5 5 0 0 0 560,383 L 560,339.6 L 635,339.6 L 635,360" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <g id="node-pending" data-graph-role="node" data-node-id="pending" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="70,180,220,236">
+  <rect x="70.0" y="180.0" width="150.0" height="56.0" rx="8.0" fill="#0b3b5e" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="145.0" y="208.0" text-anchor="middle" class="node-title" font-size="18.0">待处理</text>
+  <text x="145.0" y="230.0" text-anchor="middle" class="node-sub">ready to consume</text>
+  </g>
+  <g id="node-processing" data-graph-role="node" data-node-id="processing" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="300,180,470,236">
+  <rect x="300.0" y="180.0" width="170.0" height="56.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="2.0"/>
+  <rect x="306.0" y="186.0" width="158.0" height="44.0" rx="5.0" fill="none" stroke="#38bdf8" stroke-width="1.2" opacity="0.65"/>
+  <text x="385.0" y="208.0" text-anchor="middle" class="node-title" font-size="18.0">处理中</text>
+  <text x="385.0" y="230.0" text-anchor="middle" class="node-sub">upstream accepted</text>
+  </g>
+  <g id="node-success" data-graph-role="node" data-node-id="success" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="560,180,710,236">
+  <rect x="560.0" y="180.0" width="150.0" height="56.0" rx="8.0" fill="#123c5a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="635.0" y="208.0" text-anchor="middle" class="node-title" font-size="18.0">成功</text>
+  <text x="635.0" y="230.0" text-anchor="middle" class="node-sub">result archived</text>
+  </g>
+  <g id="node-retry" data-graph-role="node" data-node-id="retry" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="300,360,470,416">
+  <rect x="300.0" y="360.0" width="170.0" height="56.0" rx="8.0" fill="#123c5a" stroke="#a855f7" stroke-width="1.8"/>
+  <text x="385.0" y="388.0" text-anchor="middle" class="node-title" font-size="18.0">重试中</text>
+  <text x="385.0" y="410.0" text-anchor="middle" class="node-sub">delayed retry</text>
+  </g>
+  <g id="node-unknown" data-graph-role="node" data-node-id="unknown" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="560,360,710,416">
+  <path d="M 582.0 360.0 L 688.0 360.0 L 710.0 388.0 L 688.0 416.0 L 582.0 416.0 L 560.0 388.0 Z" fill="#123c5a" stroke="#f59e0b" stroke-width="2.0"/>
+  <text x="635.0" y="388.0" text-anchor="middle" class="node-title" font-size="18.0">提交未知</text>
+  <text x="635.0" y="410.0" text-anchor="middle" class="node-sub">reconcile by task id</text>
+  </g>
+  <g id="node-failed" data-graph-role="node" data-node-id="failed" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="760,360,910,416">
+  <rect x="760.0" y="360.0" width="150.0" height="56.0" rx="8.0" fill="#321a2c" stroke="#fb7185" stroke-width="1.8"/>
+  <text x="835.0" y="388.0" text-anchor="middle" class="node-title" font-size="18.0">失败</text>
+  <text x="835.0" y="410.0" text-anchor="middle" class="node-sub">bounded terminal</text>
+  </g>
+  <g id="pending-processing-label" data-graph-role="label" data-owner="pending-processing" data-graph-bounds="228.64,177,291.36,197">
+  <rect x="228.64" y="177.0" width="62.72" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="260.0" y="191.0" text-anchor="middle" class="arrow-label">consume</text>
+  </g>
+  <g id="processing-success-label" data-graph-role="label" data-owner="processing-success" data-graph-bounds="474.88,154,575.52,174">
+  <rect x="474.88" y="154.0" width="100.64000000000001" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="525.2" y="168.0" text-anchor="middle" class="arrow-label">callback / poll</text>
+  </g>
+  <g id="processing-retry-label" data-graph-role="label" data-owner="processing-retry" data-graph-bounds="294.56,311.5,382,331.5">
+  <rect x="294.56" y="311.5" width="87.44" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="338.28" y="325.5" text-anchor="middle" class="arrow-label">recoverable</text>
+  </g>
+  <g id="processing-unknown-label" data-graph-role="label" data-owner="processing-unknown" data-graph-bounds="349.88,427,454.12,447">
+  <rect x="349.88" y="427.0" width="104.24000000000001" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="402.0" y="441.0" text-anchor="middle" class="arrow-label">timeout / no id</text>
+  </g>
+  <g id="unknown-processing-label" data-graph-role="label" data-owner="unknown-processing" data-graph-bounds="436.6,315,507,335">
+  <rect x="436.6" y="315.0" width="70.4" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="471.8" y="329.0" text-anchor="middle" class="arrow-label">reconcile</text>
+  </g>
+  <g id="processing-failed-label" data-graph-role="label" data-owner="processing-failed" data-graph-bounds="610.5,269,744.5,289">
+  <rect x="610.5" y="269.0" width="134.0" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="677.5" y="283.0" text-anchor="middle" class="arrow-label">reject / exhausted</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="38" y="536" width="499.84" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="48.0" y1="550.0" x2="78.0" y2="550.0" stroke="#38bdf8" stroke-width="2.1" marker-end="url(#arrowC)"/>
+    <text data-graph-role="decoration" x="88.0" y="554.0" class="legend">consume</text>
+    <line data-graph-role="decoration" x1="164.72" y1="550.0" x2="194.72" y2="550.0" stroke="#fde047" stroke-width="2.1" marker-end="url(#arrowE)"/>
+    <text data-graph-role="decoration" x="204.72" y="554.0" class="legend">success</text>
+    <line data-graph-role="decoration" x1="281.44" y1="550.0" x2="311.44" y2="550.0" stroke="#c084fc" stroke-width="2.1" marker-end="url(#arrowF)"/>
+    <text data-graph-role="decoration" x="321.44" y="554.0" class="legend">retry</text>
+    <line data-graph-role="decoration" x1="384.24" y1="550.0" x2="414.24" y2="550.0" stroke="#fb7185" stroke-width="2.1" marker-end="url(#arrowG)"/>
+    <text data-graph-role="decoration" x="424.24" y="554.0" class="legend">reconcile / fail</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,588,608,604">
+  <text x="48.0" y="600.0" class="footnote">Local taskId guards the state; upstream idempotency protects repeated submission</text>
+  </g>
+</svg>
