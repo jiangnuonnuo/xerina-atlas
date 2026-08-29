@@ -8,3 +8,5 @@ docs/.vitepress/dist/
 tmp/
 .DS_Store
 /.idea
+/doc/
+/artifacts/hatch-pet/

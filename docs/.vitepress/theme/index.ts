@@ -1,6 +1,7 @@
 import TeekTheme from 'vitepress-theme-teek'
 import 'vitepress-theme-teek/index.css'
 import './styles.css'
+import './pet-assistant.css'
 import CustomLayout from './layouts/CustomLayout.vue'
 import HomePage from './components/HomePage.vue'
 import ProjectIndexPage from './components/ProjectIndexPage.vue'

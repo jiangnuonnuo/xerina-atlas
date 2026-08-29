@@ -15,9 +15,20 @@ const teekConfig = defineTeekConfig({
 
 export default defineConfig({
   ...teekConfig,
-  server: {
-    port: 5174,
-    strictPort: true,
+  vite: {
+    ssr: {
+      noExternal: ['vitepress-theme-teek'],
+    },
+    server: {
+      port: 5174,
+      strictPort: true,
+      proxy: {
+        '/api/v1': {
+          target: process.env.KNOWLEDGE_API_PROXY_TARGET || 'http://127.0.0.1:8091',
+          changeOrigin: true,
+        },
+      },
+    },
   },
   lang: 'zh-CN',
   title: 'Xerina Atlas',
