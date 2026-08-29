@@ -7,7 +7,7 @@
   "loop_playback": "infinite",
   "frame_count": 24,
   "fps": 10,
-  "routes": 4,
+  "routes": 5,
   "visual_review": "passed",
   "motion_meaning": "moving markers follow documented request, state, execution, or response routes"
 }
