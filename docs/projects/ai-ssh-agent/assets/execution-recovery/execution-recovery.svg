@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="960" height="720" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="3" data-visual-theme="Blueprint" data-diagram-type="architecture" data-motion-scene="service-blueprint" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fde047"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#bae6fd"/>
+    </marker>
+    <pattern id="blueprintGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#0ea5e9" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+    <style>
+    text { font-family: 'SF Mono', 'Fira Code', Menlo, 'Microsoft YaHei', 'SimHei', monospace; }
+    .title { font-size: 30px; font-weight: 700; fill: #e0f2fe; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #7dd3fc; }
+    .section { font-size: 13px; font-weight: 700; fill: #67e8f9; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .node-title { font-weight: 700; fill: #e0f2fe; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #7dd3fc; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #e0f2fe; }
+    .legend { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #7dd3fc; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #e0f2fe; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="720.0" fill="#082f49"/>
+  <text x="480.0" y="56" text-anchor="middle" class="title">Long Execution State and Recovery</text>
+  <text x="480.0" y="82" text-anchor="middle" class="subtitle">sync wait, durable output, cursor consumption, and restart boundary</text>
+  <g id="edge" data-graph-role="container" data-container-id="edge" data-semantic-role="boundary" data-graph-bounds="40,110,920,220">
+  <rect data-graph-role="container" x="40.0" y="110.0" width="880.0" height="110.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="134.0" class="section">01 // SUBMISSION</text>
+    <rect id="edge-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="116" width="141.28" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="services" data-graph-role="container" data-container-id="services" data-semantic-role="boundary" data-graph-bounds="40,270,920,400">
+  <rect data-graph-role="container" x="40.0" y="270.0" width="880.0" height="130.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="294.0" class="section">02 // RUNTIME</text>
+    <rect id="services-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="276" width="122.04" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="data" data-graph-role="container" data-container-id="data" data-semantic-role="boundary" data-graph-bounds="40,420,720,550">
+  <rect data-graph-role="container" x="40.0" y="420.0" width="680.0" height="130.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="444.0" class="section">DURABLE RECORD</text>
+    <rect id="data-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="426" width="132.7" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="order-store" data-graph-role="edge" data-edge-id="order-store" data-source="order" data-target="postgres" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="data-write" data-motion-stage="4" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="4" data-route-stretch="1.614" data-bridges="" d="M 150,380 L 150,400.4 L 180.7,400.4 L 180.7,459.6 L 150,459.6 L 150,480" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="catalog-cache" data-graph-role="edge" data-edge-id="catalog-cache" data-source="catalog" data-target="redis" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="data-write" data-motion-stage="4" data-motion-order="1" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="4" data-route-stretch="1.614" data-bridges="" d="M 380,380 L 380,400.4 L 410.7,400.4 L 410.7,459.6 L 380,459.6 L 380,480" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="billing-store" data-graph-role="edge" data-edge-id="billing-store" data-source="billing" data-target="warehouse" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="data-write" data-motion-stage="4" data-motion-order="2" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="4" data-route-stretch="1.614" data-bridges="" d="M 610,380 L 610,400.4 L 640.7,400.4 L 640.7,459.6 L 610,459.6 L 610,480" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="client-request" data-graph-role="edge" data-edge-id="client-request" data-source="clients" data-target="gateway" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="ingress" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 220,173 L 300,173" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="policy-check" data-graph-role="edge" data-edge-id="policy-check" data-source="gateway" data-target="auth" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="policy" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 460,173 L 570,173" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="a-route-order" data-graph-role="edge" data-edge-id="a-route-order" data-source="gateway" data-target="order" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="fanout" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 362,200 L 362,306 L 150,306 L 150,330" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="b-route-catalog" data-graph-role="edge" data-edge-id="b-route-catalog" data-source="gateway" data-target="catalog" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="fanout" data-motion-stage="3" data-motion-order="1" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 380,200 L 380,330" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="c-route-billing" data-graph-role="edge" data-edge-id="c-route-billing" data-source="gateway" data-target="billing" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="fanout" data-motion-stage="3" data-motion-order="2" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 398,200 L 398,224 L 610,224 L 610,330" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="publish-event" data-graph-role="edge" data-edge-id="publish-event" data-source="billing" data-target="events" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="event" data-motion-stage="5" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 680,355 L 760,355" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <path id="observe" data-graph-role="edge" data-edge-id="observe" data-source="events" data-target="metrics" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="telemetry" data-motion-stage="6" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 830,380 L 830,480" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <g id="node-clients" data-graph-role="node" data-node-id="clients" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,146,220,200">
+  <rect x="60.0" y="146.0" width="160.0" height="54.0" rx="8.0" fill="#0b3b5e" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="140.0" y="173.0" text-anchor="middle" class="node-title" font-size="18.0">Client</text>
+  <text x="140.0" y="195.0" text-anchor="middle" class="node-sub">HTTP / MCP</text>
+  </g>
+  <g id="node-gateway" data-graph-role="node" data-node-id="gateway" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="300,146,460,200">
+  <rect x="300.0" y="146.0" width="160.0" height="54.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="2.0"/>
+  <rect x="306.0" y="152.0" width="148.0" height="42.0" rx="5.0" fill="none" stroke="#38bdf8" stroke-width="1.2" opacity="0.65"/>
+  <text x="380.0" y="173.0" text-anchor="middle" class="node-title" font-size="18.0">Sync Wait</text>
+  <text x="380.0" y="195.0" text-anchor="middle" class="node-sub">10 seconds</text>
+  </g>
+  <g id="node-auth" data-graph-role="node" data-node-id="auth" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="570,146,730,200">
+  <path d="M 592.0 146.0 L 708.0 146.0 L 730.0 173.0 L 708.0 200.0 L 592.0 200.0 L 570.0 173.0 Z" fill="#0b3b5e" stroke="#f59e0b" stroke-width="2.0"/>
+  <text x="650.0" y="173.0" text-anchor="middle" class="node-title" font-size="18.0">Tracked Run</text>
+  <text x="650.0" y="195.0" text-anchor="middle" class="node-sub">no replay</text>
+  </g>
+  <g id="node-order" data-graph-role="node" data-node-id="order" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="80,330,220,380">
+  <rect x="80.0" y="330.0" width="140.0" height="50.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="150.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">Runtime</text>
+  <text x="150.0" y="377.0" text-anchor="middle" class="node-sub">memory tracker</text>
+  </g>
+  <g id="node-catalog" data-graph-role="node" data-node-id="catalog" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="310,330,450,380">
+  <rect x="310.0" y="330.0" width="140.0" height="50.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="380.0" y="355.0" text-anchor="middle" class="node-title" font-size="14.67">Output Buffer</text>
+  <text x="380.0" y="377.0" text-anchor="middle" class="node-sub">bounded tail</text>
+  </g>
+  <g id="node-billing" data-graph-role="node" data-node-id="billing" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="540,330,680,380">
+  <rect x="540.0" y="330.0" width="140.0" height="50.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="610.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">Redis Store</text>
+  <text x="610.0" y="377.0" text-anchor="middle" class="node-sub">Hash + Stream</text>
+  </g>
+  <g id="node-events" data-graph-role="node" data-node-id="events" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="760,330,900,380">
+  <path d="M 782.0 330.0 L 878.0 330.0 L 900.0 355.0 L 878.0 380.0 L 782.0 380.0 L 760.0 355.0 Z" fill="#123c5a" stroke="#a855f7" stroke-width="2.0"/>
+  <text x="830.0" y="355.0" text-anchor="middle" class="node-title" font-size="17.43">Cursor Read</text>
+  <text x="830.0" y="377.0" text-anchor="middle" class="node-sub">Stream ID</text>
+  </g>
+  <g id="node-postgres" data-graph-role="node" data-node-id="postgres" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="80,480,220,530">
+  <ellipse cx="150.0" cy="486.25" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <rect x="80.0" y="486.25" width="140.0" height="37.5" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="150.0" cy="523.75" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="150.0" cy="499.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="150.0" cy="510.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="150.0" y="499.0" text-anchor="middle" class="node-title" font-size="18.0">RUNNING</text>
+  <text x="150.0" y="523.0" text-anchor="middle" class="node-sub">1 hour TTL</text>
+  </g>
+  <g id="node-redis" data-graph-role="node" data-node-id="redis" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="310,480,450,530">
+  <ellipse cx="380.0" cy="486.25" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <rect x="310.0" y="486.25" width="140.0" height="37.5" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="380.0" cy="523.75" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="380.0" cy="499.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="380.0" cy="510.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="380.0" y="499.0" text-anchor="middle" class="node-title" font-size="18.0">COMPLETED</text>
+  <text x="380.0" y="523.0" text-anchor="middle" class="node-sub">10 min TTL</text>
+  </g>
+  <g id="node-warehouse" data-graph-role="node" data-node-id="warehouse" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="540,480,680,530">
+  <ellipse cx="610.0" cy="486.25" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <rect x="540.0" y="486.25" width="140.0" height="37.5" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="610.0" cy="523.75" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="610.0" cy="499.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="610.0" cy="510.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="610.0" y="499.0" text-anchor="middle" class="node-title" font-size="13.66">CURSOR_EXPIRED</text>
+  <text x="610.0" y="523.0" text-anchor="middle" class="node-sub">return first cursor</text>
+  </g>
+  <g id="node-metrics" data-graph-role="node" data-node-id="metrics" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="765,480,895,530">
+  <rect x="765.0" y="480.0" width="130.0" height="50.0" rx="8.0" fill="#123c5a" stroke="#10b981" stroke-width="1.8"/>
+  <text x="830.0" y="505.0" text-anchor="middle" class="node-title" font-size="18.0">Restart</text>
+  <text x="830.0" y="527.0" text-anchor="middle" class="node-sub">shell not recoverable</text>
+  </g>
+  <g id="client-request-label" data-graph-role="label" data-owner="client-request" data-graph-bounds="233.68,142,286.32,162">
+  <rect x="233.68" y="142.0" width="52.64" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="260.0" y="156.0" text-anchor="middle" class="arrow-label">submit</text>
+  </g>
+  <g id="policy-check-label" data-graph-role="label" data-owner="policy-check" data-graph-bounds="490.6,142,539.4,162">
+  <rect x="490.6" y="142.0" width="48.8" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="515.0" y="156.0" text-anchor="middle" class="arrow-label">track</text>
+  </g>
+  <g id="order-store-label" data-graph-role="label" data-owner="order-store" data-graph-bounds="201.7,416,243.54,436">
+  <rect x="201.7" y="416.0" width="41.839999999999996" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="222.62" y="430.0" text-anchor="middle" class="arrow-label">meta</text>
+  </g>
+  <g id="catalog-cache-label" data-graph-role="label" data-owner="catalog-cache" data-graph-bounds="351.94,416,407.7,436">
+  <rect x="351.94" y="416.0" width="55.76" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="379.82" y="430.0" text-anchor="middle" class="arrow-label">stream</text>
+  </g>
+  <g id="billing-store-label" data-graph-role="label" data-owner="billing-store" data-graph-bounds="581.94,416,637.7,436">
+  <rect x="581.94" y="416.0" width="55.76" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="609.82" y="430.0" text-anchor="middle" class="arrow-label">cursor</text>
+  </g>
+  <g id="publish-event-label" data-graph-role="label" data-owner="publish-event" data-graph-bounds="702,324,738,344">
+  <rect x="702.0" y="324.0" width="36.0" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="720.0" y="338.0" text-anchor="middle" class="arrow-label">ack</text>
+  </g>
+  <g id="observe-label" data-graph-role="label" data-owner="observe" data-graph-bounds="757.32,416,827,436">
+  <rect x="757.32" y="416.0" width="69.67999999999999" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="792.16" y="430.0" text-anchor="middle" class="arrow-label">boundary</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="38" y="586" width="548.56" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="48.0" y1="600.0" x2="78.0" y2="600.0" stroke="#38bdf8" stroke-width="2.1" marker-end="url(#arrowC)"/>
+    <text data-graph-role="decoration" x="88.0" y="604.0" class="legend">request</text>
+    <line data-graph-role="decoration" x1="164.72" y1="600.0" x2="194.72" y2="600.0" stroke="#67e8f9" stroke-width="2.1" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="204.72" y="604.0" class="legend">tracking</text>
+    <line data-graph-role="decoration" x1="285.28" y1="600.0" x2="315.28" y2="600.0" stroke="#fde047" stroke-width="2.1" marker-end="url(#arrowE)"/>
+    <text data-graph-role="decoration" x="325.28" y="604.0" class="legend">durable data</text>
+    <line data-graph-role="decoration" x1="431.03999999999996" y1="600.0" x2="461.03999999999996" y2="600.0" stroke="#fb7185" stroke-width="2.1" marker-end="url(#arrowG)"/>
+    <text data-graph-role="decoration" x="471.03999999999996" y="604.0" class="legend">recovery signal</text>
+  </g>
+  <g id="blueprint-title-block" data-graph-role="reserved" data-graph-bounds="694,614,926,702">
+  <rect x="700.0" y="620.0" width="220.0" height="76.0" fill="#0b3552" stroke="#0ea5e9" stroke-width="1.2"/>
+  <line x1="700.0" y1="638.0" x2="920.0" y2="638.0" stroke="#0ea5e9" stroke-width="1"/>
+  <line x1="700.0" y1="674.0" x2="920.0" y2="674.0" stroke="#0ea5e9" stroke-width="1"/>
+  <line x1="773.3333333333334" y1="674.0" x2="773.3333333333334" y2="696.0" stroke="#0ea5e9" stroke-width="0.7"/>
+  <line x1="846.6666666666666" y1="674.0" x2="846.6666666666666" y2="696.0" stroke="#0ea5e9" stroke-width="0.7"/>
+  <text x="810.0" y="633.0" text-anchor="middle" font-size="10" font-weight="600" fill="#7dd3fc">RECOVERY BOUNDARY</text>
+  <text x="810.0" y="662.0" text-anchor="middle" font-size="18" font-weight="700" fill="#e0f2fe">SSH EXECUTION</text>
+  <text x="736.6666666666666" y="688.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#7dd3fc">TTL: 1H</text>
+  <text x="810.0" y="688.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#67e8f9">REDIS V4</text>
+  <text x="883.3333333333334" y="688.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#7dd3fc">CURSOR</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,688,685,704">
+  <text x="48.0" y="700.0" class="footnote">Redis does not recover a live remote Shell; it recovers durable metadata and output cursors</text>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 9,
+  "motion_scene": "review-trace",
+  "semantic_profile": "c4-review",
+  "diagram_type": "c4",
+  "c4_level": "container",
+  "review_state": "IMPLEMENTED BOUNDARIES",
+  "rough_seed": 20260829,
+  "scope": "WaLiCode Server",
+  "quality_profile": "showcase",
+  "width": 1100,
+  "height": 700,
+  "title": "SSH Agent Isolation Review",
+  "subtitle": "HTTP, MCP, in-process sessions, execution targets, and remote host boundaries",
+  "containers": [{ "id": "server-boundary", "x": 260, "y": 150, "width": 600, "height": 420, "label": "Server Runtime", "subtitle": "application boundary" }],
+  "nodes": [
+    { "id": "user", "kind": "review_card", "c4_type": "person", "x": 50, "y": 220, "width": 150, "height": 76, "label": "Frontend User", "description": "calls HTTP API", "stroke": "#356a8a" },
+    { "id": "http", "kind": "review_card", "c4_type": "container", "parent": "server-boundary", "x": 300, "y": 210, "width": 200, "height": 96, "label": "HTTP API", "description": "connection, terminal, file", "technology": "Spring MVC" },
+    { "id": "mcp", "kind": "review_card", "c4_type": "container", "parent": "server-boundary", "x": 600, "y": 210, "width": 200, "height": 96, "label": "MCP Endpoint", "description": "enabled tool allow-list", "technology": "Streamable HTTP", "stroke": "#a44a3f" },
+    { "id": "memory", "kind": "review_card", "c4_type": "container", "parent": "server-boundary", "x": 300, "y": 400, "width": 200, "height": 96, "label": "Runtime Memory", "description": "Session, terminal, shell", "technology": "Concurrent maps", "stroke": "#356a8a" },
+    { "id": "case", "kind": "review_card", "c4_type": "container", "parent": "server-boundary", "x": 600, "y": 400, "width": 200, "height": 96, "label": "Execution Case", "description": "admission, cancel, recovery", "technology": "Java 17", "stroke": "#c06b35" },
+    { "id": "host", "kind": "review_card", "c4_type": "external_system", "x": 900, "y": 410, "width": 150, "height": 76, "label": "Remote Host", "description": "SSH, SFTP, Docker", "stroke": "#7a5c99" }
+  ],
+  "arrows": [
+    { "id": "user-http", "source": "user", "target": "http", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "review-entry", "motion_stage": 1, "motion_order": 0, "label": "request", "protocol": "HTTP" },
+    { "id": "http-mcp", "source": "http", "target": "mcp", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "review-request", "motion_stage": 2, "motion_order": 0, "label": "allow-list", "protocol": "MCP" },
+    { "id": "mcp-case", "source": "mcp", "target": "case", "source_port": "bottom", "target_port": "top", "flow": "async", "motion_role": "review-async", "motion_stage": 3, "motion_order": 0, "label": "submit", "protocol": "case" },
+    { "id": "case-memory", "source": "case", "target": "memory", "source_port": "left", "target_port": "right", "flow": "write", "motion_role": "review-state", "motion_stage": 4, "motion_order": 0, "label": "context", "protocol": "in-process" },
+    { "id": "case-host", "source": "case", "target": "host", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "review-external", "motion_stage": 4, "motion_order": 1, "label": "SSH / SFTP", "protocol": "remote", "label_dy": -24 }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 620,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "control", "label": "request" },
+    { "flow": "write", "label": "runtime state" },
+    { "flow": "async", "label": "long execution" }
+  ],
+  "footer": "Actual boundary: MCP bearer filter is /mcp-only; ordinary /api/v1 uses userId/default identity",
+  "footer_x": 48,
+  "footer_y": 680
+}

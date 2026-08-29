@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 760" width="960" height="760" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="10" data-visual-theme="Cloud Fabric" data-diagram-type="deployment" data-motion-scene="" data-semantic-profile="cloud-fabric" data-semantic-valid="true" data-quality-profile="showcase" data-max-bends-per-edge="2" data-max-total-bends="8" data-max-route-stretch="1.35" data-max-bridged-crossings="0" data-min-node-gap="40.0" data-min-container-gutter="20.0" data-min-label-clearance="4.0" data-min-segment-length="16.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ea580c"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0891b2"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#059669"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#db2777"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <filter id="shadowSoft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <filter id="shadowGlass" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#020617" flood-opacity="0.28"/>
+    </filter>
+    <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fcff"/>
+      <stop offset="100%" stop-color="#dfedf7"/>
+    </linearGradient>
+    <pattern id="cloudGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#7fa3c2" stroke-opacity="0.10" stroke-width="1"/>
+    </pattern>
+    <style>
+    text { font-family: Inter, 'Helvetica Neue', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #102a43; }
+    .subtitle { font-size: 13px; font-weight: 500; fill: #52718d; }
+    .section { font-size: 13px; font-weight: 700; fill: #315d7e; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #7892a8; }
+    .node-title { font-weight: 700; fill: #102a43; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #486581; }
+    .node-type { font-size: 10px; font-weight: 700; fill: #6b879d; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #334e68; }
+    .legend { font-size: 12px; font-weight: 500; fill: #486581; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #829ab1; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #829ab1; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #102a43; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="760.0" fill="url(#cloudGradient)"/>
+  <rect data-graph-role="decoration" width="960.0" height="760.0" fill="url(#cloudGrid)"/>
+  <text x="48.0" y="48" text-anchor="start" class="title">Docker Compose Deployment Topology</text>
+  <text x="48.0" y="72" text-anchor="start" class="subtitle">application, MySQL, Redis, and the MCP entry boundary</text>
+  <g id="style-signature" data-graph-role="decoration" data-style-signature="cloud-ownership-map">
+    <rect x="736.0" y="22.0" width="176.0" height="34.0" rx="9" fill="#ffffff" fill-opacity="0.82" stroke="#7fa3c2" stroke-width="1.1"/>
+    <rect x="747.0" y="31.0" width="14" height="14" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+    <rect x="756.0" y="35.0" width="14" height="14" rx="4" fill="#dcfce7" stroke="#059669" stroke-width="1"/>
+    <text data-full-text="PROVIDER-NEUTRAL · 2 REGIONS" x="779.0" y="36.0" font-size="7.43" font-weight="800" fill="#315d7e">PROVIDER-NEUTRAL · 2 REGIONS</text>
+    <text data-full-text="SINGLE HOST" x="779.0" y="49.0" font-size="8" font-weight="700" fill="#52718d">SINGLE HOST</text>
+  </g>
+  <g id="global-edge" data-graph-role="container" data-container-id="global-edge" data-semantic-role="global" data-graph-bounds="30,120,930,220">
+  <rect data-graph-role="container" x="30.0" y="120.0" width="900.0" height="100.0" rx="16.0" fill="rgba(255,255,255,0.54)" stroke="#7fa3c2" stroke-width="1.4" stroke-dasharray="7 5"/>
+  <rect data-graph-role="decoration" x="862.0" y="130.0" width="54.0" height="18" rx="9" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.8"/>
+  <text data-graph-role="decoration" x="889.0" y="142.5" text-anchor="middle" font-size="9" font-weight="700" fill="#315d7e">GLOBAL</text>
+  <line data-graph-role="decoration" x1="38.0" y1="162.0" x2="38.0" y2="206.0" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" opacity="0.72"/>
+  <text x="48.0" y="144.0" class="section">EXTERNAL ENTRY</text>
+    <rect id="global-edge-header" data-graph-role="reserved" data-reserved-kind="container-header" x="38" y="126" width="132.7" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="region-a" data-graph-role="container" data-container-id="region-a" data-semantic-role="region" data-graph-bounds="30,260,450,610">
+  <rect data-graph-role="container" x="30.0" y="260.0" width="420.0" height="350.0" rx="16.0" fill="rgba(255,255,255,0.54)" stroke="#7fa3c2" stroke-width="1.4" stroke-dasharray="7 5"/>
+  <rect data-graph-role="decoration" x="382.0" y="270.0" width="54.0" height="18" rx="9" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.8"/>
+  <text data-graph-role="decoration" x="409.0" y="282.5" text-anchor="middle" font-size="9" font-weight="700" fill="#315d7e">REGION</text>
+  <line data-graph-role="decoration" x1="38.0" y1="302.0" x2="38.0" y2="596.0" stroke="#0891b2" stroke-width="2.2" stroke-linecap="round" opacity="0.72"/>
+  <text x="48.0" y="284.0" class="section">HOST</text>
+    <rect id="region-a-header" data-graph-role="reserved" data-reserved-kind="container-header" x="38" y="266" width="60.16" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="region-b" data-graph-role="container" data-container-id="region-b" data-semantic-role="region" data-graph-bounds="510,260,930,610">
+  <rect data-graph-role="container" x="510.0" y="260.0" width="420.0" height="350.0" rx="16.0" fill="rgba(255,255,255,0.54)" stroke="#7fa3c2" stroke-width="1.4" stroke-dasharray="7 5"/>
+  <rect data-graph-role="decoration" x="862.0" y="270.0" width="54.0" height="18" rx="9" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.8"/>
+  <text data-graph-role="decoration" x="889.0" y="282.5" text-anchor="middle" font-size="9" font-weight="700" fill="#315d7e">REGION</text>
+  <line data-graph-role="decoration" x1="518.0" y1="302.0" x2="518.0" y2="596.0" stroke="#0891b2" stroke-width="2.2" stroke-linecap="round" opacity="0.72"/>
+  <text x="528.0" y="284.0" class="section">COMPOSE NETWORK</text>
+    <rect id="region-b-header" data-graph-role="reserved" data-reserved-kind="container-header" x="518" y="266" width="146.48" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="vpc-a" data-graph-role="container" data-container-id="vpc-a" data-semantic-role="network" data-graph-bounds="55,310,425,570">
+  <rect data-graph-role="container" x="55.0" y="310.0" width="370.0" height="260.0" rx="16.0" fill="rgba(255,255,255,0.54)" stroke="#7fa3c2" stroke-width="1.4" stroke-dasharray="7 5"/>
+  <rect data-graph-role="decoration" x="356.46" y="320.0" width="54.54" height="18" rx="9" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.8"/>
+  <text data-graph-role="decoration" x="383.73" y="332.5" text-anchor="middle" font-size="9" font-weight="700" fill="#315d7e">NETWORK</text>
+  <line data-graph-role="decoration" x1="63.0" y1="352.0" x2="63.0" y2="556.0" stroke="#7c3aed" stroke-width="2.2" stroke-linecap="round" opacity="0.72"/>
+  <text x="73.0" y="334.0" class="section">APPLICATION</text>
+    <rect id="vpc-a-header" data-graph-role="reserved" data-reserved-kind="container-header" x="63" y="316" width="106.18" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="vpc-b" data-graph-role="container" data-container-id="vpc-b" data-semantic-role="network" data-graph-bounds="535,310,905,570">
+  <rect data-graph-role="container" x="535.0" y="310.0" width="370.0" height="260.0" rx="16.0" fill="rgba(255,255,255,0.54)" stroke="#7fa3c2" stroke-width="1.4" stroke-dasharray="7 5"/>
+  <rect data-graph-role="decoration" x="836.46" y="320.0" width="54.54" height="18" rx="9" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.8"/>
+  <text data-graph-role="decoration" x="863.73" y="332.5" text-anchor="middle" font-size="9" font-weight="700" fill="#315d7e">NETWORK</text>
+  <line data-graph-role="decoration" x1="543.0" y1="352.0" x2="543.0" y2="556.0" stroke="#7c3aed" stroke-width="2.2" stroke-linecap="round" opacity="0.72"/>
+  <text x="553.0" y="334.0" class="section">PERSISTENT VOLUMES</text>
+    <rect id="vpc-b-header" data-graph-role="reserved" data-reserved-kind="container-header" x="543" y="316" width="162.6" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="route-a" data-graph-role="edge" data-edge-id="route-a" data-source="edge-a" data-target="app-a" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="global-route" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="security group / proxy" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 270,198 L 270,350" fill="none" stroke="#0891b2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="route-b" data-graph-role="edge" data-edge-id="route-b" data-source="edge-b" data-target="app-b" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="global-route" data-motion-stage="1" data-motion-order="1" data-protocol="" data-via="internal service access" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 750,198 L 750,350" fill="none" stroke="#0891b2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="write-a" data-graph-role="edge" data-edge-id="write-a" data-source="app-a" data-target="db-a" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="regional-write" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 270,422 L 270,470" fill="none" stroke="#ea580c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowB)"/>
+  <path id="write-b" data-graph-role="edge" data-edge-id="write-b" data-source="app-b" data-target="db-b" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="regional-write" data-motion-stage="2" data-motion-order="1" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 750,422 L 750,470" fill="none" stroke="#ea580c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowB)"/>
+  <path id="replicate-orders" data-graph-role="edge" data-edge-id="replicate-orders" data-source="db-a" data-target="db-b" data-edge-kind="flow" data-topic-id="" data-flow="async" data-motion-role="cross-region" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="Compose backend" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 358,506 L 662,506" fill="none" stroke="#7c3aed" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowF)" stroke-dasharray="6,4"/>
+  <g id="node-edge-a" data-graph-role="node" data-node-id="edge-a" data-semantic-role="edge" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="global-edge" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="182,142,358,198">
+  <rect x="182.0" y="142.0" width="176.0" height="56.0" rx="12" fill="#ffffff" stroke="#9bb7cf" stroke-width="1.4" filter="url(#shadowSoft)"/>
+  <rect x="194.0" y="150.0" width="40.0" height="40.0" rx="11" fill="#2563eb" opacity="0.12" stroke="#2563eb" stroke-width="1.2"/>
+  <circle cx="214.0" cy="170.0" r="11" fill="none" stroke="#2563eb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 203.0 170.0 H 225.0 M 214.0 159.0 C 208.0 165.0 208.0 175.0 214.0 181.0 M 214.0 159.0 C 220.0 165.0 220.0 175.0 214.0 181.0" fill="none" stroke="#2563eb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text data-text-role="title" data-full-text="MCP / HTTP" x="248.0" y="173.0" text-anchor="start" class="node-title" font-size="13.5">MCP / HTTP</text>
+  <text data-text-role="subtitle" data-full-text="port 8091" x="248.0" y="192.0" text-anchor="start" class="node-sub" font-size="11.5">port 8091</text>
+  <text x="348.0" y="156.0" text-anchor="end" font-size="8.5" font-weight="800" fill="#6b879d">DOCKER</text>
+  </g>
+  <g id="node-edge-b" data-graph-role="node" data-node-id="edge-b" data-semantic-role="edge" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="global-edge" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="662,142,838,198">
+  <rect x="662.0" y="142.0" width="176.0" height="56.0" rx="12" fill="#ffffff" stroke="#9bb7cf" stroke-width="1.4" filter="url(#shadowSoft)"/>
+  <rect x="674.0" y="150.0" width="40.0" height="40.0" rx="11" fill="#2563eb" opacity="0.12" stroke="#2563eb" stroke-width="1.2"/>
+  <circle cx="694.0" cy="170.0" r="11" fill="none" stroke="#2563eb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 683.0 170.0 H 705.0 M 694.0 159.0 C 688.0 165.0 688.0 175.0 694.0 181.0 M 694.0 159.0 C 700.0 165.0 700.0 175.0 694.0 181.0" fill="none" stroke="#2563eb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text data-text-role="title" data-full-text="Reverse Proxy" x="728.0" y="173.0" text-anchor="start" class="node-title" font-size="12.39">Reverse Proxy</text>
+  <text data-text-role="subtitle" data-full-text="optional TLS" x="728.0" y="192.0" text-anchor="start" class="node-sub" font-size="11.5">optional TLS</text>
+  <text x="828.0" y="156.0" text-anchor="end" font-size="8.5" font-weight="800" fill="#6b879d">DOCKER</text>
+  </g>
+  <g id="node-app-a" data-graph-role="node" data-node-id="app-a" data-semantic-role="compute" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="vpc-a" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="182,350,358,422">
+  <rect x="182.0" y="350.0" width="176.0" height="72.0" rx="12" fill="#ffffff" stroke="#9bb7cf" stroke-width="1.4" filter="url(#shadowSoft)"/>
+  <rect x="194.0" y="365.0" width="42.0" height="42.0" rx="11" fill="#059669" opacity="0.12" stroke="#059669" stroke-width="1.2"/>
+  <rect x="204.0" y="377.0" width="22" height="18" rx="4" fill="none" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 209.0 383.0 H 221.0 M 209.0 389.0 H 218.0" fill="none" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text data-text-role="title" data-full-text="walicode-server-app" x="248.0" y="381.0" text-anchor="start" class="node-title" font-size="10.5">walicode-serve…</text>
+  <text data-text-role="subtitle" data-full-text="Spring Boot · prod" x="248.0" y="400.0" text-anchor="start" class="node-sub" font-size="9.53">Spring Boot · prod</text>
+  <text x="348.0" y="364.0" text-anchor="end" font-size="8.5" font-weight="800" fill="#6b879d">DOCKER</text>
+  </g>
+  <g id="node-db-a" data-graph-role="node" data-node-id="db-a" data-semantic-role="database" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="vpc-a" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="182,470,358,542">
+  <rect x="182.0" y="470.0" width="176.0" height="72.0" rx="12" fill="#ffffff" stroke="#9bb7cf" stroke-width="1.4" filter="url(#shadowSoft)"/>
+  <rect x="194.0" y="485.0" width="42.0" height="42.0" rx="11" fill="#ea580c" opacity="0.12" stroke="#ea580c" stroke-width="1.2"/>
+  <ellipse cx="215.0" cy="498.0" rx="11" ry="4" fill="none" stroke="#ea580c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 204.0 498.0 V 514.0 C 204.0 519.0 226.0 519.0 226.0 514.0 V 498.0" fill="none" stroke="#ea580c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 204.0 506.0 C 204.0 511.0 226.0 511.0 226.0 506.0" fill="none" stroke="#ea580c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text data-text-role="title" data-full-text="MySQL 8" x="248.0" y="501.0" text-anchor="start" class="node-title" font-size="13.5">MySQL 8</text>
+  <text data-text-role="subtitle" data-full-text="walissh database" x="248.0" y="520.0" text-anchor="start" class="node-sub" font-size="10.62">walissh database</text>
+  <text x="348.0" y="484.0" text-anchor="end" font-size="8.5" font-weight="800" fill="#6b879d">DOCKER</text>
+  </g>
+  <g id="node-app-b" data-graph-role="node" data-node-id="app-b" data-semantic-role="compute" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="vpc-b" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="662,350,838,422">
+  <rect x="662.0" y="350.0" width="176.0" height="72.0" rx="12" fill="#ffffff" stroke="#9bb7cf" stroke-width="1.4" filter="url(#shadowSoft)"/>
+  <rect x="674.0" y="365.0" width="42.0" height="42.0" rx="11" fill="#059669" opacity="0.12" stroke="#059669" stroke-width="1.2"/>
+  <rect x="684.0" y="377.0" width="22" height="18" rx="4" fill="none" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 689.0 383.0 H 701.0 M 689.0 389.0 H 698.0" fill="none" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text data-text-role="title" data-full-text="Redis 7" x="728.0" y="381.0" text-anchor="start" class="node-title" font-size="13.5">Redis 7</text>
+  <text data-text-role="subtitle" data-full-text="AOF + password" x="728.0" y="400.0" text-anchor="start" class="node-sub" font-size="11.5">AOF + password</text>
+  <text x="828.0" y="364.0" text-anchor="end" font-size="8.5" font-weight="800" fill="#6b879d">DOCKER</text>
+  </g>
+  <g id="node-db-b" data-graph-role="node" data-node-id="db-b" data-semantic-role="database" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="vpc-b" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="662,470,838,542">
+  <rect x="662.0" y="470.0" width="176.0" height="72.0" rx="12" fill="#ffffff" stroke="#9bb7cf" stroke-width="1.4" filter="url(#shadowSoft)"/>
+  <rect x="674.0" y="485.0" width="42.0" height="42.0" rx="11" fill="#ea580c" opacity="0.12" stroke="#ea580c" stroke-width="1.2"/>
+  <ellipse cx="695.0" cy="498.0" rx="11" ry="4" fill="none" stroke="#ea580c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 684.0 498.0 V 514.0 C 684.0 519.0 706.0 519.0 706.0 514.0 V 498.0" fill="none" stroke="#ea580c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 684.0 506.0 C 684.0 511.0 706.0 511.0 706.0 506.0" fill="none" stroke="#ea580c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text data-text-role="title" data-full-text="Named Volumes" x="728.0" y="501.0" text-anchor="start" class="node-title" font-size="12.85">Named Volumes</text>
+  <text data-text-role="subtitle" data-full-text="mysql_data / redis_data" x="728.0" y="520.0" text-anchor="start" class="node-sub" font-size="9.5">mysql_data / redi…</text>
+  <text x="828.0" y="484.0" text-anchor="end" font-size="8.5" font-weight="800" fill="#6b879d">DOCKER</text>
+  </g>
+  <g id="route-a-label" data-graph-role="label" data-owner="route-a" data-graph-bounds="110.92,230,267,250">
+  <rect x="110.92" y="230.0" width="156.07999999999998" height="20" rx="6" fill="#f7fbfe" opacity="0.96"/>
+  <text x="188.96" y="244.0" text-anchor="middle" class="arrow-label">security group / proxy</text>
+  </g>
+  <g id="route-b-label" data-graph-role="label" data-owner="route-b" data-graph-bounds="587.56,230,747,250">
+  <rect x="587.56" y="230.0" width="159.44" height="20" rx="6" fill="#f7fbfe" opacity="0.96"/>
+  <text x="667.28" y="244.0" text-anchor="middle" class="arrow-label">internal service access</text>
+  </g>
+  <g id="replicate-orders-label" data-graph-role="label" data-owner="replicate-orders" data-graph-bounds="452.12,475,567.88,495">
+  <rect x="452.12" y="475.0" width="115.76" height="20" rx="6" fill="#f7fbfe" opacity="0.96"/>
+  <text x="510.0" y="489.0" text-anchor="middle" class="arrow-label">Compose backend</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="38" y="646" width="478.64" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="48.0" y1="660.0" x2="78.0" y2="660.0" stroke="#0891b2" stroke-width="2.2" marker-end="url(#arrowC)"/>
+    <text data-graph-role="decoration" x="88.0" y="664.0" class="legend">MCP / HTTP</text>
+    <line data-graph-role="decoration" x1="183.2" y1="660.0" x2="213.2" y2="660.0" stroke="#ea580c" stroke-width="2.2" marker-end="url(#arrowB)"/>
+    <text data-graph-role="decoration" x="223.2" y="664.0" class="legend">database / Redis</text>
+    <line data-graph-role="decoration" x1="354.15999999999997" y1="660.0" x2="384.15999999999997" y2="660.0" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arrowF)"/>
+    <text data-graph-role="decoration" x="394.15999999999997" y="664.0" class="legend">internal network</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,723,566,739">
+  <text x="48.0" y="735.0" class="footnote">TLS terminates at gateway or proxy; static Bearer Token protects /mcp only</text>
+  </g>
+</svg>
