@@ -31,6 +31,22 @@ layout: experience-detail
 
 </section>
 
+<section id="context" class="experience-detail-section">
+
+## 工作背景
+
+项目面向 C 端用户和 B 端运营人员提供 AI 生图、视频生成、印花提取和素材交付能力。由于上游任务耗时长、状态异步变化且文件体积较大，后端需要同时处理任务削峰、消息可靠性、权益额度和文件传输等问题。
+
+</section>
+
+<section id="collaboration" class="experience-detail-section">
+
+## 协作方式
+
+参与需求讨论和接口联调，与前端、产品和后端协作确认任务状态、异常提示、文件访问和权益规则；通过任务 ID、外部任务 ID、错误分类和日志链路定位异步任务问题，并跟进测试与修复验证。
+
+</section>
+
 <section id="participation" class="experience-detail-section">
 
 ## 具体参与
