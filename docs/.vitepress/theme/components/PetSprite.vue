@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { withBase } from 'vitepress'
+import { useRoute } from 'vitepress'
+import { relativeUrl } from '../utils/relative-url'
 
 export type PetState =
   | 'idle'
@@ -28,6 +29,7 @@ const props = withDefaults(
     label: 'Xerina 桌宠',
   },
 )
+const route = useRoute()
 
 const rows: Record<Exclude<PetState, 'look'>, { row: number; durations: number[] }> = {
   idle: { row: 0, durations: [280, 110, 110, 140, 140, 320] },
@@ -52,7 +54,7 @@ const column = computed(() => (props.state === 'look' ? lookIndex.value % 8 : fr
 const spriteStyle = computed(() => ({
   width: `${192 * props.scale}px`,
   height: `${208 * props.scale}px`,
-  backgroundImage: `url(${withBase('/pets/xerina/spritesheet.webp')})`,
+  backgroundImage: `url(${relativeUrl('/pets/xerina/spritesheet.webp', route.path)})`,
   backgroundPosition: `${(column.value * 100) / 7}% ${row.value * 10}%`,
 }))
 

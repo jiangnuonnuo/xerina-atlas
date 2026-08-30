@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import MarkdownIt from 'markdown-it'
 import PetSprite, { type PetState } from './PetSprite.vue'
 import {
   cancelKnowledgeAnswer,
@@ -7,19 +8,31 @@ import {
   isAbortError,
   queryKnowledgeAgent,
   streamKnowledgeAnswer,
+  type ReActEvent,
 } from '../services/knowledge-agent'
 
 type Availability = 'checking' | 'available' | 'unavailable' | 'error'
+type RetrievalActivity = {
+  id: string
+  toolName: string
+  label: string
+  status: 'running' | 'completed' | 'failed' | 'stopped'
+  content: string
+}
 type Message = {
   id: string
   role: 'user' | 'assistant'
   content: string
   pending?: boolean
+  activities?: RetrievalActivity[]
 }
 
 const visitorKey = 'xerina-atlas-visitor-id'
 const sessionKey = 'xerina-atlas-knowledge-session'
+const conversationKeyPrefix = 'xerina-atlas-knowledge-conversation:'
 const positionKey = 'xerina-atlas-pet-position'
+const conversationStorageVersion = 1
+const maxPersistedMessages = 100
 const dragThreshold = 6
 const viewportPadding = 12
 const suggestions = [
@@ -27,6 +40,12 @@ const suggestions = [
   '介绍一下她的 AI Agent 工程实践',
   '哪个项目最能体现她的系统设计能力？',
 ]
+const markdown = new MarkdownIt({
+  breaks: true,
+  html: false,
+  linkify: true,
+  typographer: false,
+})
 
 const open = ref(false)
 const availability = ref<Availability>('checking')
@@ -47,6 +66,7 @@ const looking = ref(false)
 const positioned = ref(false)
 const customPosition = ref(false)
 const dragging = ref(false)
+const panelSide = ref<'left' | 'right'>('left')
 const petPosition = reactive({ x: 0, y: 0 })
 const panelPosition = reactive({ active: false, x: 0, y: 0 })
 let sessionPromise: Promise<string> | undefined
@@ -58,6 +78,7 @@ let dragStartPointerY = 0
 let dragStartPetX = 0
 let dragStartPetY = 0
 let suppressLauncherClick = false
+let persistConversationTimer: number | undefined
 
 const visiblePetState = computed<PetState>(() => {
   if (busy.value) return petState.value
@@ -95,6 +116,125 @@ function visitorId() {
   return id
 }
 
+function conversationKey(sessionId: string) {
+  return `${conversationKeyPrefix}${sessionId}`
+}
+
+function isMessageRole(value: unknown): value is Message['role'] {
+  return value === 'user' || value === 'assistant'
+}
+
+function isActivityStatus(value: unknown): value is RetrievalActivity['status'] {
+  return value === 'running' || value === 'completed' || value === 'failed' || value === 'stopped'
+}
+
+function parseStoredActivity(value: unknown): RetrievalActivity | undefined {
+  if (!value || typeof value !== 'object') return undefined
+  const activity = value as Partial<RetrievalActivity>
+  if (typeof activity.id !== 'string' || typeof activity.label !== 'string') return undefined
+
+  return {
+    id: activity.id,
+    toolName: typeof activity.toolName === 'string' ? activity.toolName : '',
+    label: activity.label,
+    status: isActivityStatus(activity.status) ? activity.status : 'stopped',
+    content: typeof activity.content === 'string' ? activity.content : '',
+  }
+}
+
+function parseStoredMessage(value: unknown): Message | undefined {
+  if (!value || typeof value !== 'object') return undefined
+  const message = value as Partial<Message>
+  if (typeof message.id !== 'string' || !isMessageRole(message.role) || typeof message.content !== 'string') {
+    return undefined
+  }
+
+  const activities = Array.isArray(message.activities)
+    ? message.activities.map(parseStoredActivity).filter((activity): activity is RetrievalActivity => Boolean(activity))
+    : undefined
+
+  const restored: Message = {
+    id: message.id,
+    role: message.role,
+    content: message.content,
+    pending: false,
+    activities,
+  }
+
+  if (message.pending && restored.role === 'assistant') {
+    restored.activities?.forEach((activity) => {
+      if (activity.status === 'running') activity.status = 'stopped'
+    })
+    restored.content = restored.content
+      ? `${restored.content}\n\n上一次回答因页面刷新而中断。`
+      : '上一次回答因页面刷新而中断。'
+  }
+
+  return restored
+}
+
+function saveConversationNow() {
+  if (persistConversationTimer != null) {
+    window.clearTimeout(persistConversationTimer)
+    persistConversationTimer = undefined
+  }
+
+  const sessionId = window.sessionStorage.getItem(sessionKey)
+  if (!sessionId) return
+
+  try {
+    const payload = {
+      version: conversationStorageVersion,
+      sessionId,
+      updatedAt: Date.now(),
+      messages: messages.value.slice(-maxPersistedMessages),
+    }
+    window.localStorage.setItem(conversationKey(sessionId), JSON.stringify(payload))
+  } catch {
+    // The conversation remains available in memory if browser storage is unavailable or full.
+  }
+}
+
+function scheduleConversationSave() {
+  if (persistConversationTimer != null) window.clearTimeout(persistConversationTimer)
+  persistConversationTimer = window.setTimeout(saveConversationNow, 120)
+}
+
+function restoreConversation() {
+  const sessionId = window.sessionStorage.getItem(sessionKey)
+  if (!sessionId) return
+
+  const key = conversationKey(sessionId)
+  try {
+    const raw = window.localStorage.getItem(key)
+    if (!raw) return
+    const payload = JSON.parse(raw) as {
+      version?: unknown
+      sessionId?: unknown
+      messages?: unknown
+    }
+    if (
+      payload.version !== conversationStorageVersion
+      || payload.sessionId !== sessionId
+      || !Array.isArray(payload.messages)
+    ) {
+      window.localStorage.removeItem(key)
+      return
+    }
+
+    messages.value = payload.messages
+      .map(parseStoredMessage)
+      .filter((message): message is Message => Boolean(message))
+      .slice(-maxPersistedMessages)
+  } catch {
+    try {
+      window.localStorage.removeItem(key)
+    } catch {
+      // Ignore browser storage restrictions and continue with an empty in-memory conversation.
+    }
+  }
+}
+
 async function ensureSession(userId: string) {
   const existing = window.sessionStorage.getItem(sessionKey)
   if (existing) return existing
@@ -102,6 +242,7 @@ async function ensureSession(userId: string) {
     sessionPromise = createKnowledgeSession(userId)
       .then((sessionId) => {
         window.sessionStorage.setItem(sessionKey, sessionId)
+        saveConversationNow()
         return sessionId
       })
       .finally(() => {
@@ -114,6 +255,83 @@ async function ensureSession(userId: string) {
 function publicError(error: unknown) {
   if (error instanceof Error && error.message) return error.message
   return '暂时无法连接知识助手，请稍后重试'
+}
+
+function renderMarkdown(content: string) {
+  return markdown.render(content)
+}
+
+function retrievalLabel(toolName?: string) {
+  const normalized = String(toolName || '').toLowerCase()
+  if (normalized.includes('list_knowledge')) return '定位个人知识库'
+  if (normalized.includes('knowledge') || normalized.includes('rag')) return '检索个人知识库'
+  if (normalized.includes('web') || normalized.includes('search')) return '检索公开资料'
+  return '检索相关资料'
+}
+
+function retrievalStatus(activity: RetrievalActivity) {
+  if (activity.status === 'running') return '正在检索'
+  if (activity.status === 'failed') return '检索未完成'
+  if (activity.status === 'stopped') return '检索已停止'
+  return '已检索，可展开查看'
+}
+
+function readableToolResult(content?: string) {
+  if (!content) return ''
+  try {
+    const parsed = JSON.parse(content) as unknown
+    if (parsed && typeof parsed === 'object' && 'result' in parsed) {
+      const result = (parsed as { result?: unknown }).result
+      if (Array.isArray(result)) {
+        const texts = result.flatMap((item) => {
+          if (typeof item === 'string') return [item]
+          if (item && typeof item === 'object' && 'text' in item) {
+            const text = (item as { text?: unknown }).text
+            return typeof text === 'string' ? [text] : []
+          }
+          return []
+        })
+        if (texts.length) return texts.join('\n\n')
+      }
+      if (typeof result === 'string') return result
+    }
+    return typeof parsed === 'string' ? parsed : JSON.stringify(parsed, null, 2)
+  } catch {
+    return content
+  }
+}
+
+function updateRetrievalActivity(message: Message, event: ReActEvent) {
+  if (event.event !== 'tool_call' && event.event !== 'tool_result') return
+
+  const activityId = event.toolCallId || makeId('retrieval')
+  const activities = message.activities || (message.activities = [])
+  let activity = activities.find((item) => item.id === activityId)
+  if (!activity) {
+    activity = {
+      id: activityId,
+      toolName: event.toolName || '',
+      label: retrievalLabel(event.toolName),
+      status: 'running',
+      content: '',
+    }
+    activities.push(activity)
+  }
+
+  if (event.toolName) {
+    activity.toolName = event.toolName
+    activity.label = retrievalLabel(event.toolName)
+  }
+  if (event.event === 'tool_result') {
+    activity.status = event.status === 'failed' || event.status === 'error' ? 'failed' : 'completed'
+    activity.content = readableToolResult(event.content)
+  }
+}
+
+function settleRetrievalActivities(message: Message, status: 'completed' | 'failed' | 'stopped') {
+  message.activities?.forEach((activity) => {
+    if (activity.status === 'running') activity.status = status
+  })
 }
 
 function scrollToLatest() {
@@ -173,6 +391,7 @@ async function startNewConversation() {
     window.sessionStorage.setItem(sessionKey, sessionId)
     sessionPromise = undefined
     messages.value = []
+    saveConversationNow()
     input.value = ''
     statusText.value = '新对话已开始'
     setTransientPetState('waving', 1400)
@@ -191,10 +410,14 @@ function eventStatus(event: { event: string; toolName?: string; statusMessage?: 
     statusText.value = '正在分析问题'
     petState.value = 'running'
   } else if (event.event === 'tool_call') {
-    statusText.value = event.toolName === 'web_search' ? '正在检索公开资料' : '正在查询个人知识库'
+    const toolName = String(event.toolName || '').toLowerCase()
+    statusText.value = toolName.includes('web') ? '正在检索公开资料' : '正在查询个人知识库'
     petState.value = 'running'
   } else if (event.event === 'tool_result') {
-    statusText.value = '资料已返回，正在组织回答'
+    statusText.value = '资料已返回，正在生成回答'
+    petState.value = 'review'
+  } else if (event.event === 'text') {
+    statusText.value = '正在生成回答'
     petState.value = 'review'
   } else if (event.event === 'status' && event.statusMessage) {
     statusText.value = event.statusMessage
@@ -213,7 +436,13 @@ async function sendMessage(preset?: string) {
   statusText.value = '正在准备回答'
 
   const userMessage: Message = { id: makeId('user'), role: 'user', content: question }
-  const assistantMessage = reactive<Message>({ id: makeId('assistant'), role: 'assistant', content: '', pending: true })
+  const assistantMessage = reactive<Message>({
+    id: makeId('assistant'),
+    role: 'assistant',
+    content: '',
+    pending: true,
+    activities: [],
+  })
   messages.value.push(userMessage, assistantMessage)
   scrollToLatest()
 
@@ -231,27 +460,34 @@ async function sendMessage(preset?: string) {
       message: question,
       requestId,
       signal: controller.signal,
-      onText: (fullText) => {
+      onAnswerText: (fullText) => {
         assistantMessage.content = fullText
         scrollToLatest()
       },
-      onEvent: (event) => eventStatus(event),
+      onEvent: (event) => {
+        eventStatus(event)
+        updateRetrievalActivity(assistantMessage, event)
+        if (event.event === 'tool_call' || event.event === 'tool_result') scrollToLatest()
+      },
     })
 
     assistantMessage.content = result.content || assistantMessage.content || '当前资料不足，暂时无法给出可靠回答。'
     assistantMessage.pending = false
+    settleRetrievalActivities(assistantMessage, 'completed')
     const completed = result.stopReason === 'completed' || result.stopReason === 'finish'
     statusText.value = result.stopReason === 'user_stop' ? '已停止' : completed ? '回答完成' : '回答未完整完成，可缩小问题后重试'
     setTransientPetState(result.stopReason === 'user_stop' || !completed ? 'waiting' : 'review')
   } catch (error) {
     assistantMessage.pending = false
     if (isAbortError(error)) {
+      settleRetrievalActivities(assistantMessage, 'stopped')
       assistantMessage.content = assistantMessage.content
         ? `${assistantMessage.content}\n\n本次回答已停止。`
         : '本次回答已停止。'
       statusText.value = '已停止'
       setTransientPetState('waiting')
     } else {
+      settleRetrievalActivities(assistantMessage, 'failed')
       assistantMessage.content = assistantMessage.content || publicError(error)
       statusText.value = '回答中断，请重试'
       setTransientPetState('failed', 2400)
@@ -386,12 +622,19 @@ function updatePanelPosition() {
     const launcherRect = launcher.getBoundingClientRect()
     const maxX = Math.max(viewportPadding, window.innerWidth - panelWidth - viewportPadding)
     const maxY = Math.max(viewportPadding, window.innerHeight - panelHeight - viewportPadding)
-    const preferredX = launcherRect.right - panelWidth - 8
-    const aboveY = launcherRect.top - panelHeight - 10
-    const belowY = launcherRect.bottom + 10
-    const preferredY = aboveY >= viewportPadding ? aboveY : belowY
+    const gap = 18
+    const leftX = launcherRect.left - panelWidth - gap
+    const rightX = launcherRect.right + gap
+    const preferredY = launcherRect.bottom - panelHeight - 22
 
-    panelPosition.x = Math.min(Math.max(viewportPadding, preferredX), maxX)
+    if (leftX >= viewportPadding || rightX > maxX) {
+      panelSide.value = 'left'
+      panelPosition.x = Math.min(Math.max(viewportPadding, leftX), maxX)
+    } else {
+      panelSide.value = 'right'
+      panelPosition.x = Math.min(Math.max(viewportPadding, rightX), maxX)
+    }
+
     panelPosition.y = Math.min(Math.max(viewportPadding, preferredY), maxY)
     panelPosition.active = true
   })
@@ -462,9 +705,13 @@ function handleWindowKeydown(event: KeyboardEvent) {
   }
 }
 
+watch(messages, scheduleConversationSave, { deep: true })
+
 onMounted(() => {
   window.addEventListener('keydown', handleWindowKeydown)
   window.addEventListener('resize', handleWindowResize)
+  window.addEventListener('pagehide', saveConversationNow)
+  restoreConversation()
   void nextTick(restorePetPosition)
   void refreshAvailability()
 })
@@ -472,6 +719,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleWindowKeydown)
   window.removeEventListener('resize', handleWindowResize)
+  window.removeEventListener('pagehide', saveConversationNow)
+  saveConversationNow()
   activeController.value?.abort()
   if (settleTimer != null) window.clearTimeout(settleTimer)
   if (pointerFrame != null) window.cancelAnimationFrame(pointerFrame)
@@ -491,19 +740,26 @@ onBeforeUnmount(() => {
       ref="panelElement"
       v-show="open"
       class="pet-assistant-panel"
+      :class="`is-panel-${panelSide}`"
       :style="panelStyle"
       role="dialog"
       aria-modal="false"
       aria-labelledby="pet-assistant-title"
     >
       <header class="pet-assistant-header">
-        <div>
-          <span class="pet-assistant-kicker">XERINA / KNOWLEDGE COMPANION</span>
-          <h2 id="pet-assistant-title">问问 Xerina</h2>
+        <div class="pet-assistant-identity">
+          <span class="pet-assistant-avatar" aria-hidden="true">
+            <PetSprite :state="visiblePetState" :direction="lookDirection" :scale="0.2" label="" />
+          </span>
+          <div>
+            <span class="pet-assistant-kicker">XERINA / KNOWLEDGE COMPANION</span>
+            <h2 id="pet-assistant-title">问问 Xerina</h2>
+          </div>
         </div>
         <div class="pet-assistant-actions">
-          <button class="pet-icon-button" type="button" aria-label="开始新对话" title="新对话" :disabled="busy || creatingConversation || availability !== 'available'" @click="startNewConversation">
+          <button class="pet-new-conversation" type="button" :disabled="busy || creatingConversation || availability !== 'available'" @click="startNewConversation">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v11H9l-4 3V5zM12 8v5M9.5 10.5h5" /></svg>
+            <span>新对话</span>
           </button>
           <button class="pet-icon-button" type="button" aria-label="将桌宠重置到默认位置" title="重置桌宠位置" @click="resetPetPosition">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8A7 7 0 1 1 5 15M5.5 8V3M5.5 8h5" /></svg>
@@ -520,7 +776,7 @@ onBeforeUnmount(() => {
         <button v-if="availability === 'unavailable' || availability === 'error'" type="button" @click="refreshAvailability">重新检查</button>
       </div>
 
-      <div ref="messageList" class="pet-message-list" aria-live="polite" aria-relevant="additions text">
+      <div ref="messageList" class="pet-message-list" aria-live="polite" aria-relevant="additions text" :aria-busy="busy">
         <div v-if="!messages.length" class="pet-assistant-empty">
           <strong>你好，我是 Xerina 的知识搭档。</strong>
           <p>可以问我她的项目、实习经历、技术判断与 AI 工程实践。</p>
@@ -531,9 +787,50 @@ onBeforeUnmount(() => {
           </div>
         </div>
 
-        <article v-for="message in messages" :key="message.id" class="pet-message" :class="`is-${message.role}`">
-          <span>{{ message.role === 'user' ? '你' : 'Xerina' }}</span>
-          <p>{{ message.content || '正在组织回答…' }}</p>
+        <article
+          v-for="message in messages"
+          :key="message.id"
+          class="pet-message"
+          :class="`is-${message.role}`"
+          :aria-label="message.role === 'user' ? '你的消息' : 'Xerina 的回答'"
+        >
+          <span v-if="message.role === 'assistant'" class="pet-message-avatar" aria-hidden="true">X</span>
+          <div class="pet-message-content">
+            <div v-if="message.role === 'assistant' && message.activities?.length" class="pet-reasoning-list" aria-label="检索与思考过程" aria-live="off">
+              <details
+                v-for="activity in message.activities"
+                :key="activity.id"
+                class="pet-reasoning-item"
+                :class="`is-${activity.status}`"
+              >
+                <summary>
+                  <span class="pet-reasoning-icon" aria-hidden="true">
+                    <svg v-if="activity.status === 'running'" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9" /></svg>
+                    <svg v-else-if="activity.status === 'completed'" viewBox="0 0 24 24"><path d="m6.5 12.5 3.5 3.5 7.5-8" /></svg>
+                    <svg v-else-if="activity.status === 'stopped'" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" /></svg>
+                    <svg v-else viewBox="0 0 24 24"><path d="M12 8v5M12 17h.01M12 3l9 17H3L12 3z" /></svg>
+                  </span>
+                  <span class="pet-reasoning-summary">
+                    <strong>{{ activity.label }}</strong>
+                    <small>{{ retrievalStatus(activity) }}</small>
+                  </span>
+                  <svg class="pet-reasoning-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4" /></svg>
+                </summary>
+                <div class="pet-reasoning-body">
+                  <div v-if="activity.content" class="pet-rendered-markdown" v-html="renderMarkdown(activity.content)"></div>
+                  <p v-else>正在等待检索结果…</p>
+                </div>
+              </details>
+            </div>
+
+            <div class="pet-message-bubble">
+              <div v-if="message.content && message.role === 'assistant'" class="pet-rendered-markdown" v-html="renderMarkdown(message.content)"></div>
+              <p v-else-if="message.content">{{ message.content }}</p>
+              <span v-else class="pet-typing-indicator" aria-label="正在组织回答">
+                <i></i><i></i><i></i>
+              </span>
+            </div>
+          </div>
         </article>
       </div>
 

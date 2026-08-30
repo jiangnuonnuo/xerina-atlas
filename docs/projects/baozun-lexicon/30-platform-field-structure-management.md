@@ -1,7 +1,7 @@
 ---
 title: 30 · 平台字段目录结构治理
 type: project-chapter
-project: baozun-field-platform
+project: baozun-lexicon
 order: 30
 group: 目录治理
 description: 以 MySQL 邻接表加闭包表实现可懒加载、可移动、可恢复且可并发修改的多平台字段目录，并明确行锁粒度、读写快照和冲突处理。

@@ -22,6 +22,7 @@ export type ReActEvent = {
   statusMessage?: string
   toolCallId?: string
   toolName?: string
+  args?: string
   status?: string
   outputChunk?: string
   assistantMessageId?: string
@@ -53,7 +54,7 @@ export type StreamOptions = {
   message: string
   requestId: string
   signal?: AbortSignal
-  onText?: (fullText: string, event: ReActEvent) => void
+  onAnswerText?: (fullText: string, event: ReActEvent) => void
   onEvent?: (event: ReActEvent, lastEventId: number) => void
 }
 
@@ -144,9 +145,6 @@ export async function streamKnowledgeAnswer(options: StreamOptions): Promise<ReA
           message: options.message,
           requestId: options.requestId,
           lastEventId,
-          terminalSessionId: null,
-          projectContext: null,
-          inlineDatas: [],
         }),
       })
 
@@ -167,12 +165,12 @@ export async function streamKnowledgeAnswer(options: StreamOptions): Promise<ReA
         lastEventId += 1
         options.onEvent?.(event, lastEventId)
 
-        if (event.event === 'text' && event.content != null) {
+        if (event.event === 'text' && (event.content != null || event.fullText != null)) {
           const segmentId = event.assistantMessageId || `round-${event.roundIndex ?? 0}`
           if (!segments.has(segmentId)) segmentOrder.push(segmentId)
           const previous = segments.get(segmentId) || ''
-          segments.set(segmentId, event.fullText ?? `${previous}${event.content}`)
-          options.onText?.(segmentOrder.map((id) => segments.get(id) || '').join('\n\n'), event)
+          segments.set(segmentId, event.fullText ?? `${previous}${event.content || ''}`)
+          options.onAnswerText?.(segmentOrder.map((id) => segments.get(id) || '').join('\n\n'), event)
         } else if (event.event === 'done') {
           if (!event.content) throw new TerminalStreamError('服务端返回空的完成事件')
           terminal = JSON.parse(event.content) as ReActResult

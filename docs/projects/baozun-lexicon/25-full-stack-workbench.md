@@ -1,7 +1,7 @@
 ---
 title: 25 · 字段治理交互工作台
 type: project-chapter
-project: baozun-field-platform
+project: baozun-lexicon
 order: 25
 group: 全栈交互
 description: 详细说明目录树前端、懒加载、草稿审核、证据观察和异步导出如何组成可恢复的字段治理工作台。

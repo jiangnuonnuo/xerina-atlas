@@ -1,7 +1,7 @@
 ---
 title: 40 · 数据库并发与 XLSX 字典交付
 type: project-chapter
-project: baozun-field-platform
+project: baozun-lexicon
 order: 40
 group: 数据与并发
 description: 从 MySQL 一致性快照、SQLite 阶段工作区到 Apache POI 流式 XLSX 和原子文件交付，说明导出如何与采集、目录写入并行而互不阻塞。

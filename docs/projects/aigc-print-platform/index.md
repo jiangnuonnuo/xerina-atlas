@@ -3,7 +3,8 @@ title: AIGC + 印花提取平台
 type: project
 category: platform
 categoryLabel: 平台工程
-visual: platform
+visual: aigc
+icon: image-plus
 year: 2025
 order: 20
 featured: true

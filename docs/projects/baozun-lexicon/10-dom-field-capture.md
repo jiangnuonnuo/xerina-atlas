@@ -1,7 +1,7 @@
 ---
 title: 10 · DOM-SCOUT 驱动的局部 DOM 字段采集
 type: project-chapter
-project: baozun-field-platform
+project: baozun-lexicon
 order: 10
 group: 采集
 description: 由业务人员手动确定页面范围，DOM-SCOUT 自动清洗为简化 DOM 证据，再交给内部 Agent 生成业务字段层级。
@@ -10,7 +10,7 @@ layout: project-doc
 
 ## DOM-SCOUT 驱动的局部 DOM 字段采集
 
-字段目录平台面对的不是一份稳定的数据表，而是已经渲染完成的业务页面。相同的“状态”可能同时出现在查询条件、列表列头、订单详情和售后抽屉中；页面 DOM 又经常被 React、Vue 或组件库包装成多层 `div`、`span` 和临时 class。
+Lexicon · AI 字段词典平台面对的不是一份稳定的数据表，而是已经渲染完成的业务页面。相同的“状态”可能同时出现在查询条件、列表列头、订单详情和售后抽屉中；页面 DOM 又经常被 React、Vue 或组件库包装成多层 `div`、`span` 和临时 class。
 
 因此采集阶段不直接要求业务人员逐字段录入，也不让 Agent 自主浏览整个系统。业务人员负责确定页面状态和业务范围，DOM-SCOUT 负责把当前选区清洗成结构证据，内部 Agent 再判断业务含义和真正的字段层级；完整链路见下方动态架构图。
 
@@ -23,7 +23,7 @@ DOM-SCOUT 不是业务字段识别 Agent，也不是自动爬虫。它是一个�
 
 ![DOM-SCOUT 选区到 Agent 输入的动态架构图](./assets/dom-capture-architecture.svg)
 
-主流程的可交互版本：<a href="/media/projects/baozun-field-platform/diagrams/agent-runtime-architecture/index.html" target="_blank" rel="noreferrer">打开 Fireworks Tech Graph 图</a>。图中的底层 Agent Runtime、Model / Trace 和 Tool Gateway 只表示企业内部平台提供的能力；字段项目真正负责的是选区规则、清洗器、工作流节点、Prompt 和校验规则。
+主流程的可交互版本：<a href="../../media/projects/baozun-lexicon/diagrams/agent-runtime-architecture/index.html" target="_blank" rel="noreferrer">打开 Fireworks Tech Graph 图</a>。图中的底层 Agent Runtime、Model / Trace 和 Tool Gateway 只表示企业内部平台提供的能力；字段项目真正负责的是选区规则、清洗器、工作流节点、Prompt 和校验规则。
 
 ## 1. 为什么选择 DOM-SCOUT
 
@@ -328,7 +328,7 @@ serialize(selectionRoot, pageState):
 
 客户端清洗的目标是尽可能不让敏感值离开浏览器；Agent 输入侧仍然要把插件结果视为不可信数据，必要时再做一次服务端或工作流入口校验。
 
-上图对应的处理链路交互版：<a href="/media/projects/baozun-field-platform/diagrams/agent-prompt-context-pipeline/index.html" target="_blank" rel="noreferrer">打开输入到 Agent 的处理链路</a>。插件清洗不是“把 HTML 随便压缩”，而是先删除高风险和无关节点，再保留能够回指字段证据的属性、顺序和包含关系。
+上图对应的处理链路交互版：<a href="../../media/projects/baozun-lexicon/diagrams/agent-prompt-context-pipeline/index.html" target="_blank" rel="noreferrer">打开输入到 Agent 的处理链路</a>。插件清洗不是“把 HTML 随便压缩”，而是先删除高风险和无关节点，再保留能够回指字段证据的属性、顺序和包含关系。
 
 ## 6. DomSnapshot 输入契约
 

@@ -1,7 +1,7 @@
 ---
 title: 20 · Agent 编排：从 DOM 证据到可确认字段树
 type: project-chapter
-project: baozun-field-platform
+project: baozun-lexicon
 order: 20
 group: 解析
 description: 以 DOM-SCOUT 清洗结果为输入，通过二次取证、层级分析、字段语义、反思、后端校验和受限修复，编排出可由现有人工采集树组件确认的 FieldTreeDraft。
@@ -16,7 +16,7 @@ layout: project-doc
 
 ![Agent 编排：DOM 证据到 FieldTreeDraft](./assets/agent-execution-lifecycle.svg)
 
-交互版本：<a href="/media/projects/baozun-field-platform/diagrams/agent-execution-lifecycle/index.html" target="_blank" rel="noreferrer">打开 Agent 编排、校验与修复流程图</a>。
+交互版本：<a href="../../media/projects/baozun-lexicon/diagrams/agent-execution-lifecycle/index.html" target="_blank" rel="noreferrer">打开 Agent 编排、校验与修复流程图</a>。
 
 ## 1. 先看完整运行链路
 

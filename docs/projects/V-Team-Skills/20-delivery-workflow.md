@@ -9,7 +9,7 @@ sidebar: true
 layout: project-doc
 ---
 
-[返回总览](/projects/V-Team-Skills/) · [需求与价值](/projects/V-Team-Skills/10-requirements) · [系统设计](/projects/V-Team-Skills/30-system-design)
+[返回总览](./) · [需求与价值](./10-requirements) · [系统设计](./30-system-design)
 
 V-Team 的工作流围绕一个问题展开：怎样让一次功能从“听起来不错”，走到“确实可用”，同时不把个人开发变成流程管理职业体验卡。
 
@@ -17,8 +17,8 @@ V-Team 的工作流围绕一个问题展开：怎样让一次功能从“听起�
 
 <InteractiveDiagram
   title="V-Team 单任务交付工作流"
-  src="/media/projects/v-team-skills/diagrams/delivery-workflow/index.html?embed=1"
-  poster="/media/projects/v-team-skills/diagrams/delivery-workflow/preview.png"
+  src="../../media/projects/v-team-skills/diagrams/delivery-workflow/index.html?embed=1"
+  poster="../../media/projects/v-team-skills/diagrams/delivery-workflow/preview.png"
   description="主路径持续向前，需求、架构和验收问题沿责任边界精确回退。"
 />
 

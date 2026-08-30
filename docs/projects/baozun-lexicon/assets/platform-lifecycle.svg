@@ -44,7 +44,7 @@
     </style>
   </defs>
   <rect data-graph-role="background" width="1200.0" height="440.0" fill="#ffffff"/>
-  <text x="600.0" y="56" text-anchor="middle" class="title">字段目录平台全链路</text>
+  <text x="600.0" y="56" text-anchor="middle" class="title">Lexicon · AI 字段词典平台全链路</text>
   <text x="600.0" y="82" text-anchor="middle" class="subtitle">从页面证据到可维护目录，再到可交付字典的闭环。</text>
   <path id="capture-snapshot" data-graph-role="edge" data-edge-id="capture-snapshot" data-source="capture" data-target="snapshot" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 170,211 L 190,211" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
   <path id="snapshot-agent" data-graph-role="edge" data-edge-id="snapshot-agent" data-source="snapshot" data-target="agent" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 330,211 L 350,211" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>

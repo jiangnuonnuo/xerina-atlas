@@ -1,9 +1,5 @@
 import { defineConfig } from 'vitepress'
 import { defineTeekConfig } from 'vitepress-theme-teek/config'
-import { discoverProjects, discoverProjectChapters, discoverNotes } from './utils/content-discovery'
-
-const projects = discoverProjects()
-const notes = discoverNotes()
 
 const teekConfig = defineTeekConfig({
   themeConfig: {
@@ -52,63 +48,23 @@ export default defineConfig({
   ignoreDeadLinks: false,
   head: [
     ['meta', { name: 'theme-color', content: '#f7fafc' }],
-    ['link', { rel: 'icon', type: 'image/png', href: '/brand/xerina-avatar.png' }],
   ],
+  transformHead({ page }) {
+    const depth = page.split('/').length - 1
+    const prefix = depth ? '../'.repeat(depth) : './'
+    return [['link', { rel: 'icon', type: 'image/png', href: `${prefix}brand/xerina-avatar.png` }]]
+  },
+  transformHtml(code, _id, { page }) {
+    const depth = page.split('/').length - 1
+    const prefix = depth ? '../'.repeat(depth) : './'
+    return code.replace(/(\b(?:href|src|poster)=["'])\/(?!\/)/g, `$1${prefix}`)
+  },
   themeConfig: {
     ...teekConfig.themeConfig,
     // Use the site-wide double-click lightbox so project docs and articles behave the same.
     articleAnalyze: { imageViewer: { enabled: false } },
-    nav: [
-      { text: '首页', link: '/' },
-      { text: '实习经历', link: '/experience/' },
-      { text: '项目经历', link: '/projects/' },
-      { text: '作品集', link: '/portfolio/' },
-      {
-        text: '项目文档',
-        items: projects.filter((project) => project.frontmatter.nav !== false).map((project) => ({
-          text: project.frontmatter.title,
-          link: project.url,
-        })),
-      },
-      { text: '文章', link: '/notes/' },
-      { text: '关于', link: '/about/' },
-    ],
-    sidebar: {
-      // 显式控制 notes 侧栏：只显示 discoverNotes() 发现的笔记，
-      // 避免 VitePress 自动扫描子目录（如 assets / images）误生成目录项。
-      '/notes/': [
-        {
-          text: '技术文章',
-          items: [
-            { text: '文章首页', link: '/notes/' },
-            ...notes
-              .slice()
-              .sort((a, b) => Number(b.frontmatter.order ?? -Infinity) - Number(a.frontmatter.order ?? -Infinity))
-              .map((note) => ({
-                text: note.frontmatter.title,
-                link: note.url,
-              })),
-          ],
-        },
-      ],
-      ...Object.fromEntries(
-        projects.map((project) => [
-          project.url,
-          [
-            {
-              text: project.frontmatter.title,
-              items: [
-                { text: '项目总览', link: project.url },
-                ...discoverProjectChapters(project.slug).map((chapter) => ({
-                  text: chapter.frontmatter.title,
-                  link: chapter.url,
-                })),
-              ],
-            },
-          ],
-        ]),
-      ),
-    },
+    nav: [],
+    sidebar: {},
     footer: {
       message: '内容驱动的个人作品集与知识库',
       copyright: 'Copyright © 2026 Xerina',

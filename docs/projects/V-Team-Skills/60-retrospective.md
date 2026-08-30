@@ -9,14 +9,14 @@ sidebar: true
 layout: project-doc
 ---
 
-[返回总览](/projects/V-Team-Skills/) · [验证与接入](/projects/V-Team-Skills/50-testing-and-deployment)
+[返回总览](./) · [验证与接入](./50-testing-and-deployment)
 
 V-Team 的价值不在于步骤比别人多，而在于每一步都有触发条件、退出条件和事实边界。它希望 coding agent 像一位可靠的开发搭档：动手快，但不会快到忘记为什么动手；重视质量，但不会为三行修改举办九轮评审。
 
 <InteractiveDiagram
   title="V-Team 设计原则与工程价值"
-  src="/media/projects/v-team-skills/diagrams/design-principles/index.html?embed=1"
-  poster="/media/projects/v-team-skills/diagrams/design-principles/preview.png"
+  src="../../media/projects/v-team-skills/diagrams/design-principles/index.html?embed=1"
+  poster="../../media/projects/v-team-skills/diagrams/design-principles/preview.png"
   description="显式启用、渐进加载、证据完成和流程克制共同组成可靠交付。"
 />
 

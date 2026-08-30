@@ -3,7 +3,8 @@ title: AI SSH Agent
 type: project
 category: platform
 categoryLabel: 运维智能化
-visual: ops
+visual: ssh
+icon: terminal
 year: 2026
 order: 31
 featured: true

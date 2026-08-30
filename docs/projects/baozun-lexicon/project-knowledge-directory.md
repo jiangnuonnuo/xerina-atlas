@@ -1,20 +1,20 @@
 ---
-title: 00 · 字段目录平台项目技术总纲
+title: 00 · Lexicon · AI 字段词典平台项目技术总纲
 type: project-chapter
-project: baozun-field-platform
+project: baozun-lexicon
 order: 1
 group: 项目总览
 description: DOM-SCOUT 字段采证、受限 Agent 解析、人工草稿确认、目录治理、数据库并发和 XLSX 交付的全栈技术目录。
 layout: project-doc
 ---
 
-## 字段目录平台项目技术总纲
+## Lexicon · AI 字段词典平台项目技术总纲
 
-字段目录平台把业务后台中的菜单、页面、页签、区块、表单字段、表格列和指标定义，沉淀为具有统一身份、层级关系、来源证据和版本记录的目录资产。
+Lexicon把业务后台中的菜单、页面、页签、区块、表单字段、表格列和指标定义，沉淀为具有统一身份、层级关系、来源证据和版本记录的目录资产。
 
 平台通过 DOM-SCOUT 内部定制插件采集页面证据，经客户端清洗、输入归一和受限 Agent 生成 `HierarchyProposal`，再由后端编译为 `FieldTreeDraft`。业务人员在交互工作台中预览、修订并确认，前端随后提交带基线版本的 `CatalogCommand`，由后端事务写入正式目录。正式目录按层查询，并通过 MySQL 一致性快照、SQLite 阶段工作区和异步任务生成字段字典 XLSX。
 
-![字段目录平台全链路](./assets/platform-lifecycle.svg)
+![Lexicon全链路](./assets/platform-lifecycle.svg)
 
 ## 1. 系统职责和边界
 
@@ -34,13 +34,13 @@ layout: project-doc
 
 从页面证据到最终交付的状态流转见图：
 
-![字段目录平台全链路](./assets/end-to-end-chain.svg)
+![Lexicon全链路](./assets/end-to-end-chain.svg)
 
 `FieldTreeDraft` 是人工确认前的唯一候选事实来源，浏览器中的树只是视图缓存。没有确认不能插入 `catalog_nodes`、更新 `catalog_nodes` 或写入闭包表；确认后也不提交整棵浏览器树，而是由后端基于当前目录重新校验被接受的命令。
 
 ## 2. 总体技术架构
 
-![字段目录平台系统边界](./assets/system-boundary.svg)
+![Lexicon系统边界](./assets/system-boundary.svg)
 
 ![字段平台业务处理架构](./assets/processing-architecture.svg)
 

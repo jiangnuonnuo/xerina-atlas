@@ -1,7 +1,7 @@
 ---
 title: 01 · 完整需求定位与架构
 type: project-chapter
-project: baozun-field-platform
+project: baozun-lexicon
 order: 2
 group: 架构与定位
 description: 问题边界、DOM-SCOUT 内部定制方案、受限 Agent 职责、端到端链路与架构取舍。
@@ -44,14 +44,14 @@ layout: project-doc
 
 ![页面到目录的端到端链路](./assets/end-to-end-chain.svg)
 
-Agent 运行边界的 Fireworks Tech Graph 版本：[查看企业 Agent 底座与字段项目编排架构](./assets/agent-runtime-architecture.svg)，<a href="/media/projects/baozun-field-platform/diagrams/agent-runtime-architecture/index.html" target="_blank" rel="noreferrer">打开交互版</a>。它用于补充说明：插件采集、项目工作流和 Prompt 属于本项目编排，模型网关、检查点、工具注册和事件推送属于企业内部 Agent 底座。
+Agent 运行边界的 Fireworks Tech Graph 版本：[查看企业 Agent 底座与字段项目编排架构](./assets/agent-runtime-architecture.svg)，<a href="../../media/projects/baozun-lexicon/diagrams/agent-runtime-architecture/index.html" target="_blank" rel="noreferrer">打开交互版</a>。它用于补充说明：插件采集、项目工作流和 Prompt 属于本项目编排，模型网关、检查点、工具注册和事件推送属于企业内部 Agent 底座。
 
 下面这张图给出端到端全景：
 
 <InteractiveDiagram
-  title="字段目录平台端到端全景"
-  src="/media/projects/baozun-field-platform/diagrams/platform-overview/index.html?embed=1"
-  poster="/media/projects/baozun-field-platform/diagrams/platform-overview/preview.png"
+  title="Lexicon · AI 字段词典平台端到端全景"
+  src="../../media/projects/baozun-lexicon/diagrams/platform-overview/index.html?embed=1"
+  poster="../../media/projects/baozun-lexicon/diagrams/platform-overview/preview.png"
   description="从字段采集、层级解析、目录治理、字典交付到变更审核的闭环能力地图。"
 />
 
@@ -65,8 +65,8 @@ Easy Copy DOM 能完成“点选一个节点并复制 `outerHTML`”，适合低
 
 <InteractiveDiagram
   title="采集方案演进：固定输入与 DOM-SCOUT 业务证据采集器"
-  src="/media/projects/baozun-field-platform/diagrams/strategy-pivot/index.html?embed=1"
-  poster="/media/projects/baozun-field-platform/diagrams/strategy-pivot/preview.png"
+  src="../../media/projects/baozun-lexicon/diagrams/strategy-pivot/index.html?embed=1"
+  poster="../../media/projects/baozun-lexicon/diagrams/strategy-pivot/preview.png"
   description="从固定输入、Agent + Playwright 全量探索、Easy Copy DOM 验证，演进到 DOM-SCOUT 内部定制采集与 Agent 语义解析。"
 />
 

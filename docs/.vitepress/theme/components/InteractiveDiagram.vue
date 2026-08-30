@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { withBase } from 'vitepress'
+import { useRoute } from 'vitepress'
+import { isLocalUrl, relativeUrl } from '../utils/relative-url'
 
 const props = defineProps<{
   src: string
@@ -8,6 +9,7 @@ const props = defineProps<{
   poster: string
   description?: string
 }>()
+const route = useRoute()
 
 // Diagrams are interactive by default — no click / poster gate.
 const loaded = ref(true)
@@ -18,18 +20,18 @@ const modalFrame = ref<HTMLIFrameElement | null>(null)
 const frameHeight = ref('520px')
 let previewObserver: ResizeObserver | null = null
 
-const safeSource = computed(() => (props.src.startsWith('/media/') ? withBase(props.src) : ''))
-const safePoster = computed(() => withBase(props.poster))
+const safeSource = computed(() => (isLocalUrl(props.src) ? relativeUrl(props.src, route.path) : ''))
+const safePoster = computed(() => (isLocalUrl(props.poster) ? relativeUrl(props.poster, route.path) : ''))
 
 // Present mode expands the diagram to fill the viewport (hides cards/footer).
 const presentSource = computed(() => {
   if (!safeSource.value) return ''
   if (typeof window === 'undefined') return safeSource.value
   try {
-    const u = new URL(safeSource.value, window.location.origin)
+    const u = new URL(safeSource.value, window.location.href)
     u.searchParams.delete('embed')
     u.searchParams.set('present', '1')
-    return u.pathname + u.search
+    return relativeUrl(u.pathname + u.search, route.path)
   } catch {
     return safeSource.value.replace('embed=1', 'present=1')
   }

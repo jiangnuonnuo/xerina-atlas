@@ -9,7 +9,7 @@ sidebar: true
 layout: project-doc
 ---
 
-[返回总览](/projects/V-Team-Skills/) · [核心实现](/projects/V-Team-Skills/40-core-implementation) · [设计原则](/projects/V-Team-Skills/60-retrospective)
+[返回总览](./) · [核心实现](./40-core-implementation) · [设计原则](./60-retrospective)
 
 V-Team 反对两种同样危险的完成方式：一种是“代码写完了，理论上能用”；另一种是为一个局部修改启动全量测试、重复审查和多轮报告，直到功能本身开始怀疑人生。
 
@@ -17,8 +17,8 @@ V-Team 反对两种同样危险的完成方式：一种是“代码写完了，�
 
 <InteractiveDiagram
   title="风险驱动的最小验证策略"
-  src="/media/projects/v-team-skills/diagrams/validation-strategy/index.html?embed=1"
-  poster="/media/projects/v-team-skills/diagrams/validation-strategy/preview.png"
+  src="../../media/projects/v-team-skills/diagrams/validation-strategy/index.html?embed=1"
+  poster="../../media/projects/v-team-skills/diagrams/validation-strategy/preview.png"
   description="快速、标准和重大任务分别使用能够证明结果的最低有效证据层级。"
 />
 

@@ -18,30 +18,35 @@ Typography stays aligned with Atlas: Noto Sans SC for conversation and JetBrains
 ## Layout
 
 ```text
-desktop                                   mobile
-┌──────────────────────────────┐          ┌──────────────────────────────┐
-│ name                    close│          │ name                    close│
-├ connection status ───────────┤          ├ connection status ───────────┤
-│                              │          │                              │
-│ grounded conversation        │          │ grounded conversation        │
-│                              │          │                              │
-├ labeled composer ────── send ┤          ├ labeled composer ────── send ┤
-└──────────────────────────────┘          └──────────────────────────────┘
-                         pet                                  bottom sheet
+desktop                                      mobile
+┌──────────────────────────────┐             ┌──────────────────────────┐
+│ avatar · name · new · close  │             │ avatar · name · controls │
+├ knowledge status ────────────┤             ├ knowledge status ────────┤
+│                              │             │                          │
+│ ▸ retrieved personal context │◀─ tail      │ ▸ retrieval process      │
+│ final answer bubble           │             │ final answer bubble      │
+│                              │             │                          │
+├ composer ────────────── send ┤             ├ composer ────────── send ┤
+└──────────────────────────────┘             └──────────────────────────┘
+                           pet                         tail ↘ pet
 ```
 
-The desktop panel floats above the pet without masking primary navigation or document outlines. On narrow screens it becomes a bottom sheet with safe-area padding; the pet remains the launcher.
+The conversation is a speech bubble rather than a detached utility panel. On desktop it opens from the pet's side, with a tail pointing back at the current launcher position. When a dragged pet leaves insufficient room on its left, the panel flips to the other side and reverses its tail. On narrow screens it remains an inset bubble above the pet instead of becoming a bottom sheet, preserving the same visual relationship.
 
-On desktop, the closed launcher can be dragged with a 6 px intent threshold, clamped to the visible viewport, and restored after reload. Opening the panel anchors it beside the pet while keeping the conversation surface inside the viewport. Dragging is disabled on mobile so the bottom sheet and page scrolling remain predictable. A header action resets the pet to its default bottom-right position.
+On desktop, the closed launcher can be dragged with a 6 px intent threshold, clamped to the visible viewport, and restored after reload. Opening the panel anchors it beside the pet while keeping the whole bubble in the viewport. Dragging is disabled on mobile so page scrolling remains predictable. A header action resets the pet to its default bottom-right position.
+
+The greeting and suggested questions use compact, wrapping buttons rather than full-width stacked cards. The conversation itself is rendered as left-aligned assistant bubbles and right-aligned visitor bubbles. Retrieval activity appears as a quiet disclosure row above the answer: its label and state remain visible, while the complete RAG result is available only after the visitor expands it. The answer begins as a three-dot indicator and expands in place as final text arrives.
 
 ## Conversation lifecycle
 
 - Agent `300000` is checked before interaction and receives a stable anonymous visitor ID.
 - A session is created once and reused for multi-turn context. “New conversation” creates a distinct backend session before clearing the visible transcript.
-- The user message and assistant placeholder render immediately. NDJSON `text.fullText` snapshots update their own assistant segment idempotently; separate assistant message IDs are composed in order.
-- Tool inputs and raw retrieval results stay private. Only readable progress states are surfaced through the status line and sprite animation.
+- The user message and assistant placeholder render immediately. NDJSON `text.fullText` snapshots update their own final-answer segment idempotently; separate assistant message IDs are composed in order.
+- `tool_call` and `tool_result` are paired by `toolCallId`. Each pair becomes one collapsed retrieval disclosure, so RAG material remains inspectable without being mistaken for the Agent's answer.
+- Tool arguments are not rendered. The expandable body contains the returned retrieval text, while the status line and pet animation communicate the active phase.
+- `done.content.content` corrects the final answer in place and never creates a second assistant bubble. Tool results carried by `done` are not appended again.
 - Completed, stopped, failed, and reconnected streams each have an explicit visible state. Stopping a stream preserves any partial answer and marks it as stopped.
-- Message text is rendered as text rather than injected HTML, so model output cannot add executable markup to the page.
+- Answer and retrieval text use Markdown rendering with raw HTML disabled, so streamed formatting remains readable without allowing model output to inject executable markup.
 
 ## Signature
 

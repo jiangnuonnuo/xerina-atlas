@@ -6,7 +6,7 @@
   "quality_profile": "standard",
   "width": 1200,
   "height": 440,
-  "title": "字段目录平台全链路",
+  "title": "Lexicon · AI 字段词典平台全链路",
   "subtitle": "从页面证据到可维护目录，再到可交付字典的闭环。",
   "nodes": [
     { "id": "capture", "kind": "rect", "x": 30, "y": 170, "width": 140, "height": 82, "label": "DOM-SCOUT 采证", "sublabel": "人工选区 / 自动入口", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },

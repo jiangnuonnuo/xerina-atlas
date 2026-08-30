@@ -2,7 +2,7 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "字段目录平台全景",
+    "title": "Lexicon全景",
     "subtitle": "采集、理解、治理、交付与持续变更形成完整闭环",
     "output": "../platform-overview.html",
     "visual_preset": "blueprint",
@@ -27,7 +27,7 @@
     { "id": "task", "type": "messagebus", "label": "任务执行", "sublabel": "检查点与重试", "pos": [790, 480], "size": [130, 60] }
   ],
   "boundaries": [
-    { "kind": "region", "label": "字段目录平台", "wraps": ["capture", "agent", "catalog", "delivery", "review", "change", "store", "task"], "pad": 26 }
+    { "kind": "region", "label": "Lexicon", "wraps": ["capture", "agent", "catalog", "delivery", "review", "change", "store", "task"], "pad": 26 }
   ],
   "connections": [
     { "id": "request-capture", "from": "operator", "to": "capture", "label": "页面范围", "variant": "emphasis" },

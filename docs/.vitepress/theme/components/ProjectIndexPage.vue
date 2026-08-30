@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { data as projects } from '../../data/projects.data'
-import { withBase } from 'vitepress'
+import { useRoute } from 'vitepress'
 import ProjectVisual from './ProjectVisual.vue'
+import { relativeUrl } from '../utils/relative-url'
 
 const filter = ref('all')
 const filters = [
@@ -12,6 +13,8 @@ const filters = [
   { key: 'ai', label: 'AI 应用' },
 ]
 const visibleProjects = computed(() => filter.value === 'all' ? projects : projects.filter((project) => project.frontmatter.category === filter.value))
+const route = useRoute()
+const url = (path: string) => relativeUrl(path, route.path)
 </script>
 
 <template>
@@ -21,8 +24,8 @@ const visibleProjects = computed(() => filter.value === 'all' ? projects : proje
       <div class="filter-bar" role="toolbar" aria-label="项目分类筛选"><span class="filter-label">FILTER BY</span><button v-for="item in filters" :key="item.key" class="filter-button" :class="{ 'is-active': filter === item.key }" type="button" @click="filter = item.key">{{ item.label }} <span>{{ item.key === 'all' ? projects.length : projects.filter((project) => project.frontmatter.category === item.key).length }}</span></button></div>
       <div class="project-index-list">
         <article v-for="(project, index) in visibleProjects" :key="project.slug" class="project-index-card">
-          <ProjectVisual :kind="project.frontmatter.visual" class="index-card-media" />
-          <div class="index-card-copy"><div class="project-card-top"><span class="project-number">{{ String(index + 1).padStart(2, '0') }}</span><span class="project-type">{{ project.frontmatter.categoryLabel }} / {{ project.frontmatter.year }}</span></div><h2>{{ project.frontmatter.title }}</h2><p>{{ project.frontmatter.summary }}</p><div class="index-card-bottom"><div class="tag-row"><span v-for="tag in project.frontmatter.stack || []" :key="tag">{{ tag }}</span></div><a :href="withBase(project.url)" class="button button-small">查看项目文档 <span>↗</span></a></div></div>
+          <ProjectVisual :kind="project.frontmatter.visual" :icon="project.frontmatter.icon" class="index-card-media" />
+          <div class="index-card-copy"><div class="project-card-top"><span class="project-number">{{ String(index + 1).padStart(2, '0') }}</span><span class="project-type">{{ project.frontmatter.categoryLabel }} / {{ project.frontmatter.year }}</span></div><h2>{{ project.frontmatter.title }}</h2><p>{{ project.frontmatter.summary }}</p><div class="index-card-bottom"><div class="tag-row"><span v-for="tag in project.frontmatter.stack || []" :key="tag">{{ tag }}</span></div><a :href="url(project.url)" class="button button-small">查看项目文档 <span>↗</span></a></div></div>
         </article>
       </div>
     </div>
