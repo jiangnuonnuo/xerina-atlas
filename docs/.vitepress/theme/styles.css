@@ -155,6 +155,8 @@ h1, h2, h3, p { margin-top: 0; }h1, h2, h3 { color: var(--ink-strong); font-fami
 .doc-tree-link { min-height: 44px; gap: 12px; padding: 8px 12px; font-family: var(--doc-reading-font); font-size: 14px; font-weight: 500; line-height: 1.55; }
 .doc-tree-link span { flex: 0 0 28px; width: auto; font-size: 10px; line-height: 1.4; }
 .doc-tree-link strong { min-width: 0; font-size: inherit; font-weight: 600; line-height: inherit; }
+.doc-tree-link.is-active { border-left-color: var(--blue); color: var(--blue-deep); background: var(--blue-wash); box-shadow: inset 3px 0 0 var(--blue); }
+.doc-tree-link.is-active span { color: var(--blue); }
 .doc-sidebar-note { margin-top: 34px; padding: 17px; border-radius: 10px; }
 .doc-sidebar-note p { font-family: var(--doc-reading-font); font-size: 13px; line-height: 1.75; }
 
@@ -300,3 +302,43 @@ h1, h2, h3, p { margin-top: 0; }h1, h2, h3 { color: var(--ink-strong); font-fami
 .note-default-surface { min-height: 100vh; background: var(--paper); color: var(--ink); }
 .note-default-theme .VPNav, .note-default-theme .VPNavScreen { display: none; }
 .note-default-theme .VPContent { padding-top: 0; }
+
+/* Experience detail: make the business story visible before the implementation details. */
+.experience-detail-signals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 28px; border-top: 2px solid var(--blue); border-bottom: 1px solid var(--line); }
+.experience-detail-signal { display: grid; align-content: start; gap: 8px; min-height: 112px; padding: 19px 20px; border-right: 1px solid var(--line); }
+.experience-detail-signal:last-child { border-right: 0; }
+.experience-detail-signal span, .experience-value-grid span, .experience-outcome-label { color: var(--blue-deep); font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .08em; }
+.experience-detail-signal strong { color: var(--ink-strong); font-size: 13px; line-height: 1.6; }
+.experience-detail-toc { display: grid; gap: 2px; border-top: 1px solid var(--line); }
+.experience-detail-toc a { padding: 10px 8px; border-bottom: 1px solid var(--line); border-left: 2px solid transparent; color: var(--muted); font-size: 12px; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+.experience-detail-toc a:hover, .experience-detail-toc a.is-active { border-left-color: var(--blue); color: var(--blue-deep); background: var(--blue-wash); }
+.related-project p { margin: 2px 0 5px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+.experience-value-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 26px; border-top: 2px solid var(--line-strong); border-bottom: 1px solid var(--line); }
+.experience-value-grid > div { display: grid; align-content: start; gap: 8px; min-height: 190px; padding: 19px 20px; border-right: 1px solid var(--line); }
+.experience-value-grid > div:last-child { border-right: 0; }
+.experience-value-grid strong { color: var(--ink-strong); font-size: 14px; line-height: 1.55; }
+.experience-value-grid p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.experience-detail-link { display: inline-block; margin-left: 8px; color: var(--blue-deep); font-size: 12px; text-decoration: none; white-space: nowrap; }
+.experience-detail-link:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.experience-project-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 25px; }
+.experience-project-links a { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 3px 10px; padding: 14px 15px; border: 1px solid var(--line); color: var(--ink); background: rgba(255,255,255,.72); transition: border-color .2s ease, background .2s ease, transform .2s ease; }
+.experience-project-links a:hover { border-color: var(--blue); background: var(--blue-wash); transform: translateY(-2px); }
+.experience-project-links a > span { grid-row: span 2; color: var(--blue); font-family: "JetBrains Mono", monospace; font-size: 10px; }
+.experience-project-links strong { color: var(--ink-strong); font-size: 13px; line-height: 1.5; }
+.experience-project-links small { grid-column: 2; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.experience-outcome-label { margin-top: 2px; }
+
+@media (max-width: 900px) {
+  .experience-detail-signals, .experience-value-grid { grid-template-columns: 1fr 1fr; }
+  .experience-detail-signal:nth-child(2), .experience-value-grid > div:nth-child(2) { border-right: 0; }
+  .experience-detail-signal:last-child, .experience-value-grid > div:last-child { grid-column: 1 / -1; border-top: 1px solid var(--line); }
+  .experience-project-links { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .experience-detail-signals, .experience-value-grid { grid-template-columns: 1fr; }
+  .experience-detail-signal, .experience-value-grid > div { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .experience-detail-signal:last-child, .experience-value-grid > div:last-child { grid-column: auto; border-top: 0; border-bottom: 0; }
+  .experience-detail-link { display: block; margin: 9px 0 0; }
+  .experience-project-links a { padding: 13px 14px; }
+}
