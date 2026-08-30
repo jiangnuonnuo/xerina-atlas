@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 3,
+  "quality_profile": "standard",
+  "width": 960,
+  "height": 720,
+  "title": "Producer-First Task Delivery",
+  "subtitle": "persist the task first, confirm the broker, then consume idempotently",
+  "containers": [
+    { "id": "producer", "x": 40, "y": 105, "width": 880, "height": 165, "label": "Producer Path · database first, message after", "header_prefix": "01" },
+    { "id": "consumer", "x": 40, "y": 310, "width": 880, "height": 175, "label": "Consumer Path · execute once effectively", "header_prefix": "02" },
+    { "id": "recovery", "x": 40, "y": 520, "width": 880, "height": 105, "label": "Failure Boundary · no DB/MQ transaction", "header_prefix": "03" }
+  ],
+  "nodes": [
+    { "id": "entry", "kind": "rect", "x": 60, "y": 170, "width": 130, "height": 58, "label": "任务入口", "sublabel": "validate request", "fill": "#0b3b5e", "stroke": "#94a3b8", "flat": true },
+    { "id": "identity", "kind": "rect", "x": 245, "y": 170, "width": 130, "height": 58, "label": "稳定 taskId", "sublabel": "requestId + unique", "fill": "#0b3b5e", "stroke": "#38bdf8", "flat": true },
+    { "id": "task", "kind": "cylinder", "x": 430, "y": 170, "width": 130, "height": 58, "label": "任务库入库", "sublabel": "PENDING + unique", "fill": "#123c5a", "stroke": "#06d6a0", "flat": true },
+    { "id": "publish", "kind": "double_rect", "x": 615, "y": 170, "width": 130, "height": 58, "label": "RabbitMQ 发布", "sublabel": "persistent message", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "confirm", "kind": "hexagon", "x": 800, "y": 170, "width": 120, "height": 58, "label": "Publisher Confirm", "sublabel": "broker accepted", "fill": "#123c5a", "stroke": "#06d6a0", "flat": true },
+    { "id": "delivery", "kind": "rect", "x": 60, "y": 365, "width": 130, "height": 58, "label": "消息投递", "sublabel": "manual ack", "fill": "#0b3b5e", "stroke": "#94a3b8", "flat": true },
+    { "id": "local", "kind": "hexagon", "x": 245, "y": 365, "width": 130, "height": 58, "label": "本地 taskId 防重", "sublabel": "check + claim", "fill": "#0b3b5e", "stroke": "#f59e0b", "flat": true },
+    { "id": "submit", "kind": "double_rect", "x": 430, "y": 365, "width": 130, "height": 58, "label": "上游提交", "sublabel": "same taskId", "fill": "#321a2c", "stroke": "#fb7185", "flat": true },
+    { "id": "dedupe", "kind": "hexagon", "x": 615, "y": 365, "width": 130, "height": 58, "label": "上游 taskId 防重", "sublabel": "one effective task", "fill": "#321a2c", "stroke": "#fb7185", "flat": true },
+    { "id": "ack", "kind": "rect", "x": 800, "y": 365, "width": 120, "height": 58, "label": "结果落库后 ack", "sublabel": "external id + state", "fill": "#123c5a", "stroke": "#06d6a0", "flat": true },
+    { "id": "pending", "kind": "rect", "x": 120, "y": 555, "width": 180, "height": 50, "label": "PUBLISH_PENDING", "sublabel": "confirm failed / unknown", "fill": "#321a2c", "stroke": "#f59e0b", "flat": true },
+    { "id": "retry", "kind": "double_rect", "x": 390, "y": 555, "width": 180, "height": 50, "label": "同 taskId 重发", "sublabel": "no new business id", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "repair", "kind": "rect", "x": 660, "y": 555, "width": 180, "height": 50, "label": "死信 / 人工修复", "sublabel": "visible recovery path", "fill": "#321a2c", "stroke": "#fb7185", "flat": true }
+  ],
+  "arrows": [
+    { "id": "entry-identity", "source": "entry", "target": "identity", "source_port": "right", "target_port": "left", "flow": "control", "label": "accept" },
+    { "id": "identity-task", "source": "identity", "target": "task", "source_port": "right", "target_port": "left", "flow": "data", "label": "insert once" },
+    { "id": "task-publish", "source": "task", "target": "publish", "source_port": "right", "target_port": "left", "flow": "data", "label": "publish" },
+    { "id": "publish-confirm", "source": "publish", "target": "confirm", "source_port": "right", "target_port": "left", "flow": "control", "label": "confirm" },
+    { "id": "publish-delivery", "source": "publish", "target": "delivery", "source_port": "bottom", "target_port": "top", "flow": "data", "label": "deliver", "route_points": [[680, 285], [125, 285], [125, 365]] },
+    { "id": "delivery-local", "source": "delivery", "target": "local", "source_port": "right", "target_port": "left", "flow": "control", "label": "load / claim" },
+    { "id": "local-submit", "source": "local", "target": "submit", "source_port": "right", "target_port": "left", "flow": "control", "label": "eligible" },
+    { "id": "submit-dedupe", "source": "submit", "target": "dedupe", "source_port": "right", "target_port": "left", "flow": "feedback", "label": "same taskId" },
+    { "id": "dedupe-ack", "source": "dedupe", "target": "ack", "source_port": "right", "target_port": "left", "flow": "data", "label": "save result" },
+    { "id": "pending-retry", "source": "pending", "target": "retry", "source_port": "right", "target_port": "left", "flow": "control", "label": "retry" },
+    { "id": "retry-repair", "source": "retry", "target": "repair", "source_port": "right", "target_port": "left", "flow": "control", "label": "exhausted" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 650,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "task / result data" },
+    { "flow": "control", "label": "idempotent control" },
+    { "flow": "feedback", "label": "upstream dedupe" }
+  ],
+  "footer": "Confirm is broker acceptance; unique taskId and upstream dedupe make repeated delivery safe",
+  "footer_x": 48,
+  "footer_y": 700
+}

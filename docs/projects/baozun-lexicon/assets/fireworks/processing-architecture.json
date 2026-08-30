@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 760,
+  "title": "字段平台业务处理架构",
+  "subtitle": "人工或自动入口产生证据，解析、审核、发布和交付形成可回放链路。",
+  "containers": [
+    { "id": "input", "x": 40, "y": 100, "width": 1120, "height": 145, "label": "01 · Capture & Normalize", "header_prefix": "01" },
+    { "id": "decision", "x": 40, "y": 285, "width": 1120, "height": 175, "label": "02 · Parse & Review", "header_prefix": "02" },
+    { "id": "persist", "x": 40, "y": 500, "width": 1120, "height": 145, "label": "03 · Publish & Deliver", "header_prefix": "03" }
+  ],
+  "nodes": [
+    { "id": "entry", "kind": "rect", "x": 90, "y": 150, "width": 250, "height": 70, "label": "采集入口", "sublabel": "DOM-SCOUT / 扫描 / 缩进导入", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "snapshot", "kind": "document", "x": 475, "y": 150, "width": 250, "height": 70, "label": "DomSnapshot", "sublabel": "页面结构、语义和来源证据", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "rules", "kind": "rect", "x": 860, "y": 150, "width": 250, "height": 70, "label": "确定性规则", "sublabel": "清洗、归一、直接可判定结构", "fill": "#f0fdfa", "stroke": "#2dd4bf", "flat": true },
+    { "id": "agent", "kind": "rect", "x": 100, "y": 345, "width": 235, "height": 70, "label": "业务语义 Agent", "sublabel": "名称、类型和父级候选", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "draft", "kind": "double_rect", "x": 390, "y": 345, "width": 235, "height": 70, "label": "候选合并", "sublabel": "FieldTreeDraft + Review Warnings", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "review", "kind": "hexagon", "x": 680, "y": 345, "width": 235, "height": 70, "label": "结构校验 + 审核", "sublabel": "质量门、反馈和修订", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "command", "kind": "rect", "x": 970, "y": 345, "width": 145, "height": 70, "label": "CatalogCommand", "sublabel": "带 tree_version", "fill": "#eff6ff", "stroke": "#3b82f6", "flat": true },
+    { "id": "mysql", "kind": "cylinder", "x": 120, "y": 550, "width": 235, "height": 70, "label": "MySQL 正式目录", "sublabel": "邻接 + 闭包，同事务", "fill": "#eff6ff", "stroke": "#2563eb" },
+    { "id": "sqlite", "kind": "cylinder", "x": 420, "y": 550, "width": 235, "height": 70, "label": "MySQL 快照 + SQLite", "sublabel": "交付前一致性处理", "fill": "#f0fdfa", "stroke": "#0d9488" },
+    { "id": "xlsx", "kind": "document", "x": 720, "y": 550, "width": 235, "height": 70, "label": "SXSSF 字典", "sublabel": "流式工作簿 + 原子提交", "fill": "#fff7ed", "stroke": "#f97316" },
+    { "id": "download", "kind": "rect", "x": 1010, "y": 550, "width": 105, "height": 70, "label": "下载", "sublabel": "受控交付", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true }
+  ],
+  "arrows": [
+    { "id": "entry-snapshot", "source": "entry", "target": "snapshot", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "rules-snapshot", "source": "rules", "target": "snapshot", "source_port": "left", "target_port": "right", "flow": "data" },
+    { "id": "snapshot-agent", "source": "snapshot", "target": "agent", "source_port": "bottom", "target_port": "top", "flow": "data" },
+    { "id": "agent-draft", "source": "agent", "target": "draft", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "draft-review", "source": "draft", "target": "review", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "review-command", "source": "review", "target": "command", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "command-mysql", "source": "command", "target": "mysql", "source_port": "bottom", "target_port": "top", "flow": "write" },
+    { "id": "mysql-sqlite", "source": "mysql", "target": "sqlite", "source_port": "right", "target_port": "left", "flow": "read" },
+    { "id": "sqlite-xlsx", "source": "sqlite", "target": "xlsx", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "xlsx-download", "source": "xlsx", "target": "download", "source_port": "right", "target_port": "left", "flow": "write" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 700,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "页面证据" },
+    { "flow": "control", "label": "审核控制" },
+    { "flow": "write", "label": "确认后的写入" },
+    { "flow": "read", "label": "快照读取" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · modular monolith processing",
+  "footer_x": 760,
+  "footer_y": 700
+}

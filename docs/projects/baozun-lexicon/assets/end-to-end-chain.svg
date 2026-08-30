@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="data-flow" data-motion-scene="" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f97316"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+    <filter id="shadowSoft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <filter id="shadowGlass" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#020617" flood-opacity="0.28"/>
+    </filter>
+    <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #6b7280; }
+    .section { font-size: 13px; font-weight: 700; fill: #2563eb; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #94a3b8; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .node-type { font-size: 12px; font-weight: 700; fill: #9ca3af; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #94a3b8; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #94a3b8; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="1200.0" height="430.0" fill="#ffffff"/>
+  <text x="600.0" y="56" text-anchor="middle" class="title">页面到目录的端到端链路</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">字段从页面证据进入目录，再以可复现字典持续交付。</text>
+  <path id="page-scout" data-graph-role="edge" data-edge-id="page-scout" data-source="page" data-target="scout" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 165,210 L 175,210" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="scout-evidence" data-graph-role="edge" data-edge-id="scout-evidence" data-source="scout" data-target="evidence" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 310,210 L 320,210" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="evidence-agent" data-graph-role="edge" data-edge-id="evidence-agent" data-source="evidence" data-target="agent" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 455,210 L 465,210" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="agent-draft" data-graph-role="edge" data-edge-id="agent-draft" data-source="agent" data-target="draft" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 600,210 L 610,210" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="draft-catalog" data-graph-role="edge" data-edge-id="draft-catalog" data-source="draft" data-target="catalog" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 745,210 L 755,210" fill="none" stroke="#10b981" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowB)"/>
+  <path id="catalog-export" data-graph-role="edge" data-edge-id="catalog-export" data-source="catalog" data-target="export" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 890,210 L 900,210" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="export-asset" data-graph-role="edge" data-edge-id="export-asset" data-source="export" data-target="asset" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 1035,210 L 1045,210" fill="none" stroke="#10b981" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowB)"/>
+  <g id="node-page" data-graph-role="node" data-node-id="page" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="30,170,165,250">
+  <rect x="30.0" y="170.0" width="135.0" height="80.0" rx="10.0" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.8"/>
+  <text x="97.5" y="210.0" text-anchor="middle" class="node-title" font-size="18.0">页面</text>
+  <text x="97.5" y="232.0" text-anchor="middle" class="node-sub">菜单 / 页签 / 字段</text>
+  </g>
+  <g id="node-scout" data-graph-role="node" data-node-id="scout" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="175,170,310,250">
+  <rect x="175.0" y="170.0" width="135.0" height="80.0" rx="10.0" fill="#f0fdfa" stroke="#2dd4bf" stroke-width="1.8"/>
+  <text x="242.5" y="210.0" text-anchor="middle" class="node-title" font-size="18.0">DOM-SCOUT</text>
+  <text x="242.5" y="232.0" text-anchor="middle" class="node-sub">人工选区 · 清洗</text>
+  </g>
+  <g id="node-evidence" data-graph-role="node" data-node-id="evidence" data-semantic-role="document" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="320,170,455,250">
+  <path d="M 320.0 170.0 L 437.4 170.0 L 455.0 187.6 L 455.0 250.0 L 320.0 250.0 Z" fill="#f0fdfa" stroke="#14b8a6" stroke-width="2.0" filter="url(#shadowSoft)"/>
+  <path d="M 437.4 170.0 L 437.4 187.6 L 455.0 187.6" fill="none" stroke="#14b8a6" stroke-width="2.0"/>
+  <line x1="338.0" y1="196.0" x2="427.0" y2="196.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="338.0" y1="210.0" x2="427.0" y2="210.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="338.0" y1="224.0" x2="427.0" y2="224.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="338.0" y1="238.0" x2="427.0" y2="238.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <text x="387.5" y="276.0" text-anchor="middle" class="node-title" font-size="16.1">DomSnapshot</text>
+  <text x="387.5" y="294.0" text-anchor="middle" class="node-sub">结构化证据</text>
+  </g>
+  <g id="node-agent" data-graph-role="node" data-node-id="agent" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="465,170,600,250">
+  <rect x="465.0" y="170.0" width="135.0" height="80.0" rx="10.0" fill="#faf5ff" stroke="#a78bfa" stroke-width="1.8"/>
+  <text x="532.5" y="210.0" text-anchor="middle" class="node-title" font-size="18.0">Agent 解析</text>
+  <text x="532.5" y="232.0" text-anchor="middle" class="node-sub">语义 + 层级候选</text>
+  </g>
+  <g id="node-draft" data-graph-role="node" data-node-id="draft" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="610,170,745,250">
+  <rect x="610.0" y="170.0" width="135.0" height="80.0" rx="10.0" fill="#fff7ed" stroke="#fb923c" stroke-width="2.0"/>
+  <rect x="616.0" y="176.0" width="123.0" height="68.0" rx="7.0" fill="none" stroke="#fb923c" stroke-width="1.2" opacity="0.65"/>
+  <text x="677.5" y="210.0" text-anchor="middle" class="node-title" font-size="12.54">FieldTreeDraft</text>
+  <text x="677.5" y="232.0" text-anchor="middle" class="node-sub">预览 · 修订 · 审核</text>
+  </g>
+  <g id="node-catalog" data-graph-role="node" data-node-id="catalog" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="755,170,890,250">
+  <ellipse cx="822.5" cy="180.0" rx="33.75" ry="10.0" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.2"/>
+  <rect x="755.0" y="180.0" width="135.0" height="60.0" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.2"/>
+  <ellipse cx="822.5" cy="240.0" rx="33.75" ry="10.0" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.2"/>
+  <ellipse cx="822.5" cy="200.4" rx="33.75" ry="10.0" fill="none" stroke="#3b82f6" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="822.5" cy="218.0" rx="33.75" ry="10.0" fill="none" stroke="#3b82f6" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="822.5" y="204.0" text-anchor="middle" class="node-title" font-size="18.0">正式目录</text>
+  <text x="822.5" y="228.0" text-anchor="middle" class="node-sub">事务 · tree_version</text>
+  </g>
+  <g id="node-export" data-graph-role="node" data-node-id="export" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="900,170,1035,250">
+  <rect x="900.0" y="170.0" width="135.0" height="80.0" rx="10.0" fill="#fff7ed" stroke="#f97316" stroke-width="1.8"/>
+  <text x="967.5" y="210.0" text-anchor="middle" class="node-title" font-size="18.0">异步导出</text>
+  <text x="967.5" y="232.0" text-anchor="middle" class="node-sub">快照 · SQLite · SXSSF</text>
+  </g>
+  <g id="node-asset" data-graph-role="node" data-node-id="asset" data-semantic-role="document" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="1045,170,1180,250">
+  <path d="M 1045.0 170.0 L 1162.4 170.0 L 1180.0 187.6 L 1180.0 250.0 L 1045.0 250.0 Z" fill="#f0fdf4" stroke="#4ade80" stroke-width="2.0" filter="url(#shadowSoft)"/>
+  <path d="M 1162.4 170.0 L 1162.4 187.6 L 1180.0 187.6" fill="none" stroke="#4ade80" stroke-width="2.0"/>
+  <line x1="1063.0" y1="196.0" x2="1152.0" y2="196.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="1063.0" y1="210.0" x2="1152.0" y2="210.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="1063.0" y1="224.0" x2="1152.0" y2="224.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="1063.0" y1="238.0" x2="1152.0" y2="238.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <text x="1112.5" y="276.0" text-anchor="middle" class="node-title" font-size="18.0">字典资产</text>
+  <text x="1112.5" y="294.0" text-anchor="middle" class="node-sub">XLSX · 校验 · 下载</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="50" y="336" width="482" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="60.0" y1="350.0" x2="90.0" y2="350.0" stroke="#f97316" stroke-width="2.4" marker-end="url(#arrowE)"/>
+    <text data-graph-role="decoration" x="100.0" y="354.0" class="legend">证据与候选数据</text>
+    <line data-graph-role="decoration" x1="212.0" y1="350.0" x2="242.0" y2="350.0" stroke="#10b981" stroke-width="2.4" marker-end="url(#arrowB)"/>
+    <text data-graph-role="decoration" x="252.0" y="354.0" class="legend">人工确认后的正式写入</text>
+    <line data-graph-role="decoration" x1="400.0" y1="350.0" x2="430.0" y2="350.0" stroke="#2563eb" stroke-width="2.4" marker-end="url(#arrowC)"/>
+    <text data-graph-role="decoration" x="440.0" y="354.0" class="legend">只读快照读取</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="700,338,1099,354">
+  <text x="700.0" y="350.0" class="footnote">Fireworks Tech Graph · Style 1 · end-to-end catalog chain</text>
+  </g>
+</svg>

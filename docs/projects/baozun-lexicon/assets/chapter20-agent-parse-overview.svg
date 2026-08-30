@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="420" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">内部 Agent 业务字段层级解析链路</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">DomSnapshot 只提供结构证据，Agent 生成可审核草稿，正式目录写入保持独立边界</text>
+<g data-graph-role="node" data-graph-bounds="36,158,184,286">
+<rect x="36" y="158" width="148" height="128" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="60" cy="183" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="60" y="187" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="84" y="188" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">DomSnapshot</text>
+<text x="56" y="268" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">结构证据</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="232,158,380,286">
+<rect x="232" y="158" width="148" height="128" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="256" cy="183" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="256" y="187" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">2</text>
+<text x="280" y="188" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">确定性归一</text>
+<text x="252" y="268" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">标准化证据图</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="428,158,576,286">
+<rect x="428" y="158" width="148" height="128" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="452" cy="183" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="452" y="187" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">3</text>
+<text x="476" y="188" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">Agent 语义判断</text>
+<text x="448" y="268" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">业务语义与层级</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="624,158,772,286">
+<rect x="624" y="158" width="148" height="128" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="648" cy="183" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="648" y="187" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">4</text>
+<text x="672" y="188" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">FieldDraft</text>
+<text x="644" y="268" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">字段候选草稿</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="820,158,968,286">
+<rect x="820" y="158" width="148" height="128" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="844" cy="183" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="844" y="187" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">5</text>
+<text x="868" y="188" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">校验与人工修订</text>
+<text x="840" y="268" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">预览 · 修改 · 确认</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="1016,158,1164,286">
+<rect x="1016" y="158" width="148" height="128" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="1040" cy="183" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="1040" y="187" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">6</text>
+<text x="1064" y="188" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">CatalogCommand</text>
+<text x="1036" y="268" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">事务化正式保存</text>
+</g>
+<path id="parse-0" d="M184,222 H232" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="208" y="203" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">normalize</text></g>
+<path id="parse-1" d="M380,222 H428" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="404" y="203" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">semantic</text></g>
+<path id="parse-2" d="M576,222 H624" fill="none" stroke="#d8ad75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-amber)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="600" y="203" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">draft</text></g>
+<path id="parse-3" d="M772,222 H820" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="796" y="203" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">review</text></g>
+<path id="parse-4" d="M968,222 H1016" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="992" y="203" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">commit</text></g>
+<g data-graph-role="reserved" data-graph-bounds="36,330,1148,384"><rect x="36" y="330" width="1112" height="54" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="54" y="353" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">责任边界</text>
+<text x="54" y="372" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">DOM-SCOUT 保留结构；规则服务证明事实；Agent 解释语义；目录服务最终提交。</text>
+</g>
+</svg>

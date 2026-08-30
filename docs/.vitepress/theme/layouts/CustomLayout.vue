@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 import { useData } from 'vitepress'
 import TeekTheme from 'vitepress-theme-teek'
 import SiteHeader from '../components/SiteHeader.vue'
@@ -10,8 +10,11 @@ import ExperienceIndexPage from '../components/ExperienceIndexPage.vue'
 import NotesIndexPage from '../components/NotesIndexPage.vue'
 import AboutPage from '../components/AboutPage.vue'
 import PortfolioPage from '../components/PortfolioPage.vue'
+import ImageLightbox from '../components/ImageLightbox.vue'
 import ProjectDocLayout from './ProjectDocLayout.vue'
 import ExperienceDetailLayout from './ExperienceDetailLayout.vue'
+
+const PetAssistant = defineAsyncComponent(() => import('../components/PetAssistant.vue'))
 
 const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout || 'doc')
@@ -26,5 +29,11 @@ const layout = computed(() => frontmatter.value.layout || 'doc')
   <div v-else-if="layout === 'portfolio-index'" class="atlas-site"><SiteHeader /><PortfolioPage /><SiteFooter /></div>
   <ProjectDocLayout v-else-if="layout === 'project-doc'" />
   <ExperienceDetailLayout v-else-if="layout === 'experience-detail'" />
+  <div v-else-if="frontmatter.type === 'note'" class="note-default-surface">
+    <SiteHeader />
+    <div class="note-default-theme"><TeekTheme.Layout /></div>
+  </div>
   <TeekTheme.Layout v-else />
+  <ImageLightbox />
+  <PetAssistant />
 </template>

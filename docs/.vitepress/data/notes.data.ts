@@ -18,6 +18,6 @@ export default createContentLoader<NoteItem[]>('notes/**/*.md', {
         frontmatter: item.frontmatter,
         excerpt: item.excerpt,
       }))
-      .sort((a, b) => String(b.frontmatter.date ?? '').localeCompare(String(a.frontmatter.date ?? '')))
+      .sort((a, b) => Number(b.frontmatter.order ?? -Infinity) - Number(a.frontmatter.order ?? -Infinity))
   },
 })

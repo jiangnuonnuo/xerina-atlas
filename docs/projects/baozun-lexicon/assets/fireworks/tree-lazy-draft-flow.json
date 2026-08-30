@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 520,
+  "title": "目录树懒加载与草稿确认",
+  "subtitle": "前端按层请求轻量节点；Agent 或批量文本只生成草稿，显式确认后才产生正式目录命令。",
+  "containers": [
+    { "id": "tree-read", "x": 40, "y": 100, "width": 1120, "height": 150, "label": "01 · Tree Read" },
+    { "id": "draft-write", "x": 40, "y": 300, "width": 1120, "height": 150, "label": "02 · Draft to Command" }
+  ],
+  "nodes": [
+    { "id": "open", "kind": "rect", "x": 70, "y": 150, "width": 170, "height": 64, "label": "打开平台", "sublabel": "只取 roots" , "fill": "#eff6ff", "stroke": "#93c5fd", "flat": true},
+    { "id": "roots", "kind": "rect", "x": 285, "y": 150, "width": 190, "height": 64, "label": "根节点游标页", "sublabel": "sort_order + id", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true},
+    { "id": "expand", "kind": "rect", "x": 520, "y": 150, "width": 190, "height": 64, "label": "展开节点", "sublabel": "hasChildren 入口", "fill": "#f0fdfa", "stroke": "#5eead4", "flat": true},
+    { "id": "children", "kind": "rect", "x": 755, "y": 150, "width": 190, "height": 64, "label": "直接子节点", "sublabel": "按页增量合并", "fill": "#f0fdfa", "stroke": "#14b8a6", "flat": true},
+    { "id": "version", "kind": "rect", "x": 990, "y": 150, "width": 140, "height": 64, "label": "tree_version", "sublabel": "失效分支", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true},
+    { "id": "draft", "kind": "double_rect", "x": 150, "y": 350, "width": 200, "height": 64, "label": "FieldTreeDraft", "sublabel": "可编辑、可回放", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true},
+    { "id": "review", "kind": "rect", "x": 475, "y": 350, "width": 200, "height": 64, "label": "人工确认", "sublabel": "逐项或整批接受", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true},
+    { "id": "command", "kind": "rect", "x": 800, "y": 350, "width": 200, "height": 64, "label": "CatalogCommand", "sublabel": "带基线版本提交", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true}
+  ],
+  "arrows": [
+    { "id": "roots-read", "source": "open", "target": "roots", "source_port": "right", "target_port": "left", "flow": "read" },
+    { "id": "expand-read", "source": "roots", "target": "expand", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "children-read", "source": "expand", "target": "children", "source_port": "right", "target_port": "left", "flow": "read" },
+    { "id": "version-check", "source": "children", "target": "version", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "draft-build", "source": "children", "target": "draft", "source_port": "bottom", "target_port": "top", "flow": "data" },
+    { "id": "review-draft", "source": "draft", "target": "review", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "confirm-command", "source": "review", "target": "command", "source_port": "right", "target_port": "left", "flow": "write" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 485,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "read", "label": "节点读取" },
+    { "flow": "control", "label": "交互/版本控制" },
+    { "flow": "data", "label": "草稿数据" },
+    { "flow": "write", "label": "确认后写入" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · lazy tree + human gate",
+  "footer_x": 790,
+  "footer_y": 485
+}

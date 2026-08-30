@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="760" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">DOM 遍历、清洗与序列化算法</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">通用算法示意：所有分支都回到可回指证据的 DomSnapshot，而不是直接生成业务字段</text>
+<g data-graph-role="node" data-graph-bounds="40,120,280,212">
+<rect x="40" y="120" width="240" height="92" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="64" cy="145" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="64" y="149" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="88" y="150" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">连接性校验</text>
+<text x="60" y="194" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">selectionRoot 仍在 document 中</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="360,120,600,212">
+<rect x="360" y="120" width="240" height="92" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="384" cy="145" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="384" y="149" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">2</text>
+<text x="408" y="150" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">选区根节点归一化</text>
+<text x="380" y="194" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">按 Parent / Child 选择</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="680,120,920,212">
+<rect x="680" y="120" width="240" height="92" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="704" cy="145" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="704" y="149" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">3</text>
+<text x="728" y="150" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">分配稳定 sourceNodeId</text>
+<text x="700" y="194" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">建立来源回指映射</text>
+</g>
+<path id="serialize-1" d="M280,166 H360" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="320" y="148" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">assert</text></g>
+<path id="serialize-2" d="M600,166 H680" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="640" y="148" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">normalize</text></g>
+<path id="serialize-3" d="M800,212 V260 H600 V300" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="760" y="248" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">walk</text></g>
+<g data-graph-role="node" data-graph-bounds="420,300,780,396">
+<rect x="420" y="300" width="360" height="96" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="444" cy="325" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="444" y="329" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">4</text>
+<text x="468" y="330" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">walk(node, parentEvidence)</text>
+<text x="440" y="378" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">对当前节点递归处理</text>
+</g>
+<path id="serialize-4a" d="M500,396 V430 H165 V470" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="380" y="420" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">过滤</text></g>
+<path id="serialize-4b" d="M600,396 V470" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="600" y="448" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">iframe</text></g>
+<path id="serialize-4c" d="M700,396 V430 H1035 V470" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="820" y="420" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">facts</text></g>
+<g data-graph-role="node" data-graph-bounds="40,470,290,578">
+<rect x="40" y="470" width="250" height="108" rx="14" fill="#fff4f4" stroke="#d99191" stroke-width="1.5"/>
+<circle cx="64" cy="495" r="13" fill="#d99191" opacity="0.18"/>
+<text x="64" y="499" font-size="11" fill="#d99191" font-weight="700" text-anchor="middle">5</text>
+<text x="88" y="500" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">过滤节点</text>
+<text x="60" y="544" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">script / style / comment</text>
+<text x="60" y="560" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">隐藏模板 → 记录 warning</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="425,470,775,578">
+<rect x="425" y="470" width="350" height="108" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="449" cy="495" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="449" y="499" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">6</text>
+<text x="473" y="500" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">iframe 读取边界</text>
+<text x="445" y="544" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">同源且允许 → 递归</text>
+<text x="445" y="560" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">否则记录 FRAME_UNREADABLE</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="910,470,1160,578">
+<rect x="910" y="470" width="250" height="108" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="934" cy="495" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="934" y="499" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">7</text>
+<text x="958" y="500" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">事实与白名单</text>
+<text x="930" y="544" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">extract facts · pick attrs</text>
+<text x="930" y="560" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">maskRuntimeValue</text>
+</g>
+<path id="serialize-5" d="M290,524 H380 V610 H455 V642" fill="none" stroke="#d99191" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-red)" data-graph-role="edge" stroke-dasharray="6 4"/>
+<g data-graph-role="label"><text x="345" y="605" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">skip / warning</text></g>
+<path id="serialize-6" d="M600,578 V620 H575 V642" fill="none" stroke="#d8ad75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-amber)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="600" y="608" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">recurse</text></g>
+<path id="serialize-7" d="M1035,578 V610 H695 V642" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="885" y="598" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">compact</text></g>
+<g data-graph-role="node" data-graph-bounds="455,642,695,724">
+<rect x="455" y="642" width="240" height="82" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="479" cy="667" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="479" y="671" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">8</text>
+<text x="503" y="672" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">修复父子关系</text>
+<text x="475" y="706" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">repairParentChildRelations</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="800,642,1100,724">
+<rect x="800" y="642" width="300" height="82" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="824" cy="667" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="824" y="671" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">9</text>
+<text x="848" y="672" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">返回 DomSnapshot</text>
+<text x="820" y="706" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">fragment + pageState + warnings</text>
+</g>
+<path id="serialize-9" d="M695,683 H800" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="748" y="665" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">return</text></g>
+</svg>

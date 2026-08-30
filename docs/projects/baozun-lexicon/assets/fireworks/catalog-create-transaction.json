@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 430,
+  "title": "目录新增事务顺序",
+  "subtitle": "目录写入在一个短事务内完成校验、节点插入、闭包维护和版本递增。",
+  "nodes": [
+    { "id": "request", "kind": "rect", "x": 25, "y": 170, "width": 135, "height": 82, "label": "写请求", "sublabel": "parentId + name", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "platform", "kind": "cylinder", "x": 170, "y": 170, "width": 135, "height": 82, "label": "平台有效", "sublabel": "active + 未删除", "fill": "#eff6ff", "stroke": "#3b82f6" },
+    { "id": "parent", "kind": "cylinder", "x": 315, "y": 170, "width": 135, "height": 82, "label": "锁父节点", "sublabel": "同平台 + 层级", "fill": "#fff7ed", "stroke": "#f97316" },
+    { "id": "unique", "kind": "hexagon", "x": 460, "y": 170, "width": 135, "height": 82, "label": "名称唯一", "sublabel": "应用预检 + 索引", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true },
+    { "id": "sort", "kind": "cylinder", "x": 605, "y": 170, "width": 135, "height": 82, "label": "锁排序尾部", "sublabel": "DESC + LIMIT 1", "fill": "#fff7ed", "stroke": "#fb923c" },
+    { "id": "node", "kind": "rect", "x": 750, "y": 170, "width": 135, "height": 82, "label": "插入节点", "sublabel": "level + order", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true },
+    { "id": "closure", "kind": "cylinder", "x": 895, "y": 170, "width": 135, "height": 82, "label": "维护闭包", "sublabel": "self + ancestors", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "version", "kind": "double_rect", "x": 1040, "y": 170, "width": 135, "height": 82, "label": "递增版本", "sublabel": "tree_version once", "fill": "#eff6ff", "stroke": "#3b82f6", "flat": true }
+  ],
+  "arrows": [
+    { "id": "request-platform", "source": "request", "target": "platform", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "platform-parent", "source": "platform", "target": "parent", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "parent-unique", "source": "parent", "target": "unique", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "unique-sort", "source": "unique", "target": "sort", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "sort-node", "source": "sort", "target": "node", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "node-closure", "source": "node", "target": "closure", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "closure-version", "source": "closure", "target": "version", "source_port": "right", "target_port": "left", "flow": "write" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 60,
+  "legend_y": 355,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "control", "label": "事务内校验/加锁" },
+    { "flow": "write", "label": "同事务写入" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · catalog write transaction",
+  "footer_x": 760,
+  "footer_y": 355
+}

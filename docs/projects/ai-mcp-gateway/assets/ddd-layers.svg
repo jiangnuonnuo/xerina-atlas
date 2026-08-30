@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" width="960" height="700" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="3" data-visual-theme="Blueprint" data-diagram-type="architecture" data-motion-scene="" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fde047"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#bae6fd"/>
+    </marker>
+    <pattern id="blueprintGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#0ea5e9" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+    <style>
+    text { font-family: 'SF Mono', 'Fira Code', Menlo, 'Microsoft YaHei', 'SimHei', monospace; }
+    .title { font-size: 30px; font-weight: 700; fill: #e0f2fe; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #7dd3fc; }
+    .section { font-size: 13px; font-weight: 700; fill: #67e8f9; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .node-title { font-weight: 700; fill: #e0f2fe; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #7dd3fc; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #e0f2fe; }
+    .legend { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #7dd3fc; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #e0f2fe; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="700.0" fill="#082f49"/>
+  <text x="480.0" y="56" text-anchor="middle" class="title">AI MCP Gateway · DDD Layers</text>
+  <text x="480.0" y="82" text-anchor="middle" class="subtitle">业务规则留在 Domain，外部世界通过端口接入</text>
+  <g id="outer" data-graph-role="container" data-container-id="outer" data-semantic-role="boundary" data-graph-bounds="40,120,920,590">
+  <rect data-graph-role="container" x="40.0" y="120.0" width="880.0" height="470.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="144.0" class="section">HEXAGONAL BOUNDARY</text>
+    <rect id="outer-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="126" width="162.86" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="p5" data-graph-role="edge" data-edge-id="p5" data-source="infra" data-target="domain" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="2.812" data-bridges="" d="M 685,519 L 735,519 L 820,519 L 820,370 L 685,370" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="p1" data-graph-role="edge" data-edge-id="p1" data-source="trigger" data-target="api" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 260,199 L 390,199" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="p2" data-graph-role="edge" data-edge-id="p2" data-source="api" data-target="case" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 570,199 L 700,199" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="p3" data-graph-role="edge" data-edge-id="p3" data-source="case" data-target="domain" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 790,228 L 790,252 L 480,252 L 480,330" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="p4" data-graph-role="edge" data-edge-id="p4" data-source="domain" data-target="infra" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 480,410 L 480,490" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <g id="node-trigger" data-graph-role="node" data-node-id="trigger" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="80,170,260,228">
+  <rect x="80.0" y="170.0" width="180.0" height="58.0" rx="8.0" fill="#0b3b5e" stroke="#7dd3fc" stroke-width="1.8"/>
+  <text x="170.0" y="199.0" text-anchor="middle" class="node-title" font-size="18.0">Trigger</text>
+  <text x="170.0" y="221.0" text-anchor="middle" class="node-sub">HTTP / SSE / Listener</text>
+  </g>
+  <g id="node-api" data-graph-role="node" data-node-id="api" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="390,170,570,228">
+  <rect x="390.0" y="170.0" width="180.0" height="58.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="480.0" y="199.0" text-anchor="middle" class="node-title" font-size="18.0">API</text>
+  <text x="480.0" y="221.0" text-anchor="middle" class="node-sub">DTO / Response</text>
+  </g>
+  <g id="node-case" data-graph-role="node" data-node-id="case" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="700,170,880,228">
+  <rect x="700.0" y="170.0" width="180.0" height="58.0" rx="8.0" fill="#4a2e0b" stroke="#fbbf24" stroke-width="1.8"/>
+  <text x="790.0" y="199.0" text-anchor="middle" class="node-title" font-size="18.0">Case</text>
+  <text x="790.0" y="221.0" text-anchor="middle" class="node-sub">Use-case orchestration</text>
+  </g>
+  <g id="node-domain" data-graph-role="node" data-node-id="domain" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="275,330,685,410">
+  <rect x="275.0" y="330.0" width="410.0" height="80.0" rx="8.0" fill="#312e81" stroke="#c4b5fd" stroke-width="2.0"/>
+  <rect x="281.0" y="336.0" width="398.0" height="68.0" rx="5.0" fill="none" stroke="#c4b5fd" stroke-width="1.2" opacity="0.65"/>
+  <text x="480.0" y="370.0" text-anchor="middle" class="node-title" font-size="18.0">Domain</text>
+  <text x="480.0" y="392.0" text-anchor="middle" class="node-sub">Gateway · Protocol · DataSource · Session · Auth · Workbench</text>
+  </g>
+  <g id="node-infra" data-graph-role="node" data-node-id="infra" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="275,490,685,548">
+  <rect x="275.0" y="490.0" width="410.0" height="58.0" rx="8.0" fill="#0f5132" stroke="#34d399" stroke-width="1.8"/>
+  <text x="480.0" y="519.0" text-anchor="middle" class="node-title" font-size="18.0">Infrastructure</text>
+  <text x="480.0" y="541.0" text-anchor="middle" class="node-sub">Repository · Redis · HTTP · MCP · LLM</text>
+  </g>
+  <g id="p1-label" data-graph-role="label" data-owner="p1" data-graph-bounds="293.64,168,356.36,188">
+  <rect x="293.64" y="168.0" width="62.72" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="325.0" y="182.0" text-anchor="middle" class="arrow-label">request</text>
+  </g>
+  <g id="p2-label" data-graph-role="label" data-owner="p2" data-graph-bounds="603.64,168,666.36,188">
+  <rect x="603.64" y="168.0" width="62.72" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="635.0" y="182.0" text-anchor="middle" class="arrow-label">command</text>
+  </g>
+  <g id="p3-label" data-graph-role="label" data-owner="p3" data-graph-bounds="569.8,239,700.2,259">
+  <rect x="569.8" y="239.0" width="130.4" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="635.0" y="253.0" text-anchor="middle" class="arrow-label">rule orchestration</text>
+  </g>
+  <g id="p4-label" data-graph-role="label" data-owner="p4" data-graph-bounds="435.16,436,477,456">
+  <rect x="435.16" y="436.0" width="41.839999999999996" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="456.08" y="450.0" text-anchor="middle" class="arrow-label">port</text>
+  </g>
+  <g id="p5-label" data-graph-role="label" data-owner="p5" data-graph-bounds="711.32,430.5,817,450.5">
+  <rect x="711.32" y="430.5" width="105.68" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="764.16" y="444.5" text-anchor="middle" class="arrow-label">adapter result</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="40" y="620" width="350" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="50.0" y1="634.0" x2="80.0" y2="634.0" stroke="#67e8f9" stroke-width="2.1" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="90.0" y="638.0" class="legend">调用编排</text>
+    <line data-graph-role="decoration" x1="166.0" y1="634.0" x2="196.0" y2="634.0" stroke="#38bdf8" stroke-width="2.1" marker-end="url(#arrowC)"/>
+    <text data-graph-role="decoration" x="206.0" y="638.0" class="legend">端口访问</text>
+    <line data-graph-role="decoration" x1="282.0" y1="634.0" x2="312.0" y2="634.0" stroke="#fde047" stroke-width="2.1" marker-end="url(#arrowE)"/>
+    <text data-graph-role="decoration" x="322.0" y="638.0" class="legend">适配结果</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="42,672,210,688">
+  <text x="42.0" y="684.0" class="footnote">公开文档版 · 依赖方向朝向 Domain 内侧</text>
+  </g>
+</svg>

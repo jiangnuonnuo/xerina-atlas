@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 960,
+  "height": 700,
+  "title": "AI MCP Gateway · From Zero to One",
+  "subtitle": "从问题边界、领域模型到真实 MCP 验收的开发链路",
+  "containers": [
+    {"id":"input","x":40,"y":110,"width":880,"height":115,"label":"问题与验收输入"},
+    {"id":"build","x":40,"y":275,"width":880,"height":125,"label":"领域与适配实现"},
+    {"id":"operate","x":40,"y":450,"width":880,"height":125,"label":"发布、运行与验证"}
+  ],
+  "nodes": [
+    {"id":"scenario","kind":"rect","x":60,"y":150,"width":190,"height":54,"label":"业务场景","sublabel":"要让 AI 查什么"},
+    {"id":"boundary","kind":"hexagon","x":385,"y":150,"width":190,"height":54,"label":"权限边界","sublabel":"谁能看、能否写"},
+    {"id":"acceptance","kind":"rect","x":710,"y":150,"width":190,"height":54,"label":"验收样例","sublabel":"HTTP / 数据源 / MCP"},
+    {"id":"model","kind":"double_rect","x":60,"y":315,"width":190,"height":54,"label":"Domain 模型","sublabel":"工具、能力包、会话"},
+    {"id":"ports","kind":"rect","x":385,"y":315,"width":190,"height":54,"label":"Port 契约","sublabel":"执行与存储抽象"},
+    {"id":"adapters","kind":"rect","x":710,"y":315,"width":190,"height":54,"label":"外部适配","sublabel":"HTTP / MySQL / Redis / MCP"},
+    {"id":"admin","kind":"rect","x":60,"y":490,"width":190,"height":54,"label":"管理工作台","sublabel":"导入、测试、发布"},
+    {"id":"runtime","kind":"double_rect","x":385,"y":490,"width":190,"height":54,"label":"MCP 运行面","sublabel":"鉴权、会话、工具调用"},
+    {"id":"verify","kind":"rect","x":710,"y":490,"width":190,"height":54,"label":"真实验收","sublabel":"tools/list / tools/call / LLM"}
+  ],
+  "arrows": [
+    {"id":"b1","source":"scenario","target":"boundary","source_port":"right","target_port":"left","flow":"control","label":"定义范围"},
+    {"id":"b2","source":"boundary","target":"acceptance","source_port":"right","target_port":"left","flow":"control","label":"确定用例"},
+    {"id":"b3","source":"acceptance","target":"model","source_port":"bottom","target_port":"top","flow":"feedback","label":"抽象对象","route_points":[[805,204],[805,250],[155,250],[155,315]]},
+    {"id":"b4","source":"model","target":"ports","source_port":"right","target_port":"left","flow":"control","label":"定义契约"},
+    {"id":"b5","source":"ports","target":"adapters","source_port":"right","target_port":"left","flow":"data","label":"接入外部资源"},
+    {"id":"b6","source":"adapters","target":"admin","source_port":"bottom","target_port":"top","flow":"write","label":"保存配置","route_points":[[805,369],[805,425],[155,425],[155,490]]},
+    {"id":"b7","source":"admin","target":"runtime","source_port":"right","target_port":"left","flow":"control","label":"发布投影"},
+    {"id":"b8","source":"runtime","target":"verify","source_port":"right","target_port":"left","flow":"read","label":"真实调用"}
+  ],
+  "legend_orientation":"horizontal",
+  "legend_x":48,
+  "legend_y":625,
+  "legend":[
+    {"flow":"control","label":"开发与发布控制"},
+    {"flow":"data","label":"外部能力接入"},
+    {"flow":"write","label":"配置事实写入"},
+    {"flow":"read","label":"运行时读取"},
+    {"flow":"feedback","label":"验收反馈"}
+  ],
+  "footer":"公开文档版 · 0 到 1 的开发闭环"
+}

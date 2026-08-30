@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="960" height="720" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="3" data-visual-theme="Blueprint" data-diagram-type="architecture" data-motion-scene="service-blueprint" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fde047"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#bae6fd"/>
+    </marker>
+    <pattern id="blueprintGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#0ea5e9" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+    <style>
+    text { font-family: 'SF Mono', 'Fira Code', Menlo, 'Microsoft YaHei', 'SimHei', monospace; }
+    .title { font-size: 30px; font-weight: 700; fill: #e0f2fe; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #7dd3fc; }
+    .section { font-size: 13px; font-weight: 700; fill: #67e8f9; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .node-title { font-weight: 700; fill: #e0f2fe; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #7dd3fc; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #e0f2fe; }
+    .legend { font-size: 12px; font-weight: 500; fill: #bae6fd; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #7dd3fc; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #7dd3fc; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #e0f2fe; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="720.0" fill="#082f49"/>
+  <text x="480.0" y="56" text-anchor="middle" class="title">AIGC Task Platform</text>
+  <text x="480.0" y="82" text-anchor="middle" class="subtitle">C-end + B-end · async execution · reliable delivery</text>
+  <g id="edge" data-graph-role="container" data-container-id="edge" data-semantic-role="boundary" data-graph-bounds="40,110,920,220">
+  <rect data-graph-role="container" x="40.0" y="110.0" width="880.0" height="110.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="134.0" class="section">01 // CALLERS &amp; ADMISSION</text>
+    <rect id="edge-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="116" width="206.54" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="execution" data-graph-role="container" data-container-id="execution" data-semantic-role="boundary" data-graph-bounds="40,270,920,400">
+  <rect data-graph-role="container" x="40.0" y="270.0" width="880.0" height="130.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="294.0" class="section">02 // TASK EXECUTION</text>
+    <rect id="execution-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="276" width="168.84" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="result" data-graph-role="container" data-container-id="result" data-semantic-role="boundary" data-graph-bounds="40,420,720,550">
+  <rect data-graph-role="container" x="40.0" y="420.0" width="680.0" height="130.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="58.0" y="444.0" class="section">03 // STATE &amp; DELIVERY</text>
+    <rect id="result-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="426" width="184.18" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="observe" data-graph-role="container" data-container-id="observe" data-semantic-role="boundary" data-graph-bounds="740,420,920,550">
+  <rect data-graph-role="container" x="740.0" y="420.0" width="180.0" height="130.0" rx="16.0" fill="none" stroke="#0ea5e9" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="758.0" y="444.0" class="section">SIGNALS</text>
+    <rect id="observe-header" data-graph-role="reserved" data-reserved-kind="container-header" x="748" y="426" width="79.4" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="caller-request" data-graph-role="edge" data-edge-id="caller-request" data-source="callers" data-target="gateway" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="ingress" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 220,173 L 300,173" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="admission-check" data-graph-role="edge" data-edge-id="admission-check" data-source="gateway" data-target="admission" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="policy" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 460,173 L 570,173" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="route-task" data-graph-role="edge" data-edge-id="route-task" data-source="gateway" data-target="task" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="fanout" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 380,200 L 380,306 L 150,306 L 150,330" fill="none" stroke="#38bdf8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="route-queue" data-graph-role="edge" data-edge-id="route-queue" data-source="task" data-target="queue" data-edge-kind="flow" data-topic-id="" data-flow="async" data-motion-role="event" data-motion-stage="4" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 220,355 L 310,355" fill="none" stroke="#c084fc" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowF)"/>
+  <path id="queue-consumer" data-graph-role="edge" data-edge-id="queue-consumer" data-source="queue" data-target="consumer" data-edge-kind="flow" data-topic-id="" data-flow="async" data-motion-role="event" data-motion-stage="5" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 450,355 L 540,355" fill="none" stroke="#c084fc" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowF)"/>
+  <path id="persist-task" data-graph-role="edge" data-edge-id="persist-task" data-source="task" data-target="mysql" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="data-write" data-motion-stage="4" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="4" data-route-stretch="2.644" data-bridges="" d="M 150,380 L 150,400.4 L 232.18,400.4 L 232.18,459.6 L 150,459.6 L 150,480" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="archive-result" data-graph-role="edge" data-edge-id="archive-result" data-source="consumer" data-target="oss" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="data-write" data-motion-stage="4" data-motion-order="1" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 610,380 L 610,404 L 380,404 L 380,480" fill="none" stroke="#fde047" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="invoke-upstream" data-graph-role="edge" data-edge-id="invoke-upstream" data-source="consumer" data-target="upstream" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="event" data-motion-stage="5" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 680,355 L 760,355" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <path id="converge-status" data-graph-role="edge" data-edge-id="converge-status" data-source="upstream" data-target="status" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="callback" data-motion-stage="6" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="4" data-route-stretch="1.0" data-bridges="" d="M 830,380 L 830,400.4 L 704,400.4 L 704,459.6 L 610,459.6 L 610,480" fill="none" stroke="#fb7185" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+  <path id="observe-status" data-graph-role="edge" data-edge-id="observe-status" data-source="status" data-target="metrics" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="telemetry" data-motion-stage="7" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 680,505 L 760,505" fill="none" stroke="#67e8f9" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <g id="node-callers" data-graph-role="node" data-node-id="callers" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,146,220,200">
+  <rect x="60.0" y="146.0" width="160.0" height="54.0" rx="8.0" fill="#0b3b5e" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="140.0" y="173.0" text-anchor="middle" class="node-title" font-size="18.0">调用方</text>
+  <text x="140.0" y="195.0" text-anchor="middle" class="node-sub">C 端 + B 端</text>
+  </g>
+  <g id="node-gateway" data-graph-role="node" data-node-id="gateway" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="300,146,460,200">
+  <rect x="300.0" y="146.0" width="160.0" height="54.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="2.0"/>
+  <rect x="306.0" y="152.0" width="148.0" height="42.0" rx="5.0" fill="none" stroke="#38bdf8" stroke-width="1.2" opacity="0.65"/>
+  <text x="380.0" y="173.0" text-anchor="middle" class="node-title" font-size="18.0">任务 API</text>
+  <text x="380.0" y="195.0" text-anchor="middle" class="node-sub">auth + validate</text>
+  </g>
+  <g id="node-admission" data-graph-role="node" data-node-id="admission" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="570,146,730,200">
+  <path d="M 592.0 146.0 L 708.0 146.0 L 730.0 173.0 L 708.0 200.0 L 592.0 200.0 L 570.0 173.0 Z" fill="#0b3b5e" stroke="#f59e0b" stroke-width="2.0"/>
+  <text x="650.0" y="173.0" text-anchor="middle" class="node-title" font-size="18.0">准入控制</text>
+  <text x="650.0" y="195.0" text-anchor="middle" class="node-sub">quota + Redis</text>
+  </g>
+  <g id="node-task" data-graph-role="node" data-node-id="task" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="80,330,220,380">
+  <rect x="80.0" y="330.0" width="140.0" height="50.0" rx="8.0" fill="#0a4b78" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="150.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">任务服务</text>
+  <text x="150.0" y="377.0" text-anchor="middle" class="node-sub">producer write + query</text>
+  </g>
+  <g id="node-queue" data-graph-role="node" data-node-id="queue" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="310,330,450,380">
+  <rect x="310.0" y="330.0" width="140.0" height="50.0" rx="8.0" fill="#123c5a" stroke="#a855f7" stroke-width="1.8"/>
+  <text x="380.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">RabbitMQ</text>
+  <text x="380.0" y="377.0" text-anchor="middle" class="node-sub">publish + confirm</text>
+  </g>
+  <g id="node-consumer" data-graph-role="node" data-node-id="consumer" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="540,330,680,380">
+  <rect x="540.0" y="330.0" width="140.0" height="50.0" rx="8.0" fill="#123c5a" stroke="#a855f7" stroke-width="1.8"/>
+  <text x="610.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">消费者池</text>
+  <text x="610.0" y="377.0" text-anchor="middle" class="node-sub">claim + execute</text>
+  </g>
+  <g id="node-upstream" data-graph-role="node" data-node-id="upstream" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="760,330,900,380">
+  <path d="M 782.0 330.0 L 878.0 330.0 L 900.0 355.0 L 878.0 380.0 L 782.0 380.0 L 760.0 355.0 Z" fill="#123c5a" stroke="#f97316" stroke-width="2.0"/>
+  <text x="830.0" y="355.0" text-anchor="middle" class="node-title" font-size="18.0">AIGC 上游</text>
+  <text x="830.0" y="377.0" text-anchor="middle" class="node-sub">submit + callback</text>
+  </g>
+  <g id="node-mysql" data-graph-role="node" data-node-id="mysql" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="80,480,220,530">
+  <ellipse cx="150.0" cy="486.25" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <rect x="80.0" y="486.25" width="140.0" height="37.5" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="150.0" cy="523.75" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="150.0" cy="499.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="150.0" cy="510.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="150.0" y="499.0" text-anchor="middle" class="node-title" font-size="18.0">MySQL</text>
+  <text x="150.0" y="523.0" text-anchor="middle" class="node-sub">task source of truth</text>
+  </g>
+  <g id="node-oss" data-graph-role="node" data-node-id="oss" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="310,480,450,530">
+  <ellipse cx="380.0" cy="486.25" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <rect x="310.0" y="486.25" width="140.0" height="37.5" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="380.0" cy="523.75" rx="35.0" ry="6.25" fill="#082f49" stroke="#38bdf8" stroke-width="2.2"/>
+  <ellipse cx="380.0" cy="499.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="380.0" cy="510.0" rx="35.0" ry="6.25" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="380.0" y="499.0" text-anchor="middle" class="node-title" font-size="18.0">阿里云 OSS</text>
+  <text x="380.0" y="523.0" text-anchor="middle" class="node-sub">asset + result</text>
+  </g>
+  <g id="node-status" data-graph-role="node" data-node-id="status" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="540,480,680,530">
+  <rect x="540.0" y="480.0" width="140.0" height="50.0" rx="8.0" fill="#123c5a" stroke="#f97316" stroke-width="1.8"/>
+  <text x="610.0" y="505.0" text-anchor="middle" class="node-title" font-size="18.0">状态汇总</text>
+  <text x="610.0" y="527.0" text-anchor="middle" class="node-sub">callback / poll</text>
+  </g>
+  <g id="node-metrics" data-graph-role="node" data-node-id="metrics" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="760,480,900,530">
+  <rect x="760.0" y="480.0" width="140.0" height="50.0" rx="8.0" fill="#123c5a" stroke="#10b981" stroke-width="1.8"/>
+  <text x="830.0" y="505.0" text-anchor="middle" class="node-title" font-size="18.0">指标与告警</text>
+  <text x="830.0" y="527.0" text-anchor="middle" class="node-sub">lag + latency</text>
+  </g>
+  <g id="caller-request-label" data-graph-role="label" data-owner="caller-request" data-graph-bounds="233.68,160,286.32,180">
+  <rect x="233.68" y="160.0" width="52.64" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="260.0" y="174.0" text-anchor="middle" class="arrow-label">submit</text>
+  </g>
+  <g id="admission-check-label" data-graph-role="label" data-owner="admission-check" data-graph-bounds="492.16,142,537.84,162">
+  <rect x="492.16" y="142.0" width="45.67999999999999" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="515.0" y="156.0" text-anchor="middle" class="arrow-label">admit</text>
+  </g>
+  <g id="route-task-label" data-graph-role="label" data-owner="route-task" data-graph-bounds="237.12,275,292.88,295">
+  <rect x="237.12" y="275.0" width="55.76" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="265.0" y="289.0" text-anchor="middle" class="arrow-label">create</text>
+  </g>
+  <g id="route-queue-label" data-graph-role="label" data-owner="route-queue" data-graph-bounds="236.76,324,293.24,344">
+  <rect x="236.76" y="324.0" width="56.48" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="265.0" y="338.0" text-anchor="middle" class="arrow-label">publish</text>
+  </g>
+  <g id="queue-consumer-label" data-graph-role="label" data-owner="queue-consumer" data-graph-bounds="466.76,324,523.24,344">
+  <rect x="466.76" y="324.0" width="56.480000000000004" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="495.0" y="338.0" text-anchor="middle" class="arrow-label">deliver</text>
+  </g>
+  <g id="persist-task-label" data-graph-role="label" data-owner="persist-task" data-graph-bounds="161.29,387.4,220.89,407.4">
+  <rect x="161.29" y="387.4" width="59.599999999999994" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="191.09" y="401.4" text-anchor="middle" class="arrow-label">persist</text>
+  </g>
+  <g id="archive-result-label" data-graph-role="label" data-owner="archive-result" data-graph-bounds="465.2,373,524.8,393">
+  <rect x="465.2" y="373.0" width="59.599999999999994" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="495.0" y="387.0" text-anchor="middle" class="arrow-label">archive</text>
+  </g>
+  <g id="invoke-upstream-label" data-graph-role="label" data-owner="invoke-upstream" data-graph-bounds="693.68,324,746.32,344">
+  <rect x="693.68" y="324.0" width="52.64" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="720.0" y="338.0" text-anchor="middle" class="arrow-label">submit</text>
+  </g>
+  <g id="converge-status-label" data-graph-role="label" data-owner="converge-status" data-graph-bounds="716.68,387.4,817.32,407.4">
+  <rect x="716.68" y="387.4" width="100.64000000000001" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="767.0" y="401.4" text-anchor="middle" class="arrow-label">callback / poll</text>
+  </g>
+  <g id="observe-status-label" data-graph-role="label" data-owner="observe-status" data-graph-bounds="688.64,474,751.36,494">
+  <rect x="688.64" y="474.0" width="62.72" height="20" rx="6" fill="#082f49" opacity="0.9"/>
+  <text x="720.0" y="488.0" text-anchor="middle" class="arrow-label">observe</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="40" y="556" width="730.8" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="50.0" y1="570.0" x2="80.0" y2="570.0" stroke="#38bdf8" stroke-width="2.1" marker-end="url(#arrowC)"/>
+    <text data-graph-role="decoration" x="90.0" y="574.0" class="legend">request</text>
+    <line data-graph-role="decoration" x1="166.72" y1="570.0" x2="196.72" y2="570.0" stroke="#67e8f9" stroke-width="2.1" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="206.72" y="574.0" class="legend">admission / observe</text>
+    <line data-graph-role="decoration" x1="355.44" y1="570.0" x2="385.44" y2="570.0" stroke="#c084fc" stroke-width="2.1" marker-end="url(#arrowF)"/>
+    <text data-graph-role="decoration" x="395.44" y="574.0" class="legend">async dispatch</text>
+    <line data-graph-role="decoration" x1="515.12" y1="570.0" x2="545.12" y2="570.0" stroke="#fde047" stroke-width="2.1" marker-end="url(#arrowE)"/>
+    <text data-graph-role="decoration" x="555.12" y="574.0" class="legend">state / file</text>
+    <line data-graph-role="decoration" x1="655.12" y1="570.0" x2="685.12" y2="570.0" stroke="#fb7185" stroke-width="2.1" marker-end="url(#arrowG)"/>
+    <text data-graph-role="decoration" x="695.12" y="574.0" class="legend">upstream</text>
+  </g>
+  <g id="blueprint-title-block" data-graph-role="reserved" data-graph-bounds="644,614,906,702">
+  <rect x="650.0" y="620.0" width="250.0" height="76.0" fill="#0b3552" stroke="#0ea5e9" stroke-width="1.2"/>
+  <line x1="650.0" y1="638.0" x2="900.0" y2="638.0" stroke="#0ea5e9" stroke-width="1"/>
+  <line x1="650.0" y1="674.0" x2="900.0" y2="674.0" stroke="#0ea5e9" stroke-width="1"/>
+  <line x1="733.3333333333334" y1="674.0" x2="733.3333333333334" y2="696.0" stroke="#0ea5e9" stroke-width="0.7"/>
+  <line x1="816.6666666666666" y1="674.0" x2="816.6666666666666" y2="696.0" stroke="#0ea5e9" stroke-width="0.7"/>
+  <text x="775.0" y="633.0" text-anchor="middle" font-size="10" font-weight="600" fill="#7dd3fc">TASK PROCESSING ARCHITECTURE</text>
+  <text x="775.0" y="662.0" text-anchor="middle" font-size="18" font-weight="700" fill="#e0f2fe">AIGC PLATFORM</text>
+  <text x="691.6666666666666" y="688.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#7dd3fc">REV: 1.0</text>
+  <text x="775.0" y="688.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#67e8f9">C + B</text>
+  <text x="858.3333333333334" y="688.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#7dd3fc">DOC: ARCH-001</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,688,524,704">
+  <text x="48.0" y="700.0" class="footnote">Style 3 · Blueprint · receive fast, execute reliably, deliver safely</text>
+  </g>
+</svg>

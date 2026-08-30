@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#6B7280"/>
+    </marker>
+  </defs>
+  <rect width="960" height="720" fill="#ffffff"/>
+
+  <text x="480" y="52" text-anchor="middle" font-size="24" font-weight="bold" fill="#1F2937">AI 应用的"四层蛋糕"</text>
+  <text x="480" y="78" text-anchor="middle" font-size="14" fill="#6B7280">底层到顶层，一层管一层，谁也替不了谁</text>
+
+  <!-- 第 4 层 Framework -->
+  <rect x="140" y="120" width="680" height="88" rx="12" fill="#EEF2FF" stroke="#2563EB" stroke-width="2"/>
+  <rect x="170" y="132" width="26" height="26" rx="6" fill="#2563EB"/>
+  <text x="183" y="150" text-anchor="middle" font-size="15" fill="#ffffff" font-weight="bold">工</text>
+  <text x="210" y="152" font-size="17" font-weight="bold" fill="#2563EB">Framework 框架 · 搭积木的"工厂"</text>
+  <text x="170" y="178" font-size="13" fill="#4B5563">LangChain / AutoGen / LlamaIndex · 提供现成的工具链与编排范式，让开发者"拿来即用"</text>
+  <text x="170" y="197" font-size="12" fill="#6B7280">关键词：封装、组件库、开发者生产力</text>
+
+  <!-- 第 3 层 Harness -->
+  <rect x="140" y="232" width="680" height="100" rx="12" fill="#FFF7ED" stroke="#EA580C" stroke-width="2.5"/>
+  <rect x="170" y="246" width="26" height="26" rx="6" fill="#EA580C"/>
+  <text x="183" y="264" text-anchor="middle" font-size="15" fill="#ffffff" font-weight="bold">缰</text>
+  <text x="210" y="268" font-size="17" font-weight="bold" fill="#EA580C">Harness 缰绳 · 控制 Agent 的"驾驶舱"</text>
+  <text x="170" y="292" font-size="13" fill="#4B5563">Claude Code / DeepSeek Harness / OpenManus · 一个具体可运行的 Agent 程序本体</text>
+  <text x="170" y="311" font-size="12" fill="#6B7280">关键词：循环、计划、工具调用、记忆、沙箱 · 决定"这个 Agent 到底能干什么"</text>
+
+  <!-- 第 2 层 Agent -->
+  <rect x="140" y="356" width="680" height="88" rx="12" fill="#F9FAFB" stroke="#6B7280" stroke-width="2"/>
+  <rect x="170" y="368" width="26" height="26" rx="6" fill="#6B7280"/>
+  <text x="183" y="386" text-anchor="middle" font-size="15" fill="#ffffff" font-weight="bold">员</text>
+  <text x="210" y="390" font-size="17" font-weight="bold" fill="#374151">Agent 员工 · 会思考的"行动体"</text>
+  <text x="170" y="416" font-size="13" fill="#4B5563">大模型 + 规划能力 + 工具 + 记忆，组成能"自主干活"的最小行动单元</text>
+  <text x="170" y="435" font-size="12" fill="#6B7280">关键词：规划、推理、调用工具、完成目标</text>
+
+  <!-- 第 1 层 LLM -->
+  <rect x="140" y="468" width="680" height="88" rx="12" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
+  <rect x="170" y="480" width="26" height="26" rx="6" fill="#059669"/>
+  <text x="183" y="498" text-anchor="middle" font-size="15" fill="#ffffff" font-weight="bold">脑</text>
+  <text x="210" y="502" font-size="17" font-weight="bold" fill="#059669">大模型 LLM 大脑 · 会说话的"天才"</text>
+  <text x="170" y="528" font-size="13" fill="#4B5563">GPT-4 / Claude / DeepSeek / Qwen · 静态参数化的推理引擎，只能"想"和"说"</text>
+  <text x="170" y="547" font-size="12" fill="#6B7280">关键词：参数、上下文窗口、推理能力 · 没有"手"去操作真实世界</text>
+
+  <!-- 关系箭头 -->
+  <line x1="480" y1="208" x2="480" y2="230" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="480" y1="332" x2="480" y2="354" stroke="#EA580C" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="480" y1="444" x2="480" y2="466" stroke="#6B7280" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <text x="505" y="221" font-size="12" fill="#6B7280">组合组装</text>
+  <text x="505" y="345" font-size="12" fill="#6B7280">被控制</text>
+  <text x="505" y="457" font-size="12" fill="#6B7280">调用驱动</text>
+
+  <!-- 底部结论条 -->
+  <rect x="140" y="580" width="680" height="96" rx="12" fill="#FDF2F8" stroke="#DB2777" stroke-width="1.5"/>
+  <text x="480" y="608" text-anchor="middle" font-size="15" font-weight="bold" fill="#BE185D">最常见的误区：把 Harness 和 Framework 混为一谈</text>
+  <text x="480" y="632" text-anchor="middle" font-size="13" fill="#4B5563">Framework 是"图纸和模块"，Harness 是"造好并跑起来的整台机器"</text>
+  <text x="480" y="654" text-anchor="middle" font-size="13" fill="#4B5563">同一个 LLM 换上不同 Harness，就是两个性格完全不同的 Agent</text>
+
+  <text x="850" y="700" text-anchor="end" font-size="11" fill="#9CA3AF">图 1 · 四层蛋糕：LLM / Agent / Harness / Framework</text>
+</svg>

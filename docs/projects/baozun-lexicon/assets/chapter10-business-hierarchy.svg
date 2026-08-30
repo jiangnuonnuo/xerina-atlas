@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="architecture" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="560" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">从 DOM 顺序证据到业务字段层级</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">DOM-SCOUT 不凭空生成分组；内部 Agent 结合页面上下文和目标目录做业务判断</text>
+<g data-graph-role="node" data-graph-bounds="50,165,320,293">
+<rect x="50" y="165" width="270" height="128" rx="14" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.5"/>
+<circle cx="74" cy="190" r="13" fill="#b7c9dc" opacity="0.18"/>
+<text x="74" y="194" font-size="11" fill="#b7c9dc" font-weight="700" text-anchor="middle">1</text>
+<text x="98" y="195" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">DOM 结构证据</text>
+<text x="70" y="259" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">保留顺序</text>
+<text x="70" y="275" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">保留标签—值关系</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="430,165,770,293">
+<rect x="430" y="165" width="340" height="128" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="454" cy="190" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="454" y="194" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">2</text>
+<text x="478" y="195" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">内部 Agent 判断</text>
+<text x="450" y="259" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">页签 · 标题 · 目标目录</text>
+<text x="450" y="275" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">业务术语 · 结构事实</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="880,135,1150,323">
+<rect x="880" y="135" width="270" height="188" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="904" cy="160" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="904" y="164" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">3</text>
+<text x="928" y="165" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">业务字段树</text>
+<text x="900" y="257" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">售后记录</text>
+<text x="900" y="273" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">└── 退款信息</text>
+<text x="900" y="289" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">    ├── 退款状态</text>
+<text x="900" y="305" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">    └── 退款金额</text>
+</g>
+<path id="hierarchy-1" d="M320,229 H430" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="375" y="211" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">evidence</text></g>
+<path id="hierarchy-2" d="M770,229 H880" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="825" y="211" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">semantic</text></g>
+<path id="hierarchy-fallback" d="M600,293 V390" fill="none" stroke="#d99191" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-red)" data-graph-role="edge" stroke-dasharray="6 4"/>
+<g data-graph-role="label"><text x="660" y="345" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">证据不足</text></g>
+<g data-graph-role="node" data-graph-bounds="430,390,770,476">
+<rect x="430" y="390" width="340" height="86" rx="14" fill="#fff4f4" stroke="#d99191" stroke-width="1.5" stroke-dasharray="6 4"/>
+<circle cx="454" cy="415" r="13" fill="#d99191" opacity="0.18"/>
+<text x="454" y="419" font-size="11" fill="#d99191" font-weight="700" text-anchor="middle">!</text>
+<text x="478" y="420" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">挂到目标父级</text>
+<text x="450" y="458" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">标记 reviewRequired，不凭空分组</text>
+</g>
+<g data-graph-role="reserved" data-graph-bounds="50,458,1150,520"><rect x="50" y="458" width="1100" height="62" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="68" y="481" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">关键边界</text>
+<text x="68" y="508" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">DOM 层可以证明“节点如何包含”，不能单独证明“字段属于哪个业务目录分组”。</text>
+</g>
+</svg>

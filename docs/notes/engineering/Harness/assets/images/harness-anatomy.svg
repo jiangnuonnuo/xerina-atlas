@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="arr-o4" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#EA580C"/>
+    </marker>
+  </defs>
+  <rect width="960" height="640" fill="#ffffff"/>
+
+  <text x="480" y="46" text-anchor="middle" font-size="24" font-weight="bold" fill="#1F2937">拆开一台 Harness：五块"器官"各管一摊</text>
+  <text x="480" y="72" text-anchor="middle" font-size="14" fill="#6B7280">一个能稳定干活的 Agent，底层都要靠这几样兜着</text>
+
+  <!-- 中央大脑 -->
+  <rect x="360" y="120" width="240" height="70" rx="12" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
+  <text x="480" y="152" text-anchor="middle" font-size="16" font-weight="bold" fill="#047857">LLM 引擎（大脑）</text>
+  <text x="480" y="174" text-anchor="middle" font-size="11" fill="#4B5563">思考、规划、生成，可替换</text>
+
+  <!-- 五大器官 -->
+  <g>
+    <rect x="80" y="260" width="150" height="130" rx="12" fill="#EEF2FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="155" y="300" text-anchor="middle" font-size="15" font-weight="bold" fill="#1D4ED8">工具调用</text>
+    <text x="155" y="322" text-anchor="middle" font-size="11" fill="#4B5563">读文件 / 跑代码</text>
+    <text x="155" y="338" text-anchor="middle" font-size="11" fill="#4B5563">搜网络 / 调 API</text>
+    <text x="155" y="362" text-anchor="middle" font-size="11" fill="#6B7280">决定 Agent</text>
+    <text x="155" y="378" text-anchor="middle" font-size="11" fill="#6B7280">"手"有多长</text>
+  </g>
+  <g>
+    <rect x="278" y="260" width="150" height="130" rx="12" fill="#F3E8FF" stroke="#7C3AED" stroke-width="2"/>
+    <text x="353" y="300" text-anchor="middle" font-size="15" font-weight="bold" fill="#6D28D9">记忆系统</text>
+    <text x="353" y="322" text-anchor="middle" font-size="11" fill="#4B5563">短期对话上下文</text>
+    <text x="353" y="338" text-anchor="middle" font-size="11" fill="#4B5563">长期经验 / 偏好</text>
+    <text x="353" y="362" text-anchor="middle" font-size="11" fill="#6B7280">决定 Agent</text>
+    <text x="353" y="378" text-anchor="middle" font-size="11" fill="#6B7280">记不记得住</text>
+  </g>
+  <g>
+    <rect x="476" y="260" width="150" height="130" rx="12" fill="#FFF7ED" stroke="#EA580C" stroke-width="2"/>
+    <text x="551" y="300" text-anchor="middle" font-size="15" font-weight="bold" fill="#C2410C">执行循环</text>
+    <text x="551" y="322" text-anchor="middle" font-size="11" fill="#4B5563">Plan → Act → Observe</text>
+    <text x="551" y="338" text-anchor="middle" font-size="11" fill="#4B5563">→ Reflect 闭环</text>
+    <text x="551" y="362" text-anchor="middle" font-size="11" fill="#6B7280">决定 Agent</text>
+    <text x="551" y="378" text-anchor="middle" font-size="11" fill="#6B7280">干得顺不顺</text>
+  </g>
+  <g>
+    <rect x="674" y="260" width="150" height="130" rx="12" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="749" y="300" text-anchor="middle" font-size="15" font-weight="bold" fill="#B91C1C">安全沙箱</text>
+    <text x="749" y="322" text-anchor="middle" font-size="11" fill="#4B5563">隔离危险操作</text>
+    <text x="749" y="338" text-anchor="middle" font-size="11" fill="#4B5563">权限最小化</text>
+    <text x="749" y="362" text-anchor="middle" font-size="11" fill="#6B7280">决定 Agent</text>
+    <text x="749" y="378" text-anchor="middle" font-size="11" fill="#6B7280">闯不闯祸</text>
+  </g>
+
+  <!-- 连接线 大脑->器官 -->
+  <line x1="155" y1="190" x2="155" y2="258" stroke="#EA580C" stroke-width="2" marker-end="url(#arr-o4)"/>
+  <line x1="353" y1="190" x2="353" y2="258" stroke="#EA580C" stroke-width="2" marker-end="url(#arr-o4)"/>
+  <line x1="480" y1="190" x2="480" y2="258" stroke="#EA580C" stroke-width="2" marker-end="url(#arr-o4)"/>
+  <line x1="749" y1="190" x2="749" y2="258" stroke="#EA580C" stroke-width="2" marker-end="url(#arr-o4)"/>
+
+  <!-- 第五器官 兜底/策略 -->
+  <rect x="238" y="430" width="484" height="80" rx="12" fill="#F9FAFB" stroke="#6B7280" stroke-width="2"/>
+  <text x="480" y="462" text-anchor="middle" font-size="15" font-weight="bold" fill="#374151">策略与兜底（隐藏的"安全带"）</text>
+  <text x="480" y="484" text-anchor="middle" font-size="12" fill="#4B5563">循环上限 / 放弃判定 / 请示人类 / 权限审批 · 不让 Agent 无限跑下去</text>
+  <line x1="480" y1="392" x2="480" y2="428" stroke="#6B7280" stroke-width="2"/>
+
+  <!-- 底部价值条 -->
+  <rect x="80" y="540" width="800" height="56" rx="12" fill="#FDF2F8" stroke="#DB2777" stroke-width="1.5"/>
+  <text x="480" y="566" text-anchor="middle" font-size="14" font-weight="bold" fill="#BE185D">Harness 的价值 = 把"一个聪明但野"的模型，驯成"一个靠谱又高效"的员工</text>
+  <text x="480" y="588" text-anchor="middle" font-size="12" fill="#6B7280">大脑是标配，缰绳才是决定"差距"的那部分</text>
+
+  <text x="880" y="618" text-anchor="end" font-size="11" fill="#9CA3AF">图 5 · Harness 解剖：工具 / 记忆 / 循环 / 沙箱 / 兜底</text>
+</svg>

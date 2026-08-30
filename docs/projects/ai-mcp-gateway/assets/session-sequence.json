@@ -1,0 +1,8 @@
+{
+  "schema_version":1,"mode":"sequence","template_type":"sequence","style":7,"motion_scene":"token-stream","quality_profile":"standard","width":960,"height":700,
+  "title":"Streamable HTTP · 会话与恢复","subtitle":"initialize 建会话，GET 监听，POST 处理，Last-Event-ID 负责恢复",
+  "participants":[{"id":"client","label":"MCP 客户端"},{"id":"gateway","label":"网关接入"},{"id":"session","label":"会话服务"},{"id":"redis","label":"Redis 状态"}],
+  "messages":[
+    {"from":"client","to":"gateway","label":"POST initialize"},{"from":"gateway","to":"session","label":"校验网关与凭证"},{"from":"session","to":"redis","label":"创建会话租约"},{"from":"redis","to":"session","label":"返回 session-id"},{"from":"session","to":"gateway","label":"JSON-RPC 初始化响应"},{"from":"client","to":"gateway","label":"GET + Mcp-Session-Id"},{"from":"gateway","to":"session","label":"建立监听流"},{"from":"client","to":"gateway","label":"POST tools/call"},{"from":"gateway","to":"session","label":"处理消息并发布事件"},{"from":"session","to":"gateway","label":"SSE 结果流"},{"from":"client","to":"gateway","label":"断线重连 + Last-Event-ID"},{"from":"gateway","to":"session","label":"回放事件或继续监听"}],
+  "legend":[{"flow":"control","label":"同步请求"},{"flow":"async","label":"事件 / 流"}],"legend_orientation":"horizontal","legend_x":48,"legend_y":650,"footer":"公开文档版 · 断线恢复是会话边界，不是客户端细节"
+}

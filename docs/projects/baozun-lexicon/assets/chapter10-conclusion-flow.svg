@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 390" width="1200" height="390" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="390" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">本章结论：可解释、可回溯的字段采集链路</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">人工确定页面状态与边界，机器处理结构与语义，正式目录仍由人工确认</text>
+<g data-graph-role="node" data-graph-bounds="44,150,228,270">
+<rect x="44" y="150" width="184" height="120" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="68" cy="175" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="68" y="179" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="92" y="180" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">人工确定</text>
+<text x="64" y="236" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">页面状态</text>
+<text x="64" y="252" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">业务边界</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="276,150,460,270">
+<rect x="276" y="150" width="184" height="120" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="300" cy="175" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="300" y="179" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">2</text>
+<text x="324" y="180" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">DOM-SCOUT</text>
+<text x="296" y="236" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">清洗结构</text>
+<text x="296" y="252" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">生成证据</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="508,150,692,270">
+<rect x="508" y="150" width="184" height="120" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="532" cy="175" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="532" y="179" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">3</text>
+<text x="556" y="180" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">内部 Agent</text>
+<text x="528" y="236" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">判断语义</text>
+<text x="528" y="252" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">生成字段层级</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="740,150,924,270">
+<rect x="740" y="150" width="184" height="120" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="764" cy="175" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="764" y="179" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">4</text>
+<text x="788" y="180" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">FieldDraft</text>
+<text x="760" y="236" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">审核</text>
+<text x="760" y="252" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">修改</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="972,150,1156,270">
+<rect x="972" y="150" width="184" height="120" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="996" cy="175" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="996" y="179" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">5</text>
+<text x="1020" y="180" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">正式目录</text>
+<text x="992" y="236" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">事务保存</text>
+<text x="992" y="252" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">版本化</text>
+</g>
+<path id="conclusion-0" d="M228,210 H276" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="252" y="190" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">范围</text></g>
+<path id="conclusion-1" d="M460,210 H508" fill="none" stroke="#7eb8ac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-teal)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="484" y="190" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">证据</text></g>
+<path id="conclusion-2" d="M692,210 H740" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="716" y="190" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">草稿</text></g>
+<path id="conclusion-3" d="M924,210 H972" fill="none" stroke="#d8ad75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-amber)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="948" y="190" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">确认</text></g>
+<g data-graph-role="reserved" data-graph-bounds="44,306,1142,362"><rect x="44" y="306" width="1098" height="56" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="62" y="329" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">边界</text>
+<text x="62" y="350" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">不是自动操作整个业务系统的浏览器机器人；是逐步自动化的范围采集与语义解析方案。</text>
+</g>
+</svg>

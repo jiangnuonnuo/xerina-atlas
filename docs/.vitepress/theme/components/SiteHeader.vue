@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useRoute, withBase } from 'vitepress'
+import { useRoute } from 'vitepress'
 import { data as projects } from '../../data/projects.data'
+import ItemIcon from './ItemIcon.vue'
+import { relativeUrl } from '../utils/relative-url'
 
 const route = useRoute()
 const mobileOpen = ref(false)
@@ -24,16 +26,18 @@ function isActive(href: string) {
 }
 
 function resumeUrl() {
-  return withBase('/resume/xerina-java-backend-resume.pdf')
+  return relativeUrl('/resume/xerina-java-backend-resume.pdf', route.path)
 }
+
+function url(path: string) { return relativeUrl(path, route.path) }
 
 </script>
 
 <template>
   <header class="site-header">
     <div class="container nav-shell">
-      <a class="brand" :href="withBase('/')" aria-label="回到 Xerina 首页">
-        <span class="brand-mark"><img :src="withBase('/brand/code-mark.svg')" alt="" /></span>
+      <a class="brand" :href="url('/')" aria-label="回到 Xerina 首页">
+        <span class="brand-mark"><img :src="url('/brand/xerina-avatar.png')" alt="" /></span>
         <span class="brand-copy">
           <strong>Xerina</strong>
           <small>ATLAS / PORTFOLIO</small>
@@ -41,20 +45,21 @@ function resumeUrl() {
       </a>
 
       <nav class="desktop-nav" aria-label="主导航">
-        <a v-for="item in navItems.slice(0, 4)" :key="item.href" :href="withBase(item.href)" :class="{ 'is-active': isActive(item.href) }">{{ item.text }}</a>
+        <a v-for="item in navItems.slice(0, 4)" :key="item.href" :href="url(item.href)" :class="{ 'is-active': isActive(item.href) }">{{ item.text }}</a>
         <div class="nav-dropdown" :class="{ 'is-open': docsOpen }">
           <button class="nav-dropdown-trigger" type="button" aria-haspopup="true" :aria-expanded="docsOpen" @click="docsOpen = !docsOpen">
             项目文档 <span aria-hidden="true">⌄</span>
           </button>
           <div class="nav-dropdown-panel" role="menu" aria-label="选择项目文档">
             <span class="nav-dropdown-label">SELECT PROJECT DOCUMENT</span>
-            <a v-for="(project, index) in projects" :key="project.slug" class="nav-dropdown-item" role="menuitem" :href="withBase(project.url)" @click="docsOpen = false">
-              <span><b>{{ String(index + 1).padStart(2, '0') }}</b><strong>{{ project.frontmatter.title }}</strong><small>{{ project.frontmatter.categoryLabel || project.frontmatter.category }}</small></span>
+            <a v-for="(project, index) in projects" :key="project.slug" class="nav-dropdown-item" role="menuitem" :href="url(project.url)" @click="docsOpen = false">
+              <span class="nav-dropdown-icon"><ItemIcon :name="project.frontmatter.icon" :size="19" /></span>
+              <span class="nav-dropdown-copy"><b>{{ String(index + 1).padStart(2, '0') }}</b><strong>{{ project.frontmatter.title }}</strong><small>{{ project.frontmatter.categoryLabel || project.frontmatter.category }}</small></span>
               <i aria-hidden="true">↗</i>
             </a>
           </div>
         </div>
-        <a v-for="item in navItems.slice(4)" :key="item.href" :href="withBase(item.href)" :class="{ 'is-active': isActive(item.href) }">{{ item.text }}</a>
+        <a v-for="item in navItems.slice(4)" :key="item.href" :href="url(item.href)" :class="{ 'is-active': isActive(item.href) }">{{ item.text }}</a>
       </nav>
 
       <div class="nav-actions">
@@ -66,11 +71,11 @@ function resumeUrl() {
     </div>
 
     <nav v-if="mobileOpen" class="mobile-nav is-open" aria-label="移动端主导航">
-      <a v-for="item in navItems" :key="item.href" :href="withBase(item.href)" :class="{ 'is-active': isActive(item.href) }" @click="mobileOpen = false">{{ item.text }} <span>↗</span></a>
+      <a v-for="item in navItems" :key="item.href" :href="url(item.href)" :class="{ 'is-active': isActive(item.href) }" @click="mobileOpen = false">{{ item.text }} <span>↗</span></a>
       <div class="mobile-nav-group" :class="{ 'is-open': docsOpen }">
         <button class="mobile-nav-docs-trigger" type="button" :aria-expanded="docsOpen" @click="docsOpen = !docsOpen">项目文档 <span>展开⌄</span></button>
         <div v-if="docsOpen" class="mobile-docs-menu" role="menu">
-          <a v-for="project in projects" :key="project.slug" role="menuitem" :href="withBase(project.url)" @click="mobileOpen = false"><span>{{ project.frontmatter.title }}</span><b>↗</b></a>
+          <a v-for="project in projects" :key="project.slug" role="menuitem" :href="url(project.url)" @click="mobileOpen = false"><span>{{ project.frontmatter.title }}</span><b>↗</b></a>
         </div>
       </div>
     </nav>

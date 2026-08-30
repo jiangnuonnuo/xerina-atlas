@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 760,
+  "title": "目录数据库读写并发边界",
+  "subtitle": "写事务保护结构不变量；查询、采集和导出只读轻量投影，不把长任务放进同一个事务。",
+  "containers": [
+    { "id": "requests", "x": 40, "y": 100, "width": 1120, "height": 110, "label": "Requests", "header_prefix": "01" },
+    { "id": "guards", "x": 40, "y": 270, "width": 1120, "height": 150, "label": "Isolation & Guards", "header_prefix": "02" },
+    { "id": "tables", "x": 40, "y": 480, "width": 1120, "height": 150, "label": "MySQL 8 / InnoDB", "header_prefix": "03" }
+  ],
+  "nodes": [
+    { "id": "write-request", "kind": "rect", "x": 70, "y": 135, "width": 190, "height": 60, "label": "目录写请求", "sublabel": "create / move / delete", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "query-request", "kind": "rect", "x": 310, "y": 135, "width": 190, "height": 60, "label": "工作台查询", "sublabel": "roots / children / path", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "export-request", "kind": "rect", "x": 550, "y": 135, "width": 190, "height": 60, "label": "导出快照", "sublabel": "只读全量扫描", "fill": "#f0fdfa", "stroke": "#2dd4bf", "flat": true },
+    { "id": "capture-request", "kind": "rect", "x": 790, "y": 135, "width": 190, "height": 60, "label": "采集 / 解析", "sublabel": "独立证据工作流", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "write-guard", "kind": "double_rect", "x": 70, "y": 315, "width": 240, "height": 70, "label": "READ COMMITTED", "sublabel": "稳定锁序 + 锁后复查", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "query-guard", "kind": "rect", "x": 350, "y": 315, "width": 240, "height": 70, "label": "Keyset Cursor", "sublabel": "sort_order + id", "fill": "#eff6ff", "stroke": "#3b82f6", "flat": true },
+    { "id": "snapshot-guard", "kind": "rect", "x": 630, "y": 315, "width": 240, "height": 70, "label": "REPEATABLE READ", "sublabel": "server cursor + 1 permit", "fill": "#f0fdfa", "stroke": "#0d9488", "flat": true },
+    { "id": "cas-guard", "kind": "hexagon", "x": 960, "y": 315, "width": 150, "height": 70, "label": "CAS", "sublabel": "version + tree_version", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true },
+    { "id": "nodes", "kind": "cylinder", "x": 70, "y": 525, "width": 240, "height": 70, "label": "catalog_nodes", "sublabel": "parent_id · version · order", "fill": "#eff6ff", "stroke": "#2563eb" },
+    { "id": "closure", "kind": "cylinder", "x": 350, "y": 525, "width": 240, "height": 70, "label": "catalog_node_closure", "sublabel": "ancestor · descendant · depth", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "platform", "kind": "cylinder", "x": 630, "y": 525, "width": 240, "height": 70, "label": "platforms", "sublabel": "tree_version", "fill": "#fff7ed", "stroke": "#f97316" },
+    { "id": "tasks", "kind": "cylinder", "x": 910, "y": 525, "width": 200, "height": 70, "label": "export_tasks", "sublabel": "claim + progress", "fill": "#faf5ff", "stroke": "#8b5cf6" }
+  ],
+  "arrows": [
+    { "id": "write-to-guard", "source": "write-request", "target": "write-guard", "source_port": "bottom", "target_port": "top", "flow": "control", "label": "transaction" },
+    { "id": "query-to-guard", "source": "query-request", "target": "query-guard", "source_port": "bottom", "target_port": "top", "flow": "read", "label": "light read" },
+    { "id": "export-to-guard", "source": "export-request", "target": "snapshot-guard", "source_port": "bottom", "target_port": "top", "flow": "read", "label": "snapshot" },
+    { "id": "capture-to-snapshot", "source": "capture-request", "target": "snapshot-guard", "source_port": "bottom", "target_port": "top", "flow": "data", "label": "isolated input" },
+    { "id": "write-nodes", "source": "write-guard", "target": "nodes", "source_port": "bottom", "target_port": "top", "flow": "write", "label": "lock + mutate" },
+    { "id": "write-closure", "source": "write-guard", "target": "closure", "source_port": "bottom", "target_port": "top", "flow": "write", "label": "same txn" },
+    { "id": "query-nodes", "source": "query-guard", "target": "nodes", "source_port": "bottom", "target_port": "top", "flow": "read", "label": "page" },
+    { "id": "snapshot-nodes", "source": "snapshot-guard", "target": "nodes", "source_port": "bottom", "target_port": "top", "flow": "read", "label": "forward cursor" },
+    { "id": "write-version", "source": "write-guard", "target": "platform", "source_port": "right", "target_port": "left", "flow": "control", "label": "bump once" },
+    { "id": "cas-tasks", "source": "cas-guard", "target": "tasks", "source_port": "bottom", "target_port": "top", "flow": "write", "label": "claim once" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 690,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "read", "label": "只读扫描" },
+    { "flow": "write", "label": "同事务写入" },
+    { "flow": "control", "label": "锁/CAS/版本" },
+    { "flow": "data", "label": "独立证据" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · database concurrency boundaries",
+  "footer_x": 700,
+  "footer_y": 690
+}

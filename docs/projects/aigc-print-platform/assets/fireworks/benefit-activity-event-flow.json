@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "mode": "flow",
+  "template_type": "flow",
+  "style": 11,
+  "semantic_profile": "event-transit",
+  "diagram_type": "event_stream",
+  "line_code": "LINE A · BENEFIT EVENTS",
+  "quality_profile": "showcase",
+  "width": 1172,
+  "height": 720,
+  "title": "AIGC 权益事件链路",
+  "subtitle": "队伍完成 → 权益发放 → 额度入账 → AIGC 使用",
+  "topics": [
+    {
+      "id": "benefit.events",
+      "color": "#e4475b"
+    },
+    {
+      "id": "benefit.dlq",
+      "color": "#c62828"
+    }
+  ],
+  "containers": [
+    {
+      "id": "benefit-stream",
+      "x": 35,
+      "y": 140,
+      "width": 1102,
+      "height": 410,
+      "label": "benefit.events",
+      "subtitle": "RabbitMQ · complete → grant → account",
+      "header_prefix": "LINE A",
+      "header_separator": " · "
+    }
+  ],
+  "nodes": [
+    {
+      "id": "activity-entry",
+      "kind": "transit_terminal",
+      "transit_role": "producer",
+      "topic_id": "benefit.events",
+      "station_order": 0,
+      "x": 60,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "权益活动",
+      "sublabel": "invite / join",
+      "rail_color": "#e4475b",
+      "badge": "同步"
+    },
+    {
+      "id": "completion-gate",
+      "kind": "transit_station",
+      "transit_role": "station",
+      "topic_id": "benefit.events",
+      "station_order": 1,
+      "operation": "check target",
+      "x": 278,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "完成判定",
+      "sublabel": "target + action",
+      "rail_color": "#e4475b",
+      "badge": "规则"
+    },
+    {
+      "id": "event-publish",
+      "kind": "transit_junction",
+      "transit_role": "junction",
+      "topic_id": "benefit.events",
+      "station_order": 2,
+      "operation": "publish completed event",
+      "x": 496,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "完成事件",
+      "sublabel": "RabbitMQ",
+      "rail_color": "#e4475b",
+      "badge": "event"
+    },
+    {
+      "id": "grant-worker",
+      "kind": "transit_station",
+      "transit_role": "station",
+      "topic_id": "benefit.events",
+      "station_order": 3,
+      "operation": "grant per member",
+      "x": 714,
+      "y": 258,
+      "width": 150,
+      "height": 78,
+      "label": "发放消费者",
+      "sublabel": "per member",
+      "rail_color": "#e4475b",
+      "badge": "幂等"
+    },
+    {
+      "id": "quota-account",
+      "kind": "transit_terminal",
+      "transit_role": "consumer",
+      "topic_id": "benefit.events",
+      "station_order": 4,
+      "consumer_group": "quota-grant-v1",
+      "x": 932,
+      "y": 258,
+      "width": 180,
+      "height": 78,
+      "label": "额度账户",
+      "sublabel": "available quota",
+      "rail_color": "#e4475b",
+      "badge": "入账"
+    },
+    {
+      "id": "benefit-dlq",
+      "kind": "transit_terminal",
+      "transit_role": "dlq",
+      "topic_id": "benefit.dlq",
+      "x": 496,
+      "y": 430,
+      "width": 150,
+      "height": 78,
+      "label": "权益死信",
+      "sublabel": "replay / review",
+      "stroke": "#c62828",
+      "badge": "重试"
+    },
+    {
+      "id": "aigc-usage",
+      "kind": "transit_terminal",
+      "transit_role": "state_store",
+      "topic_id": "benefit.events",
+      "x": 714,
+      "y": 430,
+      "width": 150,
+      "height": 78,
+      "label": "AIGC 用量",
+      "sublabel": "freeze / settle",
+      "rail_color": "#00897b",
+      "badge": "任务号"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "rail-01",
+      "source": "activity-entry",
+      "target": "completion-gate",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "rail-12",
+      "source": "completion-gate",
+      "target": "event-publish",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "rail-23",
+      "source": "event-publish",
+      "target": "grant-worker",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 3,
+      "motion_order": 0
+    },
+    {
+      "id": "rail-34",
+      "source": "grant-worker",
+      "target": "quota-account",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "transit_type": "rail",
+      "topic_id": "benefit.events",
+      "motion_role": "topic-rail",
+      "motion_stage": 4,
+      "motion_order": 0
+    },
+    {
+      "id": "to-dlq",
+      "source": "event-publish",
+      "target": "benefit-dlq",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "feedback",
+      "transit_type": "dead_letter",
+      "topic_id": "benefit.dlq",
+      "motion_role": "dead-letter",
+      "motion_stage": 5,
+      "motion_order": 0,
+      "dashed": true
+    },
+    {
+      "id": "materialize",
+      "source": "grant-worker",
+      "target": "aigc-usage",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "write",
+      "transit_type": "state",
+      "topic_id": "benefit.events",
+      "motion_role": "state-project",
+      "motion_stage": 5,
+      "motion_order": 1
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 610,
+  "legend_locked": true,
+  "legend": [
+    {
+      "flow": "control",
+      "label": "event rail"
+    },
+    {
+      "flow": "write",
+      "label": "usage projection"
+    },
+    {
+      "flow": "feedback",
+      "label": "dead-letter route"
+    }
+  ],
+  "footer": "Style 11 · Event Transit · RabbitMQ event path with replay boundary",
+  "footer_x": 48,
+  "footer_y": 695
+}

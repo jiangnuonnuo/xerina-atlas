@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 390" width="1200" height="390" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="data-flow" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="390" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">解析任务幂等键的组成</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">相同幂等键返回已有任务或检查点，不重复写入候选节点</text>
+<g data-graph-role="node" data-graph-bounds="36,145,170,249">
+<rect x="36" y="145" width="134" height="104" rx="14" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.5"/>
+<circle cx="60" cy="170" r="13" fill="#6b9fd6" opacity="0.18"/>
+<text x="60" y="174" font-size="11" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="84" y="175" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">taskId</text>
+<text x="56" y="231" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">任务身份</text>
+</g>
+<text x="181" y="199" font-size="20" fill="#6b7f95" font-weight="600" text-anchor="middle">+</text>
+<g data-graph-role="node" data-graph-bounds="190,145,324,249">
+<rect x="190" y="145" width="134" height="104" rx="14" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.5"/>
+<circle cx="214" cy="170" r="13" fill="#7eb8ac" opacity="0.18"/>
+<text x="214" y="174" font-size="11" fill="#7eb8ac" font-weight="700" text-anchor="middle">2</text>
+<text x="238" y="175" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">snapshotHash</text>
+<text x="210" y="231" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">证据内容摘要</text>
+</g>
+<text x="335" y="199" font-size="20" fill="#6b7f95" font-weight="600" text-anchor="middle">+</text>
+<g data-graph-role="node" data-graph-bounds="344,145,478,249">
+<rect x="344" y="145" width="134" height="104" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="368" cy="170" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="368" y="174" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">3</text>
+<text x="392" y="175" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">workflowVersion</text>
+<text x="364" y="231" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">流程版本</text>
+</g>
+<text x="489" y="199" font-size="20" fill="#6b7f95" font-weight="600" text-anchor="middle">+</text>
+<g data-graph-role="node" data-graph-bounds="498,145,632,249">
+<rect x="498" y="145" width="134" height="104" rx="14" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.5"/>
+<circle cx="522" cy="170" r="13" fill="#d8ad75" opacity="0.18"/>
+<text x="522" y="174" font-size="11" fill="#d8ad75" font-weight="700" text-anchor="middle">4</text>
+<text x="546" y="175" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">promptVersion</text>
+<text x="518" y="231" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">Prompt 版本</text>
+</g>
+<text x="643" y="199" font-size="20" fill="#6b7f95" font-weight="600" text-anchor="middle">+</text>
+<g data-graph-role="node" data-graph-bounds="652,145,786,249">
+<rect x="652" y="145" width="134" height="104" rx="14" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.5"/>
+<circle cx="676" cy="170" r="13" fill="#b7c9dc" opacity="0.18"/>
+<text x="676" y="174" font-size="11" fill="#b7c9dc" font-weight="700" text-anchor="middle">5</text>
+<text x="700" y="175" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">revision</text>
+<text x="672" y="231" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">草稿修订号</text>
+</g>
+<path id="idempotency-output" d="M786,197 H870" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="828" y="178" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">compose</text></g>
+<g data-graph-role="node" data-graph-bounds="870,132,1156,262">
+<rect x="870" y="132" width="286" height="130" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="894" cy="157" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="894" y="161" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">Σ</text>
+<text x="918" y="162" font-size="15" fill="#243b53" font-weight="600" text-anchor="start">幂等键</text>
+<text x="890" y="228" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">task identity + evidence</text>
+<text x="890" y="244" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">workflow + prompt + revision</text>
+</g>
+<g data-graph-role="reserved" data-graph-bounds="36,300,1156,354"><rect x="36" y="300" width="1120" height="54" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="54" y="323" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">恢复语义</text>
+<text x="54" y="342" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">页面刷新、SSE 断线或服务重启后，服务端依据检查点恢复；前端不承担执行事实。</text>
+</g>
+</svg>

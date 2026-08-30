@@ -4,6 +4,7 @@ type: project
 category: skills
 categoryLabel: Agent skills
 visual: skills
+icon: workflow
 year: 2026
 order: 30
 featured: true
@@ -32,8 +33,8 @@ V-Team 是一套用于 Codex、Claude 等 coding agent 的个人开发技能。�
 
 <InteractiveDiagram
   title="V-Team 单任务交付闭环"
-  src="/media/projects/v-team-skills/diagrams/vteam-overview/index.html?embed=1"
-  poster="/media/projects/v-team-skills/diagrams/vteam-overview/preview.png"
+  src="../../media/projects/v-team-skills/diagrams/vteam-overview/index.html?embed=1"
+  poster="../../media/projects/v-team-skills/diagrams/vteam-overview/preview.png"
   description="先判断价值，再设计、实现和验收；失败只回到真正出错的位置。"
 />
 
@@ -143,12 +144,12 @@ V-Team 只在明确调用时启用。这让开发者知道什么时候增加了�
 
 | 章节 | 主要内容 |
 | --- | --- |
-| [10 需求与价值](/projects/V-Team-Skills/10-requirements) | 为什么先判断需求，以及哪些结果可以不开发 |
-| [20 交付工作流](/projects/V-Team-Skills/20-delivery-workflow) | 模式、风险、阶段、门禁和失败回退 |
-| [30 系统设计](/projects/V-Team-Skills/30-system-design) | `SKILL.md`、references、CLI 与项目事实怎样协作 |
-| [40 核心实现](/projects/V-Team-Skills/40-core-implementation) | 契约、context、恢复、完成和里程碑 |
-| [50 验证与接入](/projects/V-Team-Skills/50-testing-and-deployment) | 如何验证功能，又不把测试周期拉到天边 |
-| [60 设计原则](/projects/V-Team-Skills/60-retrospective) | 为什么保持显式、渐进、可信和克制 |
+| [10 需求与价值](./10-requirements) | 为什么先判断需求，以及哪些结果可以不开发 |
+| [20 交付工作流](./20-delivery-workflow) | 模式、风险、阶段、门禁和失败回退 |
+| [30 系统设计](./30-system-design) | `SKILL.md`、references、CLI 与项目事实怎样协作 |
+| [40 核心实现](./40-core-implementation) | 契约、context、恢复、完成和里程碑 |
+| [50 验证与接入](./50-testing-and-deployment) | 如何验证功能，又不把测试周期拉到天边 |
+| [60 设计原则](./60-retrospective) | 为什么保持显式、渐进、可信和克制 |
 
 ## V-Team 的一句话原则
 

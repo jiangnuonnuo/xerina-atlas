@@ -9,14 +9,14 @@ sidebar: true
 layout: project-doc
 ---
 
-[返回总览](/projects/V-Team-Skills/) · [交付工作流](/projects/V-Team-Skills/20-delivery-workflow) · [核心实现](/projects/V-Team-Skills/40-core-implementation)
+[返回总览](./) · [交付工作流](./20-delivery-workflow) · [核心实现](./40-core-implementation)
 
 V-Team 的系统设计遵循一个朴素原则：高质量流程需要明确规则，但不需要把所有规则同时塞进一次任务。它将路由、角色知识、状态工具和项目事实分层，每一层只负责自己能证明的事情。
 
 <InteractiveDiagram
   title="V-Team 分层架构"
-  src="/media/projects/v-team-skills/diagrams/system-architecture/index.html?embed=1"
-  poster="/media/projects/v-team-skills/diagrams/system-architecture/preview.png"
+  src="../../media/projects/v-team-skills/diagrams/system-architecture/index.html?embed=1"
+  poster="../../media/projects/v-team-skills/diagrams/system-architecture/preview.png"
   description="规则负责判断，状态负责事实，产品项目保留真正的实现。"
 />
 

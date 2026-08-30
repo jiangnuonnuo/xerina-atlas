@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="960" height="620" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="4" data-visual-theme="Notion Clean" data-diagram-type="memory" data-motion-scene="memory-lifecycle" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="showcase" data-max-bends-per-edge="2" data-max-total-bends="8" data-max-route-stretch="1.35" data-max-bridged-crossings="0" data-min-node-gap="40.0" data-min-container-gutter="20.0" data-min-label-clearance="4.0" data-min-segment-length="16.0">
+  <defs>
+    <marker id="arrowA" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowC" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowE" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowF" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrowH" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#d1d5db"/>
+    </marker>
+    <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 13px; font-weight: 500; fill: #9ca3af; }
+    .section { font-size: 13px; font-weight: 700; fill: #9ca3af; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #d1d5db; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #374151; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #9ca3af; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #9ca3af; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #9ca3af; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="620.0" fill="#ffffff"/>
+  <text x="48.0" y="48" text-anchor="start" class="title">Terminal and Remote File Lifecycle</text>
+  <text x="48.0" y="72" text-anchor="start" class="subtitle">frontend terminal, external Agent observation, SSH Session, and SFTP mutation</text>
+  <line x1="48" y1="100" x2="912.0" y2="100" stroke="#e5e7eb" stroke-width="1"/>
+  <g id="active-context" data-graph-role="container" data-container-id="active-context" data-semantic-role="boundary" data-graph-bounds="40,120,920,285">
+  <rect data-graph-role="container" x="40.0" y="120.0" width="880.0" height="165.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+  <text x="58.0" y="144.0" class="section">INTERACTIVE ACCESS</text>
+    <rect id="active-context-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="126" width="156.1" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="long-term" data-graph-role="container" data-container-id="long-term" data-semantic-role="boundary" data-graph-bounds="40,335,920,520">
+  <rect data-graph-role="container" x="40.0" y="335.0" width="880.0" height="185.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+  <text x="58.0" y="359.0" class="section">REMOTE FILE PLANE</text>
+    <rect id="long-term-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="341" width="152.2" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="sample" data-graph-role="edge" data-edge-id="sample" data-source="sensory" data-target="working" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="sample" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 220,210 L 270,210" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="attend" data-graph-role="edge" data-edge-id="attend" data-source="working" data-target="agent" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="attend" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 430,210 L 490,210" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="invoke" data-graph-role="edge" data-edge-id="invoke" data-source="agent" data-target="procedural" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="invoke" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 650,210 L 700,210" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="remember" data-graph-role="edge" data-edge-id="remember" data-source="working" data-target="episodic" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="remember" data-motion-stage="4" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 350,255 L 350,400" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="recall" data-graph-role="edge" data-edge-id="recall" data-source="semantic" data-target="agent" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="recall" data-motion-stage="6" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 570,400 L 570,255" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="consolidate" data-graph-role="edge" data-edge-id="consolidate" data-source="episodic" data-target="semantic" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="consolidate" data-motion-stage="5" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 430,445 L 490,445" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <g id="node-sensory" data-graph-role="node" data-node-id="sensory" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,165,220,255">
+  <rect x="60.0" y="165.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="140.0" y="183.0" text-anchor="middle" class="node-type">FRONTEND</text>
+  <text x="140.0" y="216.0" text-anchor="middle" class="node-title" font-size="18.0">Page Terminal</text>
+  <rect x="78.0" y="235.0" width="114" height="16" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="135.0" y="246.5" text-anchor="middle" font-size="11" font-weight="500" fill="#3b82f6">read + write</text>
+  </g>
+  <g id="node-working" data-graph-role="node" data-node-id="working" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="270,165,430,255">
+  <rect x="270.0" y="165.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="350.0" y="183.0" text-anchor="middle" class="node-type">EXTERNAL AGENT</text>
+  <text x="350.0" y="216.0" text-anchor="middle" class="node-title" font-size="17.06">Agent Terminal</text>
+  <rect x="288.0" y="235.0" width="114" height="16" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="345.0" y="246.5" text-anchor="middle" font-size="11" font-weight="500" fill="#3b82f6">observe only</text>
+  </g>
+  <g id="node-agent" data-graph-role="node" data-node-id="agent" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="490,165,650,255">
+  <path d="M 512.0 165.0 L 628.0 165.0 L 650.0 210.0 L 628.0 255.0 L 512.0 255.0 L 490.0 210.0 Z" fill="#ffffff" stroke="#3b82f6" stroke-width="1.6"/>
+  <text x="570.0" y="183.0" text-anchor="middle" class="node-type">SSH SESSION</text>
+  <text x="570.0" y="216.0" text-anchor="middle" class="node-title" font-size="16.48">Shared Session</text>
+  <text x="570.0" y="238.0" text-anchor="middle" class="node-sub">reuse per connection</text>
+  </g>
+  <g id="node-procedural" data-graph-role="node" data-node-id="procedural" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="700,165,880,255">
+  <rect x="700.0" y="165.0" width="180.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="790.0" y="183.0" text-anchor="middle" class="node-type">SFTP</text>
+  <text x="790.0" y="216.0" text-anchor="middle" class="node-title" font-size="18.0">File Operations</text>
+  <rect x="718.0" y="235.0" width="162" height="16" rx="3" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="799.0" y="246.5" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">one Channel per op</text>
+  </g>
+  <g id="node-episodic" data-graph-role="node" data-node-id="episodic" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="270,400,430,490">
+  <rect x="270.0" y="400.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="350.0" y="418.0" text-anchor="middle" class="node-type">READ</text>
+  <text x="350.0" y="451.0" text-anchor="middle" class="node-title" font-size="15.24">Read and Search</text>
+  <rect x="288.0" y="470.0" width="130" height="16" rx="3" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="353.0" y="481.5" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">UTF-8 / chunks</text>
+  </g>
+  <g id="node-semantic" data-graph-role="node" data-node-id="semantic" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="490,400,650,490">
+  <rect x="490.0" y="400.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="570.0" y="418.0" text-anchor="middle" class="node-type">MUTATION</text>
+  <text x="570.0" y="451.0" text-anchor="middle" class="node-title" font-size="15.28">Write and Patch</text>
+  <rect x="508.0" y="470.0" width="138" height="16" rx="3" fill="#fff7ed" stroke="#fed7aa" stroke-width="1"/>
+  <text x="577.0" y="481.5" text-anchor="middle" font-size="11" font-weight="500" fill="#ea580c">SHA-256 version</text>
+  </g>
+  <g id="remember-label" data-graph-role="label" data-owner="remember" data-graph-bounds="305.16,313.5,347,333.5">
+  <rect x="305.16" y="313.5" width="41.839999999999996" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="326.08" y="327.5" text-anchor="middle" class="arrow-label">read</text>
+  </g>
+  <g id="recall-label" data-graph-role="label" data-owner="recall" data-graph-bounds="507.4,313.5,567,333.5">
+  <rect x="507.4" y="313.5" width="59.599999999999994" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="537.2" y="327.5" text-anchor="middle" class="arrow-label">version</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,578,615,594">
+  <text x="48.0" y="590.0" class="footnote">Limits: 5 terminals per connection · 2 MiB editable file · root deletion rejected</text>
+  </g>
+</svg>

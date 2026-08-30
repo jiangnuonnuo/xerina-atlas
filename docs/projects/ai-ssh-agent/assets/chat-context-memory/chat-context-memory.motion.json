@@ -1,0 +1,2136 @@
+{
+  "animation_contract": {
+    "connectors_visible_at_opening": false,
+    "draw_easing": "linear",
+    "draw_schedule": [
+      {
+        "frames": [
+          1,
+          4
+        ],
+        "order": 0,
+        "role": "sample",
+        "stage": 1
+      },
+      {
+        "frames": [
+          5,
+          8
+        ],
+        "order": 0,
+        "role": "attend",
+        "stage": 2
+      },
+      {
+        "frames": [
+          9,
+          12
+        ],
+        "order": 0,
+        "role": "invoke",
+        "stage": 3
+      },
+      {
+        "frames": [
+          13,
+          22
+        ],
+        "order": 0,
+        "role": "remember",
+        "stage": 4
+      },
+      {
+        "frames": [
+          23,
+          26
+        ],
+        "order": 0,
+        "role": "consolidate",
+        "stage": 5
+      },
+      {
+        "frames": [
+          27,
+          36
+        ],
+        "order": 0,
+        "role": "recall",
+        "stage": 6
+      }
+    ],
+    "empty_opening_frame": 0,
+    "forbidden": [
+      "node-motion",
+      "text-motion",
+      "glow",
+      "blur",
+      "shadow",
+      "scan-line",
+      "halo",
+      "ripple",
+      "terminal-cursor",
+      "circular-bead",
+      "camera-motion",
+      "animated-background",
+      "breathing"
+    ],
+    "maximum_concurrent_draws": 1,
+    "nodes_visible_every_frame": true,
+    "persistent_data_flow": {
+      "body": {
+        "appended_below_labels_and_nodes": true,
+        "color": "semantic-memory-destination",
+        "dash_pattern": [
+          12,
+          35
+        ],
+        "filter_free": true,
+        "linecap": "round",
+        "linejoin": "round",
+        "marker_free": true,
+        "opacity": 0.88,
+        "primitive": "notion-memory-rail",
+        "resolved_style_4_source_stroke_width": 1.8,
+        "resolved_style_4_stroke_width": 2.7,
+        "resolved_style_4_stroke_width_at_50_percent": 1.35,
+        "semantic_color_meanings": {
+          "active_context": "#3b82f6",
+          "episodic_memory": "#059669",
+          "procedural_memory": "#7c3aed",
+          "semantic_memory": "#ea580c"
+        },
+        "semantic_colors_in_schedule_order": [
+          "#3b82f6",
+          "#3b82f6",
+          "#7c3aed",
+          "#059669",
+          "#ea580c",
+          "#ea580c"
+        ],
+        "source_colors_in_schedule_order": [
+          "#3b82f6",
+          "#3b82f6",
+          "#3b82f6",
+          "#3b82f6",
+          "#3b82f6",
+          "#3b82f6"
+        ],
+        "stroke_width": "min(3.0, max(2.4, source_stroke * 1.50))"
+      },
+      "card_advance_per_rendered_frame": 6.0,
+      "dash_offset_per_rendered_frame": -6.0,
+      "dash_period": 47,
+      "direction": "source-to-target",
+      "direction_sentinels": {
+        "attend/0": {
+          "directions": [
+            "right"
+          ],
+          "tangent_rotation": 0
+        },
+        "consolidate/0": {
+          "directions": [
+            "right"
+          ],
+          "tangent_rotation": 0
+        },
+        "invoke/0": {
+          "directions": [
+            "right"
+          ],
+          "tangent_rotation": 0
+        },
+        "recall/0": {
+          "directions": [
+            "up"
+          ],
+          "tangent_rotation": -90
+        },
+        "remember/0": {
+          "directions": [
+            "down"
+          ],
+          "tangent_rotation": 90
+        },
+        "sample/0": {
+          "directions": [
+            "right"
+          ],
+          "tangent_rotation": 0
+        }
+      },
+      "expected_initial_phases": [
+        7,
+        14,
+        21,
+        28,
+        35,
+        42
+      ],
+      "fade_in_factors": [
+        0.3,
+        0.65,
+        1.0
+      ],
+      "fade_in_frames": [
+        36,
+        38
+      ],
+      "full_opacity_frames": [
+        38,
+        109
+      ],
+      "initial_normalized_progress_by_stage": [
+        0.08,
+        0.22,
+        0.36,
+        0.5,
+        0.64,
+        0.78
+      ],
+      "memory_card": {
+        "animated_attributes": [
+          "transform",
+          "opacity"
+        ],
+        "appended_below_labels_and_nodes": true,
+        "direction": "source-to-target",
+        "endpoint_clearance": 8,
+        "filter_free": true,
+        "initial_normalized_progress_by_stage": [
+          0.08,
+          0.22,
+          0.36,
+          0.5,
+          0.64,
+          0.78
+        ],
+        "initial_path_distance": "8 + progress * (pathLength - 16)",
+        "ink_linecap": "butt",
+        "ink_lines": [
+          {
+            "x1": -4.5,
+            "x2": 4,
+            "y1": -2,
+            "y2": -2
+          },
+          {
+            "x1": -4.5,
+            "x2": 0.5,
+            "y1": 2,
+            "y2": 2
+          }
+        ],
+        "ink_shape_rendering": "crispEdges",
+        "ink_stroke": "semantic-memory-destination",
+        "ink_stroke_width": 2.0,
+        "marker_free": true,
+        "opacity": 0.98,
+        "outer_rect": {
+          "fill": "#ffffff",
+          "height": 10,
+          "rx": 2,
+          "stroke": "semantic-memory-destination",
+          "stroke_width": 1.4,
+          "width": 14,
+          "x": -7,
+          "y": -5
+        },
+        "path_advance_per_rendered_frame": 6.0,
+        "primitive": "notion-memory-card",
+        "semantic_colors_in_schedule_order": [
+          "#3b82f6",
+          "#3b82f6",
+          "#7c3aed",
+          "#059669",
+          "#ea580c",
+          "#ea580c"
+        ],
+        "shadow_free": true,
+        "shape": "group",
+        "tangent_rotations_in_schedule_order": [
+          0,
+          0,
+          0,
+          90,
+          0,
+          -90
+        ],
+        "wrap": "target-clearance-to-source-clearance"
+      },
+      "memory_card_count": 6,
+      "memory_card_primitive": "notion-memory-card",
+      "minimum_review_scale": "50%",
+      "period_step_coprime": true,
+      "phase_policy": "(motionStage * 7 + motionOrder * 0) mod 47",
+      "phase_repeat_within_stream_interval": true,
+      "primitive": "notion-memory-rail",
+      "rendered_frames": [
+        36,
+        114
+      ],
+      "reset_behavior": "all six rails and six memory cards keep advancing while topology, labels, rails, and cards fade together",
+      "reset_opacity_samples": [
+        1.0,
+        0.7575,
+        0.515,
+        0.2725,
+        0.03
+      ],
+      "reset_range": [
+        110,
+        114
+      ],
+      "roles": [
+        "sample",
+        "attend",
+        "invoke",
+        "remember",
+        "consolidate",
+        "recall"
+      ],
+      "route_keys": [
+        {
+          "order": 0,
+          "role": "sample"
+        },
+        {
+          "order": 0,
+          "role": "attend"
+        },
+        {
+          "order": 0,
+          "role": "invoke"
+        },
+        {
+          "order": 0,
+          "role": "remember"
+        },
+        {
+          "order": 0,
+          "role": "consolidate"
+        },
+        {
+          "order": 0,
+          "role": "recall"
+        }
+      ],
+      "stream_count": 6,
+      "stream_interval_frame_count": 79,
+      "travel_easing": "linear",
+      "travel_pixels_per_frame_at_50_percent": 3,
+      "travel_pixels_per_frame_at_960px": 6,
+      "travel_pixels_per_second_at_50_percent_20fps": 60,
+      "travel_pixels_per_second_at_960px_20fps": 120,
+      "travel_user_units_per_rendered_frame": 6
+    },
+    "primitive": "connector-draw-on-with-persistent-data-flow",
+    "reset_opacity_samples": [
+      1.0,
+      0.7575,
+      0.515,
+      0.2725,
+      0.03
+    ],
+    "reset_range": [
+      110,
+      114
+    ],
+    "route_label_opacity_states": 2,
+    "schedule_key": "(data-motion-role, data-motion-order)",
+    "settled_markers": "original marker appears only after route arrival",
+    "settled_topology_dynamic": true,
+    "source_edges_hidden_by_transient_css": true,
+    "text_geometry_motion": 0,
+    "topology_draw_on": true
+  },
+  "artifact": {
+    "bytes": 215887,
+    "encoder": "ffmpeg/gif-palette",
+    "format": "gif",
+    "mime_type": "image/gif",
+    "path": "docs/projects/ai-ssh-agent/assets/chat-context-memory/chat-context-memory.gif",
+    "probe": {
+      "codec_name": "gif",
+      "container": {
+        "duration": "5.750000",
+        "format_name": "gif"
+      },
+      "duration": "5.750000",
+      "height": 620,
+      "nb_frames": "115",
+      "nb_read_frames": "115",
+      "pix_fmt": "bgra",
+      "r_frame_rate": "20/1",
+      "width": 960
+    },
+    "sha256": "7f7c1bd07c28b97c7e1f2abb848c20524b4c724bff8166a1daf2bb7e5e998fa8",
+    "source_frame_count": 115
+  },
+  "dry_run": false,
+  "duration_seconds": 5.75,
+  "encoded_dimensions": {
+    "height": 620,
+    "width": 960
+  },
+  "fixture_sha256": null,
+  "fps": 20,
+  "frame_count": 115,
+  "frame_uniqueness_contract": {
+    "adjacent_duplicates_allowed": false,
+    "intentional_reset_boundary_opacity": 1.0,
+    "intentional_reset_boundary_repeat_frame": 110,
+    "long_timeline_repeat_scope": [
+      38,
+      109
+    ],
+    "minimum_unique_rasters_for_long_timeline": 75,
+    "opening_construction_and_reset_tail_globally_distinct": true,
+    "strict_all_unique_through_frame_count": 75
+  },
+  "height": 620,
+  "input_kind": "svg",
+  "loop": {
+    "adjacent_duplicate_count": 0,
+    "all_frames_unique": true,
+    "delta_quality": {
+      "adjacent_max": 0.0007644549019607843,
+      "adjacent_median": 0.0005982745098039216,
+      "adjacent_min": 1.8171529411764704e-05,
+      "adjacent_p95": 0.0007521529411764706,
+      "changed_area_method": "accumulated adjacent luma delta greater than 2 percent",
+      "changed_area_ratio": 0.010667019607843137,
+      "metric": "normalized-luma-mean-absolute-difference",
+      "seam": 5.296627450980392e-05,
+      "seam_within_adjacent_p95": true
+    },
+    "embedded_loop_count": 0,
+    "encoded_frames": {
+      "adjacent_duplicate_count": 0,
+      "adjacent_duplicate_pairs": [],
+      "algorithm": "framemd5",
+      "all_frames_unique": true,
+      "first_frame_hash": "35c3d77b87f83869ad765783f02f15e6",
+      "frame_count": 115,
+      "intentional_reset_boundary_opacity": 1.0,
+      "intentional_reset_boundary_repeat_count": 0,
+      "intentional_reset_boundary_repeat_evidence": [],
+      "intentional_reset_boundary_repeat_frame": 110,
+      "last_frame_hash": "938b4173592e3741f79d99b77f8cf774",
+      "minimum_unique_frame_count": 75,
+      "opening_construction_and_reset_tail_globally_distinct": true,
+      "repeat_scope": [
+        38,
+        109
+      ],
+      "repeat_scope_policy": "non-adjacent-repeats-inside-full-opacity-plus-reset-start-boundary",
+      "repeated_frame_group_count": 0,
+      "repeated_frame_index_evidence": [],
+      "repeats_confined_to_full_opacity": true,
+      "repeats_confined_to_permitted_scope": true,
+      "unique_frame_count": 115
+    },
+    "first_frame_sha256": "d604f3cc2c8c3f7eb4156190f2804aeb6f422241370531b4dd25126dc7c43117",
+    "intentional_reset_boundary_repeat_count": 0,
+    "intentional_reset_boundary_repeat_evidence": [],
+    "last_frame_sha256": "5fc94aec9cd95dce83f36f768b53c5e47e09e86209d9d793582c7b21773aa576",
+    "minimum_unique_frame_count": 75,
+    "opening_construction_and_reset_tail_globally_distinct": true,
+    "playback": "embedded-infinite",
+    "raw_frames": {
+      "adjacent_duplicate_count": 0,
+      "adjacent_duplicate_pairs": [],
+      "algorithm": "sha256",
+      "all_frames_unique": true,
+      "first_frame_hash": "d604f3cc2c8c3f7eb4156190f2804aeb6f422241370531b4dd25126dc7c43117",
+      "frame_count": 115,
+      "intentional_reset_boundary_opacity": 1.0,
+      "intentional_reset_boundary_repeat_count": 0,
+      "intentional_reset_boundary_repeat_evidence": [],
+      "intentional_reset_boundary_repeat_frame": 110,
+      "last_frame_hash": "5fc94aec9cd95dce83f36f768b53c5e47e09e86209d9d793582c7b21773aa576",
+      "minimum_unique_frame_count": 75,
+      "opening_construction_and_reset_tail_globally_distinct": true,
+      "repeat_scope": [
+        38,
+        109
+      ],
+      "repeat_scope_policy": "non-adjacent-repeats-inside-full-opacity-plus-reset-start-boundary",
+      "repeated_frame_group_count": 0,
+      "repeated_frame_index_evidence": [],
+      "repeats_confined_to_full_opacity": true,
+      "repeats_confined_to_permitted_scope": true,
+      "unique_frame_count": 115
+    },
+    "repeat_scope": [
+      38,
+      109
+    ],
+    "repeat_scope_policy": "non-adjacent-repeats-inside-full-opacity-plus-reset-start-boundary",
+    "repeated_frame_index_evidence": [],
+    "repeats_confined_to_full_opacity": true,
+    "repeats_confined_to_permitted_scope": true,
+    "sampling": "uniform-frame-centers",
+    "unique_frame_count": 115
+  },
+  "loop_playback": "embedded-infinite",
+  "mime_type": "image/gif",
+  "motion_class": "semantic",
+  "motion_grammar": {
+    "curves": {
+      "draw": "linear",
+      "persistent-data-flow": "linear",
+      "reset": "linear"
+    },
+    "draw_on": {
+      "connectors_visible_at_opening": false,
+      "draw_easing": "linear",
+      "draw_schedule": [
+        {
+          "frames": [
+            1,
+            4
+          ],
+          "order": 0,
+          "role": "sample",
+          "stage": 1
+        },
+        {
+          "frames": [
+            5,
+            8
+          ],
+          "order": 0,
+          "role": "attend",
+          "stage": 2
+        },
+        {
+          "frames": [
+            9,
+            12
+          ],
+          "order": 0,
+          "role": "invoke",
+          "stage": 3
+        },
+        {
+          "frames": [
+            13,
+            22
+          ],
+          "order": 0,
+          "role": "remember",
+          "stage": 4
+        },
+        {
+          "frames": [
+            23,
+            26
+          ],
+          "order": 0,
+          "role": "consolidate",
+          "stage": 5
+        },
+        {
+          "frames": [
+            27,
+            36
+          ],
+          "order": 0,
+          "role": "recall",
+          "stage": 6
+        }
+      ],
+      "empty_opening_frame": 0,
+      "forbidden": [
+        "node-motion",
+        "text-motion",
+        "glow",
+        "blur",
+        "shadow",
+        "scan-line",
+        "halo",
+        "ripple",
+        "terminal-cursor",
+        "circular-bead",
+        "camera-motion",
+        "animated-background",
+        "breathing"
+      ],
+      "maximum_concurrent_draws": 1,
+      "nodes_visible_every_frame": true,
+      "persistent_data_flow": {
+        "body": {
+          "appended_below_labels_and_nodes": true,
+          "color": "semantic-memory-destination",
+          "dash_pattern": [
+            12,
+            35
+          ],
+          "filter_free": true,
+          "linecap": "round",
+          "linejoin": "round",
+          "marker_free": true,
+          "opacity": 0.88,
+          "primitive": "notion-memory-rail",
+          "resolved_style_4_source_stroke_width": 1.8,
+          "resolved_style_4_stroke_width": 2.7,
+          "resolved_style_4_stroke_width_at_50_percent": 1.35,
+          "semantic_color_meanings": {
+            "active_context": "#3b82f6",
+            "episodic_memory": "#059669",
+            "procedural_memory": "#7c3aed",
+            "semantic_memory": "#ea580c"
+          },
+          "semantic_colors_in_schedule_order": [
+            "#3b82f6",
+            "#3b82f6",
+            "#7c3aed",
+            "#059669",
+            "#ea580c",
+            "#ea580c"
+          ],
+          "source_colors_in_schedule_order": [
+            "#3b82f6",
+            "#3b82f6",
+            "#3b82f6",
+            "#3b82f6",
+            "#3b82f6",
+            "#3b82f6"
+          ],
+          "stroke_width": "min(3.0, max(2.4, source_stroke * 1.50))"
+        },
+        "card_advance_per_rendered_frame": 6.0,
+        "dash_offset_per_rendered_frame": -6.0,
+        "dash_period": 47,
+        "direction": "source-to-target",
+        "direction_sentinels": {
+          "attend/0": {
+            "directions": [
+              "right"
+            ],
+            "tangent_rotation": 0
+          },
+          "consolidate/0": {
+            "directions": [
+              "right"
+            ],
+            "tangent_rotation": 0
+          },
+          "invoke/0": {
+            "directions": [
+              "right"
+            ],
+            "tangent_rotation": 0
+          },
+          "recall/0": {
+            "directions": [
+              "up"
+            ],
+            "tangent_rotation": -90
+          },
+          "remember/0": {
+            "directions": [
+              "down"
+            ],
+            "tangent_rotation": 90
+          },
+          "sample/0": {
+            "directions": [
+              "right"
+            ],
+            "tangent_rotation": 0
+          }
+        },
+        "expected_initial_phases": [
+          7,
+          14,
+          21,
+          28,
+          35,
+          42
+        ],
+        "fade_in_factors": [
+          0.3,
+          0.65,
+          1.0
+        ],
+        "fade_in_frames": [
+          36,
+          38
+        ],
+        "full_opacity_frames": [
+          38,
+          109
+        ],
+        "initial_normalized_progress_by_stage": [
+          0.08,
+          0.22,
+          0.36,
+          0.5,
+          0.64,
+          0.78
+        ],
+        "memory_card": {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "direction": "source-to-target",
+          "endpoint_clearance": 8,
+          "filter_free": true,
+          "initial_normalized_progress_by_stage": [
+            0.08,
+            0.22,
+            0.36,
+            0.5,
+            0.64,
+            0.78
+          ],
+          "initial_path_distance": "8 + progress * (pathLength - 16)",
+          "ink_linecap": "butt",
+          "ink_lines": [
+            {
+              "x1": -4.5,
+              "x2": 4,
+              "y1": -2,
+              "y2": -2
+            },
+            {
+              "x1": -4.5,
+              "x2": 0.5,
+              "y1": 2,
+              "y2": 2
+            }
+          ],
+          "ink_shape_rendering": "crispEdges",
+          "ink_stroke": "semantic-memory-destination",
+          "ink_stroke_width": 2.0,
+          "marker_free": true,
+          "opacity": 0.98,
+          "outer_rect": {
+            "fill": "#ffffff",
+            "height": 10,
+            "rx": 2,
+            "stroke": "semantic-memory-destination",
+            "stroke_width": 1.4,
+            "width": 14,
+            "x": -7,
+            "y": -5
+          },
+          "path_advance_per_rendered_frame": 6.0,
+          "primitive": "notion-memory-card",
+          "semantic_colors_in_schedule_order": [
+            "#3b82f6",
+            "#3b82f6",
+            "#7c3aed",
+            "#059669",
+            "#ea580c",
+            "#ea580c"
+          ],
+          "shadow_free": true,
+          "shape": "group",
+          "tangent_rotations_in_schedule_order": [
+            0,
+            0,
+            0,
+            90,
+            0,
+            -90
+          ],
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        "memory_card_count": 6,
+        "memory_card_primitive": "notion-memory-card",
+        "minimum_review_scale": "50%",
+        "period_step_coprime": true,
+        "phase_policy": "(motionStage * 7 + motionOrder * 0) mod 47",
+        "phase_repeat_within_stream_interval": true,
+        "primitive": "notion-memory-rail",
+        "rendered_frames": [
+          36,
+          114
+        ],
+        "reset_behavior": "all six rails and six memory cards keep advancing while topology, labels, rails, and cards fade together",
+        "reset_opacity_samples": [
+          1.0,
+          0.7575,
+          0.515,
+          0.2725,
+          0.03
+        ],
+        "reset_range": [
+          110,
+          114
+        ],
+        "roles": [
+          "sample",
+          "attend",
+          "invoke",
+          "remember",
+          "consolidate",
+          "recall"
+        ],
+        "route_keys": [
+          {
+            "order": 0,
+            "role": "sample"
+          },
+          {
+            "order": 0,
+            "role": "attend"
+          },
+          {
+            "order": 0,
+            "role": "invoke"
+          },
+          {
+            "order": 0,
+            "role": "remember"
+          },
+          {
+            "order": 0,
+            "role": "consolidate"
+          },
+          {
+            "order": 0,
+            "role": "recall"
+          }
+        ],
+        "stream_count": 6,
+        "stream_interval_frame_count": 79,
+        "travel_easing": "linear",
+        "travel_pixels_per_frame_at_50_percent": 3,
+        "travel_pixels_per_frame_at_960px": 6,
+        "travel_pixels_per_second_at_50_percent_20fps": 60,
+        "travel_pixels_per_second_at_960px_20fps": 120,
+        "travel_user_units_per_rendered_frame": 6
+      },
+      "primitive": "connector-draw-on-with-persistent-data-flow",
+      "reset_opacity_samples": [
+        1.0,
+        0.7575,
+        0.515,
+        0.2725,
+        0.03
+      ],
+      "reset_range": [
+        110,
+        114
+      ],
+      "route_label_opacity_states": 2,
+      "schedule_key": "(data-motion-role, data-motion-order)",
+      "settled_markers": "original marker appears only after route arrival",
+      "settled_topology_dynamic": true,
+      "source_edges_hidden_by_transient_css": true,
+      "text_geometry_motion": 0,
+      "topology_draw_on": true
+    },
+    "duration_seconds": 5.75,
+    "frame_duration_ms": 50.0,
+    "phases": {
+      "draw": {
+        "frames": [
+          1,
+          36
+        ],
+        "seconds": [
+          0.075,
+          1.825
+        ]
+      },
+      "empty": {
+        "frames": [
+          0,
+          0
+        ],
+        "seconds": [
+          0.025,
+          0.025
+        ]
+      },
+      "full_opacity": {
+        "frames": [
+          38,
+          109
+        ],
+        "seconds": [
+          1.925,
+          5.475
+        ]
+      },
+      "reset": {
+        "frames": [
+          110,
+          114
+        ],
+        "seconds": [
+          5.525,
+          5.725
+        ]
+      },
+      "stream": {
+        "frames": [
+          36,
+          114
+        ],
+        "seconds": [
+          1.825,
+          5.725
+        ]
+      }
+    },
+    "sample_index_expression": "time * fps - 0.5",
+    "sampling": "uniform-frame-centers",
+    "version": "3.4"
+  },
+  "motion_grammar_version": "3.4",
+  "motion_scene": "memory-lifecycle",
+  "ok": true,
+  "output": "docs/projects/ai-ssh-agent/assets/chat-context-memory/chat-context-memory.gif",
+  "output_format": "gif",
+  "preset": "memory-lifecycle",
+  "rendered_pixels": 68448000,
+  "renderer": {
+    "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "duration_seconds": 5.75,
+    "effects": 14,
+    "engine": "chromium-svg-draw-on-persistent-data-flow",
+    "fps": 20,
+    "frame_count": 115,
+    "height": 620,
+    "input_kind": "svg",
+    "loop_frame_policy": "integer-frame-index-centers-with-steady-state-plus-reset-boundary-repeat-scope",
+    "module": "puppeteer-core",
+    "module_version": "25.3.0",
+    "ok": true,
+    "paint_barrier": "fonts-ready-plus-two-animation-frames-before-capture",
+    "preset": "memory-lifecycle",
+    "resolved_module": "fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+    "sandbox": "enabled",
+    "scene_report": {
+      "animated_background_count": 0,
+      "blur_count": 0,
+      "camera_motion_count": 0,
+      "circular_bead_count": 0,
+      "connectors_visible_at_opening": false,
+      "direction_sentinels": [
+        {
+          "actual": [
+            "right"
+          ],
+          "card_advance_per_rendered_frame": 6,
+          "dash_offset_per_rendered_frame": -6,
+          "expected": [
+            "right"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "sample",
+          "schedule_key": "sample/0",
+          "tangent_rotation": 0
+        },
+        {
+          "actual": [
+            "right"
+          ],
+          "card_advance_per_rendered_frame": 6,
+          "dash_offset_per_rendered_frame": -6,
+          "expected": [
+            "right"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "attend",
+          "schedule_key": "attend/0",
+          "tangent_rotation": 0
+        },
+        {
+          "actual": [
+            "right"
+          ],
+          "card_advance_per_rendered_frame": 6,
+          "dash_offset_per_rendered_frame": -6,
+          "expected": [
+            "right"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "invoke",
+          "schedule_key": "invoke/0",
+          "tangent_rotation": 0
+        },
+        {
+          "actual": [
+            "down"
+          ],
+          "card_advance_per_rendered_frame": 6,
+          "dash_offset_per_rendered_frame": -6,
+          "expected": [
+            "down"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "remember",
+          "schedule_key": "remember/0",
+          "tangent_rotation": 90
+        },
+        {
+          "actual": [
+            "right"
+          ],
+          "card_advance_per_rendered_frame": 6,
+          "dash_offset_per_rendered_frame": -6,
+          "expected": [
+            "right"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "consolidate",
+          "schedule_key": "consolidate/0",
+          "tangent_rotation": 0
+        },
+        {
+          "actual": [
+            "up"
+          ],
+          "card_advance_per_rendered_frame": 6,
+          "dash_offset_per_rendered_frame": -6,
+          "expected": [
+            "up"
+          ],
+          "order": 0,
+          "passed": true,
+          "role": "recall",
+          "schedule_key": "recall/0",
+          "tangent_rotation": -90
+        }
+      ],
+      "draw_clones": 6,
+      "draw_contract": {
+        "easing": "linear",
+        "marker_after_arrival": true,
+        "marker_during_draw": false,
+        "source_geometry": "exact immutable edge clone"
+      },
+      "draw_schedule": [
+        {
+          "easing": "linear",
+          "edge_id": "append",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            1,
+            4
+          ],
+          "role": "sample",
+          "schedule_key": "sample/0",
+          "stage": 1
+        },
+        {
+          "easing": "linear",
+          "edge_id": "collect",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            5,
+            8
+          ],
+          "role": "attend",
+          "schedule_key": "attend/0",
+          "stage": 2
+        },
+        {
+          "easing": "linear",
+          "edge_id": "compose",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            9,
+            12
+          ],
+          "role": "invoke",
+          "schedule_key": "invoke/0",
+          "stage": 3
+        },
+        {
+          "easing": "linear",
+          "edge_id": "detect",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            13,
+            22
+          ],
+          "role": "remember",
+          "schedule_key": "remember/0",
+          "stage": 4
+        },
+        {
+          "easing": "linear",
+          "edge_id": "learn",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            23,
+            26
+          ],
+          "role": "consolidate",
+          "schedule_key": "consolidate/0",
+          "stage": 5
+        },
+        {
+          "easing": "linear",
+          "edge_id": "recall",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            27,
+            36
+          ],
+          "role": "recall",
+          "schedule_key": "recall/0",
+          "stage": 6
+        }
+      ],
+      "empty_opening_frame": 0,
+      "extra_scene_primitives": [
+        "notion-memory-card"
+      ],
+      "grammar_version": "3.4",
+      "halo_count": 0,
+      "initial_progress_vector": [
+        0.08,
+        0.22,
+        0.36,
+        0.5,
+        0.64,
+        0.78
+      ],
+      "maximum_concurrent_draws": 1,
+      "node_glow_pulse_count": 0,
+      "node_motion": 0,
+      "nodes_visible_every_frame": true,
+      "notion_memory_card_count": 6,
+      "notion_memory_cards": [
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "direction": "source-to-target",
+          "edge_id": "append",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_normalized_progress": 0.08,
+          "initial_path_distance": 10.72,
+          "initial_point": {
+            "x": 230.72000122070312,
+            "y": 210
+          },
+          "ink_linecap": "butt",
+          "ink_lines": [
+            {
+              "x1": -4.5,
+              "x2": 4,
+              "y1": -2,
+              "y2": -2
+            },
+            {
+              "x1": -4.5,
+              "x2": 0.5,
+              "y1": 2,
+              "y2": 2
+            }
+          ],
+          "ink_shape_rendering": "crispEdges",
+          "ink_stroke": "#3b82f6",
+          "ink_stroke_width": 2,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 1,
+          "opacity": 0.98,
+          "outer_rect": {
+            "fill": "#ffffff",
+            "height": 10,
+            "rx": 2,
+            "stroke": "#3b82f6",
+            "stroke_width": 1.4,
+            "width": 14,
+            "x": -7,
+            "y": -5
+          },
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 50,
+          "primitive": "notion-memory-card",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "sample",
+          "schedule_key": "sample/0",
+          "semantic_color": "#3b82f6",
+          "shadow_free": true,
+          "shape": "group",
+          "tangent_rotation": 0,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "direction": "source-to-target",
+          "edge_id": "collect",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_normalized_progress": 0.22,
+          "initial_path_distance": 17.68,
+          "initial_point": {
+            "x": 447.67999267578125,
+            "y": 210
+          },
+          "ink_linecap": "butt",
+          "ink_lines": [
+            {
+              "x1": -4.5,
+              "x2": 4,
+              "y1": -2,
+              "y2": -2
+            },
+            {
+              "x1": -4.5,
+              "x2": 0.5,
+              "y1": 2,
+              "y2": 2
+            }
+          ],
+          "ink_shape_rendering": "crispEdges",
+          "ink_stroke": "#3b82f6",
+          "ink_stroke_width": 2,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 2,
+          "opacity": 0.98,
+          "outer_rect": {
+            "fill": "#ffffff",
+            "height": 10,
+            "rx": 2,
+            "stroke": "#3b82f6",
+            "stroke_width": 1.4,
+            "width": 14,
+            "x": -7,
+            "y": -5
+          },
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 60,
+          "primitive": "notion-memory-card",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "attend",
+          "schedule_key": "attend/0",
+          "semantic_color": "#3b82f6",
+          "shadow_free": true,
+          "shape": "group",
+          "tangent_rotation": 0,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "direction": "source-to-target",
+          "edge_id": "compose",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_normalized_progress": 0.36,
+          "initial_path_distance": 20.240000000000002,
+          "initial_point": {
+            "x": 670.239990234375,
+            "y": 210
+          },
+          "ink_linecap": "butt",
+          "ink_lines": [
+            {
+              "x1": -4.5,
+              "x2": 4,
+              "y1": -2,
+              "y2": -2
+            },
+            {
+              "x1": -4.5,
+              "x2": 0.5,
+              "y1": 2,
+              "y2": 2
+            }
+          ],
+          "ink_shape_rendering": "crispEdges",
+          "ink_stroke": "#7c3aed",
+          "ink_stroke_width": 2,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 3,
+          "opacity": 0.98,
+          "outer_rect": {
+            "fill": "#ffffff",
+            "height": 10,
+            "rx": 2,
+            "stroke": "#7c3aed",
+            "stroke_width": 1.4,
+            "width": 14,
+            "x": -7,
+            "y": -5
+          },
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 50,
+          "primitive": "notion-memory-card",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "invoke",
+          "schedule_key": "invoke/0",
+          "semantic_color": "#7c3aed",
+          "shadow_free": true,
+          "shape": "group",
+          "tangent_rotation": 0,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "direction": "source-to-target",
+          "edge_id": "detect",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_normalized_progress": 0.5,
+          "initial_path_distance": 72.5,
+          "initial_point": {
+            "x": 350,
+            "y": 327.5
+          },
+          "ink_linecap": "butt",
+          "ink_lines": [
+            {
+              "x1": -4.5,
+              "x2": 4,
+              "y1": -2,
+              "y2": -2
+            },
+            {
+              "x1": -4.5,
+              "x2": 0.5,
+              "y1": 2,
+              "y2": 2
+            }
+          ],
+          "ink_shape_rendering": "crispEdges",
+          "ink_stroke": "#059669",
+          "ink_stroke_width": 2,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 4,
+          "opacity": 0.98,
+          "outer_rect": {
+            "fill": "#ffffff",
+            "height": 10,
+            "rx": 2,
+            "stroke": "#059669",
+            "stroke_width": 1.4,
+            "width": 14,
+            "x": -7,
+            "y": -5
+          },
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 145,
+          "primitive": "notion-memory-card",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "remember",
+          "schedule_key": "remember/0",
+          "semantic_color": "#059669",
+          "shadow_free": true,
+          "shape": "group",
+          "tangent_rotation": 90,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "direction": "source-to-target",
+          "edge_id": "learn",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_normalized_progress": 0.64,
+          "initial_path_distance": 36.16,
+          "initial_point": {
+            "x": 466.1600036621094,
+            "y": 445
+          },
+          "ink_linecap": "butt",
+          "ink_lines": [
+            {
+              "x1": -4.5,
+              "x2": 4,
+              "y1": -2,
+              "y2": -2
+            },
+            {
+              "x1": -4.5,
+              "x2": 0.5,
+              "y1": 2,
+              "y2": 2
+            }
+          ],
+          "ink_shape_rendering": "crispEdges",
+          "ink_stroke": "#ea580c",
+          "ink_stroke_width": 2,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 5,
+          "opacity": 0.98,
+          "outer_rect": {
+            "fill": "#ffffff",
+            "height": 10,
+            "rx": 2,
+            "stroke": "#ea580c",
+            "stroke_width": 1.4,
+            "width": 14,
+            "x": -7,
+            "y": -5
+          },
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 60,
+          "primitive": "notion-memory-card",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "consolidate",
+          "schedule_key": "consolidate/0",
+          "semantic_color": "#ea580c",
+          "shadow_free": true,
+          "shape": "group",
+          "tangent_rotation": 0,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "direction": "source-to-target",
+          "edge_id": "recall",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_normalized_progress": 0.78,
+          "initial_path_distance": 108.62,
+          "initial_point": {
+            "x": 570,
+            "y": 291.3800048828125
+          },
+          "ink_linecap": "butt",
+          "ink_lines": [
+            {
+              "x1": -4.5,
+              "x2": 4,
+              "y1": -2,
+              "y2": -2
+            },
+            {
+              "x1": -4.5,
+              "x2": 0.5,
+              "y1": 2,
+              "y2": 2
+            }
+          ],
+          "ink_shape_rendering": "crispEdges",
+          "ink_stroke": "#ea580c",
+          "ink_stroke_width": 2,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 6,
+          "opacity": 0.98,
+          "outer_rect": {
+            "fill": "#ffffff",
+            "height": 10,
+            "rx": 2,
+            "stroke": "#ea580c",
+            "stroke_width": 1.4,
+            "width": 14,
+            "x": -7,
+            "y": -5
+          },
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 145,
+          "primitive": "notion-memory-card",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "recall",
+          "schedule_key": "recall/0",
+          "semantic_color": "#ea580c",
+          "shadow_free": true,
+          "shape": "group",
+          "tangent_rotation": -90,
+          "wrap": "target-clearance-to-source-clearance"
+        }
+      ],
+      "packet_head_count": 0,
+      "persistent_packet_heads": [],
+      "persistent_stream_contract": {
+        "body": {
+          "color": "semantic-memory-destination",
+          "dash_pattern": [
+            12,
+            35
+          ],
+          "filter_free": true,
+          "linecap": "round",
+          "linejoin": "round",
+          "marker_free": true,
+          "opacity": 0.88,
+          "primitive": "notion-memory-rail",
+          "resolved_style_4_source_stroke_width": 1.8,
+          "resolved_style_4_stroke_width": 2.7,
+          "resolved_style_4_stroke_width_at_50_percent": 1.35,
+          "semantic_colors_in_schedule_order": [
+            "#3b82f6",
+            "#3b82f6",
+            "#7c3aed",
+            "#059669",
+            "#ea580c",
+            "#ea580c"
+          ],
+          "source_colors_in_schedule_order": [
+            "#3b82f6",
+            "#3b82f6",
+            "#3b82f6",
+            "#3b82f6",
+            "#3b82f6",
+            "#3b82f6"
+          ],
+          "stroke_width": "min(3.0, max(2.4, source_stroke * 1.50))"
+        },
+        "card_advance_per_rendered_frame": 6,
+        "dash_offset_per_rendered_frame": -6,
+        "dash_period": 47,
+        "direction": "source-to-target",
+        "expected_initial_phases": [
+          7,
+          14,
+          21,
+          28,
+          35,
+          42
+        ],
+        "fade_in_factors": [
+          0.3,
+          0.65,
+          1
+        ],
+        "fade_in_frames": [
+          36,
+          38
+        ],
+        "full_opacity_frames": [
+          38,
+          109
+        ],
+        "memory_card": {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "direction": "source-to-target",
+          "endpoint_clearance": 8,
+          "filter_free": true,
+          "initial_normalized_progress_by_stage": [
+            0.08,
+            0.22,
+            0.36,
+            0.5,
+            0.64,
+            0.78
+          ],
+          "initial_path_distance": "8 + progress * (pathLength - 16)",
+          "ink_linecap": "butt",
+          "ink_lines": [
+            {
+              "x1": -4.5,
+              "x2": 4,
+              "y1": -2,
+              "y2": -2
+            },
+            {
+              "x1": -4.5,
+              "x2": 0.5,
+              "y1": 2,
+              "y2": 2
+            }
+          ],
+          "ink_shape_rendering": "crispEdges",
+          "ink_stroke": "semantic-memory-destination",
+          "ink_stroke_width": 2,
+          "marker_free": true,
+          "opacity": 0.98,
+          "outer_rect": {
+            "fill": "#ffffff",
+            "height": 10,
+            "rx": 2,
+            "stroke": "semantic-memory-destination",
+            "stroke_width": 1.4,
+            "width": 14,
+            "x": -7,
+            "y": -5
+          },
+          "path_advance_per_rendered_frame": 6,
+          "primitive": "notion-memory-card",
+          "semantic_colors_in_schedule_order": [
+            "#3b82f6",
+            "#3b82f6",
+            "#7c3aed",
+            "#059669",
+            "#ea580c",
+            "#ea580c"
+          ],
+          "shadow_free": true,
+          "shape": "group",
+          "tangent_rotations_in_schedule_order": [
+            0,
+            0,
+            0,
+            90,
+            0,
+            -90
+          ],
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        "memory_card_count": 6,
+        "memory_card_primitive": "notion-memory-card",
+        "minimum_review_scale": "50%",
+        "period_step_coprime": true,
+        "phase_policy": "(motionStage * 7 + motionOrder * 0) mod 47",
+        "phase_repeat_within_stream_interval": true,
+        "primitive": "notion-memory-rail",
+        "rendered_frames": [
+          36,
+          114
+        ],
+        "reset_behavior": "all six rails and six memory cards keep advancing while topology, labels, rails, and cards fade together",
+        "reset_opacity_samples": [
+          1,
+          0.7575,
+          0.515,
+          0.2725,
+          0.03
+        ],
+        "reset_range": [
+          110,
+          114
+        ],
+        "stream_count": 6,
+        "stream_interval_frame_count": 79,
+        "travel_easing": "linear",
+        "travel_pixels_per_frame_at_50_percent": 3,
+        "travel_pixels_per_frame_at_960px": 6,
+        "travel_pixels_per_second_at_50_percent_20fps": 60,
+        "travel_pixels_per_second_at_960px_20fps": 120,
+        "travel_user_units_per_rendered_frame": 6
+      },
+      "persistent_streams": [
+        {
+          "color": "#3b82f6",
+          "dash_offset_per_rendered_frame": -6,
+          "dash_pattern": [
+            12,
+            35
+          ],
+          "dash_period": 47,
+          "direction": "source-to-target",
+          "edge_id": "append",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 7,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 1,
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 0) mod 47",
+          "primitive": "notion-memory-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "sample",
+          "schedule_key": "sample/0",
+          "source_stroke": "#3b82f6",
+          "stroke_width": 2.7,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#3b82f6",
+          "dash_offset_per_rendered_frame": -6,
+          "dash_pattern": [
+            12,
+            35
+          ],
+          "dash_period": 47,
+          "direction": "source-to-target",
+          "edge_id": "collect",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 14,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 2,
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 0) mod 47",
+          "primitive": "notion-memory-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "attend",
+          "schedule_key": "attend/0",
+          "source_stroke": "#3b82f6",
+          "stroke_width": 2.7,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#7c3aed",
+          "dash_offset_per_rendered_frame": -6,
+          "dash_pattern": [
+            12,
+            35
+          ],
+          "dash_period": 47,
+          "direction": "source-to-target",
+          "edge_id": "compose",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 21,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 3,
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 0) mod 47",
+          "primitive": "notion-memory-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "invoke",
+          "schedule_key": "invoke/0",
+          "source_stroke": "#3b82f6",
+          "stroke_width": 2.7,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#059669",
+          "dash_offset_per_rendered_frame": -6,
+          "dash_pattern": [
+            12,
+            35
+          ],
+          "dash_period": 47,
+          "direction": "source-to-target",
+          "edge_id": "detect",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 28,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 4,
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 0) mod 47",
+          "primitive": "notion-memory-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "remember",
+          "schedule_key": "remember/0",
+          "source_stroke": "#3b82f6",
+          "stroke_width": 2.7,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#ea580c",
+          "dash_offset_per_rendered_frame": -6,
+          "dash_pattern": [
+            12,
+            35
+          ],
+          "dash_period": 47,
+          "direction": "source-to-target",
+          "edge_id": "learn",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 35,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 5,
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 0) mod 47",
+          "primitive": "notion-memory-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "consolidate",
+          "schedule_key": "consolidate/0",
+          "source_stroke": "#3b82f6",
+          "stroke_width": 2.7,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#ea580c",
+          "dash_offset_per_rendered_frame": -6,
+          "dash_pattern": [
+            12,
+            35
+          ],
+          "dash_period": 47,
+          "direction": "source-to-target",
+          "edge_id": "recall",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 42,
+          "marker_free": true,
+          "motion_order": 0,
+          "motion_stage": 6,
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 0) mod 47",
+          "primitive": "notion-memory-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "recall",
+          "schedule_key": "recall/0",
+          "source_stroke": "#3b82f6",
+          "stroke_width": 2.7,
+          "travel_easing": "linear"
+        }
+      ],
+      "preset": "memory-lifecycle",
+      "primitive": "connector-draw-on-with-persistent-data-flow",
+      "reset_opacity_samples": [
+        1,
+        0.7575,
+        0.515,
+        0.2725,
+        0.03
+      ],
+      "reset_range": [
+        110,
+        114
+      ],
+      "ripple_count": 0,
+      "route_label_clones": 2,
+      "route_label_opacity_states": 2,
+      "scan_line_count": 0,
+      "schedule_key": "(data-motion-role, data-motion-order)",
+      "semantic_color_vector": [
+        "#3b82f6",
+        "#3b82f6",
+        "#7c3aed",
+        "#059669",
+        "#ea580c",
+        "#ea580c"
+      ],
+      "settled_marker_clones": 6,
+      "settled_topology_dynamic": true,
+      "shadow_count": 0,
+      "source_edges": 6,
+      "source_edges_hidden_by_transient_css": true,
+      "source_route_labels": 2,
+      "static_dom_guard": true,
+      "stream_count": 6,
+      "terminal_cursor_count": 0,
+      "terminal_text_typing_count": 0,
+      "text_geometry_motion": 0,
+      "text_motion": 0,
+      "topology_draw_on": true
+    },
+    "width": 960
+  },
+  "report": "docs/projects/ai-ssh-agent/assets/chat-context-memory/chat-context-memory.motion.json",
+  "required_encoder": "ffmpeg/gif",
+  "review_reference_source_sha256": "04cf833659e82c3e1743db4042cacf839a6d784a99c32d076e36fd4776e70c1b",
+  "review_status": "user-approved",
+  "runtime": {
+    "encoders": [
+      "gif"
+    ],
+    "ffmpeg": "/tmp/codex-ffmpeg/node_modules/ffmpeg-static/ffmpeg",
+    "ffprobe": "/tmp/codex-ffmpeg/node_modules/@ffprobe-installer/darwin-arm64/ffprobe",
+    "format": {
+      "gif": true
+    },
+    "node": "node-runtime",
+    "ok": true,
+    "renderer": {
+      "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "deterministic_timeline": true,
+      "input": "semantic-svg",
+      "module": "puppeteer-core",
+      "module_version": "25.3.0",
+      "motion_model": "connector-draw-on-with-persistent-data-flow",
+      "ok": true,
+      "presets": [
+        "memory-weave",
+        "tool-grounding",
+        "service-blueprint",
+        "memory-lifecycle",
+        "agent-orchestration",
+        "governed-runtime",
+        "token-stream",
+        "golden-circuit",
+        "review-trace",
+        "cloud-flow",
+        "event-transit",
+        "ops-pulse"
+      ],
+      "resolved_module": "fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+      "sandbox_default": "enabled"
+    },
+    "worker": "fireworks-tech-graph/scripts/svg2gif.js"
+  },
+  "scene_signature": {
+    "distinctive_primitives": [
+      "semantic-route-build",
+      "settled-marker-arrival",
+      "six-route-notion-memory-rail",
+      "notion-memory-card"
+    ],
+    "name": "memory-lifecycle-notion-card-handoff"
+  },
+  "seamless_loop_contract": "75 frames or fewer: every raster is unique; more than 75 frames: non-adjacent repeats are allowed within the full-opacity interval, plus the sole intentional reset-boundary exception at reset_start with opacity 1.00, with at least 75 unique rasters; seam MAD must not exceed p95 adjacent-frame MAD",
+  "semantic_profile": "generic",
+  "semantics": {
+    "edges": 6,
+    "edges_without_flow": 0,
+    "motion_metadata": "explicit",
+    "nodes": 6,
+    "resolved_schedule": [
+      {
+        "edge_id": "append",
+        "order": 0,
+        "role": "sample",
+        "semantic_color": "#3b82f6",
+        "source_stroke": "#3b82f6",
+        "stage": 1
+      },
+      {
+        "edge_id": "collect",
+        "order": 0,
+        "role": "attend",
+        "semantic_color": "#3b82f6",
+        "source_stroke": "#3b82f6",
+        "stage": 2
+      },
+      {
+        "edge_id": "compose",
+        "order": 0,
+        "role": "invoke",
+        "semantic_color": "#7c3aed",
+        "source_stroke": "#3b82f6",
+        "stage": 3
+      },
+      {
+        "edge_id": "detect",
+        "order": 0,
+        "role": "remember",
+        "semantic_color": "#059669",
+        "source_stroke": "#3b82f6",
+        "stage": 4
+      },
+      {
+        "edge_id": "learn",
+        "order": 0,
+        "role": "consolidate",
+        "semantic_color": "#ea580c",
+        "source_stroke": "#3b82f6",
+        "stage": 5
+      },
+      {
+        "edge_id": "recall",
+        "order": 0,
+        "role": "recall",
+        "semantic_color": "#ea580c",
+        "source_stroke": "#3b82f6",
+        "stage": 6
+      }
+    ],
+    "schedule_key": "(data-motion-role, data-motion-order)",
+    "staged_edges": 6
+  },
+  "size_guidance": {
+    "artifact_target_bytes": 500000,
+    "artifact_within_target": true,
+    "warnings": []
+  },
+  "source": "docs/projects/ai-ssh-agent/assets/chat-context-memory/chat-context-memory.svg",
+  "source_checks": {
+    "composition": {
+      "details": [],
+      "ok": true
+    },
+    "geometry": {
+      "details": [],
+      "ok": true
+    },
+    "markers": {
+      "details": [],
+      "ok": true
+    },
+    "xml": {
+      "details": [],
+      "ok": true
+    }
+  },
+  "source_integrity": {
+    "sha256": "1750e83aedcc66e94c2310bf71686c42144dc17580ee6553f710e9ebb8bf729f",
+    "sha256_after": "1750e83aedcc66e94c2310bf71686c42144dc17580ee6553f710e9ebb8bf729f",
+    "sha256_before": "1750e83aedcc66e94c2310bf71686c42144dc17580ee6553f710e9ebb8bf729f",
+    "unchanged": true
+  },
+  "source_sha256": "1750e83aedcc66e94c2310bf71686c42144dc17580ee6553f710e9ebb8bf729f",
+  "style_contract": {
+    "scope": "signature-speed-path-geometry-and-construction-schedule",
+    "source_policy": "semantic-schedule-and-geometry-not-exact-byte-hash",
+    "status": "user-approved"
+  },
+  "style_contract_status": "user-approved",
+  "style_id": 4,
+  "timing_revision": {
+    "approved_at": "2026-07-17",
+    "baseline": {
+      "duration_seconds": 3.75,
+      "frame_count": 75
+    },
+    "candidate": {
+      "added_full_opacity_frames": [
+        70,
+        109
+      ],
+      "duration_seconds": 5.75,
+      "frame_count": 115
+    },
+    "id": "+2s-settled-flow",
+    "only_pending_item": false,
+    "status": "user-approved"
+  },
+  "visual_theme": "Notion Clean",
+  "width": 960
+}

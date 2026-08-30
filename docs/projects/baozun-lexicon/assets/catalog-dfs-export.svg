@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="4" data-visual-theme="Notion Clean" data-diagram-type="architecture" data-motion-scene="memory-lifecycle" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowC" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowE" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowF" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrowH" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#d1d5db"/>
+    </marker>
+    <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 13px; font-weight: 500; fill: #9ca3af; }
+    .section { font-size: 13px; font-weight: 700; fill: #9ca3af; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #d1d5db; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #374151; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #9ca3af; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #9ca3af; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #9ca3af; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="600.0" fill="#ffffff"/>
+  <text x="48.0" y="48" text-anchor="start" class="title">导出子字段的 DFS 流式发现</text>
+  <text x="48.0" y="72" text-anchor="start" class="subtitle">递归 CTE 产生 DFS 前序，Deque 维护当前祖先路径；仅结构叶节点即时生成字典行。</text>
+  <line x1="48" y1="100" x2="912.0" y2="100" stroke="#e5e7eb" stroke-width="1"/>
+  <g id="source" data-graph-role="container" data-container-id="source" data-semantic-role="boundary" data-graph-bounds="40,105,940,215">
+  <rect data-graph-role="container" x="40.0" y="105.0" width="900.0" height="110.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+  <text x="58.0" y="129.0" class="section">01 // SNAPSHOT / ORDERED STREAM</text>
+    <rect id="source-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="111" width="252.56" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="traversal" data-graph-role="container" data-container-id="traversal" data-semantic-role="boundary" data-graph-bounds="40,270,940,420">
+  <rect data-graph-role="container" x="40.0" y="270.0" width="900.0" height="150.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+  <text x="58.0" y="294.0" class="section">02 // DFS DECISION / ROW OUTPUT</text>
+    <rect id="traversal-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="276" width="242.94" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="snapshot-cte" data-graph-role="edge" data-edge-id="snapshot-cte" data-source="snapshot" data-target="cte" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="sample" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 180,163 L 280,163" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="cte-cursor" data-graph-role="edge" data-edge-id="cte-cursor" data-source="cte" data-target="child-cursor" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="attend" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 400,163 L 480,163" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="cursor-stack" data-graph-role="edge" data-edge-id="cursor-stack" data-source="child-cursor" data-target="dfs-stack" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="invoke" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 600,163 L 660,163" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="stack-leaf" data-graph-role="edge" data-edge-id="stack-leaf" data-source="dfs-stack" data-target="leaf-test" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="remember" data-motion-stage="4" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 720,190 L 720,320" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="leaf-rows" data-graph-role="edge" data-edge-id="leaf-rows" data-source="leaf-test" data-target="rows" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="consolidate" data-motion-stage="5" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 780,347 L 820,347" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="rows-continue" data-graph-role="edge" data-edge-id="rows-continue" data-source="rows" data-target="continue" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="recall" data-motion-stage="6" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 870,320 L 870,190" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <g id="node-snapshot" data-graph-role="node" data-node-id="snapshot" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,136,180,190">
+  <ellipse cx="120.0" cy="142.75" rx="30.0" ry="6.75" fill="#f8fafc" stroke="#3b82f6" stroke-width="2.2"/>
+  <rect x="60.0" y="142.75" width="120.0" height="40.5" fill="#f8fafc" stroke="#3b82f6" stroke-width="2.2"/>
+  <ellipse cx="120.0" cy="183.25" rx="30.0" ry="6.75" fill="#f8fafc" stroke="#3b82f6" stroke-width="2.2"/>
+  <ellipse cx="120.0" cy="156.52" rx="30.0" ry="6.75" fill="none" stroke="#3b82f6" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="120.0" cy="168.4" rx="30.0" ry="6.75" fill="none" stroke="#3b82f6" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="120.0" y="157.0" text-anchor="middle" class="node-title" font-size="14.52">snapshot.db</text>
+  <text x="120.0" y="181.0" text-anchor="middle" class="node-sub">RR source copy</text>
+  </g>
+  <g id="node-cte" data-graph-role="node" data-node-id="cte" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="280,136,400,190">
+  <rect x="280.0" y="136.0" width="120.0" height="54.0" rx="4.0" fill="#f8fafc" stroke="#3b82f6" stroke-width="2.0"/>
+  <rect x="286.0" y="142.0" width="108.0" height="42.0" rx="4" fill="none" stroke="#3b82f6" stroke-width="1.2" opacity="0.65"/>
+  <text x="340.0" y="163.0" text-anchor="middle" class="node-title" font-size="12.0">valid_tree CTE</text>
+  <text x="340.0" y="185.0" text-anchor="middle" class="node-sub">recursive + path</text>
+  </g>
+  <g id="node-child-cursor" data-graph-role="node" data-node-id="child-cursor" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="480,136,600,190">
+  <rect x="480.0" y="136.0" width="120.0" height="54.0" rx="4.0" fill="#f8fafc" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="540.0" y="163.0" text-anchor="middle" class="node-title" font-size="17.77">子节点游标</text>
+  <text x="540.0" y="185.0" text-anchor="middle" class="node-sub">parent + level</text>
+  </g>
+  <g id="node-dfs-stack" data-graph-role="node" data-node-id="dfs-stack" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="660,136,780,190">
+  <rect x="660.0" y="136.0" width="120.0" height="54.0" rx="4.0" fill="#f8fafc" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="720.0" y="163.0" text-anchor="middle" class="node-title" font-size="18.0">DFS 栈</text>
+  <text x="720.0" y="185.0" text-anchor="middle" class="node-sub">Deque push / pop</text>
+  </g>
+  <g id="node-leaf-test" data-graph-role="node" data-node-id="leaf-test" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="660,320,780,374">
+  <rect x="660.0" y="320.0" width="120.0" height="54.0" rx="4.0" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8"/>
+  <text x="720.0" y="347.0" text-anchor="middle" class="node-title" font-size="17.77">叶节点判断</text>
+  <text x="720.0" y="369.0" text-anchor="middle" class="node-sub">structural_leaf</text>
+  </g>
+  <g id="node-rows" data-graph-role="node" data-node-id="rows" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="820,320,920,374">
+  <ellipse cx="870.0" cy="326.75" rx="25.0" ry="6.75" fill="#f8fafc" stroke="#059669" stroke-width="2.2"/>
+  <rect x="820.0" y="326.75" width="100.0" height="40.5" fill="#f8fafc" stroke="#059669" stroke-width="2.2"/>
+  <ellipse cx="870.0" cy="367.25" rx="25.0" ry="6.75" fill="#f8fafc" stroke="#059669" stroke-width="2.2"/>
+  <ellipse cx="870.0" cy="340.52" rx="25.0" ry="6.75" fill="none" stroke="#059669" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="870.0" cy="352.4" rx="25.0" ry="6.75" fill="none" stroke="#059669" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="870.0" y="341.0" text-anchor="middle" class="node-title" font-size="17.08">rows.bin</text>
+  <text x="870.0" y="365.0" text-anchor="middle" class="node-sub">one leaf row</text>
+  </g>
+  <g id="node-continue" data-graph-role="node" data-node-id="continue" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="820,136,920,190">
+  <path d="M 842.0 136.0 L 898.0 136.0 L 920.0 163.0 L 898.0 190.0 L 842.0 190.0 L 820.0 163.0 Z" fill="#f8fafc" stroke="#ea580c" stroke-width="2.0"/>
+  <text x="870.0" y="163.0" text-anchor="middle" class="node-title" font-size="17.59">继续遍历</text>
+  <text x="870.0" y="185.0" text-anchor="middle" class="node-sub">next preorder item</text>
+  </g>
+  <g id="stack-leaf-label" data-graph-role="label" data-owner="stack-leaf" data-graph-bounds="638.68,241,717,261">
+  <rect x="638.68" y="241.0" width="78.32" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="677.84" y="255.0" text-anchor="middle" class="arrow-label">push / pop</text>
+  </g>
+  <g id="leaf-rows-label" data-graph-role="label" data-owner="leaf-rows" data-graph-bounds="764.2,293,835.8,313">
+  <rect x="764.2" y="293.0" width="71.6" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="800.0" y="307.0" text-anchor="middle" class="arrow-label">yield leaf</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="38" y="496" width="182.8" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="48.0" y1="510.0" x2="78.0" y2="510.0" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="88.0" y="514.0" class="legend">DFS 读取 / 路径传播</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,558,419,574">
+  <text x="48.0" y="570.0" class="footnote">Fireworks Tech Graph · Style 4 · DFS export traversal</text>
+  </g>
+</svg>

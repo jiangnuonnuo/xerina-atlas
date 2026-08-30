@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 4,
+  "motion_scene": "memory-lifecycle",
+  "quality_profile": "standard",
+  "width": 960,
+  "height": 600,
+  "title": "导出子字段的 DFS 流式发现",
+  "subtitle": "递归 CTE 产生 DFS 前序，Deque 维护当前祖先路径；仅结构叶节点即时生成字典行。",
+  "containers": [
+    { "id": "source", "x": 40, "y": 105, "width": 900, "height": 110, "label": "SNAPSHOT / ORDERED STREAM", "header_prefix": "01" },
+    { "id": "traversal", "x": 40, "y": 270, "width": 900, "height": 150, "label": "DFS DECISION / ROW OUTPUT", "header_prefix": "02" }
+  ],
+  "nodes": [
+    { "id": "snapshot", "kind": "cylinder", "x": 60, "y": 136, "width": 120, "height": 54, "label": "snapshot.db", "sublabel": "RR source copy", "fill": "#f8fafc", "stroke": "#3b82f6" },
+    { "id": "cte", "kind": "double_rect", "x": 280, "y": 136, "width": 120, "height": 54, "label": "valid_tree CTE", "sublabel": "recursive + path", "fill": "#f8fafc", "stroke": "#3b82f6", "flat": true },
+    { "id": "child-cursor", "kind": "rect", "x": 480, "y": 136, "width": 120, "height": 54, "label": "子节点游标", "sublabel": "parent + level", "fill": "#f8fafc", "stroke": "#3b82f6", "flat": true },
+    { "id": "dfs-stack", "kind": "rect", "x": 660, "y": 136, "width": 120, "height": 54, "label": "DFS 栈", "sublabel": "Deque push / pop", "fill": "#f8fafc", "stroke": "#3b82f6", "flat": true },
+    { "id": "leaf-test", "kind": "rect", "x": 660, "y": 320, "width": 120, "height": 54, "label": "叶节点判断", "sublabel": "structural_leaf", "fill": "#fff7ed", "stroke": "#ea580c", "flat": true },
+    { "id": "rows", "kind": "cylinder", "x": 820, "y": 320, "width": 100, "height": 54, "label": "rows.bin", "sublabel": "one leaf row", "fill": "#f8fafc", "stroke": "#059669" },
+    { "id": "continue", "kind": "hexagon", "x": 820, "y": 136, "width": 100, "height": 54, "label": "继续遍历", "sublabel": "next preorder item", "fill": "#f8fafc", "stroke": "#ea580c", "flat": true }
+  ],
+  "arrows": [
+    { "id": "snapshot-cte", "source": "snapshot", "target": "cte", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "sample", "motion_stage": 1, "motion_order": 0 },
+    { "id": "cte-cursor", "source": "cte", "target": "child-cursor", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "attend", "motion_stage": 2, "motion_order": 0 },
+    { "id": "cursor-stack", "source": "child-cursor", "target": "dfs-stack", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "invoke", "motion_stage": 3, "motion_order": 0 },
+    { "id": "stack-leaf", "source": "dfs-stack", "target": "leaf-test", "source_port": "bottom", "target_port": "top", "flow": "read", "motion_role": "remember", "motion_stage": 4, "motion_order": 0, "label": "push / pop" },
+    { "id": "leaf-rows", "source": "leaf-test", "target": "rows", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "consolidate", "motion_stage": 5, "motion_order": 0, "label": "yield leaf" },
+    { "id": "rows-continue", "source": "rows", "target": "continue", "source_port": "top", "target_port": "bottom", "flow": "read", "motion_role": "recall", "motion_stage": 6, "motion_order": 0 }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 510,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "read", "label": "DFS 读取 / 路径传播" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 4 · DFS export traversal",
+  "footer_x": 48,
+  "footer_y": 570
+}

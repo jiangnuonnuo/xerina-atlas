@@ -9,14 +9,14 @@ sidebar: true
 layout: project-doc
 ---
 
-[返回总览](/projects/V-Team-Skills/) · [交付工作流](/projects/V-Team-Skills/20-delivery-workflow)
+[返回总览](./) · [交付工作流](./20-delivery-workflow)
 
 V-Team 把需求分析放在代码实现之前，因为错误目标不会被高质量代码自动修正。一个功能可以编译通过、测试全绿、命名优雅，最后仍然没有解决真实问题。那种感觉像精心造了一把钥匙，做工无可挑剔，只是附近没有对应的门。
 
 <InteractiveDiagram
   title="需求审判：从想法到明确结论"
-  src="/media/projects/v-team-skills/diagrams/requirement-judgement/index.html?embed=1"
-  poster="/media/projects/v-team-skills/diagrams/requirement-judgement/preview.png"
+  src="../../media/projects/v-team-skills/diagrams/requirement-judgement/index.html?embed=1"
+  poster="../../media/projects/v-team-skills/diagrams/requirement-judgement/preview.png"
   description="项目事实优先，Skills 与官方资料按需补充，最后形成可执行判断。"
 />
 

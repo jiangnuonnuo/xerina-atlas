@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { withBase } from 'vitepress'
+import { useRoute } from 'vitepress'
+import { isLocalUrl, relativeUrl } from '../utils/relative-url'
 
 const props = defineProps<{
   src: string
@@ -8,25 +9,29 @@ const props = defineProps<{
   poster: string
   description?: string
 }>()
+const route = useRoute()
 
 // Diagrams are interactive by default — no click / poster gate.
 const loaded = ref(true)
 const expanded = ref(false)
+const preview = ref<HTMLElement | null>(null)
 const frame = ref<HTMLIFrameElement | null>(null)
 const modalFrame = ref<HTMLIFrameElement | null>(null)
+const frameHeight = ref('520px')
+let previewObserver: ResizeObserver | null = null
 
-const safeSource = computed(() => (props.src.startsWith('/media/') ? withBase(props.src) : ''))
-const safePoster = computed(() => withBase(props.poster))
+const safeSource = computed(() => (isLocalUrl(props.src) ? relativeUrl(props.src, route.path) : ''))
+const safePoster = computed(() => (isLocalUrl(props.poster) ? relativeUrl(props.poster, route.path) : ''))
 
 // Present mode expands the diagram to fill the viewport (hides cards/footer).
 const presentSource = computed(() => {
   if (!safeSource.value) return ''
   if (typeof window === 'undefined') return safeSource.value
   try {
-    const u = new URL(safeSource.value, window.location.origin)
+    const u = new URL(safeSource.value, window.location.href)
     u.searchParams.delete('embed')
     u.searchParams.set('present', '1')
-    return u.pathname + u.search
+    return relativeUrl(u.pathname + u.search, route.path)
   } catch {
     return safeSource.value.replace('embed=1', 'present=1')
   }
@@ -43,6 +48,28 @@ function bindInside(elm: HTMLIFrameElement | null, handler: () => void) {
   }
 }
 
+function fitEmbeddedDiagram(elm: HTMLIFrameElement | null) {
+  if (!elm) return
+  try {
+    const doc = elm.contentDocument
+    const container = doc?.querySelector('.diagram-container') as HTMLElement | null
+    if (!container) return
+
+    // The diagram is an SVG with a responsive viewBox. Measure its intrinsic
+    // container instead of guessing a fixed iframe height, so no lower nodes
+    // are hidden when the article column becomes wider or narrower.
+    const height = Math.ceil(container.getBoundingClientRect().height)
+    if (height > 0) frameHeight.value = `${Math.max(480, height)}px`
+  } catch {
+    /* cross-origin fallback keeps the safe default height */
+  }
+}
+
+function onFrameLoad(elm: HTMLIFrameElement | null, handler: () => void) {
+  bindInside(elm, handler)
+  fitEmbeddedDiagram(elm)
+}
+
 function openFullscreen() {
   expanded.value = true
 }
@@ -54,22 +81,33 @@ function onKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape') expanded.value = false
 }
 
-onMounted(() => window.addEventListener('keydown', onKeydown))
-onUnmounted(() => window.removeEventListener('keydown', onKeydown))
+onMounted(() => {
+  window.addEventListener('keydown', onKeydown)
+  if (typeof ResizeObserver !== 'undefined' && preview.value) {
+    previewObserver = new ResizeObserver(() => fitEmbeddedDiagram(frame.value))
+    previewObserver.observe(preview.value)
+  }
+  fitEmbeddedDiagram(frame.value)
+})
+onUnmounted(() => {
+  window.removeEventListener('keydown', onKeydown)
+  previewObserver?.disconnect()
+})
 </script>
 
 <template>
   <figure class="interactive-diagram">
-    <div class="interactive-diagram-preview">
+    <div ref="preview" class="interactive-diagram-preview">
       <img v-if="!loaded && safePoster" :src="safePoster" :alt="description || title" loading="lazy" decoding="async" />
       <iframe
         v-if="loaded && safeSource"
         ref="frame"
         :src="safeSource"
+        :style="{ height: frameHeight }"
         :title="title"
         loading="lazy"
         sandbox="allow-scripts allow-same-origin"
-        @load="bindInside(frame, openFullscreen)"
+        @load="onFrameLoad(frame, openFullscreen)"
       />
     </div>
     <figcaption>

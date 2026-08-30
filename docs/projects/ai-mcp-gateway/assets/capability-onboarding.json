@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 960,
+  "height": 620,
+  "title": "Capability Onboarding · 接入到 AI 调用",
+  "subtitle": "不同能力来源经过同一套契约、发布和运行时边界",
+  "containers": [
+    {"id":"onboarding","x":40,"y":120,"width":880,"height":130,"label":"能力接入与发布"},
+    {"id":"runtime","x":40,"y":330,"width":880,"height":130,"label":"MCP 运行与 AI 使用"}
+  ],
+  "nodes": [
+    {"id":"sources","kind":"rect","x":40,"y":165,"width":145,"height":54,"label":"能力来源","sublabel":"HTTP · SQL · Redis · MCP"},
+    {"id":"contract","kind":"rect","x":230,"y":165,"width":145,"height":54,"label":"形成契约","sublabel":"解析、预览、映射"},
+    {"id":"tool","kind":"double_rect","x":420,"y":165,"width":145,"height":54,"label":"工具配置","sublabel":"名称、schema、协议"},
+    {"id":"package","kind":"double_rect","x":600,"y":165,"width":145,"height":54,"label":"能力包发布","sublabel":"语义、测试、token"},
+    {"id":"session","kind":"double_rect","x":785,"y":165,"width":135,"height":54,"label":"建立会话","sublabel":"gateway + package"},
+    {"id":"list","kind":"rect","x":230,"y":375,"width":145,"height":54,"label":"tools/list","sublabel":"发布投影"},
+    {"id":"call","kind":"rect","x":420,"y":375,"width":145,"height":54,"label":"tools/call","sublabel":"权限与安全"},
+    {"id":"downstream","kind":"rect","x":610,"y":375,"width":145,"height":54,"label":"下游执行","sublabel":"HTTP · SQL · Redis · MCP"},
+    {"id":"answer","kind":"rect","x":800,"y":375,"width":120,"height":54,"label":"AI 结果","sublabel":"LLM 继续编排"}
+  ],
+  "arrows": [
+    {"id":"o1","source":"sources","target":"contract","source_port":"right","target_port":"left","flow":"control","label":"解析","label_style":"offset"},
+    {"id":"o2","source":"contract","target":"tool","source_port":"right","target_port":"left","flow":"data","label":"映射","label_style":"offset"},
+    {"id":"o3","source":"tool","target":"package","source_port":"right","target_port":"left","flow":"control","label":"纳入","label_style":"offset"},
+    {"id":"o4","source":"package","target":"session","source_port":"right","target_port":"left","flow":"write","label":"发布","label_style":"offset"},
+    {"id":"o5","source":"session","target":"list","source_port":"bottom","target_port":"top","flow":"read","label":"发现"},
+    {"id":"o6","source":"list","target":"call","source_port":"right","target_port":"left","flow":"control","label":"选择","label_style":"offset"},
+    {"id":"o7","source":"call","target":"downstream","source_port":"right","target_port":"left","flow":"data","label":"执行","label_style":"offset"},
+    {"id":"o8","source":"downstream","target":"answer","source_port":"right","target_port":"left","flow":"feedback","label":"结果","label_style":"offset"}
+  ],
+  "legend_orientation":"horizontal",
+  "legend_x":48,
+  "legend_y":530,
+  "legend":[
+    {"flow":"control","label":"配置与治理"},
+    {"flow":"data","label":"契约与执行数据"},
+    {"flow":"write","label":"发布授权"},
+    {"flow":"read","label":"客户端发现"},
+    {"flow":"feedback","label":"结果回传"}
+  ],
+  "footer":"公开文档版 · 接入来源不同，发布与执行边界统一"
+}

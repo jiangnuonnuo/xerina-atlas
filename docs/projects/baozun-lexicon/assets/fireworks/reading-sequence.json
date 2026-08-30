@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 430,
+  "title": "技术文章阅读顺序",
+  "subtitle": "从边界和证据开始，逐步进入解析、工作台、治理和交付。",
+  "nodes": [
+    { "id": "c01", "kind": "rect", "x": 35, "y": 170, "width": 150, "height": 82, "label": "01 需求与架构", "sublabel": "边界 · 责任 · 取舍", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "c10", "kind": "rect", "x": 205, "y": 170, "width": 150, "height": 82, "label": "10 DOM 采集", "sublabel": "证据 · 清洗 · 状态", "fill": "#f0fdfa", "stroke": "#2dd4bf", "flat": true },
+    { "id": "c20", "kind": "rect", "x": 375, "y": 170, "width": 150, "height": 82, "label": "20 Agent 解析", "sublabel": "提案 · 校验 · 修复", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "c25", "kind": "double_rect", "x": 545, "y": 170, "width": 150, "height": 82, "label": "25 交互工作台", "sublabel": "懒加载 · 草稿 · 确认", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "c30", "kind": "cylinder", "x": 715, "y": 170, "width": 150, "height": 82, "label": "30 目录治理", "sublabel": "MySQL · 闭包 · CAS", "fill": "#eff6ff", "stroke": "#3b82f6" },
+    { "id": "c40", "kind": "document", "x": 885, "y": 170, "width": 150, "height": 82, "label": "40 并发与交付", "sublabel": "快照 · XLSX · 原子提交", "fill": "#f0fdf4", "stroke": "#4ade80" }
+  ],
+  "arrows": [
+    { "id": "c01-c10", "source": "c01", "target": "c10", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "c10-c20", "source": "c10", "target": "c20", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "c20-c25", "source": "c20", "target": "c25", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "c25-c30", "source": "c25", "target": "c30", "source_port": "right", "target_port": "left", "flow": "write" },
+    { "id": "c30-c40", "source": "c30", "target": "c40", "source_port": "right", "target_port": "left", "flow": "write" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 60,
+  "legend_y": 355,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "证据与候选" },
+    { "flow": "write", "label": "确认后的正式写入" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · six-chapter reading order",
+  "footer_x": 760,
+  "footer_y": 355
+}

@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { data as profile } from '../../data/profile.data'
 import { data as projects } from '../../data/projects.data'
-import { withBase } from 'vitepress'
+import { useRoute } from 'vitepress'
 import ProjectVisual from './ProjectVisual.vue'
+import { relativeUrl } from '../utils/relative-url'
+
+const route = useRoute()
 
 function url(path: string) {
-  return withBase(path)
+  return relativeUrl(path, route.path)
 }
 
 function honorText(honor: unknown) {
@@ -35,7 +38,7 @@ function honorYear(honor: unknown) {
         <div class="section-heading"><div><span class="section-index">01 / PROJECT WORK</span><h2>项目作品</h2></div><a class="section-link" :href="url('/projects/')">项目快速了解 <span aria-hidden="true">↗</span></a></div>
         <div class="portfolio-project-grid">
           <article v-for="(project, index) in projects" :key="project.slug" class="portfolio-project-card">
-            <div class="portfolio-project-media"><ProjectVisual :kind="project.frontmatter.visual" /><span class="portfolio-project-number">{{ String(index + 1).padStart(2, '0') }}</span></div>
+            <div class="portfolio-project-media"><ProjectVisual :kind="project.frontmatter.visual" :icon="project.frontmatter.icon" /><span class="portfolio-project-number">{{ String(index + 1).padStart(2, '0') }}</span></div>
             <div class="portfolio-project-copy"><div class="tag-row"><span v-for="tag in (project.frontmatter.stack || []).slice(0, 4)" :key="tag">{{ tag }}</span></div><h3>{{ project.frontmatter.title }}</h3><p>{{ project.frontmatter.summary }}</p><a class="card-arrow" :href="url(project.url)">进入项目文档 <span aria-hidden="true">↗</span></a></div>
           </article>
         </div>

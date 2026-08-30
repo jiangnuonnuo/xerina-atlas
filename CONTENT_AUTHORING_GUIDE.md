@@ -287,19 +287,30 @@ relatedProjects:
 
 ## 8. 图片怎么放
 
-文章或项目独占图片放在 Markdown 同目录的 assets/images：
+项目独占图片放在 Markdown 同目录的 assets/images；当前采用文件式布局的技术文章，则放在与文章同名的 assets/images 目录：
 
 ~~~text
 docs/projects/order-fulfillment/
 ├── 30-system-design.md
 └── assets/images/
     └── order-context.webp
+
+docs/notes/engineering/
+├── wiki-and-rag.md
+└── wiki-and-rag/assets/images/
+    └── rag-pipeline.png
 ~~~
 
 Markdown 使用相对路径：
 
 ~~~md
 ![订单履约领域上下文图](./assets/images/order-context.webp)
+~~~
+
+技术文章使用以文章文件名命名的资源目录：
+
+~~~md
+![RAG 全流程](./wiki-and-rag/assets/images/rag-pipeline.png)
 ~~~
 
 要求：

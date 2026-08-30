@@ -3,20 +3,25 @@ import { data as profile } from '../../data/profile.data'
 import { data as projects } from '../../data/projects.data'
 import { data as experiences } from '../../data/experiences.data'
 import { data as notes } from '../../data/notes.data'
-import { withBase } from 'vitepress'
+import { useRoute } from 'vitepress'
+import ItemIcon from './ItemIcon.vue'
 import ProjectVisual from './ProjectVisual.vue'
+import { relativeUrl } from '../utils/relative-url'
 
 const featuredExperience = experiences.slice(0, 3)
 const featuredProjects = projects.slice(0, 3)
-const featuredNotes = notes.slice(0, 3)
+const featuredNotes = [...notes]
+  .sort((a, b) => String(b.frontmatter.date ?? '').localeCompare(String(a.frontmatter.date ?? '')))
+  .slice(0, 3)
 const honors = profile.honors || []
+const route = useRoute()
 
 function value(key: string, fallback = '') {
   return profile[key] || fallback
 }
 
 function url(path: string) {
-  return withBase(path)
+  return relativeUrl(path, route.path)
 }
 
 function formatDate(date: unknown) {
@@ -72,7 +77,7 @@ function honorYear(honor: unknown) {
         <div class="section-heading compact-heading"><div><span class="section-index">01 / INTERNSHIP &amp; PRACTICE EXPERIENCE</span><h2>实习与实践经历</h2></div><a class="section-link" :href="url('/experience/')">查看完整经历 <span aria-hidden="true">↗</span></a></div>
         <div class="experience-list">
           <a v-for="(item, index) in featuredExperience" :key="item.slug" class="experience-row" :class="{ 'experience-row-featured': index === 0 }" :href="url(item.url)">
-            <span class="experience-year">{{ item.frontmatter.period }}</span><span class="experience-role"><strong>{{ item.frontmatter.title }}</strong><small>{{ item.frontmatter.organization }}</small></span><span class="experience-summary">{{ item.frontmatter.summary }}</span><span class="row-arrow" aria-hidden="true">↗</span>
+            <span class="experience-item-icon"><ItemIcon :name="item.frontmatter.icon" :size="21" /></span><span class="experience-year">{{ item.frontmatter.period }}</span><span class="experience-role"><strong>{{ item.frontmatter.title }}</strong><small>{{ item.frontmatter.organization }}</small></span><span class="experience-summary">{{ item.frontmatter.summary }}</span><span class="row-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
       </section>
@@ -82,7 +87,7 @@ function honorYear(honor: unknown) {
         <div class="project-grid">
           <article v-for="(project, index) in featuredProjects" :key="project.slug" class="project-card" :class="{ 'project-card-featured': index === 0 }">
             <div class="project-card-top"><span class="project-number">{{ String(index + 1).padStart(2, '0') }}</span><span class="project-type">{{ project.frontmatter.categoryLabel }} / {{ project.frontmatter.year }}</span></div>
-            <ProjectVisual :kind="project.frontmatter.visual" />
+            <ProjectVisual :kind="project.frontmatter.visual" :icon="project.frontmatter.icon" />
             <div class="project-card-body"><div class="tag-row"><span v-for="tag in (project.frontmatter.stack || []).slice(0, 3)" :key="tag">{{ tag }}</span></div><h3>{{ project.frontmatter.title }}</h3><p>{{ project.frontmatter.summary }}</p><a :href="url(project.url)" class="card-arrow">查看项目详情 <span aria-hidden="true">↗</span></a></div>
           </article>
         </div>

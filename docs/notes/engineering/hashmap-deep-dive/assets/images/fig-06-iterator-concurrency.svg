@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<style>text{font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Microsoft YaHei","Microsoft JhengHei","SimHei",sans-serif}</style>
+<defs>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/></marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c"/></marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9333ea"/></marker>
+</defs>
+<rect width="1200" height="900" fill="#ffffff"/>
+<text x="600.0" y="48" font-size="27px" fill="#111827" font-weight="700" text-anchor="middle">迭代器、fail-fast 与线程安全：三个容易混为一谈的概念</text>
+<text x="600.0" y="80" font-size="14px" fill="#6b7280" font-weight="400" text-anchor="middle">HashMap 迭代器会扫描数组和桶链；结构性修改改变 modCount，但 fail-fast 只是尽力而为</text>
+<line x1="56" y1="104" x2="1144" y2="104" stroke="#d1d5db" stroke-width="2"/>
+<rect x="64" y="140" width="500" height="620" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" data-graph-role="container"/>
+<rect x="636" y="140" width="500" height="620" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8" data-graph-role="container"/>
+<text x="88" y="178" font-size="17px" fill="#2563eb" font-weight="700" text-anchor="start">左：迭代器如何走</text>
+<text x="660" y="178" font-size="17px" fill="#ea580c" font-weight="700" text-anchor="start">右：结构性修改如何被感知</text>
+<rect x="88" y="220" width="452" height="62" rx="9" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<text x="108" y="246" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="start">创建迭代器</text>
+<text x="108" y="268" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">expectedModCount = modCount</text>
+<line x1="314" y1="282" x2="314" y2="316" stroke="#2563eb" stroke-width="1.6" marker-end="url(#arrow-blue)"/>
+<rect x="88" y="316" width="452" height="62" rx="9" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<text x="108" y="342" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="start">扫描 table[0..n-1]</text>
+<text x="108" y="364" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">空桶也会被扫描</text>
+<line x1="314" y1="378" x2="314" y2="412" stroke="#2563eb" stroke-width="1.6" marker-end="url(#arrow-blue)"/>
+<rect x="88" y="412" width="452" height="62" rx="9" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<text x="108" y="438" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="start">进入桶内</text>
+<text x="108" y="460" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">next → next → next</text>
+<line x1="314" y1="474" x2="314" y2="508" stroke="#2563eb" stroke-width="1.6" marker-end="url(#arrow-blue)"/>
+<rect x="88" y="508" width="452" height="62" rx="9" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<text x="108" y="534" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="start">hasNext / next</text>
+<text x="108" y="556" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">返回 Entry，不保证顺序</text>
+<line x1="314" y1="570" x2="314" y2="604" stroke="#2563eb" stroke-width="1.6" marker-end="url(#arrow-blue)"/>
+<rect x="88" y="604" width="452" height="62" rx="9" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<text x="108" y="630" font-size="13px" fill="#2563eb" font-weight="700" text-anchor="start">Iterator.remove</text>
+<text x="108" y="652" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">同步 expectedModCount</text>
+<rect x="660" y="220" width="452" height="88" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
+<text x="682" y="250" font-size="13px" fill="#111827" font-weight="600" text-anchor="start">线程 A：迭代器准备 next()</text>
+<text x="682" y="278" font-size="12px" fill="#6b7280" font-weight="600" text-anchor="start" font-family="monospace">expectedModCount = 3</text>
+<rect x="660" y="354" width="452" height="88" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="1.2"/>
+<text x="682" y="384" font-size="13px" fill="#111827" font-weight="600" text-anchor="start">线程 B：put 新 key / remove</text>
+<text x="682" y="412" font-size="12px" fill="#dc2626" font-weight="700" text-anchor="start" font-family="monospace">结构性修改 → modCount = 4</text>
+<rect x="660" y="488" width="452" height="88" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
+<text x="682" y="518" font-size="13px" fill="#111827" font-weight="600" text-anchor="start">线程 A：再次 next()</text>
+<text x="682" y="546" font-size="12px" fill="#ea580c" font-weight="700" text-anchor="start" font-family="monospace">不一致 → ConcurrentModificationException</text>
+<line x1="886" y1="308" x2="886" y2="354" stroke="#dc2626" stroke-width="1.7" marker-end="url(#arrow-orange)"/>
+<line x1="886" y1="442" x2="886" y2="488" stroke="#dc2626" stroke-width="1.7" marker-end="url(#arrow-orange)"/>
+<rect x="660" y="626" width="452" height="92" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2"/>
+<text x="682" y="658" font-size="13px" fill="#16a34a" font-weight="700" text-anchor="start">但 fail-fast 不是并发安全</text>
+<text x="682" y="686" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">检测到就抛异常，不保证每次都检测到；并发读写仍是未定义的竞态。</text>
+<rect x="64" y="794" width="1072" height="62" rx="12" fill="#f8fafc" stroke="#d1d5db" stroke-width="1.2"/>
+<text x="88" y="830" font-size="13px" fill="#6b7280" font-weight="400" text-anchor="start">结构性修改：新增/删除键、resize 会改变结构；仅替换已有 key 的 value 通常不改变 modCount。并发场景请使用 ConcurrentHashMap。</text>
+<text x="64" y="870" font-size="12px" fill="#6b7280" font-weight="700" text-anchor="start">图例</text>
+<line x1="72" y1="890" x2="110" y2="890" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/><text x="120" y="895" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">迭代顺序</text>
+<line x1="72" y1="890" x2="110" y2="890" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)"/><text x="120" y="895" font-size="12px" fill="#6b7280" font-weight="400" text-anchor="start">修改被感知</text>
+</svg>

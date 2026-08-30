@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "mode": "memory",
+  "template_type": "memory",
+  "style": 4,
+  "motion_scene": "memory-lifecycle",
+  "quality_profile": "showcase",
+  "width": 960,
+  "height": 620,
+  "title": "Conversation Context and Memory",
+  "subtitle": "history, providers, milestones, core memory, and dynamic prompt construction",
+  "containers": [
+    { "id": "working", "x": 40, "y": 120, "width": 880, "height": 165, "label": "Working Conversation Context" },
+    { "id": "durable", "x": 40, "y": 335, "width": 880, "height": 185, "label": "Durable Memory and Prompt" }
+  ],
+  "nodes": [
+    { "id": "input", "kind": "rect", "x": 60, "y": 165, "width": 160, "height": 90, "type_label": "INPUT", "label": "User Message", "sublabel": "latest intent", "fill": "#ffffff", "stroke": "#e5e7eb", "flat": true, "tags": [{ "label": "text + media", "fill": "#eff6ff", "stroke": "#bfdbfe", "text_fill": "#3b82f6" }] },
+    { "id": "history", "kind": "rect", "x": 270, "y": 165, "width": 160, "height": 90, "type_label": "HISTORY", "label": "Chat History", "sublabel": "recent messages", "fill": "#ffffff", "stroke": "#e5e7eb", "flat": true, "tags": [{ "label": "MySQL", "fill": "#eff6ff", "stroke": "#bfdbfe", "text_fill": "#3b82f6" }] },
+    { "id": "context", "kind": "hexagon", "x": 490, "y": 165, "width": 160, "height": 90, "type_label": "CONTEXT", "label": "Context Service", "sublabel": "providers + reducer", "fill": "#ffffff", "stroke": "#3b82f6", "stroke_width": 1.6, "flat": true },
+    { "id": "prompt", "kind": "rect", "x": 700, "y": 165, "width": 180, "height": 90, "type_label": "PROMPT", "label": "Dynamic Prompt", "sublabel": "runtime prefix", "fill": "#ffffff", "stroke": "#e5e7eb", "flat": true, "tags": [{ "label": "current + history", "fill": "#f5f3ff", "stroke": "#ddd6fe", "text_fill": "#7c3aed" }] },
+    { "id": "milestone", "kind": "rect", "x": 270, "y": 400, "width": 160, "height": 90, "type_label": "EVENT", "label": "Milestones", "sublabel": "change / error / done", "fill": "#ffffff", "stroke": "#e5e7eb", "flat": true, "tags": [{ "label": "recent 10", "fill": "#ecfdf5", "stroke": "#a7f3d0", "text_fill": "#059669" }] },
+    { "id": "memory", "kind": "rect", "x": 490, "y": 400, "width": 160, "height": 90, "type_label": "LONG TERM", "label": "Core Memory", "sublabel": "relevant user facts", "fill": "#ffffff", "stroke": "#e5e7eb", "flat": true, "tags": [{ "label": "keyword match", "fill": "#fff7ed", "stroke": "#fed7aa", "text_fill": "#ea580c" }] }
+  ],
+  "arrows": [
+    { "id": "append", "source": "input", "target": "history", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "sample", "motion_stage": 1, "motion_order": 0 },
+    { "id": "collect", "source": "history", "target": "context", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "attend", "motion_stage": 2, "motion_order": 0 },
+    { "id": "compose", "source": "context", "target": "prompt", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "invoke", "motion_stage": 3, "motion_order": 0 },
+    { "id": "detect", "source": "history", "target": "milestone", "source_port": "bottom", "target_port": "top", "flow": "write", "motion_role": "remember", "motion_stage": 4, "motion_order": 0, "label": "event" },
+    { "id": "learn", "source": "milestone", "target": "memory", "source_port": "right", "target_port": "left", "flow": "write", "motion_role": "consolidate", "motion_stage": 5, "motion_order": 0 },
+    { "id": "recall", "source": "memory", "target": "context", "source_port": "top", "target_port": "bottom", "flow": "read", "motion_role": "recall", "motion_stage": 6, "motion_order": 0, "label": "read" }
+  ],
+  "footer": "History and milestones are persisted; provider caches and terminal facts remain process-local",
+  "footer_x": 48,
+  "footer_y": 590
+}

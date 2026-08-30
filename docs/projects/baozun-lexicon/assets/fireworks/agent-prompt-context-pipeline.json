@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "mode": "agent",
+  "template_type": "agent",
+  "style": 5,
+  "quality_profile": "showcase",
+  "width": 960,
+  "height": 700,
+  "title": "Prompt Context Pipeline",
+  "subtitle": "untrusted DOM evidence is separated from role-specific prompts before the multi-agent chain runs",
+  "containers": [
+    { "id": "input", "x": 40, "y": 110, "width": 880, "height": 140, "label": "Input Boundary", "subtitle": "evidence and target context" },
+    { "id": "prompt", "x": 40, "y": 270, "width": 880, "height": 150, "label": "Prompt Construction", "subtitle": "developer-owned context assembly" },
+    { "id": "execute", "x": 40, "y": 450, "width": 880, "height": 145, "label": "Execution and Review", "subtitle": "enterprise runtime with domain quality gates" }
+  ],
+  "nodes": [
+    { "id": "snapshot", "kind": "document", "x": 60, "y": 155, "width": 190, "height": 72, "type_label": "DATA", "label": "DomSnapshot", "sublabel": "simplified HTML + facts", "fill": "rgba(255,255,255,0.12)", "stroke": "#60a5fa", "flat": true },
+    { "id": "boundary", "kind": "hexagon", "x": 370, "y": 155, "width": 220, "height": 72, "type_label": "SECURITY", "label": "Trust Boundary", "sublabel": "data is not instructions", "fill": "rgba(255,255,255,0.12)", "stroke": "#f59e0b", "flat": true },
+    { "id": "target", "kind": "rect", "x": 700, "y": 155, "width": 180, "height": 72, "type_label": "CONTEXT", "label": "Catalog Context", "sublabel": "parent + terms + version", "fill": "rgba(255,255,255,0.12)", "stroke": "#34d399", "flat": true },
+    { "id": "contract", "kind": "rect", "x": 60, "y": 315, "width": 190, "height": 62, "type_label": "SCHEMA", "label": "Stage Contracts", "sublabel": "evidence + tree + semantics", "fill": "rgba(255,255,255,0.12)", "stroke": "#f59e0b" },
+    { "id": "policy", "kind": "double_rect", "x": 370, "y": 315, "width": 220, "height": 62, "type_label": "POLICY", "label": "Role Prompt Pack", "sublabel": "agent boundaries + examples", "fill": "rgba(255,255,255,0.12)", "stroke": "#c084fc" },
+    { "id": "assembler", "kind": "rect", "x": 700, "y": 315, "width": 180, "height": 62, "type_label": "ASSEMBLY", "label": "Context Assembler", "sublabel": "six context layers", "fill": "rgba(255,255,255,0.12)", "stroke": "#60a5fa" },
+    { "id": "tools", "kind": "terminal", "x": 60, "y": 495, "width": 190, "height": 70, "type_label": "TOOLS", "label": "Allow-listed Calls", "sublabel": "catalog · terms · evidence", "fill": "#0f172a", "stroke": "rgba(255,255,255,0.24)", "header_fill": "rgba(255,255,255,0.12)" },
+    { "id": "agent", "kind": "double_rect", "x": 370, "y": 495, "width": 220, "height": 70, "type_label": "AGENT CHAIN", "label": "Multi-Agent Chain", "sublabel": "evidence + tree + semantics", "fill": "rgba(255,255,255,0.12)", "stroke": "#c084fc" },
+    { "id": "validator", "kind": "speech", "x": 700, "y": 495, "width": 180, "height": 70, "type_label": "REFLECTION", "label": "Critic + Validator", "sublabel": "pass / ReAct recovery", "fill": "rgba(255,255,255,0.12)", "stroke": "#34d399", "flat": true }
+  ],
+  "arrows": [
+    { "id": "snapshot-boundary", "source": "snapshot", "target": "boundary", "source_port": "right", "target_port": "left", "flow": "read", "label": "evidence" },
+    { "id": "boundary-policy", "source": "boundary", "target": "policy", "source_port": "bottom", "target_port": "top", "flow": "control", "label": "normalize" },
+    { "id": "target-assembler", "source": "target", "target": "assembler", "source_port": "bottom", "target_port": "top", "flow": "read", "label": "context" },
+    { "id": "assembler-policy", "source": "assembler", "target": "policy", "source_port": "left", "target_port": "right", "flow": "write", "label": "compose" },
+    { "id": "policy-contract", "source": "policy", "target": "contract", "source_port": "left", "target_port": "right", "flow": "write", "label": "schema" },
+    { "id": "policy-agent", "source": "policy", "target": "agent", "source_port": "bottom", "target_port": "top", "flow": "control", "label": "run" },
+    { "id": "assembler-validator", "source": "assembler", "target": "validator", "source_port": "bottom", "target_port": "top", "flow": "read", "label": "facts" },
+    { "id": "tools-agent", "source": "tools", "target": "agent", "source_port": "right", "target_port": "left", "flow": "read", "label": "result" },
+    { "id": "agent-validator", "source": "agent", "target": "validator", "source_port": "right", "target_port": "left", "flow": "feedback", "label": "candidate" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 625,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "control", "label": "execution" },
+    { "flow": "read", "label": "evidence / tool result" },
+    { "flow": "write", "label": "compiled artifact" },
+    { "flow": "feedback", "label": "quality boundary" }
+  ],
+  "footer": "Project-owned prompt design · enterprise runtime execution",
+  "footer_x": 48,
+  "footer_y": 680
+}

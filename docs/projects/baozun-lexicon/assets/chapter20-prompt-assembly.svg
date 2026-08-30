@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 610" width="1200" height="610" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="data-flow" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="610" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">Prompt 六层上下文的版本化拼装</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">页面内容作为不可信数据输入，系统规则、工具权限和输出契约保持独立</text>
+<g data-graph-role="node" data-graph-bounds="54,98,644,140">
+<rect x="54" y="98" width="590" height="42" rx="12" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.4"/>
+<circle cx="78" cy="119.0" r="12" fill="#6b9fd6" opacity="0.18"/>
+<text x="78" y="123.0" font-size="10" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="102" y="124" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">系统角色与禁止事项</text>
+<text x="314" y="124" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">节点类型 · 字段边界 · 安全规则</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="54,150,644,192">
+<rect x="54" y="150" width="590" height="42" rx="12" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.4"/>
+<circle cx="78" cy="171.0" r="12" fill="#7eb8ac" opacity="0.18"/>
+<text x="78" y="175.0" font-size="10" fill="#7eb8ac" font-weight="700" text-anchor="middle">2</text>
+<text x="102" y="176" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">字段节点类型和父级规则</text>
+<text x="314" y="176" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">SECTION · COMPONENT · FIELD · METRIC</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="54,202,644,244">
+<rect x="54" y="202" width="590" height="42" rx="12" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.4"/>
+<circle cx="78" cy="223.0" r="12" fill="#6b9fd6" opacity="0.18"/>
+<text x="78" y="227.0" font-size="10" fill="#6b9fd6" font-weight="700" text-anchor="middle">3</text>
+<text x="102" y="228" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">页面上下文与选区说明</text>
+<text x="314" y="228" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">标题 · 路由 · 页签 · 状态指纹</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="54,254,644,296">
+<rect x="54" y="254" width="590" height="42" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.4"/>
+<circle cx="78" cy="275.0" r="12" fill="#b7c9dc" opacity="0.18"/>
+<text x="78" y="279.0" font-size="10" fill="#b7c9dc" font-weight="700" text-anchor="middle">4</text>
+<text x="102" y="280" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">结构事实和简化 HTML</text>
+<text x="314" y="280" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">节点顺序 · 关系 · sourceRefs</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="54,306,644,348">
+<rect x="54" y="306" width="590" height="42" rx="12" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.4"/>
+<circle cx="78" cy="327.0" r="12" fill="#a78bca" opacity="0.18"/>
+<text x="78" y="331.0" font-size="10" fill="#a78bca" font-weight="700" text-anchor="middle">5</text>
+<text x="102" y="332" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">目标目录祖先路径与子节点摘要</text>
+<text x="314" y="332" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">目标父级是硬锚点</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="54,358,644,400">
+<rect x="54" y="358" width="590" height="42" rx="12" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.4"/>
+<circle cx="78" cy="379.0" r="12" fill="#d8ad75" opacity="0.18"/>
+<text x="78" y="383.0" font-size="10" fill="#d8ad75" font-weight="700" text-anchor="middle">6</text>
+<text x="102" y="384" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">业务术语、同义词和编码映射</text>
+<text x="314" y="384" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">标准名 · 类型 · 编码</text>
+</g>
+<g data-graph-role="node" data-graph-bounds="54,410,644,452">
+<rect x="54" y="410" width="590" height="42" rx="12" fill="#fff4f4" stroke="#d99191" stroke-width="1.4"/>
+<circle cx="78" cy="431.0" r="12" fill="#d99191" opacity="0.18"/>
+<text x="78" y="435.0" font-size="10" fill="#d99191" font-weight="700" text-anchor="middle">7</text>
+<text x="102" y="436" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">输出 Schema、原因码和审核要求</text>
+<text x="314" y="436" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">FieldDraft · reviewRequired</text>
+</g>
+<path id="prompt-stack-0" d="M349,140 V150" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="prompt-stack-1" d="M349,192 V202" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="prompt-stack-2" d="M349,244 V254" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="prompt-stack-3" d="M349,296 V306" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="prompt-stack-4" d="M349,348 V358" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="prompt-stack-5" d="M349,400 V410" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<path id="prompt-to-compiled" d="M644,431 H730 V270" fill="none" stroke="#a78bca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-purple)" data-graph-role="edge"/>
+<g data-graph-role="label"><text x="680" y="418" font-size="12" fill="#6b7f95" font-weight="500" text-anchor="middle" class="edge-label">compile</text></g>
+<g data-graph-role="node" data-graph-bounds="730,192,1120,348">
+<rect x="730" y="192" width="390" height="156" rx="14" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.5"/>
+<circle cx="754" cy="217" r="13" fill="#a78bca" opacity="0.18"/>
+<text x="754" y="221" font-size="11" fill="#a78bca" font-weight="700" text-anchor="middle">Σ</text>
+<text x="778" y="222" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">Prompt Context</text>
+<text x="750" y="298" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">六层上下文编译结果</text>
+<text x="750" y="314" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">系统规则与页面数据边界清晰</text>
+<text x="750" y="330" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">版本化，可回滚，可评估</text>
+</g>
+<g data-graph-role="reserved" data-graph-bounds="54,500,1120,556"><rect x="54" y="500" width="1066" height="56" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="72" y="523" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">安全约束</text>
+<text x="72" y="544" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">页面 HTML、标题、用户说明和历史对话属于不可信数据；不能覆盖 Agent 角色、工具权限或保存边界。</text>
+</g>
+</svg>

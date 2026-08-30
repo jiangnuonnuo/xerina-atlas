@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 4,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 760,
+  "title": "本地 DFS 清洗判断链路",
+  "subtitle": "SQLite 产生有序前序流，Deque 只维护当前祖先路径；异常分支跳过，结构叶节点写入行文件。",
+  "containers": [
+    {
+      "id": "snapshot-order",
+      "x": 40,
+      "y": 104,
+      "width": 1120,
+      "height": 132,
+      "label": "SNAPSHOT / DFS ORDER",
+      "header_prefix": "01"
+    },
+    {
+      "id": "cleaning-flow",
+      "x": 40,
+      "y": 276,
+      "width": 1120,
+      "height": 354,
+      "label": "DECISION / PATH STACK / ROW OUTPUT",
+      "header_prefix": "02"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "snapshot",
+      "kind": "cylinder",
+      "x": 64,
+      "y": 150,
+      "width": 150,
+      "height": 64,
+      "label": "snapshot.db",
+      "sublabel": "RR source copy",
+      "fill": "#eff6ff",
+      "stroke": "#2563eb"
+    },
+    {
+      "id": "valid-root",
+      "kind": "rect",
+      "x": 272,
+      "y": 150,
+      "width": 170,
+      "height": 64,
+      "label": "选择有效根",
+      "sublabel": "level=1 · name≠blank",
+      "fill": "#f9fafb",
+      "stroke": "#3b82f6",
+      "flat": true
+    },
+    {
+      "id": "valid-tree",
+      "kind": "double_rect",
+      "x": 488,
+      "y": 150,
+      "width": 180,
+      "height": 64,
+      "label": "递归 valid_tree",
+      "sublabel": "parent + level + platform",
+      "fill": "#f9fafb",
+      "stroke": "#7c3aed",
+      "flat": true
+    },
+    {
+      "id": "tree-path",
+      "kind": "rect",
+      "x": 714,
+      "y": 150,
+      "width": 180,
+      "height": 64,
+      "label": "生成 tree_path",
+      "sublabel": "sort_order + id",
+      "fill": "#faf5ff",
+      "stroke": "#7c3aed",
+      "flat": true
+    },
+    {
+      "id": "node-cursor",
+      "kind": "rect",
+      "x": 944,
+      "y": 150,
+      "width": 190,
+      "height": 64,
+      "label": "取下一个节点",
+      "sublabel": "ordered preorder stream",
+      "fill": "#f9fafb",
+      "stroke": "#2563eb",
+      "flat": true
+    },
+    {
+      "id": "valid-path",
+      "kind": "hexagon",
+      "x": 80,
+      "y": 372,
+      "width": 190,
+      "height": 72,
+      "label": "有效路径？",
+      "sublabel": "root / parent / level",
+      "fill": "#fff7ed",
+      "stroke": "#ea580c",
+      "flat": true,
+      "title_size": 13
+    },
+    {
+      "id": "skip-branch",
+      "kind": "rect",
+      "x": 80,
+      "y": 500,
+      "width": 190,
+      "height": 64,
+      "label": "跳过分支",
+      "sublabel": "记录异常计数",
+      "fill": "#fef2f2",
+      "stroke": "#dc2626",
+      "flat": true
+    },
+    {
+      "id": "has-child",
+      "kind": "hexagon",
+      "x": 350,
+      "y": 372,
+      "width": 190,
+      "height": 72,
+      "label": "有直接子节点？",
+      "sublabel": "child exists · leaf=false",
+      "fill": "#fff7ed",
+      "stroke": "#ea580c",
+      "flat": true,
+      "title_size": 12.5
+    },
+    {
+      "id": "deque-push",
+      "kind": "rect",
+      "x": 635,
+      "y": 310,
+      "width": 190,
+      "height": 64,
+      "label": "Deque 压栈",
+      "sublabel": "保存祖先层级",
+      "fill": "#eff6ff",
+      "stroke": "#2563eb",
+      "flat": true
+    },
+    {
+      "id": "leaf-row",
+      "kind": "rect",
+      "x": 635,
+      "y": 488,
+      "width": 190,
+      "height": 64,
+      "label": "构造叶子行",
+      "sublabel": "祖先路径 + 字段",
+      "fill": "#f0fdf4",
+      "stroke": "#16a34a",
+      "flat": true
+    },
+    {
+      "id": "row-file",
+      "kind": "cylinder",
+      "x": 930,
+      "y": 488,
+      "width": 190,
+      "height": 64,
+      "label": "写入 rows.bin",
+      "sublabel": "一叶一行",
+      "fill": "#f0fdf4",
+      "stroke": "#16a34a"
+    },
+    {
+      "id": "next-node",
+      "kind": "rect",
+      "x": 930,
+      "y": 310,
+      "width": 190,
+      "height": 64,
+      "label": "继续前序流",
+      "sublabel": "Deque 回退后再取",
+      "fill": "#f9fafb",
+      "stroke": "#6b7280",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "snapshot-root",
+      "source": "snapshot",
+      "target": "valid-root",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "read"
+    },
+    {
+      "id": "root-tree",
+      "source": "valid-root",
+      "target": "valid-tree",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "transform"
+    },
+    {
+      "id": "tree-path-order",
+      "source": "valid-tree",
+      "target": "tree-path",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "transform"
+    },
+    {
+      "id": "order-cursor",
+      "source": "tree-path",
+      "target": "node-cursor",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "read"
+    },
+    {
+      "id": "cursor-valid",
+      "source": "node-cursor",
+      "target": "valid-path",
+      "source_port": "bottom",
+      "target_port": "top",
+      "route_points": [[1039, 262], [175, 262]],
+      "flow": "read",
+      "label": "当前节点",
+      "label_style": "offset"
+    },
+    {
+      "id": "valid-skip",
+      "source": "valid-path",
+      "target": "skip-branch",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "error",
+      "label": "否 / 异常",
+      "label_style": "offset"
+    },
+    {
+      "id": "valid-child",
+      "source": "valid-path",
+      "target": "has-child",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "label": "是",
+      "label_style": "offset"
+    },
+    {
+      "id": "child-push",
+      "source": "has-child",
+      "target": "deque-push",
+      "source_port": "right",
+      "target_port": "left",
+      "route_points": [[580, 408], [580, 342]],
+      "flow": "control",
+      "label": "是 / 入栈",
+      "label_style": "offset"
+    },
+    {
+      "id": "child-leaf",
+      "source": "has-child",
+      "target": "leaf-row",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "control",
+      "label": "否 / 叶节点",
+      "label_style": "offset"
+    },
+    {
+      "id": "push-next",
+      "source": "deque-push",
+      "target": "next-node",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "label": "继续子树",
+      "label_style": "offset"
+    },
+    {
+      "id": "leaf-row-file",
+      "source": "leaf-row",
+      "target": "row-file",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "label": "emit row",
+      "label_style": "offset"
+    },
+    {
+      "id": "rows-next",
+      "source": "row-file",
+      "target": "next-node",
+      "source_port": "top",
+      "target_port": "bottom",
+      "flow": "control",
+      "label": "回到游标",
+      "label_style": "offset"
+    },
+    {
+      "id": "skip-next",
+      "source": "skip-branch",
+      "target": "next-node",
+      "source_port": "bottom",
+      "target_port": "right",
+      "route_points": [[175, 594], [1160, 594], [1160, 342]],
+      "flow": "error",
+      "label": "不输出 / 继续",
+      "label_style": "offset"
+    },
+    {
+      "id": "next-cursor",
+      "source": "next-node",
+      "target": "node-cursor",
+      "source_port": "top",
+      "target_port": "bottom",
+      "flow": "read",
+      "label": "next preorder",
+      "label_style": "offset"
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 680,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "read", "label": "读取 / 前序流" },
+    { "flow": "transform", "label": "递归展开 / 排序" },
+    { "flow": "control", "label": "判断 / 栈操作" },
+    { "flow": "write", "label": "输出行文件" },
+    { "flow": "error", "label": "异常跳过" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 4 · local DFS cleaning flow",
+  "footer_x": 48,
+  "footer_y": 736
+}

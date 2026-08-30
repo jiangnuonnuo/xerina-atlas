@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 470,
+  "title": "Agent 校验失败后的有限修复闭环",
+  "subtitle": "修复只接受确定性错误反馈，并重新经过提案、编译和校验。",
+  "nodes": [
+    { "id": "validate", "kind": "hexagon", "x": 55, "y": 130, "width": 175, "height": 82, "label": "Candidate Validator", "sublabel": "无环 · 父级 · 类型", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "feedback", "kind": "document", "x": 275, "y": 130, "width": 175, "height": 82, "label": "RepairFeedback", "sublabel": "错误码 + 节点定位", "fill": "#fef2f2", "stroke": "#f87171" },
+    { "id": "repair", "kind": "rect", "x": 495, "y": 130, "width": 175, "height": 82, "label": "局部修复", "sublabel": "受限动作 + 次数预算", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "proposal", "kind": "document", "x": 715, "y": 130, "width": 175, "height": 82, "label": "HierarchyProposal", "sublabel": "重新固化候选", "fill": "#faf5ff", "stroke": "#8b5cf6" },
+    { "id": "compile", "kind": "rect", "x": 935, "y": 130, "width": 175, "height": 82, "label": "Compiler", "sublabel": "生成 FieldTreeDraft", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "ready", "kind": "double_rect", "x": 935, "y": 305, "width": 175, "height": 82, "label": "可确认草稿", "sublabel": "READY 或 PARTIAL", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true }
+  ],
+  "arrows": [
+    { "id": "validate-feedback", "source": "validate", "target": "feedback", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "feedback-repair", "source": "feedback", "target": "repair", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "repair-proposal", "source": "repair", "target": "proposal", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "proposal-compile", "source": "proposal", "target": "compile", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "compile-validate", "source": "compile", "target": "validate", "source_port": "bottom", "target_port": "bottom", "flow": "control", "corridor_y": [400] },
+    { "id": "compile-ready", "source": "compile", "target": "ready", "source_port": "bottom", "target_port": "top", "flow": "write" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 60,
+  "legend_y": 425,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "control", "label": "确定性校验/回环" },
+    { "flow": "data", "label": "修复候选" },
+    { "flow": "write", "label": "草稿发布" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · bounded repair loop",
+  "footer_x": 790,
+  "footer_y": 425
+}

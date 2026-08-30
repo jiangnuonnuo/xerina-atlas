@@ -9,14 +9,14 @@ sidebar: true
 layout: project-doc
 ---
 
-[返回总览](/projects/V-Team-Skills/) · [系统设计](/projects/V-Team-Skills/30-system-design) · [验证与接入](/projects/V-Team-Skills/50-testing-and-deployment)
+[返回总览](./) · [系统设计](./30-system-design) · [验证与接入](./50-testing-and-deployment)
 
 V-Team 的核心实现由一套 Python 标准库 CLI 提供。它不负责“自动思考”，而是把跨角色协作中容易说不清、记不准、接不上三类问题变成稳定结构：契约索引、恢复状态和完成事实。
 
 <InteractiveDiagram
   title="跨角色契约协作链路"
-  src="/media/projects/v-team-skills/diagrams/contract-collaboration/index.html?embed=1"
-  poster="/media/projects/v-team-skills/diagrams/contract-collaboration/preview.png"
+  src="../../media/projects/v-team-skills/diagrams/contract-collaboration/index.html?embed=1"
+  poster="../../media/projects/v-team-skills/diagrams/contract-collaboration/preview.png"
   description="提供者发布并验证，消费者按唯一契约发现、联调和记录证据。"
 />
 

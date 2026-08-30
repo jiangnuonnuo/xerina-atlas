@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 3,
+  "motion_scene": "service-blueprint",
+  "quality_profile": "standard",
+  "width": 960,
+  "height": 720,
+  "title": "AI Task Async Processing",
+  "subtitle": "producer persists first, RabbitMQ confirms delivery, consumers converge results idempotently",
+  "containers": [
+    { "id": "ingress", "x": 40, "y": 110, "width": 880, "height": 110, "label": "Ingress & Producer Persistence", "header_prefix": "01" },
+    { "id": "execution", "x": 40, "y": 270, "width": 880, "height": 130, "label": "Delivery & Upstream Execution", "header_prefix": "02" },
+    { "id": "result", "x": 40, "y": 420, "width": 880, "height": 130, "label": "State, Result & Observability", "header_prefix": "03" }
+  ],
+  "nodes": [
+    { "id": "client", "kind": "rect", "x": 60, "y": 146, "width": 160, "height": 54, "label": "运营端", "sublabel": "batch submit", "fill": "#0b3b5e", "stroke": "#38bdf8", "flat": true },
+    { "id": "gateway", "kind": "double_rect", "x": 300, "y": 146, "width": 160, "height": 54, "label": "任务接口", "sublabel": "validate + identity", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "admission", "kind": "hexagon", "x": 570, "y": 146, "width": 160, "height": 54, "label": "准入控制", "sublabel": "quota + throttle", "fill": "#0b3b5e", "stroke": "#f59e0b", "flat": true },
+    { "id": "task", "kind": "rect", "x": 80, "y": 330, "width": 140, "height": 50, "label": "生产者任务库", "sublabel": "PENDING + unique", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "queue", "kind": "rect", "x": 310, "y": 330, "width": 140, "height": 50, "label": "RabbitMQ", "sublabel": "publish + confirm", "fill": "#123c5a", "stroke": "#a855f7", "flat": true },
+    { "id": "consumer", "kind": "rect", "x": 540, "y": 330, "width": 140, "height": 50, "label": "消费者池", "sublabel": "claim + execute", "fill": "#123c5a", "stroke": "#a855f7", "flat": true },
+    { "id": "upstream", "kind": "hexagon", "x": 760, "y": 330, "width": 140, "height": 50, "label": "AIGC 上游", "sublabel": "same taskId", "fill": "#123c5a", "stroke": "#f97316", "flat": true },
+    { "id": "database", "kind": "cylinder", "x": 80, "y": 480, "width": 140, "height": 50, "label": "任务结果库", "sublabel": "external id + state", "fill": "#082f49", "stroke": "#38bdf8" },
+    { "id": "oss", "kind": "cylinder", "x": 310, "y": 480, "width": 140, "height": 50, "label": "结果存储", "sublabel": "OSS / object", "fill": "#082f49", "stroke": "#38bdf8" },
+    { "id": "status", "kind": "rect", "x": 540, "y": 480, "width": 140, "height": 50, "label": "回调状态", "sublabel": "callback / query", "fill": "#123c5a", "stroke": "#f97316", "flat": true },
+    { "id": "metrics", "kind": "rect", "x": 760, "y": 480, "width": 140, "height": 50, "label": "指标与告警", "sublabel": "lag + latency", "fill": "#123c5a", "stroke": "#10b981", "flat": true }
+  ],
+  "arrows": [
+    { "id": "client-request", "source": "client", "target": "gateway", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "ingress", "motion_stage": 1, "motion_order": 0, "label": "submit" },
+    { "id": "admission-check", "source": "gateway", "target": "admission", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "policy", "motion_stage": 2, "motion_order": 0, "label": "admit" },
+    { "id": "admission-task", "source": "admission", "target": "task", "source_port": "bottom", "target_port": "top", "flow": "read", "motion_role": "fanout", "motion_stage": 3, "motion_order": 0, "label": "insert once", "route_points": [[650, 200], [150, 200], [150, 330]] },
+    { "id": "task-queue", "source": "task", "target": "queue", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "fanout", "motion_stage": 3, "motion_order": 1, "label": "publish" },
+    { "id": "queue-consumer", "source": "queue", "target": "consumer", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "fanout", "motion_stage": 3, "motion_order": 2, "label": "deliver" },
+    { "id": "consumer-upstream", "source": "consumer", "target": "upstream", "source_port": "right", "target_port": "left", "flow": "feedback", "motion_role": "event", "motion_stage": 5, "motion_order": 0, "label": "same taskId" },
+    { "id": "consumer-result", "source": "consumer", "target": "database", "source_port": "bottom", "target_port": "top", "flow": "data", "motion_role": "data-write", "motion_stage": 4, "motion_order": 0, "label": "save state", "route_points": [[610, 395], [150, 395], [150, 480]] },
+    { "id": "database-oss", "source": "database", "target": "oss", "source_port": "right", "target_port": "left", "flow": "data", "motion_role": "data-write", "motion_stage": 4, "motion_order": 1, "label": "archive" },
+    { "id": "upstream-status", "source": "upstream", "target": "status", "source_port": "bottom", "target_port": "top", "flow": "data", "motion_role": "data-write", "motion_stage": 4, "motion_order": 2, "label": "callback", "route_points": [[830, 395], [610, 395], [610, 480]] },
+    { "id": "status-metrics", "source": "status", "target": "metrics", "source_port": "right", "target_port": "left", "flow": "feedback", "motion_role": "telemetry", "motion_stage": 6, "motion_order": 0, "label": "observe" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 600,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "read", "label": "request / dispatch" },
+    { "flow": "control", "label": "admission" },
+    { "flow": "data", "label": "state / result" },
+    { "flow": "feedback", "label": "upstream / telemetry" }
+  ],
+  "footer": "Style 3 · Blueprint · submit fast, consume under control",
+  "footer_x": 48,
+  "footer_y": 700
+}

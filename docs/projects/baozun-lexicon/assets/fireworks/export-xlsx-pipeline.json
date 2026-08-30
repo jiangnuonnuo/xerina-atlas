@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "mode": "data-flow",
+  "template_type": "data-flow",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 820,
+  "title": "一致性快照到 XLSX 原子交付",
+  "subtitle": "导出先领取任务，再释放 MySQL 长事务；本地快照、行文件和工作簿检查点让重试不重复扫描业务库。",
+  "containers": [
+    { "id": "control", "x": 40, "y": 100, "width": 1120, "height": 120, "label": "01 · Task Control", "header_prefix": "01" },
+    { "id": "snapshot", "x": 40, "y": 260, "width": 1120, "height": 140, "label": "02 · Consistent Snapshot", "header_prefix": "02" },
+    { "id": "local", "x": 40, "y": 440, "width": 1120, "height": 140, "label": "03 · Local Streaming Workspace", "header_prefix": "03" },
+    { "id": "delivery", "x": 40, "y": 620, "width": 1120, "height": 120, "label": "04 · Atomic Delivery", "header_prefix": "04" }
+  ],
+  "nodes": [
+    { "id": "create", "kind": "rect", "x": 70, "y": 145, "width": 200, "height": 68, "label": "POST /export-tasks", "sublabel": "202 + Idempotency-Key", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "task-row", "kind": "cylinder", "x": 360, "y": 145, "width": 200, "height": 68, "label": "export_tasks", "sublabel": "PENDING / RETRYING", "fill": "#faf5ff", "stroke": "#8b5cf6" },
+    { "id": "claim", "kind": "double_rect", "x": 650, "y": 145, "width": 200, "height": 68, "label": "条件领取", "sublabel": "PENDING → RUNNING", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "write-continues", "kind": "rect", "x": 940, "y": 145, "width": 170, "height": 68, "label": "采集/目录写入", "sublabel": "继续服务", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true },
+    { "id": "mysql", "kind": "cylinder", "x": 120, "y": 305, "width": 240, "height": 70, "label": "MySQL 快照", "sublabel": "RR + forward cursor", "fill": "#eff6ff", "stroke": "#2563eb" },
+    { "id": "sqlite-part", "kind": "cylinder", "x": 480, "y": 305, "width": 240, "height": 70, "label": "snapshot.db.part", "sublabel": "SQLite · commit later", "fill": "#f0fdfa", "stroke": "#0d9488" },
+    { "id": "snapshot-ready", "kind": "document", "x": 840, "y": 305, "width": 240, "height": 70, "label": "SNAPSHOT_READY", "sublabel": "manifest 原子发布", "fill": "#fff7ed", "stroke": "#f97316" },
+    { "id": "mapper", "kind": "rect", "x": 70, "y": 485, "width": 230, "height": 70, "label": "DFS 映射器", "sublabel": "只保留当前路径", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "rows", "kind": "document", "x": 380, "y": 485, "width": 230, "height": 70, "label": "rows/*.bin", "sublabel": "DataOutputStream", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "sxssf", "kind": "rect", "x": 690, "y": 485, "width": 230, "height": 70, "label": "SXSSF 工作簿", "sublabel": "100 行窗口", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "part-xlsx", "kind": "document", "x": 1000, "y": 485, "width": 120, "height": 70, "label": "xlsx.part", "sublabel": "未发布", "fill": "#f3f4f6", "stroke": "#9ca3af" },
+    { "id": "atomic", "kind": "double_rect", "x": 250, "y": 665, "width": 260, "height": 70, "label": "原子移动 + SHA-256", "sublabel": "临时文件 → final key", "fill": "#f0fdf4", "stroke": "#22c55e", "flat": true },
+    { "id": "success", "kind": "rect", "x": 690, "y": 665, "width": 240, "height": 70, "label": "SUCCESS + 可下载", "sublabel": "元数据与文件一致", "fill": "#eff6ff", "stroke": "#3b82f6", "flat": true }
+  ],
+  "arrows": [
+    { "id": "create-task", "source": "create", "target": "task-row", "source_port": "right", "target_port": "left", "flow": "control", "label": "create", "label_style": "offset" },
+    { "id": "claim-task", "source": "task-row", "target": "claim", "source_port": "right", "target_port": "left", "flow": "control", "label": "claim", "label_style": "offset" },
+    { "id": "write-parallel", "source": "claim", "target": "write-continues", "source_port": "right", "target_port": "left", "flow": "async", "label": "parallel", "label_style": "offset" },
+    { "id": "read-mysql", "source": "claim", "target": "mysql", "source_port": "bottom", "target_port": "top", "flow": "read", "label": "read", "label_style": "offset" },
+    { "id": "stage-sqlite", "source": "mysql", "target": "sqlite-part", "source_port": "right", "target_port": "left", "flow": "data", "label": "batch", "label_style": "offset" },
+    { "id": "publish-snapshot", "source": "sqlite-part", "target": "snapshot-ready", "source_port": "right", "target_port": "left", "flow": "write", "label": "publish", "label_style": "offset" },
+    { "id": "map-rows", "source": "snapshot-ready", "target": "mapper", "source_port": "bottom", "target_port": "top", "flow": "data", "label": "valid", "label_style": "offset" },
+    { "id": "row-file", "source": "mapper", "target": "rows", "source_port": "right", "target_port": "left", "flow": "write", "label": "rows", "label_style": "offset" },
+    { "id": "write-book", "source": "rows", "target": "sxssf", "source_port": "right", "target_port": "left", "flow": "data", "label": "stream", "label_style": "offset" },
+    { "id": "stage-xlsx", "source": "sxssf", "target": "part-xlsx", "source_port": "right", "target_port": "left", "flow": "write", "label": "stage", "label_style": "offset" },
+    { "id": "commit-file", "source": "part-xlsx", "target": "atomic", "source_port": "bottom", "target_port": "top", "flow": "write", "label": "commit", "label_style": "offset" },
+    { "id": "mark-success", "source": "atomic", "target": "success", "source_port": "right", "target_port": "left", "flow": "control", "label": "success", "label_style": "offset" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 785,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "read", "label": "MySQL 只读快照" },
+    { "flow": "data", "label": "流式数据" },
+    { "flow": "write", "label": "本地阶段写入" },
+    { "flow": "control", "label": "任务状态" },
+    { "flow": "async", "label": "不阻塞采集" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · repeatable snapshot + atomic XLSX",
+  "footer_x": 700,
+  "footer_y": 785
+}

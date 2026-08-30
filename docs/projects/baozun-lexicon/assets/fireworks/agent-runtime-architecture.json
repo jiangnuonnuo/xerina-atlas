@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 6,
+  "motion_scene": "governed-runtime",
+  "quality_profile": "showcase",
+  "width": 960,
+  "height": 760,
+  "title": "Field Agent Runtime Architecture",
+  "subtitle": "project-owned orchestration on top of the enterprise Agent foundation",
+  "containers": [
+    { "id": "evidence", "x": 40, "y": 110, "width": 880, "height": 130, "label": "Evidence Boundary", "subtitle": "human-selected page evidence" },
+    { "id": "project", "x": 40, "y": 280, "width": 880, "height": 150, "label": "Project-owned Orchestration", "subtitle": "workflow nodes · prompts · field rules" },
+    { "id": "foundation", "x": 40, "y": 480, "width": 880, "height": 165, "label": "Enterprise Agent Foundation", "subtitle": "runtime capabilities consumed through stable interfaces" }
+  ],
+  "nodes": [
+    { "id": "business", "kind": "speech", "x": 60, "y": 160, "width": 180, "height": 54, "type_label": "INPUT", "label": "Business User", "sublabel": "selects page region", "fill": "#e9f1fb", "stroke": "#8c6f5a", "flat": true },
+    { "id": "scout", "kind": "double_rect", "x": 370, "y": 160, "width": 220, "height": 54, "type_label": "PLUGIN", "label": "Field DOM Scout", "sublabel": "clean + serialize", "fill": "#f7ecda", "stroke": "#d97757" },
+    { "id": "snapshot", "kind": "rect", "x": 700, "y": 160, "width": 180, "height": 54, "type_label": "EVIDENCE", "label": "DomSnapshot", "sublabel": "HTML + facts + context", "fill": "#f7ecda", "stroke": "#d0b893", "flat": true },
+    { "id": "validator", "kind": "rect", "x": 60, "y": 330, "width": 180, "height": 60, "type_label": "QUALITY GATE", "label": "FieldTreeDraft Gate", "sublabel": "tree + evidence + policy", "fill": "#efe8de", "stroke": "#d0c3b3", "flat": true },
+    { "id": "prompt", "kind": "double_rect", "x": 370, "y": 330, "width": 220, "height": 60, "type_label": "PROMPT", "label": "Prompt Compiler", "sublabel": "rules + context + schema", "fill": "#c8e4db", "stroke": "#8c6f5a" },
+    { "id": "workflow", "kind": "rect", "x": 700, "y": 330, "width": 180, "height": 60, "type_label": "FLOW", "label": "Workflow Graph", "sublabel": "route + retry + checkpoint", "fill": "#f7ecda", "stroke": "#d0b893", "flat": true },
+    { "id": "tools", "kind": "rect", "x": 60, "y": 535, "width": 180, "height": 60, "type_label": "FOUNDATION", "label": "Tool Gateway", "sublabel": "allow-listed calls", "fill": "#f7ecda", "stroke": "#d0b893", "flat": true },
+    { "id": "runtime", "kind": "double_rect", "x": 370, "y": 535, "width": 220, "height": 60, "type_label": "FOUNDATION", "label": "Agent Runtime", "sublabel": "context + execution loop", "fill": "#c8e4db", "stroke": "#8c6f5a" },
+    { "id": "state", "kind": "cylinder", "x": 700, "y": 520, "width": 180, "height": 90, "label": "Model / Trace", "sublabel": "gateway + run audit", "fill": "#e5e8df", "stroke": "#7b8b5c" }
+  ],
+  "arrows": [
+    { "id": "user-select", "source": "business", "target": "scout", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "ingress", "motion_stage": 1, "motion_order": 0, "label": "select" },
+    { "id": "clean-snapshot", "source": "scout", "target": "snapshot", "source_port": "right", "target_port": "left", "flow": "write", "motion_role": "dispatch", "motion_stage": 2, "motion_order": 0, "label": "clean" },
+    { "id": "snapshot-workflow", "source": "snapshot", "target": "workflow", "source_port": "bottom", "target_port": "top", "flow": "read", "motion_role": "runtime-branch", "motion_stage": 3, "motion_order": 0, "label": "load" },
+    { "id": "workflow-prompt", "source": "workflow", "target": "prompt", "source_port": "left", "target_port": "right", "flow": "control", "motion_role": "runtime-branch", "motion_stage": 3, "motion_order": 1, "label": "route" },
+    { "id": "prompt-validator", "source": "prompt", "target": "validator", "source_port": "left", "target_port": "right", "flow": "data", "motion_role": "runtime-branch", "motion_stage": 3, "motion_order": 2, "label": "draft" },
+    { "id": "prompt-runtime", "source": "prompt", "target": "runtime", "source_port": "bottom", "target_port": "top", "flow": "control", "motion_role": "foundation", "motion_stage": 4, "motion_order": 0, "label": "invoke" },
+    { "id": "runtime-tools", "source": "runtime", "target": "tools", "source_port": "left", "target_port": "right", "flow": "control", "motion_role": "foundation", "motion_stage": 4, "motion_order": 1, "label": "tools" },
+    { "id": "runtime-state", "source": "runtime", "target": "state", "source_port": "right", "target_port": "left", "flow": "write", "motion_role": "foundation", "motion_stage": 4, "motion_order": 2, "label": "trace" },
+    { "id": "workflow-state", "source": "workflow", "target": "state", "source_port": "bottom", "target_port": "top", "flow": "feedback", "motion_role": "promote", "motion_stage": 5, "motion_order": 0, "label": "audit" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 685,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "control", "label": "orchestration" },
+    { "flow": "read", "label": "evidence read" },
+    { "flow": "write", "label": "state / evidence" },
+    { "flow": "data", "label": "compiled rules" },
+    { "flow": "feedback", "label": "quality gate" }
+  ],
+  "footer": "Style 6 · enterprise foundation vs project-owned logic",
+  "footer_x": 48,
+  "footer_y": 735
+}

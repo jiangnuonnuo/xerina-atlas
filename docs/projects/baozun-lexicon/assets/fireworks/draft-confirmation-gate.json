@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 430,
+  "title": "草稿到正式目录的人工确认闸门",
+  "subtitle": "候选树先编译和校验；只有业务人员确认后才生成正式目录命令。",
+  "nodes": [
+    { "id": "proposal", "kind": "document", "x": 35, "y": 170, "width": 155, "height": 82, "label": "HierarchyProposal", "sublabel": "Agent 候选提案", "fill": "#faf5ff", "stroke": "#a78bfa" },
+    { "id": "compile", "kind": "rect", "x": 215, "y": 170, "width": 155, "height": 82, "label": "编译校验", "sublabel": "结构 · 类型 · 来源", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "draft", "kind": "double_rect", "x": 395, "y": 170, "width": 155, "height": 82, "label": "FieldTreeDraft", "sublabel": "可编辑候选树", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true },
+    { "id": "review", "kind": "rect", "x": 575, "y": 170, "width": 155, "height": 82, "label": "差异审核", "sublabel": "接受 · 修改 · 拒绝", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "confirm", "kind": "hexagon", "x": 755, "y": 170, "width": 155, "height": 82, "label": "人工确认", "sublabel": "高风险操作二次确认", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "command", "kind": "rect", "x": 935, "y": 170, "width": 190, "height": 82, "label": "CatalogCommand", "sublabel": "baseTreeVersion + 操作集", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true }
+  ],
+  "arrows": [
+    { "id": "proposal-compile", "source": "proposal", "target": "compile", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "compile-draft", "source": "compile", "target": "draft", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "draft-review", "source": "draft", "target": "review", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "review-confirm", "source": "review", "target": "confirm", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "confirm-command", "source": "confirm", "target": "command", "source_port": "right", "target_port": "left", "flow": "write" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 60,
+  "legend_y": 355,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "候选数据" },
+    { "flow": "control", "label": "审核控制" },
+    { "flow": "write", "label": "确认后的正式命令" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · human confirmation gate",
+  "footer_x": 760,
+  "footer_y": 355
+}

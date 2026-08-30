@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 3,
+  "motion_scene": "service-blueprint",
+  "quality_profile": "standard",
+  "width": 960,
+  "height": 720,
+  "title": "Long Execution State and Recovery",
+  "subtitle": "sync wait, durable output, cursor consumption, and restart boundary",
+  "containers": [
+    { "id": "edge", "x": 40, "y": 110, "width": 880, "height": 110, "label": "Submission", "header_prefix": "01" },
+    { "id": "services", "x": 40, "y": 270, "width": 880, "height": 130, "label": "Runtime", "header_prefix": "02" },
+    { "id": "data", "x": 40, "y": 420, "width": 680, "height": 130, "label": "Durable Record" }
+  ],
+  "nodes": [
+    { "id": "clients", "kind": "rect", "x": 60, "y": 146, "width": 160, "height": 54, "label": "Client", "sublabel": "HTTP / MCP", "fill": "#0b3b5e", "stroke": "#94a3b8", "flat": true },
+    { "id": "gateway", "kind": "double_rect", "x": 300, "y": 146, "width": 160, "height": 54, "label": "Sync Wait", "sublabel": "10 seconds", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "auth", "kind": "hexagon", "x": 570, "y": 146, "width": 160, "height": 54, "label": "Tracked Run", "sublabel": "no replay", "fill": "#0b3b5e", "stroke": "#f59e0b", "flat": true },
+    { "id": "order", "kind": "rect", "x": 80, "y": 330, "width": 140, "height": 50, "label": "Runtime", "sublabel": "memory tracker", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "catalog", "kind": "rect", "x": 310, "y": 330, "width": 140, "height": 50, "label": "Output Buffer", "sublabel": "bounded tail", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "billing", "kind": "rect", "x": 540, "y": 330, "width": 140, "height": 50, "label": "Redis Store", "sublabel": "Hash + Stream", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "events", "kind": "hexagon", "x": 760, "y": 330, "width": 140, "height": 50, "label": "Cursor Read", "sublabel": "Stream ID", "fill": "#123c5a", "stroke": "#a855f7", "flat": true },
+    { "id": "postgres", "kind": "cylinder", "x": 80, "y": 480, "width": 140, "height": 50, "label": "RUNNING", "sublabel": "1 hour TTL", "fill": "#082f49", "stroke": "#38bdf8" },
+    { "id": "redis", "kind": "cylinder", "x": 310, "y": 480, "width": 140, "height": 50, "label": "COMPLETED", "sublabel": "10 min TTL", "fill": "#082f49", "stroke": "#38bdf8" },
+    { "id": "warehouse", "kind": "cylinder", "x": 540, "y": 480, "width": 140, "height": 50, "label": "CURSOR_EXPIRED", "sublabel": "return first cursor", "fill": "#082f49", "stroke": "#38bdf8" },
+    { "id": "metrics", "kind": "rect", "x": 765, "y": 480, "width": 130, "height": 50, "label": "Restart", "sublabel": "shell not recoverable", "fill": "#123c5a", "stroke": "#10b981", "flat": true }
+  ],
+  "arrows": [
+    { "id": "client-request", "source": "clients", "target": "gateway", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "ingress", "motion_stage": 1, "motion_order": 0, "label": "submit" },
+    { "id": "policy-check", "source": "gateway", "target": "auth", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "policy", "motion_stage": 2, "motion_order": 0, "label": "track" },
+    { "id": "a-route-order", "source": "gateway", "target": "order", "source_port": "bottom", "target_port": "top", "flow": "read", "motion_role": "fanout", "motion_stage": 3, "motion_order": 0 },
+    { "id": "b-route-catalog", "source": "gateway", "target": "catalog", "source_port": "bottom", "target_port": "top", "flow": "read", "motion_role": "fanout", "motion_stage": 3, "motion_order": 1 },
+    { "id": "c-route-billing", "source": "gateway", "target": "billing", "source_port": "bottom", "target_port": "top", "flow": "read", "motion_role": "fanout", "motion_stage": 3, "motion_order": 2 },
+    { "id": "order-store", "source": "order", "target": "postgres", "source_port": "bottom", "target_port": "top", "route_points": [[150, 400.4], [180.7, 400.4], [180.7, 459.6], [150, 459.6]], "flow": "data", "motion_role": "data-write", "motion_stage": 4, "motion_order": 0, "label": "meta" },
+    { "id": "catalog-cache", "source": "catalog", "target": "redis", "source_port": "bottom", "target_port": "top", "route_points": [[380, 400.4], [410.7, 400.4], [410.7, 459.6], [380, 459.6]], "flow": "data", "motion_role": "data-write", "motion_stage": 4, "motion_order": 1, "label": "stream" },
+    { "id": "billing-store", "source": "billing", "target": "warehouse", "source_port": "bottom", "target_port": "top", "route_points": [[610, 400.4], [640.7, 400.4], [640.7, 459.6], [610, 459.6]], "flow": "data", "motion_role": "data-write", "motion_stage": 4, "motion_order": 2, "label": "cursor" },
+    { "id": "publish-event", "source": "billing", "target": "events", "source_port": "right", "target_port": "left", "flow": "feedback", "motion_role": "event", "motion_stage": 5, "motion_order": 0, "label": "ack" },
+    { "id": "observe", "source": "events", "target": "metrics", "source_port": "bottom", "target_port": "top", "flow": "feedback", "motion_role": "telemetry", "motion_stage": 6, "motion_order": 0, "label": "boundary" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 600,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "read", "label": "request" },
+    { "flow": "control", "label": "tracking" },
+    { "flow": "data", "label": "durable data" },
+    { "flow": "feedback", "label": "recovery signal" }
+  ],
+  "blueprint_title_block": { "title": "SSH EXECUTION", "subtitle": "RECOVERY BOUNDARY", "center_caption": "REDIS V4", "left_caption": "TTL: 1H", "right_caption": "CURSOR", "width": 220, "height": 76, "x": 700, "y": 620 },
+  "footer": "Redis does not recover a live remote Shell; it recovers durable metadata and output cursors",
+  "footer_x": 48,
+  "footer_y": 700
+}

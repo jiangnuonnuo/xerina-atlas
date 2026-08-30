@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;fill:#111827} .muted{fill:#6b7280} .small{font-size:12px} .title{font-size:23px;font-weight:700} .node{font-size:14px;font-weight:600}</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#ea580c"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="1200" height="620" fill="#ffffff"/>
+<text x="40" y="38" class="title">模块化单体与端口适配分层</text>
+<text x="40" y="62" class="small muted">接口层向下调用应用用例，领域层保持独立，基础设施通过端口接入外部技术。</text>
+<rect x="80" y="105" width="1040" height="90" rx="12" fill="#eff6ff" fill-opacity="0.45" stroke="#60a5fa" stroke-width="1.4" stroke-dasharray="7,5"/>
+<text x="96" y="130" font-size="13" font-weight="700" fill="#60a5fa">interfaces</text>
+<rect x="280" y="135" width="640" height="42" rx="10" fill="#ffffff" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="600.0" y="165" text-anchor="middle" class="node">REST、SSE、认证、参数校验、DTO、前端交互协议</text>
+<line x1="600" y1="195" x2="600" y2="225" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="80" y="225" width="1040" height="90" rx="12" fill="#f0fdfa" fill-opacity="0.45" stroke="#2dd4bf" stroke-width="1.4" stroke-dasharray="7,5"/>
+<text x="96" y="250" font-size="13" font-weight="700" fill="#2dd4bf">application</text>
+<rect x="280" y="255" width="640" height="42" rx="10" fill="#ffffff" stroke="#2dd4bf" stroke-width="1.5"/>
+<text x="600.0" y="285" text-anchor="middle" class="node">采集编排、解析编排、审核发布、目录命令 / 查询、导出任务</text>
+<line x1="600" y1="315" x2="600" y2="345" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="80" y="345" width="1040" height="90" rx="12" fill="#faf5ff" fill-opacity="0.45" stroke="#c084fc" stroke-width="1.4" stroke-dasharray="7,5"/>
+<text x="96" y="370" font-size="13" font-weight="700" fill="#c084fc">domain</text>
+<rect x="280" y="375" width="640" height="42" rx="10" fill="#ffffff" stroke="#c084fc" stroke-width="2.2"/>
+<rect x="284" y="379" width="632" height="34" rx="7" fill="none" stroke="#c084fc" stroke-width="0.8" opacity="0.55"/>
+<text x="600.0" y="405" text-anchor="middle" class="node">DomSnapshot、HierarchyProposal、FieldTreeDraft、CatalogCommand、Task State</text>
+<line x1="600" y1="435" x2="600" y2="465" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<rect x="80" y="465" width="1040" height="90" rx="12" fill="#fff7ed" fill-opacity="0.45" stroke="#fb923c" stroke-width="1.4" stroke-dasharray="7,5"/>
+<text x="96" y="490" font-size="13" font-weight="700" fill="#fb923c">infrastructure</text>
+<rect x="280" y="495" width="640" height="42" rx="10" fill="#ffffff" stroke="#fb923c" stroke-width="1.5"/>
+<text x="600.0" y="525" text-anchor="middle" class="node">Browser、Model、MySQL、SQLite、XLSX、Storage、Scheduler</text>
+<text x="600" y="590" text-anchor="middle" class="small muted">领域规则不依赖浏览器驱动、模型 SDK、MyBatis 或文件系统。</text>
+</svg>

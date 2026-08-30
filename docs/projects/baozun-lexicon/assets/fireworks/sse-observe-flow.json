@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 440,
+  "title": "解析任务与 SSE 观察通道",
+  "subtitle": "任务状态和观察连接分离，连接断开不影响后台解析。",
+  "nodes": [
+    { "id": "post", "kind": "rect", "x": 40, "y": 170, "width": 155, "height": 82, "label": "POST 创建任务", "sublabel": "返回 parseTaskId", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "persist", "kind": "cylinder", "x": 225, "y": 170, "width": 155, "height": 82, "label": "任务持久化", "sublabel": "后台继续执行", "fill": "#faf5ff", "stroke": "#8b5cf6" },
+    { "id": "events", "kind": "rect", "x": 410, "y": 170, "width": 155, "height": 82, "label": "GET /events", "sublabel": "建立 SSE", "fill": "#f0fdfa", "stroke": "#2dd4bf", "flat": true },
+    { "id": "stage", "kind": "document", "x": 595, "y": 170, "width": 155, "height": 82, "label": "阶段事件", "sublabel": "节点/字段摘要", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "disconnect", "kind": "hexagon", "x": 780, "y": 170, "width": 155, "height": 82, "label": "连接断开", "sublabel": "任务不回滚", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "recover", "kind": "rect", "x": 965, "y": 170, "width": 155, "height": 82, "label": "重连恢复", "sublabel": "状态 + lastEventId", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true }
+  ],
+  "arrows": [
+    { "id": "post-persist", "source": "post", "target": "persist", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "persist-events", "source": "persist", "target": "events", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "events-stage", "source": "events", "target": "stage", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "stage-disconnect", "source": "stage", "target": "disconnect", "source_port": "right", "target_port": "left", "flow": "data" },
+    { "id": "disconnect-recover", "source": "disconnect", "target": "recover", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "id": "recover-persist", "source": "recover", "target": "persist", "source_port": "bottom", "target_port": "bottom", "flow": "read" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 355,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "control", "label": "任务/连接控制" },
+    { "flow": "data", "label": "阶段摘要" },
+    { "flow": "read", "label": "重连后重新查询" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · SSE observes durable task state",
+  "footer_x": 730,
+  "footer_y": 355
+}

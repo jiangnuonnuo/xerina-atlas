@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 730" width="1200" height="730" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="sequence" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei','Microsoft JhengHei','SimHei',sans-serif}
+.title{font-size:24px;font-weight:600;letter-spacing:.01em}
+.subtitle{font-size:13px}
+.node-title{font-size:15px;font-weight:600}
+.node-body{font-size:12px}
+.edge-label{font-size:12px;font-weight:500}
+</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b9fd6"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7eb8ac"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a78bca"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d8ad75"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d99191"/></marker>
+</defs>
+<rect width="1200" height="730" fill="#fbfdff" data-graph-role="background"/>
+<text x="48" y="46" font-size="24" fill="#243b53" font-weight="600" text-anchor="start" class="title">解析任务的领域事件流</text>
+<text x="48" y="72" font-size="13" fill="#6b7f95" font-weight="400" text-anchor="start" class="subtitle">事件只表达业务进度，不暴露模型内部思维过程；每个事件携带 sequence 与 revision</text>
+<path d="M210,117 V581" fill="none" stroke="#b7c9dc" stroke-width="2" data-graph-role="reserved"/>
+<circle cx="210" cy="117" r="8" fill="#6b9fd6" data-graph-role="reserved"/>
+<g data-graph-role="node" data-graph-bounds="340,96,860,138">
+<rect x="340" y="96" width="520" height="42" rx="10" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.4"/>
+<circle cx="362" cy="117" r="11" fill="#6b9fd6" opacity="0.18"/>
+<text x="362" y="121" font-size="10" fill="#6b9fd6" font-weight="700" text-anchor="middle">1</text>
+<text x="386" y="122" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">TASK_STARTED</text>
+</g>
+<path id="event-1" d="M600,138 V154" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<circle cx="210" cy="175" r="8" fill="#7eb8ac" data-graph-role="reserved"/>
+<g data-graph-role="node" data-graph-bounds="340,154,860,196">
+<rect x="340" y="154" width="520" height="42" rx="10" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.4"/>
+<circle cx="362" cy="175" r="11" fill="#7eb8ac" opacity="0.18"/>
+<text x="362" y="179" font-size="10" fill="#7eb8ac" font-weight="700" text-anchor="middle">2</text>
+<text x="386" y="180" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">SNAPSHOT_NORMALIZED</text>
+</g>
+<path id="event-2" d="M600,196 V212" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<circle cx="210" cy="233" r="8" fill="#b7c9dc" data-graph-role="reserved"/>
+<g data-graph-role="node" data-graph-bounds="340,212,860,254">
+<rect x="340" y="212" width="520" height="42" rx="10" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.4"/>
+<circle cx="362" cy="233" r="11" fill="#b7c9dc" opacity="0.18"/>
+<text x="362" y="237" font-size="10" fill="#b7c9dc" font-weight="700" text-anchor="middle">3</text>
+<text x="386" y="238" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">DOM_SEGMENTED</text>
+</g>
+<path id="event-3" d="M600,254 V270" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<circle cx="210" cy="291" r="8" fill="#a78bca" data-graph-role="reserved"/>
+<g data-graph-role="node" data-graph-bounds="340,270,860,312">
+<rect x="340" y="270" width="520" height="42" rx="10" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.4"/>
+<circle cx="362" cy="291" r="11" fill="#a78bca" opacity="0.18"/>
+<text x="362" y="295" font-size="10" fill="#a78bca" font-weight="700" text-anchor="middle">4</text>
+<text x="386" y="296" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">FIELD_UPSERT</text>
+</g>
+<path id="event-4" d="M600,312 V328" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<circle cx="210" cy="349" r="8" fill="#d8ad75" data-graph-role="reserved"/>
+<g data-graph-role="node" data-graph-bounds="340,328,860,370">
+<rect x="340" y="328" width="520" height="42" rx="10" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.4"/>
+<circle cx="362" cy="349" r="11" fill="#d8ad75" opacity="0.18"/>
+<text x="362" y="353" font-size="10" fill="#d8ad75" font-weight="700" text-anchor="middle">5</text>
+<text x="386" y="354" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">VALIDATION_WARNING</text>
+</g>
+<path id="event-5" d="M600,370 V386" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<circle cx="210" cy="407" r="8" fill="#d8ad75" data-graph-role="reserved"/>
+<g data-graph-role="node" data-graph-bounds="340,386,860,428">
+<rect x="340" y="386" width="520" height="42" rx="10" fill="#fff8ed" stroke="#d8ad75" stroke-width="1.4"/>
+<circle cx="362" cy="407" r="11" fill="#d8ad75" opacity="0.18"/>
+<text x="362" y="411" font-size="10" fill="#d8ad75" font-weight="700" text-anchor="middle">6</text>
+<text x="386" y="412" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">PARTIAL_RESULT</text>
+</g>
+<path id="event-6" d="M600,428 V444" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<circle cx="210" cy="465" r="8" fill="#7eb8ac" data-graph-role="reserved"/>
+<g data-graph-role="node" data-graph-bounds="340,444,860,486">
+<rect x="340" y="444" width="520" height="42" rx="10" fill="#effaf7" stroke="#7eb8ac" stroke-width="1.4"/>
+<circle cx="362" cy="465" r="11" fill="#7eb8ac" opacity="0.18"/>
+<text x="362" y="469" font-size="10" fill="#7eb8ac" font-weight="700" text-anchor="middle">7</text>
+<text x="386" y="470" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">DRAFT_READY</text>
+</g>
+<path id="event-7" d="M600,486 V502" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<circle cx="210" cy="523" r="8" fill="#d99191" data-graph-role="reserved"/>
+<g data-graph-role="node" data-graph-bounds="340,502,860,544">
+<rect x="340" y="502" width="520" height="42" rx="10" fill="#fff4f4" stroke="#d99191" stroke-width="1.4"/>
+<circle cx="362" cy="523" r="11" fill="#d99191" opacity="0.18"/>
+<text x="362" y="527" font-size="10" fill="#d99191" font-weight="700" text-anchor="middle">8</text>
+<text x="386" y="528" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">TASK_FAILED</text>
+</g>
+<path id="event-8" d="M600,544 V560" fill="none" stroke="#6b9fd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)" data-graph-role="edge"/>
+<circle cx="210" cy="581" r="8" fill="#6b9fd6" data-graph-role="reserved"/>
+<g data-graph-role="node" data-graph-bounds="340,560,860,602">
+<rect x="340" y="560" width="520" height="42" rx="10" fill="#eef6ff" stroke="#6b9fd6" stroke-width="1.4"/>
+<circle cx="362" cy="581" r="11" fill="#6b9fd6" opacity="0.18"/>
+<text x="362" y="585" font-size="10" fill="#6b9fd6" font-weight="700" text-anchor="middle">9</text>
+<text x="386" y="586" font-size="14" fill="#243b53" font-weight="600" text-anchor="start">TASK_COMPLETED</text>
+</g>
+<g data-graph-role="reserved" data-graph-bounds="860,205,1140,337"><rect x="860" y="205" width="280" height="132" rx="12" fill="#f4f7fa" stroke="#b7c9dc" stroke-width="1.2"/>
+<text x="878" y="228" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">断线恢复</text>
+<text x="878" y="325" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">SSE 断开后查询完整草稿恢复事实。</text>
+</g>
+<g data-graph-role="reserved" data-graph-bounds="860,385,1140,517"><rect x="860" y="385" width="280" height="132" rx="12" fill="#f7f2ff" stroke="#a78bca" stroke-width="1.2"/>
+<text x="878" y="408" font-size="13" fill="#243b53" font-weight="600" text-anchor="start">事件边界</text>
+<text x="878" y="505" font-size="12" fill="#6b7f95" font-weight="400" text-anchor="start">事件表达进度，不替代检查点与事务提交。</text>
+</g>
+</svg>

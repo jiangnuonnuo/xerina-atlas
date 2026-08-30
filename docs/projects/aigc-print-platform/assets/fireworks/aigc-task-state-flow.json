@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 3,
+  "quality_profile": "standard",
+  "width": 960,
+  "height": 620,
+  "title": "Task State Machine",
+  "subtitle": "local task state, upstream idempotency, and bounded terminal states",
+  "containers": [
+    { "id": "lifecycle", "x": 40, "y": 110, "width": 880, "height": 390, "label": "Task Lifecycle", "header_prefix": "01" }
+  ],
+  "nodes": [
+    { "id": "pending", "kind": "rect", "x": 70, "y": 180, "width": 150, "height": 56, "label": "待处理", "sublabel": "ready to consume", "fill": "#0b3b5e", "stroke": "#38bdf8", "flat": true },
+    { "id": "processing", "kind": "double_rect", "x": 300, "y": 180, "width": 170, "height": 56, "label": "处理中", "sublabel": "upstream accepted", "fill": "#0a4b78", "stroke": "#38bdf8", "flat": true },
+    { "id": "success", "kind": "rect", "x": 560, "y": 180, "width": 150, "height": 56, "label": "成功", "sublabel": "result archived", "fill": "#123c5a", "stroke": "#22c55e", "flat": true },
+    { "id": "retry", "kind": "rect", "x": 300, "y": 360, "width": 170, "height": 56, "label": "重试中", "sublabel": "delayed retry", "fill": "#123c5a", "stroke": "#a855f7", "flat": true },
+    { "id": "unknown", "kind": "hexagon", "x": 560, "y": 360, "width": 150, "height": 56, "label": "提交未知", "sublabel": "reconcile by task id", "fill": "#123c5a", "stroke": "#f59e0b", "flat": true },
+    { "id": "failed", "kind": "rect", "x": 760, "y": 360, "width": 150, "height": 56, "label": "失败", "sublabel": "bounded terminal", "fill": "#321a2c", "stroke": "#fb7185", "flat": true }
+  ],
+  "arrows": [
+    { "id": "pending-processing", "source": "pending", "target": "processing", "source_port": "right", "target_port": "left", "flow": "read", "label": "consume" },
+    { "id": "processing-success", "source": "processing", "target": "success", "source_port": "right", "target_port": "left", "flow": "data", "label": "callback / poll" },
+    { "id": "processing-retry", "source": "processing", "target": "retry", "source_port": "bottom", "target_port": "top", "flow": "async", "label": "recoverable" },
+    { "id": "retry-processing", "source": "retry", "target": "processing", "source_port": "left", "target_port": "bottom", "flow": "async", "route_points": [[250, 388], [250, 270], [385, 270]] },
+    { "id": "processing-unknown", "source": "processing", "target": "unknown", "source_port": "bottom", "target_port": "top", "flow": "feedback", "label": "timeout / no id" },
+    { "id": "unknown-processing", "source": "unknown", "target": "processing", "source_port": "left", "target_port": "bottom", "flow": "feedback", "label": "reconcile", "route_points": [[510, 388], [510, 270], [385, 270]] },
+    { "id": "processing-failed", "source": "processing", "target": "failed", "source_port": "right", "target_port": "top", "flow": "feedback", "label": "reject / exhausted", "route_points": [[520, 208], [520, 300], [835, 300]] }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 550,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "read", "label": "consume" },
+    { "flow": "data", "label": "success" },
+    { "flow": "async", "label": "retry" },
+    { "flow": "feedback", "label": "reconcile / fail" }
+  ],
+  "footer": "Local taskId guards the state; upstream idempotency protects repeated submission",
+  "footer_x": 48,
+  "footer_y": 600
+}

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;fill:#111827} .muted{fill:#6b7280} .small{font-size:12px} .label{font-size:14px} .title{font-size:24px;font-weight:700} .subtitle{font-size:13px} .node-title{font-size:14px;font-weight:600}</style>
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#ea580c"/></marker>
+<marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="1200" height="720" fill="#ffffff"/>
+<text x="40" y="42" class="title">字段采集方案适用边界</text>
+<text x="40" y="67" class="subtitle muted">Field DOM Scout + Agent 是主链路；自动浏览负责加速，Easy Copy DOM 与手工录入负责降级。</text>
+<rect x="40" y="105" width="230" height="68" fill="#f3f4f6" stroke="#d1d5db"/>
+<text x="155.0" y="145" text-anchor="middle" font-size="15" font-weight="700">比较维度</text>
+<rect x="270" y="105" width="300" height="68" fill="#faf5ff" stroke="#d1d5db"/>
+<text x="420.0" y="145" text-anchor="middle" font-size="15" font-weight="700">Agent + Playwright</text>
+<rect x="570" y="105" width="330" height="68" fill="#ecfdf5" stroke="#d1d5db"/>
+<text x="735.0" y="145" text-anchor="middle" font-size="15" font-weight="700">Field DOM Scout + Agent</text>
+<rect x="900" y="105" width="300" height="68" fill="#fff7ed" stroke="#d1d5db"/>
+<text x="1050.0" y="138" text-anchor="middle" font-size="15" font-weight="700">Easy Copy DOM</text>
+<text x="1050.0" y="156" text-anchor="middle" font-size="12" font-weight="400">/ 逐字段手工录入</text>
+<rect x="40" y="173" width="230" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="54" y="208" text-anchor="start" font-size="13" font-weight="600">范围确定</text>
+<rect x="270" y="173" width="300" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="420.0" y="208" text-anchor="middle" font-size="13" font-weight="400">Agent 自主探索</text>
+<rect x="570" y="173" width="330" height="58" fill="#f0fdf4" stroke="#e5e7eb"/>
+<text x="735.0" y="208" text-anchor="middle" font-size="13" font-weight="400">人工选择业务区块</text>
+<rect x="900" y="173" width="300" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="1050.0" y="208" text-anchor="middle" font-size="13" font-weight="400">单选复制 / 逐项判断</text>
+<rect x="40" y="231" width="230" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="54" y="266" text-anchor="start" font-size="13" font-weight="600">登录与权限</text>
+<rect x="270" y="231" width="300" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="420.0" y="266" text-anchor="middle" font-size="13" font-weight="400">复杂状态适配成本高</text>
+<rect x="570" y="231" width="330" height="58" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="735.0" y="266" text-anchor="middle" font-size="13" font-weight="400">复用业务人员当前会话</text>
+<rect x="900" y="231" width="300" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="1050.0" y="266" text-anchor="middle" font-size="13" font-weight="400">复用业务人员当前会话</text>
+<rect x="40" y="289" width="230" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="54" y="324" text-anchor="start" font-size="13" font-weight="600">DOM 输入</text>
+<rect x="270" y="289" width="300" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="420.0" y="324" text-anchor="middle" font-size="13" font-weight="400">多轮观察页面状态</text>
+<rect x="570" y="289" width="330" height="58" fill="#f0fdf4" stroke="#e5e7eb"/>
+<text x="735.0" y="324" text-anchor="middle" font-size="13" font-weight="400">一次提交局部结构</text>
+<rect x="900" y="289" width="300" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="1050.0" y="324" text-anchor="middle" font-size="13" font-weight="400">outerHTML / 人工输入</text>
+<rect x="40" y="347" width="230" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="54" y="382" text-anchor="start" font-size="13" font-weight="600">Token 特征</text>
+<rect x="270" y="347" width="300" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="420.0" y="382" text-anchor="middle" font-size="13" font-weight="400">随步骤和页面状态增长</text>
+<rect x="570" y="347" width="330" height="58" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="735.0" y="382" text-anchor="middle" font-size="13" font-weight="400">与选区规模直接相关</text>
+<rect x="900" y="347" width="300" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="1050.0" y="382" text-anchor="middle" font-size="13" font-weight="400">取决于降级路径</text>
+<rect x="40" y="405" width="230" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="54" y="440" text-anchor="start" font-size="13" font-weight="600">复杂页面稳定性</text>
+<rect x="270" y="405" width="300" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="420.0" y="440" text-anchor="middle" font-size="13" font-weight="400">受动态交互影响明显</text>
+<rect x="570" y="405" width="330" height="58" fill="#f0fdf4" stroke="#e5e7eb"/>
+<text x="735.0" y="440" text-anchor="middle" font-size="13" font-weight="400">由人工锁定业务上下文</text>
+<rect x="900" y="405" width="300" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="1050.0" y="440" text-anchor="middle" font-size="13" font-weight="400">可用但操作割裂 / 效率低</text>
+<rect x="40" y="463" width="230" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="54" y="498" text-anchor="start" font-size="13" font-weight="600">修订方式</text>
+<rect x="270" y="463" width="300" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="420.0" y="498" text-anchor="middle" font-size="13" font-weight="400">自动结果再确认</text>
+<rect x="570" y="463" width="330" height="58" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="735.0" y="498" text-anchor="middle" font-size="13" font-weight="400">对话修改 + 直接编辑</text>
+<rect x="900" y="463" width="300" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="1050.0" y="498" text-anchor="middle" font-size="13" font-weight="400">粘贴后对话 / 直接编辑</text>
+<rect x="40" y="521" width="230" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="54" y="556" text-anchor="start" font-size="13" font-weight="600">主要价值</text>
+<rect x="270" y="521" width="300" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="420.0" y="556" text-anchor="middle" font-size="13" font-weight="400">批量处理简单页面</text>
+<rect x="570" y="521" width="330" height="58" fill="#f0fdf4" stroke="#e5e7eb"/>
+<text x="735.0" y="556" text-anchor="middle" font-size="13" font-weight="400">多选、预览、清洗与 Agent 输入</text>
+<rect x="900" y="521" width="300" height="58" fill="#f9fafb" stroke="#e5e7eb"/>
+<text x="1050.0" y="556" text-anchor="middle" font-size="13" font-weight="400">故障回退 / 极端补充</text>
+<rect x="40" y="579" width="230" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="54" y="614" text-anchor="start" font-size="13" font-weight="600">项目定位</text>
+<rect x="270" y="579" width="300" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="420.0" y="614" text-anchor="middle" font-size="13" font-weight="400">可选加速入口</text>
+<rect x="570" y="579" width="330" height="58" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="735.0" y="614" text-anchor="middle" font-size="13" font-weight="400">主采集方案</text>
+<rect x="900" y="579" width="300" height="58" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="1050.0" y="614" text-anchor="middle" font-size="13" font-weight="400">故障回退与极端补充</text>
+<rect x="570" y="96" width="330" height="552" fill="none" stroke="#22c55e" stroke-width="3" rx="6"/>
+<text x="735" y="682" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">主方案：人工选区，插件清洗，Agent 判语义</text>
+</svg>

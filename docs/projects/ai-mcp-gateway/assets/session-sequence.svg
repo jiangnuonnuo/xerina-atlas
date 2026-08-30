@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 760" width="960" height="760" data-generator="fireworks-tech-graph" data-diagram-type="sequence">
+<style>text{font-family:Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,sans-serif} .title{font-size:26px;font-weight:700;fill:#111827}.sub{font-size:13px;fill:#6b7280}.actor{font-size:14px;font-weight:600;fill:#111827}.msg{font-size:12px;fill:#374151}.note{font-size:12px;fill:#6b7280}</style>
+<defs><marker id="arrow-control" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#2563eb"/></marker><marker id="arrow-async" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#6b7280"/></marker></defs>
+<rect width="960" height="760" fill="#ffffff"/>
+<text x="48" y="46" class="title">Streamable HTTP · 会话与恢复</text>
+<text x="48" y="70" class="sub">initialize 建会话，GET 监听，POST 处理，Last-Event-ID 负责恢复</text>
+<g data-graph-role="participant"><rect x="48" y="100" width="144" height="42" rx="8" fill="#eff6ff" stroke="#93c5fd"/><text x="120" y="126" text-anchor="middle" class="actor">MCP 客户端</text><path d="M120 142 V690" stroke="#cbd5e1" stroke-width="1.4" stroke-dasharray="5 5"/></g>
+<g data-graph-role="participant"><rect x="278" y="100" width="144" height="42" rx="8" fill="#eff6ff" stroke="#93c5fd"/><text x="350" y="126" text-anchor="middle" class="actor">网关接入</text><path d="M350 142 V690" stroke="#cbd5e1" stroke-width="1.4" stroke-dasharray="5 5"/></g>
+<g data-graph-role="participant"><rect x="498" y="100" width="144" height="42" rx="8" fill="#eff6ff" stroke="#93c5fd"/><text x="570" y="126" text-anchor="middle" class="actor">会话服务</text><path d="M570 142 V690" stroke="#cbd5e1" stroke-width="1.4" stroke-dasharray="5 5"/></g>
+<g data-graph-role="participant"><rect x="728" y="100" width="144" height="42" rx="8" fill="#eff6ff" stroke="#93c5fd"/><text x="800" y="126" text-anchor="middle" class="actor">Redis 状态</text><path d="M800 142 V690" stroke="#cbd5e1" stroke-width="1.4" stroke-dasharray="5 5"/></g>
+<rect x="345" y="200" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<rect x="565" y="250" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<rect x="345" y="300" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<rect x="115" y="350" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<rect x="345" y="400" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<rect x="565" y="450" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<rect x="345" y="500" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<rect x="115" y="550" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<rect x="345" y="600" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<rect x="115" y="650" width="10" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+<path id="message-1" data-graph-role="edge" d="M120 190 H350" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-control)"/>
+<rect x="171.0" y="166" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="235.0" y="179" text-anchor="middle" class="msg">POST initialize</text>
+<path id="message-2" data-graph-role="edge" d="M350 240 H570" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-control)"/>
+<rect x="396.0" y="216" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="460.0" y="229" text-anchor="middle" class="msg">校验网关与凭证</text>
+<path id="message-3" data-graph-role="edge" d="M570 290 H800" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-control)"/>
+<rect x="621.0" y="266" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="685.0" y="279" text-anchor="middle" class="msg">创建会话租约</text>
+<path id="message-4" data-graph-role="edge" d="M800 340 H570" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-control)"/>
+<rect x="621.0" y="316" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="685.0" y="329" text-anchor="middle" class="msg">返回 session-id</text>
+<path id="message-5" data-graph-role="edge" d="M570 390 H350" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-control)"/>
+<rect x="396.0" y="366" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="460.0" y="379" text-anchor="middle" class="msg">初始化响应</text>
+<path id="message-6" data-graph-role="edge" d="M120 440 H350" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-control)"/>
+<rect x="171.0" y="416" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="235.0" y="429" text-anchor="middle" class="msg">GET + Mcp-Session-Id</text>
+<path id="message-7" data-graph-role="edge" d="M350 490 H570" fill="none" stroke="#6b7280" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-async)"/>
+<rect x="396.0" y="466" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="460.0" y="479" text-anchor="middle" class="msg">建立监听流</text>
+<path id="message-8" data-graph-role="edge" d="M120 540 H350" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-control)"/>
+<rect x="171.0" y="516" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="235.0" y="529" text-anchor="middle" class="msg">POST tools/call</text>
+<path id="message-9" data-graph-role="edge" d="M350 590 H570" fill="none" stroke="#6b7280" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-async)"/>
+<rect x="396.0" y="566" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="460.0" y="579" text-anchor="middle" class="msg">发布结果事件</text>
+<path id="message-10" data-graph-role="edge" d="M570 640 H350" fill="none" stroke="#6b7280" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-async)"/>
+<rect x="396.0" y="616" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="460.0" y="629" text-anchor="middle" class="msg">SSE 结果流</text>
+<path id="message-11" data-graph-role="edge" d="M120 690 H350" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-control)"/>
+<rect x="171.0" y="666" width="128" height="18" rx="4" fill="#ffffff" opacity=".94"/><text x="235.0" y="679" text-anchor="middle" class="msg">重连 + Last-Event-ID</text>
+<rect x="62" y="174" width="836" height="558" rx="10" fill="none" stroke="#dbe5f1" stroke-dasharray="6 5"/>
+<text x="78" y="196" class="note">同步请求与异步事件共用会话作用域；恢复依赖事件 id，不依赖客户端自行重放业务请求</text>
+<line x1="64" y1="724" x2="94" y2="724" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-control)"/><text x="102" y="728" class="note">同步请求</text><line x1="202" y1="724" x2="232" y2="724" stroke="#6b7280" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-async)"/><text x="240" y="728" class="note">事件 / 流</text>
+</svg>
