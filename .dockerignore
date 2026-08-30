@@ -1,0 +1,8 @@
+**
+!Dockerfile
+!deploy/
+!deploy/nginx.conf
+!docs/
+!docs/.vitepress/
+!docs/.vitepress/dist/
+!docs/.vitepress/dist/**

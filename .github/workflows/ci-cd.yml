@@ -1,0 +1,151 @@
+name: CI/CD
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  DEPLOY_HOST: 118.89.18.90
+  DEPLOY_USER: ubuntu
+  DEPLOY_DIR: /opt/xerina-atlas
+  IMAGE_NAME: xerina-atlas
+  CONTAINER_NAME: xerina-atlas
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate and build site
+        run: npm run build
+
+      - name: Build production image
+        run: docker build --pull --tag "${IMAGE_NAME}:${GITHUB_SHA}" .
+
+      - name: Export production image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: docker save "${IMAGE_NAME}:${GITHUB_SHA}" | gzip -1 > "${RUNNER_TEMP}/${IMAGE_NAME}.tar.gz"
+
+      - name: Configure deployment SSH key
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "${DEPLOY_SSH_KEY}"
+          install -d -m 700 "${HOME}/.ssh"
+          install -m 600 deploy/known_hosts "${HOME}/.ssh/known_hosts"
+          printf '%s\n' "${DEPLOY_SSH_KEY}" | tr -d '\r' > "${HOME}/.ssh/id_ed25519"
+          chmod 600 "${HOME}/.ssh/id_ed25519"
+          ssh-keygen -y -f "${HOME}/.ssh/id_ed25519" >/dev/null
+
+      - name: Upload production image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          scp -o BatchMode=yes \
+            "${RUNNER_TEMP}/${IMAGE_NAME}.tar.gz" \
+            "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${IMAGE_NAME}-${GITHUB_SHA}.tar.gz"
+
+      - name: Deploy production container
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            bash -s -- "${GITHUB_SHA}" "${DEPLOY_DIR}" "${IMAGE_NAME}" "${CONTAINER_NAME}" <<'REMOTE'
+          set -euo pipefail
+
+          sha="$1"
+          deploy_dir="$2"
+          image_name="$3"
+          container_name="$4"
+          archive="${deploy_dir}/${image_name}-${sha}.tar.gz"
+          image="${image_name}:${sha}"
+          candidate="${container_name}-candidate"
+
+          gzip -dc "${archive}" | docker load
+          rm -f "${archive}"
+
+          docker rm -f "${candidate}" >/dev/null 2>&1 || true
+          docker run --detach \
+            --name "${candidate}" \
+            --publish 127.0.0.1:18080:80 \
+            "${image}" >/dev/null
+
+          candidate_ready=false
+          for attempt in $(seq 1 20); do
+            if curl --fail --silent --show-error http://127.0.0.1:18080/healthz >/dev/null \
+              && curl --fail --silent --show-error http://127.0.0.1:18080/ >/dev/null; then
+              candidate_ready=true
+              break
+            fi
+            sleep 1
+          done
+
+          if [ "${candidate_ready}" != true ]; then
+            docker logs "${candidate}" || true
+            docker rm -f "${candidate}" >/dev/null 2>&1 || true
+            exit 1
+          fi
+
+          docker rm -f "${candidate}" >/dev/null
+          docker rm -f "${container_name}" >/dev/null 2>&1 || true
+          docker run --detach \
+            --name "${container_name}" \
+            --restart unless-stopped \
+            --publish 80:80 \
+            "${image}" >/dev/null
+
+          production_ready=false
+          for attempt in $(seq 1 20); do
+            if curl --fail --silent --show-error http://127.0.0.1/healthz >/dev/null \
+              && curl --fail --silent --show-error http://127.0.0.1/ >/dev/null; then
+              production_ready=true
+              break
+            fi
+            sleep 1
+          done
+
+          if [ "${production_ready}" != true ]; then
+            docker logs "${container_name}" || true
+            exit 1
+          fi
+
+          docker image ls --format '{{.Repository}}:{{.Tag}}' \
+            | awk -v current="${image}" -v prefix="${image_name}:" \
+              'index($0, prefix) == 1 && $0 != current { print $0 }' \
+            | xargs -r docker image rm
+          docker image prune --force >/dev/null
+          REMOTE
+
+      - name: Verify public endpoint
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          curl --fail --silent --show-error --retry 5 --retry-delay 2 "http://${DEPLOY_HOST}/healthz"
+          curl --fail --silent --show-error --retry 5 --retry-delay 2 "http://${DEPLOY_HOST}/" >/dev/null
