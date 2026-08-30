@@ -345,11 +345,11 @@
     "topology_draw_on": true
   },
   "artifact": {
-    "bytes": 210938,
+    "bytes": 215887,
     "encoder": "ffmpeg/gif-palette",
     "format": "gif",
     "mime_type": "image/gif",
-    "path": "docs/projects/ai-ssh-agent/assets/terminal-file/terminal-file.gif",
+    "path": "docs/projects/ai-ssh-agent/assets/chat-context-memory/chat-context-memory.gif",
     "probe": {
       "codec_name": "gif",
       "container": {
@@ -364,7 +364,7 @@
       "r_frame_rate": "20/1",
       "width": 960
     },
-    "sha256": "558ed3bac1a289c9adff14ceca6d75f7854195ed76866daab9980bed0c7ca0a2",
+    "sha256": "7f7c1bd07c28b97c7e1f2abb848c20524b4c724bff8166a1daf2bb7e5e998fa8",
     "source_frame_count": 115
   },
   "dry_run": false,
@@ -397,11 +397,11 @@
       "adjacent_max": 0.0007644549019607843,
       "adjacent_median": 0.0005982745098039216,
       "adjacent_min": 1.8171529411764704e-05,
-      "adjacent_p95": 0.000752643137254902,
+      "adjacent_p95": 0.0007521529411764706,
       "changed_area_method": "accumulated adjacent luma delta greater than 2 percent",
-      "changed_area_ratio": 0.010744274509803923,
+      "changed_area_ratio": 0.010667019607843137,
       "metric": "normalized-luma-mean-absolute-difference",
-      "seam": 5.370431372549019e-05,
+      "seam": 5.296627450980392e-05,
       "seam_within_adjacent_p95": true
     },
     "embedded_loop_count": 0,
@@ -410,13 +410,13 @@
       "adjacent_duplicate_pairs": [],
       "algorithm": "framemd5",
       "all_frames_unique": true,
-      "first_frame_hash": "4121ef9e01e745e176f8417521eae98e",
+      "first_frame_hash": "35c3d77b87f83869ad765783f02f15e6",
       "frame_count": 115,
       "intentional_reset_boundary_opacity": 1.0,
       "intentional_reset_boundary_repeat_count": 0,
       "intentional_reset_boundary_repeat_evidence": [],
       "intentional_reset_boundary_repeat_frame": 110,
-      "last_frame_hash": "07b23b637fc0c4c76c92d91bf9bd11af",
+      "last_frame_hash": "938b4173592e3741f79d99b77f8cf774",
       "minimum_unique_frame_count": 75,
       "opening_construction_and_reset_tail_globally_distinct": true,
       "repeat_scope": [
@@ -430,10 +430,10 @@
       "repeats_confined_to_permitted_scope": true,
       "unique_frame_count": 115
     },
-    "first_frame_sha256": "752c9b398e3318508cb356102aa2f9157adb5112d0278539fa9c58de4c56449e",
+    "first_frame_sha256": "d604f3cc2c8c3f7eb4156190f2804aeb6f422241370531b4dd25126dc7c43117",
     "intentional_reset_boundary_repeat_count": 0,
     "intentional_reset_boundary_repeat_evidence": [],
-    "last_frame_sha256": "de2414f7149b1c4c9dfeae2677995b779848fe3569df9c2003cd63fd4e8ed9d4",
+    "last_frame_sha256": "5fc94aec9cd95dce83f36f768b53c5e47e09e86209d9d793582c7b21773aa576",
     "minimum_unique_frame_count": 75,
     "opening_construction_and_reset_tail_globally_distinct": true,
     "playback": "embedded-infinite",
@@ -442,13 +442,13 @@
       "adjacent_duplicate_pairs": [],
       "algorithm": "sha256",
       "all_frames_unique": true,
-      "first_frame_hash": "752c9b398e3318508cb356102aa2f9157adb5112d0278539fa9c58de4c56449e",
+      "first_frame_hash": "d604f3cc2c8c3f7eb4156190f2804aeb6f422241370531b4dd25126dc7c43117",
       "frame_count": 115,
       "intentional_reset_boundary_opacity": 1.0,
       "intentional_reset_boundary_repeat_count": 0,
       "intentional_reset_boundary_repeat_evidence": [],
       "intentional_reset_boundary_repeat_frame": 110,
-      "last_frame_hash": "de2414f7149b1c4c9dfeae2677995b779848fe3569df9c2003cd63fd4e8ed9d4",
+      "last_frame_hash": "5fc94aec9cd95dce83f36f768b53c5e47e09e86209d9d793582c7b21773aa576",
       "minimum_unique_frame_count": 75,
       "opening_construction_and_reset_tail_globally_distinct": true,
       "repeat_scope": [
@@ -888,7 +888,7 @@
   "motion_grammar_version": "3.4",
   "motion_scene": "memory-lifecycle",
   "ok": true,
-  "output": "docs/projects/ai-ssh-agent/assets/terminal-file/terminal-file.gif",
+  "output": "docs/projects/ai-ssh-agent/assets/chat-context-memory/chat-context-memory.gif",
   "output_format": "gif",
   "preset": "memory-lifecycle",
   "rendered_pixels": 68448000,
@@ -1017,7 +1017,7 @@
       "draw_schedule": [
         {
           "easing": "linear",
-          "edge_id": "sample",
+          "edge_id": "append",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 0,
@@ -1031,7 +1031,7 @@
         },
         {
           "easing": "linear",
-          "edge_id": "attend",
+          "edge_id": "collect",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 0,
@@ -1045,7 +1045,7 @@
         },
         {
           "easing": "linear",
-          "edge_id": "invoke",
+          "edge_id": "compose",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 0,
@@ -1059,7 +1059,7 @@
         },
         {
           "easing": "linear",
-          "edge_id": "remember",
+          "edge_id": "detect",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 0,
@@ -1073,7 +1073,7 @@
         },
         {
           "easing": "linear",
-          "edge_id": "consolidate",
+          "edge_id": "learn",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 0,
@@ -1126,7 +1126,7 @@
             "opacity"
           ],
           "direction": "source-to-target",
-          "edge_id": "sample",
+          "edge_id": "append",
           "endpoint_clearance": 8,
           "fade_in_frames": [
             36,
@@ -1196,7 +1196,7 @@
             "opacity"
           ],
           "direction": "source-to-target",
-          "edge_id": "attend",
+          "edge_id": "collect",
           "endpoint_clearance": 8,
           "fade_in_frames": [
             36,
@@ -1266,7 +1266,7 @@
             "opacity"
           ],
           "direction": "source-to-target",
-          "edge_id": "invoke",
+          "edge_id": "compose",
           "endpoint_clearance": 8,
           "fade_in_frames": [
             36,
@@ -1336,7 +1336,7 @@
             "opacity"
           ],
           "direction": "source-to-target",
-          "edge_id": "remember",
+          "edge_id": "detect",
           "endpoint_clearance": 8,
           "fade_in_frames": [
             36,
@@ -1406,7 +1406,7 @@
             "opacity"
           ],
           "direction": "source-to-target",
-          "edge_id": "consolidate",
+          "edge_id": "learn",
           "endpoint_clearance": 8,
           "fade_in_frames": [
             36,
@@ -1714,7 +1714,7 @@
           ],
           "dash_period": 47,
           "direction": "source-to-target",
-          "edge_id": "sample",
+          "edge_id": "append",
           "fade_in_frames": [
             36,
             38
@@ -1750,7 +1750,7 @@
           ],
           "dash_period": 47,
           "direction": "source-to-target",
-          "edge_id": "attend",
+          "edge_id": "collect",
           "fade_in_frames": [
             36,
             38
@@ -1786,7 +1786,7 @@
           ],
           "dash_period": 47,
           "direction": "source-to-target",
-          "edge_id": "invoke",
+          "edge_id": "compose",
           "fade_in_frames": [
             36,
             38
@@ -1822,7 +1822,7 @@
           ],
           "dash_period": 47,
           "direction": "source-to-target",
-          "edge_id": "remember",
+          "edge_id": "detect",
           "fade_in_frames": [
             36,
             38
@@ -1858,7 +1858,7 @@
           ],
           "dash_period": 47,
           "direction": "source-to-target",
-          "edge_id": "consolidate",
+          "edge_id": "learn",
           "fade_in_frames": [
             36,
             38
@@ -1964,7 +1964,7 @@
     },
     "width": 960
   },
-  "report": "docs/projects/ai-ssh-agent/assets/terminal-file/terminal-file.motion.json",
+  "report": "docs/projects/ai-ssh-agent/assets/chat-context-memory/chat-context-memory.motion.json",
   "required_encoder": "ffmpeg/gif",
   "review_reference_source_sha256": "04cf833659e82c3e1743db4042cacf839a6d784a99c32d076e36fd4776e70c1b",
   "review_status": "user-approved",
@@ -1972,8 +1972,8 @@
     "encoders": [
       "gif"
     ],
-    "ffmpeg": "/tmp/fireworks-tech-graph-bin/ffmpeg",
-    "ffprobe": "/tmp/fireworks-tech-graph-bin/ffprobe",
+    "ffmpeg": "/tmp/codex-ffmpeg/node_modules/ffmpeg-static/ffmpeg",
+    "ffprobe": "/tmp/codex-ffmpeg/node_modules/@ffprobe-installer/darwin-arm64/ffprobe",
     "format": {
       "gif": true
     },
@@ -2024,7 +2024,7 @@
     "nodes": 6,
     "resolved_schedule": [
       {
-        "edge_id": "sample",
+        "edge_id": "append",
         "order": 0,
         "role": "sample",
         "semantic_color": "#3b82f6",
@@ -2032,7 +2032,7 @@
         "stage": 1
       },
       {
-        "edge_id": "attend",
+        "edge_id": "collect",
         "order": 0,
         "role": "attend",
         "semantic_color": "#3b82f6",
@@ -2040,7 +2040,7 @@
         "stage": 2
       },
       {
-        "edge_id": "invoke",
+        "edge_id": "compose",
         "order": 0,
         "role": "invoke",
         "semantic_color": "#7c3aed",
@@ -2048,7 +2048,7 @@
         "stage": 3
       },
       {
-        "edge_id": "remember",
+        "edge_id": "detect",
         "order": 0,
         "role": "remember",
         "semantic_color": "#059669",
@@ -2056,7 +2056,7 @@
         "stage": 4
       },
       {
-        "edge_id": "consolidate",
+        "edge_id": "learn",
         "order": 0,
         "role": "consolidate",
         "semantic_color": "#ea580c",
@@ -2080,7 +2080,7 @@
     "artifact_within_target": true,
     "warnings": []
   },
-  "source": "docs/projects/ai-ssh-agent/assets/terminal-file/terminal-file.svg",
+  "source": "docs/projects/ai-ssh-agent/assets/chat-context-memory/chat-context-memory.svg",
   "source_checks": {
     "composition": {
       "details": [],
@@ -2100,12 +2100,12 @@
     }
   },
   "source_integrity": {
-    "sha256": "ee2bcdea53b899c2945aaa1304ac083b107806af4c235dd16d4dc1c22aa6f660",
-    "sha256_after": "ee2bcdea53b899c2945aaa1304ac083b107806af4c235dd16d4dc1c22aa6f660",
-    "sha256_before": "ee2bcdea53b899c2945aaa1304ac083b107806af4c235dd16d4dc1c22aa6f660",
+    "sha256": "1750e83aedcc66e94c2310bf71686c42144dc17580ee6553f710e9ebb8bf729f",
+    "sha256_after": "1750e83aedcc66e94c2310bf71686c42144dc17580ee6553f710e9ebb8bf729f",
+    "sha256_before": "1750e83aedcc66e94c2310bf71686c42144dc17580ee6553f710e9ebb8bf729f",
     "unchanged": true
   },
-  "source_sha256": "ee2bcdea53b899c2945aaa1304ac083b107806af4c235dd16d4dc1c22aa6f660",
+  "source_sha256": "1750e83aedcc66e94c2310bf71686c42144dc17580ee6553f710e9ebb8bf729f",
   "style_contract": {
     "scope": "signature-speed-path-geometry-and-construction-schedule",
     "source_policy": "semantic-schedule-and-geometry-not-exact-byte-hash",

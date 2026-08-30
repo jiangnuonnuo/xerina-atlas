@@ -1,7 +1,11 @@
 ---
 title: SSH 连接认证与主机信任
-type: project-doc
-project: AI SSH Agent
+type: project-chapter
+project: ai-ssh-agent
+group: SSH 连接
+order: 5
+description: 说明连接配置、密码/私钥认证、严格主机密钥检查、JSch Session 复用和连接状态如何变化。
+sidebar: true
 layout: project-doc
 ---
 
@@ -29,6 +33,12 @@ layout: project-doc
 
 连接建立时，认证材料由基础设施网关解密并交给 JSch；领域层只关心认证策略、连接配置和结果，不应该知道 JSch 的 Session API 细节。
 
+## 创建、更新和连接不是一个事务
+
+创建连接时，领域服务先补充默认端口 `22`、认证类型、状态 `DISCONNECTED` 和 `userId=default`，再保存连接主体与高级配置。这个动作只确认“连接配置已经持久化”，不会替用户完成 SSH 握手。连接接口随后读取配置，选择密码或私钥认证策略，建立 Session，并把连接结果映射回响应。
+
+更新连接时，如果调用方没有带认证类型，会保留原类型；认证策略负责凭据保留、切换和互斥清理。主机或端口变化会清空已知主机密钥，避免把旧目标的信任材料带到新目标。更新完成后还会主动断开旧 Session，下一次操作必须重新建立连接。
+
 ## 主机密钥确认
 
 项目采用严格主机密钥检查。第一次遇到未知 host key 时，系统保留待确认信息并要求用户显式调用主机密钥确认接口；确认后才允许把该主机纳入可信连接。指纹确认不是前端装饰，而是连接状态的一部分。
@@ -40,6 +50,8 @@ layout: project-doc
 成功连接后的 JSch Session 以连接为键保存在进程内运行时缓存中。重复使用同一连接时，系统复用 Session；SFTP 操作不复用 Channel，而是每次操作建立独立 Channel。连接健康检查使用 SSH `sendIgnore()`，而不是通过执行一个可能产生副作用的 Shell 命令探活。
 
 Session 是运行时资源，不是数据库事实。应用重启后，数据库中的连接配置仍然可能存在，但 JSch Session 必须重新建立。这个边界会影响 [交互终端与远程文件操作](./08-交互终端与远程文件操作.md) 和 [部署拓扑、配置、监控与运维](./14-部署拓扑配置监控与运维.md)。
+
+连接级操作按 `connectionId` 使用 JVM 内锁，避免同一个连接同时建立两个 Session。Session 网关在建立新连接前先关闭旧 Session；成功后再把新 Session 放入连接缓存。这个锁只在单实例内生效，不能替代多实例路由或分布式协调。
 
 ## 失败分支
 

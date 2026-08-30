@@ -18,70 +18,70 @@
           12
         ],
         "order": 0,
-        "role": "dispatch",
+        "role": "delegate",
         "stage": 2
       },
       {
         "frames": [
-          10,
-          17
-        ],
-        "order": 0,
-        "role": "runtime-branch",
-        "stage": 3
-      },
-      {
-        "frames": [
-          13,
-          20
+          8,
+          15
         ],
         "order": 1,
-        "role": "runtime-branch",
-        "stage": 3
+        "role": "delegate",
+        "stage": 2
       },
       {
         "frames": [
-          16,
-          23
+          11,
+          18
         ],
         "order": 2,
-        "role": "runtime-branch",
-        "stage": 3
+        "role": "delegate",
+        "stage": 2
       },
       {
         "frames": [
-          21,
-          28
+          17,
+          24
         ],
         "order": 0,
-        "role": "foundation",
-        "stage": 4
+        "role": "evidence",
+        "stage": 3
       },
       {
         "frames": [
-          24,
-          31
+          20,
+          27
         ],
         "order": 1,
-        "role": "foundation",
-        "stage": 4
+        "role": "artifact",
+        "stage": 3
       },
       {
         "frames": [
-          27,
-          34
+          25,
+          30
         ],
-        "order": 2,
-        "role": "foundation",
+        "order": 0,
+        "role": "context",
         "stage": 4
       },
       {
         "frames": [
-          31,
+          29,
           36
         ],
         "order": 0,
-        "role": "promote",
+        "role": "deliver",
+        "stage": 5
+      },
+      {
+        "frames": [
+          29,
+          36
+        ],
+        "order": 1,
+        "role": "approval",
         "stage": 5
       }
     ],
@@ -97,35 +97,45 @@
     "maximum_concurrent_draws": 2,
     "nodes_visible_every_frame": true,
     "persistent_data_flow": {
+      "auxiliary": {
+        "movement": "opacity-only",
+        "node_id": "coordinator",
+        "opacity_range": [
+          0.12,
+          0.32
+        ],
+        "period_frames": 16,
+        "primitive": "coordinator-halo"
+      },
       "body": {
         "appended_below_labels_and_nodes": true,
         "color": "inherit-source-stroke",
         "dash_pattern": [
-          11,
-          36
+          13,
+          30
         ],
         "filter_free": true,
         "linecap": "round",
         "linejoin": "round",
         "marker_free": true,
-        "maximum_live_width": 2.8,
-        "opacity": 0.82,
-        "primitive": "governance-thread",
+        "maximum_live_width": 2.2,
+        "opacity": 0.88,
+        "primitive": "glass-handoff-rail",
         "resolved_widths_in_schedule_order": [
-          2.0,
-          2.0,
-          2.0,
-          2.0,
-          2.0,
-          2.0,
-          2.0,
-          2.0,
-          2.0
+          2.2,
+          2.2,
+          2.2,
+          2.2,
+          2.2,
+          2.2,
+          2.2,
+          2.2,
+          2.2
         ],
         "stroke_width": "min(maximum_live_width, source_stroke)"
       },
       "dash_offset_per_rendered_frame": -6,
-      "dash_period": 47,
+      "dash_period": 43,
       "direction": "source-to-target",
       "direction_sentinels": [
         {
@@ -136,45 +146,43 @@
         },
         {
           "directions": [
+            "down",
+            "left",
             "down"
           ],
-          "key": "dispatch/0"
+          "key": "delegate/0"
         },
         {
           "directions": [
-            "left"
+            "down",
+            "right",
+            "down"
           ],
-          "key": "runtime-branch/0"
+          "key": "delegate/2"
+        },
+        {
+          "directions": [
+            "down"
+          ],
+          "key": "evidence/0"
         },
         {
           "directions": [
             "right"
           ],
-          "key": "runtime-branch/1"
-        },
-        {
-          "directions": [
-            "down"
-          ],
-          "key": "foundation/0"
-        },
-        {
-          "directions": [
-            "right"
-          ],
-          "key": "promote/0"
+          "key": "context/0"
         }
       ],
       "expected_initial_phases": [
         7,
         14,
+        17,
+        20,
         21,
         24,
-        27,
         28,
-        31,
-        34,
-        35
+        35,
+        38
       ],
       "fade_in_factors": [
         0.3,
@@ -191,8 +199,8 @@
       ],
       "minimum_review_scale": "50%",
       "period_step_coprime": true,
-      "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-      "primitive": "governance-thread",
+      "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+      "primitive": "glass-handoff-rail",
       "rendered_frames": [
         36,
         114
@@ -216,35 +224,35 @@
         },
         {
           "order": 0,
-          "role": "dispatch"
-        },
-        {
-          "order": 0,
-          "role": "runtime-branch"
+          "role": "delegate"
         },
         {
           "order": 1,
-          "role": "runtime-branch"
+          "role": "delegate"
         },
         {
           "order": 2,
-          "role": "runtime-branch"
+          "role": "delegate"
         },
         {
           "order": 0,
-          "role": "foundation"
+          "role": "evidence"
         },
         {
           "order": 1,
-          "role": "foundation"
-        },
-        {
-          "order": 2,
-          "role": "foundation"
+          "role": "artifact"
         },
         {
           "order": 0,
-          "role": "promote"
+          "role": "context"
+        },
+        {
+          "order": 0,
+          "role": "deliver"
+        },
+        {
+          "order": 1,
+          "role": "approval"
         }
       ],
       "signature": {
@@ -256,22 +264,23 @@
         "direction": "source-to-target",
         "endpoint_clearance": 8,
         "geometry": {
-          "approval_bar_width": 4,
-          "center_dot_diameter": 3,
-          "glow": false,
-          "height": 12,
-          "shadow": false,
-          "shape": "warm-white-hexagonal-outline",
-          "width": 12
+          "height": 9,
+          "highlight_stroke_width": 1,
+          "rx": 3,
+          "shape": "rounded-translucent-plate",
+          "tangent_aware_rotation": true,
+          "width": 14,
+          "work_item_dot_count": 2,
+          "work_item_dot_radius": 2
         },
         "path_advance_per_rendered_frame": 6,
-        "primitive": "policy-seal",
+        "primitive": "glass-task-capsule",
         "tangent_aware_rotation": true,
         "wrap": "target-clearance-to-source-clearance"
       },
       "signature_advance_per_rendered_frame": 6,
       "signature_count": 9,
-      "signature_primitive": "policy-seal",
+      "signature_primitive": "glass-task-capsule",
       "stream_count": 9,
       "travel_easing": "linear",
       "travel_pixels_per_frame_at_100_percent": 6,
@@ -299,11 +308,11 @@
     "topology_draw_on": true
   },
   "artifact": {
-    "bytes": 249229,
+    "bytes": 379797,
     "encoder": "ffmpeg/gif-palette",
     "format": "gif",
     "mime_type": "image/gif",
-    "path": "docs/projects/ai-ssh-agent/assets/architecture/architecture.gif",
+    "path": "docs/projects/ai-ssh-agent/assets/http-mcp-contract/http-mcp-contract.gif",
     "probe": {
       "codec_name": "gif",
       "container": {
@@ -318,7 +327,7 @@
       "r_frame_rate": "20/1",
       "width": 960
     },
-    "sha256": "f36c9749d1a646a10a9a35b77717d06f2d302a6c2dd3665704c775fcb5e1c4c6",
+    "sha256": "0f703df1c3fd5a9a45e185b6d51ce0336edda381109c3b513c47aad43731327b",
     "source_frame_count": 115
   },
   "dry_run": false,
@@ -327,7 +336,7 @@
     "height": 700,
     "width": 960
   },
-  "fixture_sha256": "427127297757d7672ab365e37983a2a09bc55b26a420be9b44dc67e7ac5b9553",
+  "fixture_sha256": "f4664045331c73179c312482b4d68d474513a059ede426891e097e615722b6a9",
   "fps": 20,
   "frame_count": 115,
   "frame_uniqueness_contract": {
@@ -348,14 +357,14 @@
     "adjacent_duplicate_count": 0,
     "all_frames_unique": true,
     "delta_quality": {
-      "adjacent_max": 0.0008031529411764706,
-      "adjacent_median": 0.0002259921568627451,
-      "adjacent_min": 3.215450980392157e-06,
-      "adjacent_p95": 0.000295938431372549,
+      "adjacent_max": 0.0016039254901960784,
+      "adjacent_median": 0.0006635686274509804,
+      "adjacent_min": 6.547607843137255e-06,
+      "adjacent_p95": 0.0007452392156862746,
       "changed_area_method": "accumulated adjacent luma delta greater than 2 percent",
-      "changed_area_ratio": 0.019691960784313723,
+      "changed_area_ratio": 0.036346745098039215,
       "metric": "normalized-luma-mean-absolute-difference",
-      "seam": 7.876980392156863e-05,
+      "seam": 0.00016405215686274508,
       "seam_within_adjacent_p95": true
     },
     "embedded_loop_count": 0,
@@ -364,13 +373,13 @@
       "adjacent_duplicate_pairs": [],
       "algorithm": "framemd5",
       "all_frames_unique": true,
-      "first_frame_hash": "8ac3cf24e1c055d6f7da684b450f2c51",
+      "first_frame_hash": "54d25c384b52d0449156098fc563d2ff",
       "frame_count": 115,
       "intentional_reset_boundary_opacity": 1.0,
       "intentional_reset_boundary_repeat_count": 0,
       "intentional_reset_boundary_repeat_evidence": [],
       "intentional_reset_boundary_repeat_frame": 110,
-      "last_frame_hash": "20315c406204dbe466668ea41687e626",
+      "last_frame_hash": "79b01cb53ba0fe772d6f58fb70a855f4",
       "minimum_unique_frame_count": 75,
       "opening_construction_and_reset_tail_globally_distinct": true,
       "repeat_scope": [
@@ -384,10 +393,10 @@
       "repeats_confined_to_permitted_scope": true,
       "unique_frame_count": 115
     },
-    "first_frame_sha256": "33642e00c3d9978f45eb4e3d281ca862dfa63cc94aa578d6db1f5c0684177e26",
+    "first_frame_sha256": "c375be7bea862dc5b19e0879c0bfdd83d2d8708fa22f2820c42d7b28a818ae50",
     "intentional_reset_boundary_repeat_count": 0,
     "intentional_reset_boundary_repeat_evidence": [],
-    "last_frame_sha256": "87f74346b5b317ff844db7ac855cd71a45ec7151db290e13fb755890a63b081b",
+    "last_frame_sha256": "1d10995d9b97995365c271ace37a0fc9d86f2dc32085f48d971a044382fff052",
     "minimum_unique_frame_count": 75,
     "opening_construction_and_reset_tail_globally_distinct": true,
     "playback": "embedded-infinite",
@@ -396,13 +405,13 @@
       "adjacent_duplicate_pairs": [],
       "algorithm": "sha256",
       "all_frames_unique": true,
-      "first_frame_hash": "33642e00c3d9978f45eb4e3d281ca862dfa63cc94aa578d6db1f5c0684177e26",
+      "first_frame_hash": "c375be7bea862dc5b19e0879c0bfdd83d2d8708fa22f2820c42d7b28a818ae50",
       "frame_count": 115,
       "intentional_reset_boundary_opacity": 1.0,
       "intentional_reset_boundary_repeat_count": 0,
       "intentional_reset_boundary_repeat_evidence": [],
       "intentional_reset_boundary_repeat_frame": 110,
-      "last_frame_hash": "87f74346b5b317ff844db7ac855cd71a45ec7151db290e13fb755890a63b081b",
+      "last_frame_hash": "1d10995d9b97995365c271ace37a0fc9d86f2dc32085f48d971a044382fff052",
       "minimum_unique_frame_count": 75,
       "opening_construction_and_reset_tail_globally_distinct": true,
       "repeat_scope": [
@@ -455,70 +464,70 @@
             12
           ],
           "order": 0,
-          "role": "dispatch",
+          "role": "delegate",
           "stage": 2
         },
         {
           "frames": [
-            10,
-            17
-          ],
-          "order": 0,
-          "role": "runtime-branch",
-          "stage": 3
-        },
-        {
-          "frames": [
-            13,
-            20
+            8,
+            15
           ],
           "order": 1,
-          "role": "runtime-branch",
-          "stage": 3
+          "role": "delegate",
+          "stage": 2
         },
         {
           "frames": [
-            16,
-            23
+            11,
+            18
           ],
           "order": 2,
-          "role": "runtime-branch",
-          "stage": 3
+          "role": "delegate",
+          "stage": 2
         },
         {
           "frames": [
-            21,
-            28
+            17,
+            24
           ],
           "order": 0,
-          "role": "foundation",
-          "stage": 4
+          "role": "evidence",
+          "stage": 3
         },
         {
           "frames": [
-            24,
-            31
+            20,
+            27
           ],
           "order": 1,
-          "role": "foundation",
-          "stage": 4
+          "role": "artifact",
+          "stage": 3
         },
         {
           "frames": [
-            27,
-            34
+            25,
+            30
           ],
-          "order": 2,
-          "role": "foundation",
+          "order": 0,
+          "role": "context",
           "stage": 4
         },
         {
           "frames": [
-            31,
+            29,
             36
           ],
           "order": 0,
-          "role": "promote",
+          "role": "deliver",
+          "stage": 5
+        },
+        {
+          "frames": [
+            29,
+            36
+          ],
+          "order": 1,
+          "role": "approval",
           "stage": 5
         }
       ],
@@ -534,35 +543,45 @@
       "maximum_concurrent_draws": 2,
       "nodes_visible_every_frame": true,
       "persistent_data_flow": {
+        "auxiliary": {
+          "movement": "opacity-only",
+          "node_id": "coordinator",
+          "opacity_range": [
+            0.12,
+            0.32
+          ],
+          "period_frames": 16,
+          "primitive": "coordinator-halo"
+        },
         "body": {
           "appended_below_labels_and_nodes": true,
           "color": "inherit-source-stroke",
           "dash_pattern": [
-            11,
-            36
+            13,
+            30
           ],
           "filter_free": true,
           "linecap": "round",
           "linejoin": "round",
           "marker_free": true,
-          "maximum_live_width": 2.8,
-          "opacity": 0.82,
-          "primitive": "governance-thread",
+          "maximum_live_width": 2.2,
+          "opacity": 0.88,
+          "primitive": "glass-handoff-rail",
           "resolved_widths_in_schedule_order": [
-            2.0,
-            2.0,
-            2.0,
-            2.0,
-            2.0,
-            2.0,
-            2.0,
-            2.0,
-            2.0
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2
           ],
           "stroke_width": "min(maximum_live_width, source_stroke)"
         },
         "dash_offset_per_rendered_frame": -6,
-        "dash_period": 47,
+        "dash_period": 43,
         "direction": "source-to-target",
         "direction_sentinels": [
           {
@@ -573,45 +592,43 @@
           },
           {
             "directions": [
+              "down",
+              "left",
               "down"
             ],
-            "key": "dispatch/0"
+            "key": "delegate/0"
           },
           {
             "directions": [
-              "left"
+              "down",
+              "right",
+              "down"
             ],
-            "key": "runtime-branch/0"
+            "key": "delegate/2"
+          },
+          {
+            "directions": [
+              "down"
+            ],
+            "key": "evidence/0"
           },
           {
             "directions": [
               "right"
             ],
-            "key": "runtime-branch/1"
-          },
-          {
-            "directions": [
-              "down"
-            ],
-            "key": "foundation/0"
-          },
-          {
-            "directions": [
-              "right"
-            ],
-            "key": "promote/0"
+            "key": "context/0"
           }
         ],
         "expected_initial_phases": [
           7,
           14,
+          17,
+          20,
           21,
           24,
-          27,
           28,
-          31,
-          34,
-          35
+          35,
+          38
         ],
         "fade_in_factors": [
           0.3,
@@ -628,8 +645,8 @@
         ],
         "minimum_review_scale": "50%",
         "period_step_coprime": true,
-        "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-        "primitive": "governance-thread",
+        "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+        "primitive": "glass-handoff-rail",
         "rendered_frames": [
           36,
           114
@@ -653,35 +670,35 @@
           },
           {
             "order": 0,
-            "role": "dispatch"
-          },
-          {
-            "order": 0,
-            "role": "runtime-branch"
+            "role": "delegate"
           },
           {
             "order": 1,
-            "role": "runtime-branch"
+            "role": "delegate"
           },
           {
             "order": 2,
-            "role": "runtime-branch"
+            "role": "delegate"
           },
           {
             "order": 0,
-            "role": "foundation"
+            "role": "evidence"
           },
           {
             "order": 1,
-            "role": "foundation"
-          },
-          {
-            "order": 2,
-            "role": "foundation"
+            "role": "artifact"
           },
           {
             "order": 0,
-            "role": "promote"
+            "role": "context"
+          },
+          {
+            "order": 0,
+            "role": "deliver"
+          },
+          {
+            "order": 1,
+            "role": "approval"
           }
         ],
         "signature": {
@@ -693,22 +710,23 @@
           "direction": "source-to-target",
           "endpoint_clearance": 8,
           "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "tangent_aware_rotation": true,
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
           },
           "path_advance_per_rendered_frame": 6,
-          "primitive": "policy-seal",
+          "primitive": "glass-task-capsule",
           "tangent_aware_rotation": true,
           "wrap": "target-clearance-to-source-clearance"
         },
         "signature_advance_per_rendered_frame": 6,
         "signature_count": 9,
-        "signature_primitive": "policy-seal",
+        "signature_primitive": "glass-task-capsule",
         "stream_count": 9,
         "travel_easing": "linear",
         "travel_pixels_per_frame_at_100_percent": 6,
@@ -794,16 +812,16 @@
     "version": "3.4"
   },
   "motion_grammar_version": "3.4",
-  "motion_scene": "governed-runtime",
+  "motion_scene": "agent-orchestration",
   "ok": true,
-  "output": "docs/projects/ai-ssh-agent/assets/architecture/architecture.gif",
+  "output": "docs/projects/ai-ssh-agent/assets/http-mcp-contract/http-mcp-contract.gif",
   "output_format": "gif",
-  "preset": "governed-runtime",
+  "preset": "agent-orchestration",
   "rendered_pixels": 77280000,
   "renderer": {
     "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     "duration_seconds": 5.75,
-    "effects": 27,
+    "effects": 28,
     "engine": "chromium-svg-draw-on-persistent-data-flow",
     "fps": 20,
     "frame_count": 115,
@@ -814,12 +832,35 @@
     "module_version": "25.3.0",
     "ok": true,
     "paint_barrier": "fonts-ready-plus-two-animation-frames-before-capture",
-    "preset": "governed-runtime",
+    "preset": "agent-orchestration",
     "resolved_module": "fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
     "sandbox": "enabled",
     "scene_report": {
       "animated_background_count": 0,
-      "auxiliary_primitives": [],
+      "auxiliary_primitives": [
+        {
+          "animated_attributes": [
+            "opacity"
+          ],
+          "below_node": true,
+          "count": 1,
+          "geometry": {
+            "height": 62,
+            "width": 208,
+            "x": 386,
+            "y": 142
+          },
+          "movement": "opacity-only",
+          "node_id": "coordinator",
+          "opacity_range": [
+            0.12,
+            0.32
+          ],
+          "period_frames": 16,
+          "primitive": "coordinator-halo",
+          "source_geometry_mutated": false
+        }
+      ],
       "camera_motion_count": 0,
       "connectors_visible_at_opening": false,
       "direction_sentinels": [
@@ -839,30 +880,56 @@
         },
         {
           "actual": [
+            "down",
+            "left",
             "down"
           ],
           "dash_offset_per_rendered_frame": -6,
           "expected": [
+            "down",
+            "left",
             "down"
           ],
           "order": 0,
           "passed": true,
-          "role": "dispatch",
-          "schedule_key": "dispatch/0",
+          "role": "delegate",
+          "schedule_key": "delegate/0",
           "signature_advance_per_rendered_frame": 6
         },
         {
           "actual": [
-            "left"
+            "down",
+            "right",
+            "down"
           ],
           "dash_offset_per_rendered_frame": -6,
           "expected": [
-            "left"
+            "down",
+            "right",
+            "down"
+          ],
+          "order": 2,
+          "passed": true,
+          "role": "delegate",
+          "schedule_key": "delegate/2",
+          "signature_advance_per_rendered_frame": 6
+        },
+        {
+          "actual": [
+            "down",
+            "right",
+            "down",
+            "left",
+            "down"
+          ],
+          "dash_offset_per_rendered_frame": -6,
+          "expected": [
+            "down"
           ],
           "order": 0,
           "passed": true,
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/0",
+          "role": "evidence",
+          "schedule_key": "evidence/0",
           "signature_advance_per_rendered_frame": 6
         },
         {
@@ -873,38 +940,10 @@
           "expected": [
             "right"
           ],
-          "order": 1,
-          "passed": true,
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/1",
-          "signature_advance_per_rendered_frame": 6
-        },
-        {
-          "actual": [
-            "down"
-          ],
-          "dash_offset_per_rendered_frame": -6,
-          "expected": [
-            "down"
-          ],
           "order": 0,
           "passed": true,
-          "role": "foundation",
-          "schedule_key": "foundation/0",
-          "signature_advance_per_rendered_frame": 6
-        },
-        {
-          "actual": [
-            "right"
-          ],
-          "dash_offset_per_rendered_frame": -6,
-          "expected": [
-            "right"
-          ],
-          "order": 0,
-          "passed": true,
-          "role": "promote",
-          "schedule_key": "promote/0",
+          "role": "context",
+          "schedule_key": "context/0",
           "signature_advance_per_rendered_frame": 6
         }
       ],
@@ -918,7 +957,7 @@
       "draw_schedule": [
         {
           "easing": "linear",
-          "edge_id": "request",
+          "edge_id": "ingress",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 0,
@@ -932,7 +971,7 @@
         },
         {
           "easing": "linear",
-          "edge_id": "dispatch",
+          "edge_id": "context",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 0,
@@ -940,120 +979,121 @@
             5,
             12
           ],
-          "role": "dispatch",
-          "schedule_key": "dispatch/0",
+          "role": "delegate",
+          "schedule_key": "delegate/0",
           "stage": 2
         },
         {
           "easing": "linear",
-          "edge_id": "plan",
-          "marker_after_arrival": true,
-          "marker_during_draw": false,
-          "order": 0,
-          "rendered_frames": [
-            10,
-            17
-          ],
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/0",
-          "stage": 3
-        },
-        {
-          "easing": "linear",
-          "edge_id": "enforce",
+          "edge_id": "adapt",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 1,
           "rendered_frames": [
-            13,
-            20
+            8,
+            15
           ],
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/1",
-          "stage": 3
+          "role": "delegate",
+          "schedule_key": "delegate/1",
+          "stage": 2
         },
         {
           "easing": "linear",
-          "edge_id": "act",
+          "edge_id": "scope",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 2,
           "rendered_frames": [
-            16,
-            23
+            11,
+            18
           ],
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/2",
-          "stage": 3
+          "role": "delegate",
+          "schedule_key": "delegate/2",
+          "stage": 2
         },
         {
           "easing": "linear",
-          "edge_id": "remember",
+          "edge_id": "session-to-catalog",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 0,
           "rendered_frames": [
-            21,
-            28
+            17,
+            24
           ],
-          "role": "foundation",
-          "schedule_key": "foundation/0",
-          "stage": 4
+          "role": "evidence",
+          "schedule_key": "evidence/0",
+          "stage": 3
         },
         {
           "easing": "linear",
-          "edge_id": "register",
+          "edge_id": "adapter-to-case",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 1,
           "rendered_frames": [
-            24,
-            31
+            20,
+            27
           ],
-          "role": "foundation",
-          "schedule_key": "foundation/1",
-          "stage": 4
+          "role": "artifact",
+          "schedule_key": "artifact/1",
+          "stage": 3
         },
         {
           "easing": "linear",
-          "edge_id": "trace",
-          "marker_after_arrival": true,
-          "marker_during_draw": false,
-          "order": 2,
-          "rendered_frames": [
-            27,
-            34
-          ],
-          "role": "foundation",
-          "schedule_key": "foundation/2",
-          "stage": 4
-        },
-        {
-          "easing": "linear",
-          "edge_id": "promote",
+          "edge_id": "catalog-to-case",
           "marker_after_arrival": true,
           "marker_during_draw": false,
           "order": 0,
           "rendered_frames": [
-            31,
+            25,
+            30
+          ],
+          "role": "context",
+          "schedule_key": "context/0",
+          "stage": 4
+        },
+        {
+          "easing": "linear",
+          "edge_id": "case-to-result",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 0,
+          "rendered_frames": [
+            29,
             36
           ],
-          "role": "promote",
-          "schedule_key": "promote/0",
+          "role": "deliver",
+          "schedule_key": "deliver/0",
+          "stage": 5
+        },
+        {
+          "easing": "linear",
+          "edge_id": "guard-to-result",
+          "marker_after_arrival": true,
+          "marker_during_draw": false,
+          "order": 1,
+          "rendered_frames": [
+            29,
+            36
+          ],
+          "role": "approval",
+          "schedule_key": "approval/1",
           "stage": 5
         }
       ],
       "dynamic_not_thicker_than_source": true,
       "empty_opening_frame": 0,
       "extra_scene_primitives": [
-        "policy-seal"
+        "glass-task-capsule",
+        "coordinator-halo"
       ],
       "grammar_version": "3.4",
-      "halo_count": 0,
-      "live_rail_width_ceiling": 2.8,
+      "halo_count": 1,
+      "live_rail_width_ceiling": 2.2,
       "live_rail_width_ceiling_passed": true,
       "maximum_concurrent_draws": 2,
-      "maximum_live_rail_width": 2,
+      "maximum_live_rail_width": 2.2,
       "node_motion": 0,
       "node_motion_count": 0,
       "nodes_visible_every_frame": true,
@@ -1063,54 +1103,54 @@
         "body": {
           "color": "inherit-source-stroke",
           "dash_pattern": [
-            11,
-            36
+            13,
+            30
           ],
           "dynamic_not_thicker_than_source": true,
           "filter_free": true,
           "linecap": "round",
           "linejoin": "round",
           "marker_free": true,
-          "maximum_live_width": 2.8,
-          "opacity": 0.82,
-          "primitive": "governance-thread",
+          "maximum_live_width": 2.2,
+          "opacity": 0.88,
+          "primitive": "glass-handoff-rail",
           "resolved_widths_in_schedule_order": [
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2
           ],
           "source_widths_in_schedule_order": [
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2,
+            2.2
           ],
-          "stroke_width": "min(2.8, source_stroke)"
+          "stroke_width": "min(2.2, source_stroke)"
         },
         "dash_offset_per_rendered_frame": -6,
-        "dash_period": 47,
+        "dash_period": 43,
         "direction": "source-to-target",
         "expected_initial_phases": [
           7,
           14,
+          17,
+          20,
           21,
           24,
-          27,
           28,
-          31,
-          34,
-          35
+          35,
+          38
         ],
         "fade_in_factors": [
           0.3,
@@ -1127,9 +1167,9 @@
         ],
         "minimum_review_scale": "50%",
         "period_step_coprime": true,
-        "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
+        "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
         "phase_repeat_within_stream_interval": true,
-        "primitive": "governance-thread",
+        "primitive": "glass-handoff-rail",
         "rendered_frames": [
           36,
           114
@@ -1157,131 +1197,131 @@
           "geometry_by_route": [
             {
               "geometry": {
-                "approval_bar_width": 4,
-                "center_dot_diameter": 3,
-                "glow": false,
-                "height": 12,
-                "shadow": false,
-                "shape": "warm-white-hexagonal-outline",
-                "width": 12
+                "height": 9,
+                "highlight_stroke_width": 1,
+                "rx": 3,
+                "shape": "rounded-translucent-plate",
+                "width": 14,
+                "work_item_dot_count": 2,
+                "work_item_dot_radius": 2
               },
-              "primitive": "policy-seal",
+              "primitive": "glass-task-capsule",
               "schedule_key": "ingress/0"
             },
             {
               "geometry": {
-                "approval_bar_width": 4,
-                "center_dot_diameter": 3,
-                "glow": false,
-                "height": 12,
-                "shadow": false,
-                "shape": "warm-white-hexagonal-outline",
-                "width": 12
+                "height": 9,
+                "highlight_stroke_width": 1,
+                "rx": 3,
+                "shape": "rounded-translucent-plate",
+                "width": 14,
+                "work_item_dot_count": 2,
+                "work_item_dot_radius": 2
               },
-              "primitive": "policy-seal",
-              "schedule_key": "dispatch/0"
+              "primitive": "glass-task-capsule",
+              "schedule_key": "delegate/0"
             },
             {
               "geometry": {
-                "approval_bar_width": 4,
-                "center_dot_diameter": 3,
-                "glow": false,
-                "height": 12,
-                "shadow": false,
-                "shape": "warm-white-hexagonal-outline",
-                "width": 12
+                "height": 9,
+                "highlight_stroke_width": 1,
+                "rx": 3,
+                "shape": "rounded-translucent-plate",
+                "width": 14,
+                "work_item_dot_count": 2,
+                "work_item_dot_radius": 2
               },
-              "primitive": "policy-seal",
-              "schedule_key": "runtime-branch/0"
+              "primitive": "glass-task-capsule",
+              "schedule_key": "delegate/1"
             },
             {
               "geometry": {
-                "approval_bar_width": 4,
-                "center_dot_diameter": 3,
-                "glow": false,
-                "height": 12,
-                "shadow": false,
-                "shape": "warm-white-hexagonal-outline",
-                "width": 12
+                "height": 9,
+                "highlight_stroke_width": 1,
+                "rx": 3,
+                "shape": "rounded-translucent-plate",
+                "width": 14,
+                "work_item_dot_count": 2,
+                "work_item_dot_radius": 2
               },
-              "primitive": "policy-seal",
-              "schedule_key": "runtime-branch/1"
+              "primitive": "glass-task-capsule",
+              "schedule_key": "delegate/2"
             },
             {
               "geometry": {
-                "approval_bar_width": 4,
-                "center_dot_diameter": 3,
-                "glow": false,
-                "height": 12,
-                "shadow": false,
-                "shape": "warm-white-hexagonal-outline",
-                "width": 12
+                "height": 9,
+                "highlight_stroke_width": 1,
+                "rx": 3,
+                "shape": "rounded-translucent-plate",
+                "width": 14,
+                "work_item_dot_count": 2,
+                "work_item_dot_radius": 2
               },
-              "primitive": "policy-seal",
-              "schedule_key": "runtime-branch/2"
+              "primitive": "glass-task-capsule",
+              "schedule_key": "evidence/0"
             },
             {
               "geometry": {
-                "approval_bar_width": 4,
-                "center_dot_diameter": 3,
-                "glow": false,
-                "height": 12,
-                "shadow": false,
-                "shape": "warm-white-hexagonal-outline",
-                "width": 12
+                "height": 9,
+                "highlight_stroke_width": 1,
+                "rx": 3,
+                "shape": "rounded-translucent-plate",
+                "width": 14,
+                "work_item_dot_count": 2,
+                "work_item_dot_radius": 2
               },
-              "primitive": "policy-seal",
-              "schedule_key": "foundation/0"
+              "primitive": "glass-task-capsule",
+              "schedule_key": "artifact/1"
             },
             {
               "geometry": {
-                "approval_bar_width": 4,
-                "center_dot_diameter": 3,
-                "glow": false,
-                "height": 12,
-                "shadow": false,
-                "shape": "warm-white-hexagonal-outline",
-                "width": 12
+                "height": 9,
+                "highlight_stroke_width": 1,
+                "rx": 3,
+                "shape": "rounded-translucent-plate",
+                "width": 14,
+                "work_item_dot_count": 2,
+                "work_item_dot_radius": 2
               },
-              "primitive": "policy-seal",
-              "schedule_key": "foundation/1"
+              "primitive": "glass-task-capsule",
+              "schedule_key": "context/0"
             },
             {
               "geometry": {
-                "approval_bar_width": 4,
-                "center_dot_diameter": 3,
-                "glow": false,
-                "height": 12,
-                "shadow": false,
-                "shape": "warm-white-hexagonal-outline",
-                "width": 12
+                "height": 9,
+                "highlight_stroke_width": 1,
+                "rx": 3,
+                "shape": "rounded-translucent-plate",
+                "width": 14,
+                "work_item_dot_count": 2,
+                "work_item_dot_radius": 2
               },
-              "primitive": "policy-seal",
-              "schedule_key": "foundation/2"
+              "primitive": "glass-task-capsule",
+              "schedule_key": "deliver/0"
             },
             {
               "geometry": {
-                "approval_bar_width": 4,
-                "center_dot_diameter": 3,
-                "glow": false,
-                "height": 12,
-                "shadow": false,
-                "shape": "warm-white-hexagonal-outline",
-                "width": 12
+                "height": 9,
+                "highlight_stroke_width": 1,
+                "rx": 3,
+                "shape": "rounded-translucent-plate",
+                "width": 14,
+                "work_item_dot_count": 2,
+                "work_item_dot_radius": 2
               },
-              "primitive": "policy-seal",
-              "schedule_key": "promote/0"
+              "primitive": "glass-task-capsule",
+              "schedule_key": "approval/1"
             }
           ],
           "path_advance_per_rendered_frame": 6,
-          "primitive": "policy-seal",
-          "signature_kind": "policy-seal",
+          "primitive": "glass-task-capsule",
+          "signature_kind": "glass-task-capsule",
           "tangent_aware_rotation": true,
           "wrap": "target-clearance-to-source-clearance"
         },
         "signature_advance_per_rendered_frame": 6,
         "signature_count": 9,
-        "signature_primitive": "policy-seal",
+        "signature_primitive": "glass-task-capsule",
         "stream_count": 9,
         "stream_interval_frame_count": 79,
         "travel_easing": "linear",
@@ -1293,16 +1333,16 @@
       },
       "persistent_streams": [
         {
-          "color": "#8c6f5a",
+          "color": "#60a5fa",
           "dash_offset_per_rendered_frame": -6,
           "dash_pattern": [
-            11,
-            36
+            13,
+            30
           ],
-          "dash_period": 47,
+          "dash_period": 43,
           "direction": "source-to-target",
           "dynamic_not_thicker_than_source": true,
-          "edge_id": "request",
+          "edge_id": "ingress",
           "fade_in_frames": [
             36,
             38
@@ -1314,33 +1354,33 @@
           ],
           "initial_phase": 7,
           "marker_free": true,
-          "maximum_live_width": 2.8,
+          "maximum_live_width": 2.2,
           "motion_order": 0,
           "motion_stage": 1,
-          "opacity": 0.82,
-          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-          "primitive": "governance-thread",
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+          "primitive": "glass-handoff-rail",
           "rendered_frames": [
             36,
             114
           ],
           "role": "ingress",
           "schedule_key": "ingress/0",
-          "source_stroke_width": 2,
-          "stroke_width": 2,
+          "source_stroke_width": 2.2,
+          "stroke_width": 2.2,
           "travel_easing": "linear"
         },
         {
-          "color": "#d97757",
+          "color": "#c084fc",
           "dash_offset_per_rendered_frame": -6,
           "dash_pattern": [
-            11,
-            36
+            13,
+            30
           ],
-          "dash_period": 47,
+          "dash_period": 43,
           "direction": "source-to-target",
           "dynamic_not_thicker_than_source": true,
-          "edge_id": "dispatch",
+          "edge_id": "context",
           "fade_in_frames": [
             36,
             38
@@ -1352,33 +1392,109 @@
           ],
           "initial_phase": 14,
           "marker_free": true,
-          "maximum_live_width": 2.8,
+          "maximum_live_width": 2.2,
           "motion_order": 0,
           "motion_stage": 2,
-          "opacity": 0.82,
-          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-          "primitive": "governance-thread",
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+          "primitive": "glass-handoff-rail",
           "rendered_frames": [
             36,
             114
           ],
-          "role": "dispatch",
-          "schedule_key": "dispatch/0",
-          "source_stroke_width": 2,
-          "stroke_width": 2,
+          "role": "delegate",
+          "schedule_key": "delegate/0",
+          "source_stroke_width": 2.2,
+          "stroke_width": 2.2,
           "travel_easing": "linear"
         },
         {
-          "color": "#d97757",
+          "color": "#c084fc",
           "dash_offset_per_rendered_frame": -6,
           "dash_pattern": [
-            11,
-            36
+            13,
+            30
           ],
-          "dash_period": 47,
+          "dash_period": 43,
           "direction": "source-to-target",
           "dynamic_not_thicker_than_source": true,
-          "edge_id": "plan",
+          "edge_id": "adapt",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 17,
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "motion_order": 1,
+          "motion_stage": 2,
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+          "primitive": "glass-handoff-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "delegate",
+          "schedule_key": "delegate/1",
+          "source_stroke_width": 2.2,
+          "stroke_width": 2.2,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#c084fc",
+          "dash_offset_per_rendered_frame": -6,
+          "dash_pattern": [
+            13,
+            30
+          ],
+          "dash_period": 43,
+          "direction": "source-to-target",
+          "dynamic_not_thicker_than_source": true,
+          "edge_id": "scope",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 20,
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "motion_order": 2,
+          "motion_stage": 2,
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+          "primitive": "glass-handoff-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "delegate",
+          "schedule_key": "delegate/2",
+          "source_stroke_width": 2.2,
+          "stroke_width": 2.2,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#34d399",
+          "dash_offset_per_rendered_frame": -6,
+          "dash_pattern": [
+            13,
+            30
+          ],
+          "dash_period": 43,
+          "direction": "source-to-target",
+          "dynamic_not_thicker_than_source": true,
+          "edge_id": "session-to-catalog",
           "fade_in_frames": [
             36,
             38
@@ -1390,33 +1506,33 @@
           ],
           "initial_phase": 21,
           "marker_free": true,
-          "maximum_live_width": 2.8,
+          "maximum_live_width": 2.2,
           "motion_order": 0,
           "motion_stage": 3,
-          "opacity": 0.82,
-          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-          "primitive": "governance-thread",
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+          "primitive": "glass-handoff-rail",
           "rendered_frames": [
             36,
             114
           ],
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/0",
-          "source_stroke_width": 2,
-          "stroke_width": 2,
+          "role": "evidence",
+          "schedule_key": "evidence/0",
+          "source_stroke_width": 2.2,
+          "stroke_width": 2.2,
           "travel_easing": "linear"
         },
         {
-          "color": "#d97757",
+          "color": "#34d399",
           "dash_offset_per_rendered_frame": -6,
           "dash_pattern": [
-            11,
-            36
+            13,
+            30
           ],
-          "dash_period": 47,
+          "dash_period": 43,
           "direction": "source-to-target",
           "dynamic_not_thicker_than_source": true,
-          "edge_id": "enforce",
+          "edge_id": "adapter-to-case",
           "fade_in_frames": [
             36,
             38
@@ -1428,71 +1544,33 @@
           ],
           "initial_phase": 24,
           "marker_free": true,
-          "maximum_live_width": 2.8,
+          "maximum_live_width": 2.2,
           "motion_order": 1,
           "motion_stage": 3,
-          "opacity": 0.82,
-          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-          "primitive": "governance-thread",
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+          "primitive": "glass-handoff-rail",
           "rendered_frames": [
             36,
             114
           ],
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/1",
-          "source_stroke_width": 2,
-          "stroke_width": 2,
+          "role": "artifact",
+          "schedule_key": "artifact/1",
+          "source_stroke_width": 2.2,
+          "stroke_width": 2.2,
           "travel_easing": "linear"
         },
         {
-          "color": "#8c6f5a",
+          "color": "#60a5fa",
           "dash_offset_per_rendered_frame": -6,
           "dash_pattern": [
-            11,
-            36
+            13,
+            30
           ],
-          "dash_period": 47,
+          "dash_period": 43,
           "direction": "source-to-target",
           "dynamic_not_thicker_than_source": true,
-          "edge_id": "act",
-          "fade_in_frames": [
-            36,
-            38
-          ],
-          "filter_free": true,
-          "full_opacity_frames": [
-            38,
-            109
-          ],
-          "initial_phase": 27,
-          "marker_free": true,
-          "maximum_live_width": 2.8,
-          "motion_order": 2,
-          "motion_stage": 3,
-          "opacity": 0.82,
-          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-          "primitive": "governance-thread",
-          "rendered_frames": [
-            36,
-            114
-          ],
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/2",
-          "source_stroke_width": 2,
-          "stroke_width": 2,
-          "travel_easing": "linear"
-        },
-        {
-          "color": "#7b8b5c",
-          "dash_offset_per_rendered_frame": -6,
-          "dash_pattern": [
-            11,
-            36
-          ],
-          "dash_period": 47,
-          "direction": "source-to-target",
-          "dynamic_not_thicker_than_source": true,
-          "edge_id": "remember",
+          "edge_id": "catalog-to-case",
           "fade_in_frames": [
             36,
             38
@@ -1504,109 +1582,33 @@
           ],
           "initial_phase": 28,
           "marker_free": true,
-          "maximum_live_width": 2.8,
+          "maximum_live_width": 2.2,
           "motion_order": 0,
           "motion_stage": 4,
-          "opacity": 0.82,
-          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-          "primitive": "governance-thread",
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+          "primitive": "glass-handoff-rail",
           "rendered_frames": [
             36,
             114
           ],
-          "role": "foundation",
-          "schedule_key": "foundation/0",
-          "source_stroke_width": 2,
-          "stroke_width": 2,
+          "role": "context",
+          "schedule_key": "context/0",
+          "source_stroke_width": 2.2,
+          "stroke_width": 2.2,
           "travel_easing": "linear"
         },
         {
-          "color": "#7c5c96",
+          "color": "#f59e0b",
           "dash_offset_per_rendered_frame": -6,
           "dash_pattern": [
-            11,
-            36
+            13,
+            30
           ],
-          "dash_period": 47,
+          "dash_period": 43,
           "direction": "source-to-target",
           "dynamic_not_thicker_than_source": true,
-          "edge_id": "register",
-          "fade_in_frames": [
-            36,
-            38
-          ],
-          "filter_free": true,
-          "full_opacity_frames": [
-            38,
-            109
-          ],
-          "initial_phase": 31,
-          "marker_free": true,
-          "maximum_live_width": 2.8,
-          "motion_order": 1,
-          "motion_stage": 4,
-          "opacity": 0.82,
-          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-          "primitive": "governance-thread",
-          "rendered_frames": [
-            36,
-            114
-          ],
-          "role": "foundation",
-          "schedule_key": "foundation/1",
-          "source_stroke_width": 2,
-          "stroke_width": 2,
-          "travel_easing": "linear"
-        },
-        {
-          "color": "#7c5c96",
-          "dash_offset_per_rendered_frame": -6,
-          "dash_pattern": [
-            11,
-            36
-          ],
-          "dash_period": 47,
-          "direction": "source-to-target",
-          "dynamic_not_thicker_than_source": true,
-          "edge_id": "trace",
-          "fade_in_frames": [
-            36,
-            38
-          ],
-          "filter_free": true,
-          "full_opacity_frames": [
-            38,
-            109
-          ],
-          "initial_phase": 34,
-          "marker_free": true,
-          "maximum_live_width": 2.8,
-          "motion_order": 2,
-          "motion_stage": 4,
-          "opacity": 0.82,
-          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-          "primitive": "governance-thread",
-          "rendered_frames": [
-            36,
-            114
-          ],
-          "role": "foundation",
-          "schedule_key": "foundation/2",
-          "source_stroke_width": 2,
-          "stroke_width": 2,
-          "travel_easing": "linear"
-        },
-        {
-          "color": "#7c5c96",
-          "dash_offset_per_rendered_frame": -6,
-          "dash_pattern": [
-            11,
-            36
-          ],
-          "dash_period": 47,
-          "direction": "source-to-target",
-          "dynamic_not_thicker_than_source": true,
-          "edge_id": "promote",
+          "edge_id": "case-to-result",
           "fade_in_frames": [
             36,
             38
@@ -1618,24 +1620,62 @@
           ],
           "initial_phase": 35,
           "marker_free": true,
-          "maximum_live_width": 2.8,
+          "maximum_live_width": 2.2,
           "motion_order": 0,
           "motion_stage": 5,
-          "opacity": 0.82,
-          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 47",
-          "primitive": "governance-thread",
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+          "primitive": "glass-handoff-rail",
           "rendered_frames": [
             36,
             114
           ],
-          "role": "promote",
-          "schedule_key": "promote/0",
-          "source_stroke_width": 2,
-          "stroke_width": 2,
+          "role": "deliver",
+          "schedule_key": "deliver/0",
+          "source_stroke_width": 2.2,
+          "stroke_width": 2.2,
+          "travel_easing": "linear"
+        },
+        {
+          "color": "#f59e0b",
+          "dash_offset_per_rendered_frame": -6,
+          "dash_pattern": [
+            13,
+            30
+          ],
+          "dash_period": 43,
+          "direction": "source-to-target",
+          "dynamic_not_thicker_than_source": true,
+          "edge_id": "guard-to-result",
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_free": true,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "initial_phase": 38,
+          "marker_free": true,
+          "maximum_live_width": 2.2,
+          "motion_order": 1,
+          "motion_stage": 5,
+          "opacity": 0.88,
+          "phase_policy": "(motionStage * 7 + motionOrder * 3) mod 43",
+          "primitive": "glass-handoff-rail",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "approval",
+          "schedule_key": "approval/1",
+          "source_stroke_width": 2.2,
+          "stroke_width": 2.2,
           "travel_easing": "linear"
         }
       ],
-      "preset": "governed-runtime",
+      "preset": "agent-orchestration",
       "primitive": "connector-draw-on-with-persistent-data-flow",
       "reset_opacity_samples": [
         1,
@@ -1651,11 +1691,11 @@
       "ripple_count": 0,
       "route_label_clones": 9,
       "route_label_opacity_states": 9,
-      "scene_identity": "Claude Official",
+      "scene_identity": "Glassmorphism",
       "schedule_key": "(data-motion-role, data-motion-order)",
       "settled_marker_clones": 9,
       "settled_topology_dynamic": true,
-      "signature_kind": "policy-seal",
+      "signature_kind": "glass-task-capsule",
       "signature_travel_at_100_percent": 6,
       "signature_travel_at_50_percent": 3,
       "source_edges": 9,
@@ -1673,11 +1713,11 @@
           ],
           "appended_below_labels_and_nodes": true,
           "center_travel_range": [
-            14,
-            66
+            15,
+            155
           ],
           "direction": "source-to-target",
-          "edge_id": "request",
+          "edge_id": "ingress",
           "endpoint_clearance": 8,
           "fade_in_frames": [
             36,
@@ -1690,34 +1730,34 @@
             109
           ],
           "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
           },
-          "geometry_forward_extent": 6,
-          "geometry_rear_extent": 6,
-          "initial_path_distance": 21,
+          "geometry_forward_extent": 7,
+          "geometry_rear_extent": 7,
+          "initial_path_distance": 22,
           "initial_point": {
-            "x": 281,
-            "y": 183
+            "x": 242,
+            "y": 173
           },
           "initial_tangent_rotation": 0,
           "marker_free": true,
           "path_advance_per_rendered_frame": 6,
-          "path_length": 80,
-          "primitive": "policy-seal",
+          "path_length": 170,
+          "primitive": "glass-task-capsule",
           "rendered_frames": [
             36,
             114
           ],
           "role": "ingress",
           "schedule_key": "ingress/0",
-          "signature_family": "policy-seal",
-          "source_color": "#8c6f5a",
+          "signature_family": "glass-task-capsule",
+          "source_color": "#60a5fa",
           "travel_pixels_per_rendered_frame_at_50_percent": 3,
           "wrap": "target-clearance-to-source-clearance"
         },
@@ -1728,11 +1768,11 @@
           ],
           "appended_below_labels_and_nodes": true,
           "center_travel_range": [
-            14,
-            116
+            15,
+            435
           ],
           "direction": "source-to-target",
-          "edge_id": "dispatch",
+          "edge_id": "context",
           "endpoint_clearance": 8,
           "fade_in_frames": [
             36,
@@ -1745,34 +1785,309 @@
             109
           ],
           "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
           },
-          "geometry_forward_extent": 6,
-          "geometry_rear_extent": 6,
-          "initial_path_distance": 28,
+          "geometry_forward_extent": 7,
+          "geometry_rear_extent": 7,
+          "initial_path_distance": 29,
           "initial_point": {
-            "x": 440,
-            "y": 238
+            "x": 490,
+            "y": 229
           },
           "initial_tangent_rotation": 90,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 450,
+          "primitive": "glass-task-capsule",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "delegate",
+          "schedule_key": "delegate/0",
+          "signature_family": "glass-task-capsule",
+          "source_color": "#c084fc",
+          "travel_pixels_per_rendered_frame_at_50_percent": 3,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            15,
+            133
+          ],
+          "direction": "source-to-target",
+          "edge_id": "adapt",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
+          },
+          "geometry_forward_extent": 7,
+          "geometry_rear_extent": 7,
+          "initial_path_distance": 32,
+          "initial_point": {
+            "x": 472,
+            "y": 232
+          },
+          "initial_tangent_rotation": 90,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 148,
+          "primitive": "glass-task-capsule",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "delegate",
+          "schedule_key": "delegate/1",
+          "signature_family": "glass-task-capsule",
+          "source_color": "#c084fc",
+          "travel_pixels_per_rendered_frame_at_50_percent": 3,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            15,
+            397
+          ],
+          "direction": "source-to-target",
+          "edge_id": "scope",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
+          },
+          "geometry_forward_extent": 7,
+          "geometry_rear_extent": 7,
+          "initial_path_distance": 35,
+          "initial_point": {
+            "x": 526.2000122070312,
+            "y": 216.8000030517578
+          },
+          "initial_tangent_rotation": 0,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 412,
+          "primitive": "glass-task-capsule",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "delegate",
+          "schedule_key": "delegate/2",
+          "signature_family": "glass-task-capsule",
+          "source_color": "#c084fc",
+          "travel_pixels_per_rendered_frame_at_50_percent": 3,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            15,
+            196.07998657226562
+          ],
+          "direction": "source-to-target",
+          "edge_id": "session-to-catalog",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
+          },
+          "geometry_forward_extent": 7,
+          "geometry_rear_extent": 7,
+          "initial_path_distance": 36,
+          "initial_point": {
+            "x": 185.60000610351562,
+            "y": 410.3999938964844
+          },
+          "initial_tangent_rotation": 0,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 211.07998657226562,
+          "primitive": "glass-task-capsule",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "evidence",
+          "schedule_key": "evidence/0",
+          "signature_family": "glass-task-capsule",
+          "source_color": "#34d399",
+          "travel_pixels_per_rendered_frame_at_50_percent": 3,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            15,
+            105
+          ],
+          "direction": "source-to-target",
+          "edge_id": "adapter-to-case",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
+          },
+          "geometry_forward_extent": 7,
+          "geometry_rear_extent": 7,
+          "initial_path_distance": 39,
+          "initial_point": {
+            "x": 490,
+            "y": 429
+          },
+          "initial_tangent_rotation": 90,
+          "marker_free": true,
+          "path_advance_per_rendered_frame": 6,
+          "path_length": 120,
+          "primitive": "glass-task-capsule",
+          "rendered_frames": [
+            36,
+            114
+          ],
+          "role": "artifact",
+          "schedule_key": "artifact/1",
+          "signature_family": "glass-task-capsule",
+          "source_color": "#34d399",
+          "travel_pixels_per_rendered_frame_at_50_percent": 3,
+          "wrap": "target-clearance-to-source-clearance"
+        },
+        {
+          "animated_attributes": [
+            "transform",
+            "opacity"
+          ],
+          "appended_below_labels_and_nodes": true,
+          "center_travel_range": [
+            15,
+            115
+          ],
+          "direction": "source-to-target",
+          "edge_id": "catalog-to-case",
+          "endpoint_clearance": 8,
+          "fade_in_frames": [
+            36,
+            38
+          ],
+          "filter_boundary_valid": true,
+          "filtered_element_count": 0,
+          "full_opacity_frames": [
+            38,
+            109
+          ],
+          "geometry": {
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
+          },
+          "geometry_forward_extent": 7,
+          "geometry_rear_extent": 7,
+          "initial_path_distance": 43,
+          "initial_point": {
+            "x": 303,
+            "y": 540
+          },
+          "initial_tangent_rotation": 0,
           "marker_free": true,
           "path_advance_per_rendered_frame": 6,
           "path_length": 130,
-          "primitive": "policy-seal",
+          "primitive": "glass-task-capsule",
           "rendered_frames": [
             36,
             114
           ],
-          "role": "dispatch",
-          "schedule_key": "dispatch/0",
-          "signature_family": "policy-seal",
-          "source_color": "#d97757",
+          "role": "context",
+          "schedule_key": "context/0",
+          "signature_family": "glass-task-capsule",
+          "source_color": "#60a5fa",
           "travel_pixels_per_rendered_frame_at_50_percent": 3,
           "wrap": "target-clearance-to-source-clearance"
         },
@@ -1783,11 +2098,11 @@
           ],
           "appended_below_labels_and_nodes": true,
           "center_travel_range": [
-            14,
-            66
+            15,
+            95
           ],
           "direction": "source-to-target",
-          "edge_id": "plan",
+          "edge_id": "case-to-result",
           "endpoint_clearance": 8,
           "fade_in_frames": [
             36,
@@ -1800,309 +2115,34 @@
             109
           ],
           "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
           },
-          "geometry_forward_extent": 6,
-          "geometry_rear_extent": 6,
-          "initial_path_distance": 35,
+          "geometry_forward_extent": 7,
+          "geometry_rear_extent": 7,
+          "initial_path_distance": 50,
           "initial_point": {
-            "x": 305,
-            "y": 365
-          },
-          "initial_tangent_rotation": 180,
-          "marker_free": true,
-          "path_advance_per_rendered_frame": 6,
-          "path_length": 80,
-          "primitive": "policy-seal",
-          "rendered_frames": [
-            36,
-            114
-          ],
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/0",
-          "signature_family": "policy-seal",
-          "source_color": "#d97757",
-          "travel_pixels_per_rendered_frame_at_50_percent": 3,
-          "wrap": "target-clearance-to-source-clearance"
-        },
-        {
-          "animated_attributes": [
-            "transform",
-            "opacity"
-          ],
-          "appended_below_labels_and_nodes": true,
-          "center_travel_range": [
-            14,
-            186
-          ],
-          "direction": "source-to-target",
-          "edge_id": "enforce",
-          "endpoint_clearance": 8,
-          "fade_in_frames": [
-            36,
-            38
-          ],
-          "filter_boundary_valid": true,
-          "filtered_element_count": 0,
-          "full_opacity_frames": [
-            38,
-            109
-          ],
-          "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
-          },
-          "geometry_forward_extent": 6,
-          "geometry_rear_extent": 6,
-          "initial_path_distance": 38,
-          "initial_point": {
-            "x": 578,
-            "y": 365
-          },
-          "initial_tangent_rotation": 0,
-          "marker_free": true,
-          "path_advance_per_rendered_frame": 6,
-          "path_length": 200,
-          "primitive": "policy-seal",
-          "rendered_frames": [
-            36,
-            114
-          ],
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/1",
-          "signature_family": "policy-seal",
-          "source_color": "#d97757",
-          "travel_pixels_per_rendered_frame_at_50_percent": 3,
-          "wrap": "target-clearance-to-source-clearance"
-        },
-        {
-          "animated_attributes": [
-            "transform",
-            "opacity"
-          ],
-          "appended_below_labels_and_nodes": true,
-          "center_travel_range": [
-            14,
-            106
-          ],
-          "direction": "source-to-target",
-          "edge_id": "act",
-          "endpoint_clearance": 8,
-          "fade_in_frames": [
-            36,
-            38
-          ],
-          "filter_boundary_valid": true,
-          "filtered_element_count": 0,
-          "full_opacity_frames": [
-            38,
-            109
-          ],
-          "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
-          },
-          "geometry_forward_extent": 6,
-          "geometry_rear_extent": 6,
-          "initial_path_distance": 41,
-          "initial_point": {
-            "x": 440,
-            "y": 431
-          },
-          "initial_tangent_rotation": 90,
-          "marker_free": true,
-          "path_advance_per_rendered_frame": 6,
-          "path_length": 120,
-          "primitive": "policy-seal",
-          "rendered_frames": [
-            36,
-            114
-          ],
-          "role": "runtime-branch",
-          "schedule_key": "runtime-branch/2",
-          "signature_family": "policy-seal",
-          "source_color": "#8c6f5a",
-          "travel_pixels_per_rendered_frame_at_50_percent": 3,
-          "wrap": "target-clearance-to-source-clearance"
-        },
-        {
-          "animated_attributes": [
-            "transform",
-            "opacity"
-          ],
-          "appended_below_labels_and_nodes": true,
-          "center_travel_range": [
-            14,
-            106
-          ],
-          "direction": "source-to-target",
-          "edge_id": "remember",
-          "endpoint_clearance": 8,
-          "fade_in_frames": [
-            36,
-            38
-          ],
-          "filter_boundary_valid": true,
-          "filtered_element_count": 0,
-          "full_opacity_frames": [
-            38,
-            109
-          ],
-          "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
-          },
-          "geometry_forward_extent": 6,
-          "geometry_rear_extent": 6,
-          "initial_path_distance": 42,
-          "initial_point": {
-            "x": 170,
-            "y": 432
-          },
-          "initial_tangent_rotation": 90,
-          "marker_free": true,
-          "path_advance_per_rendered_frame": 6,
-          "path_length": 120,
-          "primitive": "policy-seal",
-          "rendered_frames": [
-            36,
-            114
-          ],
-          "role": "foundation",
-          "schedule_key": "foundation/0",
-          "signature_family": "policy-seal",
-          "source_color": "#7b8b5c",
-          "travel_pixels_per_rendered_frame_at_50_percent": 3,
-          "wrap": "target-clearance-to-source-clearance"
-        },
-        {
-          "animated_attributes": [
-            "transform",
-            "opacity"
-          ],
-          "appended_below_labels_and_nodes": true,
-          "center_travel_range": [
-            14,
-            106
-          ],
-          "direction": "source-to-target",
-          "edge_id": "register",
-          "endpoint_clearance": 8,
-          "fade_in_frames": [
-            36,
-            38
-          ],
-          "filter_boundary_valid": true,
-          "filtered_element_count": 0,
-          "full_opacity_frames": [
-            38,
-            109
-          ],
-          "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
-          },
-          "geometry_forward_extent": 6,
-          "geometry_rear_extent": 6,
-          "initial_path_distance": 45,
-          "initial_point": {
-            "x": 820,
-            "y": 435
-          },
-          "initial_tangent_rotation": 90,
-          "marker_free": true,
-          "path_advance_per_rendered_frame": 6,
-          "path_length": 120,
-          "primitive": "policy-seal",
-          "rendered_frames": [
-            36,
-            114
-          ],
-          "role": "foundation",
-          "schedule_key": "foundation/1",
-          "signature_family": "policy-seal",
-          "source_color": "#7c5c96",
-          "travel_pixels_per_rendered_frame_at_50_percent": 3,
-          "wrap": "target-clearance-to-source-clearance"
-        },
-        {
-          "animated_attributes": [
-            "transform",
-            "opacity"
-          ],
-          "appended_below_labels_and_nodes": true,
-          "center_travel_range": [
-            14,
-            46
-          ],
-          "direction": "source-to-target",
-          "edge_id": "trace",
-          "endpoint_clearance": 8,
-          "fade_in_frames": [
-            36,
-            38
-          ],
-          "filter_boundary_valid": true,
-          "filtered_element_count": 0,
-          "full_opacity_frames": [
-            38,
-            109
-          ],
-          "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
-          },
-          "geometry_forward_extent": 6,
-          "geometry_rear_extent": 6,
-          "initial_path_distance": 16,
-          "initial_point": {
-            "x": 536,
+            "x": 640,
             "y": 540
           },
           "initial_tangent_rotation": 0,
           "marker_free": true,
           "path_advance_per_rendered_frame": 6,
-          "path_length": 60,
-          "primitive": "policy-seal",
+          "path_length": 110,
+          "primitive": "glass-task-capsule",
           "rendered_frames": [
             36,
             114
           ],
-          "role": "foundation",
-          "schedule_key": "foundation/2",
-          "signature_family": "policy-seal",
-          "source_color": "#7c5c96",
+          "role": "deliver",
+          "schedule_key": "deliver/0",
+          "signature_family": "glass-task-capsule",
+          "source_color": "#f59e0b",
           "travel_pixels_per_rendered_frame_at_50_percent": 3,
           "wrap": "target-clearance-to-source-clearance"
         },
@@ -2113,11 +2153,11 @@
           ],
           "appended_below_labels_and_nodes": true,
           "center_travel_range": [
-            14,
-            46
+            15,
+            105
           ],
           "direction": "source-to-target",
-          "edge_id": "promote",
+          "edge_id": "guard-to-result",
           "endpoint_clearance": 8,
           "fade_in_frames": [
             36,
@@ -2130,34 +2170,34 @@
             109
           ],
           "geometry": {
-            "approval_bar_width": 4,
-            "center_dot_diameter": 3,
-            "glow": false,
-            "height": 12,
-            "shadow": false,
-            "shape": "warm-white-hexagonal-outline",
-            "width": 12
+            "height": 9,
+            "highlight_stroke_width": 1,
+            "rx": 3,
+            "shape": "rounded-translucent-plate",
+            "width": 14,
+            "work_item_dot_count": 2,
+            "work_item_dot_radius": 2
           },
-          "geometry_forward_extent": 6,
-          "geometry_rear_extent": 6,
-          "initial_path_distance": 17,
+          "geometry_forward_extent": 7,
+          "geometry_rear_extent": 7,
+          "initial_path_distance": 53,
           "initial_point": {
-            "x": 717,
-            "y": 540
+            "x": 790,
+            "y": 443
           },
-          "initial_tangent_rotation": 0,
+          "initial_tangent_rotation": 90,
           "marker_free": true,
           "path_advance_per_rendered_frame": 6,
-          "path_length": 60,
-          "primitive": "policy-seal",
+          "path_length": 120,
+          "primitive": "glass-task-capsule",
           "rendered_frames": [
             36,
             114
           ],
-          "role": "promote",
-          "schedule_key": "promote/0",
-          "signature_family": "policy-seal",
-          "source_color": "#7c5c96",
+          "role": "approval",
+          "schedule_key": "approval/1",
+          "signature_family": "glass-task-capsule",
+          "source_color": "#f59e0b",
           "travel_pixels_per_rendered_frame_at_50_percent": 3,
           "wrap": "target-clearance-to-source-clearance"
         }
@@ -2173,16 +2213,16 @@
     },
     "width": 960
   },
-  "report": "docs/projects/ai-ssh-agent/assets/architecture/architecture.motion.json",
+  "report": "docs/projects/ai-ssh-agent/assets/http-mcp-contract/http-mcp-contract.motion.json",
   "required_encoder": "ffmpeg/gif",
-  "review_reference_source_sha256": "25847c17def77f9b9da1b9320504e31841c28cbcf35f56602d2f4dd76a40c772",
+  "review_reference_source_sha256": "52bf52e8ac0b129fcfad8dcd06e93468b3b79e29e9e0f919be80cb58046c0991",
   "review_status": "user-approved",
   "runtime": {
     "encoders": [
       "gif"
     ],
-    "ffmpeg": "/tmp/fireworks-tech-graph-bin/ffmpeg",
-    "ffprobe": "/tmp/fireworks-tech-graph-bin/ffprobe",
+    "ffmpeg": "/tmp/codex-ffmpeg/node_modules/ffmpeg-static/ffmpeg",
+    "ffprobe": "/tmp/codex-ffmpeg/node_modules/@ffprobe-installer/darwin-arm64/ffprobe",
     "format": {
       "gif": true
     },
@@ -2218,10 +2258,11 @@
   "scene_signature": {
     "distinctive_primitives": [
       "semantic-route-build",
-      "governance-thread",
-      "policy-seal"
+      "glass-handoff-rail",
+      "glass-task-capsule",
+      "coordinator-halo"
     ],
-    "name": "claude-official-governed-runtime-policy-seals"
+    "name": "glassmorphism-multi-agent-task-capsules"
   },
   "seamless_loop_contract": "75 frames or fewer: every raster is unique; more than 75 frames: non-adjacent repeats are allowed within the full-opacity interval, plus the sole intentional reset-boundary exception at reset_start with opacity 1.00, with at least 75 unique rasters; seam MAD must not exceed p95 adjacent-frame MAD",
   "semantic_profile": "generic",
@@ -2229,69 +2270,69 @@
     "edges": 9,
     "edges_without_flow": 0,
     "motion_metadata": "explicit",
-    "nodes": 9,
+    "nodes": 8,
     "resolved_schedule": [
       {
-        "edge_id": "request",
+        "edge_id": "ingress",
         "order": 0,
         "role": "ingress",
-        "source_stroke": "#8c6f5a",
+        "source_stroke": "#60a5fa",
         "stage": 1
       },
       {
-        "edge_id": "dispatch",
+        "edge_id": "context",
         "order": 0,
-        "role": "dispatch",
-        "source_stroke": "#d97757",
+        "role": "delegate",
+        "source_stroke": "#c084fc",
         "stage": 2
       },
       {
-        "edge_id": "plan",
-        "order": 0,
-        "role": "runtime-branch",
-        "source_stroke": "#d97757",
-        "stage": 3
-      },
-      {
-        "edge_id": "enforce",
+        "edge_id": "adapt",
         "order": 1,
-        "role": "runtime-branch",
-        "source_stroke": "#d97757",
-        "stage": 3
+        "role": "delegate",
+        "source_stroke": "#c084fc",
+        "stage": 2
       },
       {
-        "edge_id": "act",
+        "edge_id": "scope",
         "order": 2,
-        "role": "runtime-branch",
-        "source_stroke": "#8c6f5a",
+        "role": "delegate",
+        "source_stroke": "#c084fc",
+        "stage": 2
+      },
+      {
+        "edge_id": "session-to-catalog",
+        "order": 0,
+        "role": "evidence",
+        "source_stroke": "#34d399",
         "stage": 3
       },
       {
-        "edge_id": "remember",
-        "order": 0,
-        "role": "foundation",
-        "source_stroke": "#7b8b5c",
-        "stage": 4
-      },
-      {
-        "edge_id": "register",
+        "edge_id": "adapter-to-case",
         "order": 1,
-        "role": "foundation",
-        "source_stroke": "#7c5c96",
-        "stage": 4
+        "role": "artifact",
+        "source_stroke": "#34d399",
+        "stage": 3
       },
       {
-        "edge_id": "trace",
-        "order": 2,
-        "role": "foundation",
-        "source_stroke": "#7c5c96",
-        "stage": 4
-      },
-      {
-        "edge_id": "promote",
+        "edge_id": "catalog-to-case",
         "order": 0,
-        "role": "promote",
-        "source_stroke": "#7c5c96",
+        "role": "context",
+        "source_stroke": "#60a5fa",
+        "stage": 4
+      },
+      {
+        "edge_id": "case-to-result",
+        "order": 0,
+        "role": "deliver",
+        "source_stroke": "#f59e0b",
+        "stage": 5
+      },
+      {
+        "edge_id": "guard-to-result",
+        "order": 1,
+        "role": "approval",
+        "source_stroke": "#f59e0b",
         "stage": 5
       }
     ],
@@ -2303,7 +2344,7 @@
     "artifact_within_target": true,
     "warnings": []
   },
-  "source": "docs/projects/ai-ssh-agent/assets/architecture/architecture.svg",
+  "source": "docs/projects/ai-ssh-agent/assets/http-mcp-contract/http-mcp-contract.svg",
   "source_checks": {
     "composition": {
       "details": [],
@@ -2323,12 +2364,12 @@
     }
   },
   "source_integrity": {
-    "sha256": "afa0eb66413b3626f11d8e119aa8e2e50e971f0b69f9d59c66d4937174461a52",
-    "sha256_after": "afa0eb66413b3626f11d8e119aa8e2e50e971f0b69f9d59c66d4937174461a52",
-    "sha256_before": "afa0eb66413b3626f11d8e119aa8e2e50e971f0b69f9d59c66d4937174461a52",
+    "sha256": "072c3830c51114b03d0164e4b52e78e023fba62da57773fe36c77b48bce24615",
+    "sha256_after": "072c3830c51114b03d0164e4b52e78e023fba62da57773fe36c77b48bce24615",
+    "sha256_before": "072c3830c51114b03d0164e4b52e78e023fba62da57773fe36c77b48bce24615",
     "unchanged": true
   },
-  "source_sha256": "afa0eb66413b3626f11d8e119aa8e2e50e971f0b69f9d59c66d4937174461a52",
+  "source_sha256": "072c3830c51114b03d0164e4b52e78e023fba62da57773fe36c77b48bce24615",
   "style_contract": {
     "approval_recorded_on": "2026-07-16",
     "scope": "signature-speed-path-geometry-and-construction-schedule",
@@ -2336,7 +2377,7 @@
     "status": "user-approved"
   },
   "style_contract_status": "user-approved",
-  "style_id": 6,
+  "style_id": 5,
   "timing_revision": {
     "approved_at": "2026-07-17",
     "baseline": {
@@ -2355,6 +2396,6 @@
     "only_pending_item": false,
     "status": "user-approved"
   },
-  "visual_theme": "Claude Official",
+  "visual_theme": "Glassmorphism",
   "width": 960
 }

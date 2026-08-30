@@ -1,7 +1,11 @@
 ---
 title: Agent 装配与工具暴露
-type: project-doc
-project: AI SSH Agent
+type: project-chapter
+project: ai-ssh-agent
+group: Agent 运行时
+order: 4
+description: 追踪应用就绪事件到 Armory、模型、工具、Workflow 和 Runner 的装配链，并区分内置 Agent 与外部 MCP。
+sidebar: true
 layout: project-doc
 ---
 
@@ -19,6 +23,22 @@ layout: project-doc
 
 我的判断是把配置解析和运行时注册放在 `app`，把工具实际能力放在 `trigger`、`case` 和 `domain`，这样换模型供应商不会改变 SSH 命令安全规则，增加一个工具也不会要求重写 Agent 生命周期。
 
+## 装配节点怎样传递上下文
+
+Armory 使用一个装配上下文在节点之间传递中间结果：
+
+| 节点 | 写入装配上下文的内容 | 下一步 |
+| --- | --- | --- |
+| Root | 接收一份 Agent 配置表 | AI API |
+| AI API | OpenAI 兼容 API、连接/读取超时 | Chat Model |
+| Chat Model | Chat Model、动态 MCP/Skills 工具回调 | Agent |
+| Agent | 将 Spring AI 工具转换为 ADK Tool，合并内置工具和动态工具 | Workflow |
+| Workflow | 逐项读取 loop、parallel、sequential 配置 | Runner |
+| Runner | 选择根 Agent、插件和应用名，注入事件压缩 | 注册 |
+| 注册 | 以 Agent ID 将 Runner、模型和描述放入 Spring 上下文 | 聊天或查询 |
+
+`code-agent.yml` 中的 `app-name`、Agent 元信息、模型、Agent instruction、工具策略和 Runner 配置共同决定这一结果。应用就绪后逐份处理启用的配置表，禁用项不会装配；修改 YAML 不会热更新已注册的 Runner，通常需要重新启动应用。
+
 ## 工具汇总
 
 当前工具平面由两类来源组成：
@@ -29,6 +49,10 @@ layout: project-doc
 | 动态能力 | MCP SSE、Streamable HTTP、Stdio、Local 和 Skills 等外部或本地能力 | 配置或运行时贡献者汇总后进入 Agent 工具集合 |
 
 工具汇总不是“所有方法都暴露”。实现中还要经过白名单、重名检查、调用次数和循环保护等约束。内置 Agent 的 SSH 工具直接进入同一套 Case 和 Domain，不经过 `/mcp`，也不依赖 MCP Bearer Token；外部 MCP 客户端才经过 MCP 端点和其会话解析。
+
+当前内置运维工具目录按四组能力组合：SSH 连接与 HOST 命令、统一 Execution 查询/取消/最近执行、SFTP 文件操作、Sandbox 生命周期与执行。外部 MCP 兼容别名仍然存在，但内置 Agent 会排除探活和旧版执行查询别名，避免同一动作在模型面前出现两个候选工具。
+
+动态工具由配置指定的 MCP client 或 Skills 生成。使用允许列表策略时，未知内置组、缺失动态工具、重复声明、事实落地工具不在必需列表、调用上限非法等情况会在装配期失败；LEGACY 模式才保留历史的“内置优先、动态同名忽略”行为。
 
 ## 工具调用上下文
 

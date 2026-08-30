@@ -1,7 +1,11 @@
 ---
 title: DDD 分层与系统架构
-type: project-doc
-project: AI SSH Agent
+type: project-chapter
+project: ai-ssh-agent
+group: 架构设计
+order: 2
+description: 解释 Maven 模块、DDD 分层、端口适配器和 Agent/SSH 两条真实调用链如何组合成单体系统。
+sidebar: true
 layout: project-doc
 ---
 
@@ -42,6 +46,26 @@ layout: project-doc
 ### SSH 请求链
 
 一次 SSH 请求从 HTTP Controller、Spring AI 工具或 MCP 工具进入 SSH Case。Case 组装执行请求，调用 Execution Admission Chain；准入通过后选择 HOST、INTERACTIVE_TERMINAL 或 SANDBOX 策略，再通过 Domain Port 进入 Infrastructure。远端结果回到生命周期协调器，状态和输出分别进入内存跟踪、Redis 持久化以及 HTTP、SSE 或 MCP 响应。
+
+## Port 和适配器的真实落点
+
+Domain 中定义的端口不是抽象装饰，而是当前代码真正跨越技术边界的接口：
+
+| Domain 端口 | Infrastructure 实现方向 | 外部依赖 | 由谁决定业务语义 |
+| --- | --- | --- | --- |
+| SSH Session、Managed Shell、Command、File、Terminal | JSch Session、Shell、SFTP 和终端网关 | 远端 SSH 服务 | SSH/Execution Domain 与 Case |
+| SSH Credential | 加密组件和连接仓储映射 | 应用密钥、MySQL | SSH 认证策略 |
+| SSH Execution Repository | Redis 执行服务 | Redis Hash、Stream、Sorted Set、Value | Execution Case |
+| Chat History、Core Memory | MyBatis Repository | MySQL | Agent Domain |
+| Sandbox Runtime、Managed Shell | Docker 命令构造和远端网关 | 目标主机 Docker | Sandbox Domain 与 Case |
+
+因此依赖方向是“Domain 定义我要什么，Infrastructure 决定怎样接入”，而不是由 Domain 直接 import JSch、RedisTemplate 或 Docker CLI。
+
+## 一个请求穿过哪些层
+
+以 `ssh_execute` 为例，Trigger 只负责解析工具参数和补充来源/会话上下文；Case 负责规范化、校验、幂等、占用和策略路由；Domain 负责连接可用性、命令风险、终端或 Sandbox 规则；Infrastructure 负责建立 Channel、读写控制帧、调用 Redis 并把结果转换回来。响应组装再把领域状态映射为工具或 HTTP 可读的字段。
+
+这种切分还决定了事务边界：连接配置保存和 JSch 建连是两次独立操作，远端命令和 Redis 输出也不是一个事务。文章 [数据一致性、并发与异常处理](./12-数据一致性并发与异常处理.md) 专门记录这些断点。
 
 ## 事务边界
 

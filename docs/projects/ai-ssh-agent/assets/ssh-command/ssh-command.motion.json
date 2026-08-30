@@ -331,7 +331,7 @@
     "encoder": "ffmpeg/gif-palette",
     "format": "gif",
     "mime_type": "image/gif",
-    "path": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/ssh-command/ssh-command.gif",
+    "path": "docs/projects/ai-ssh-agent/assets/ssh-command/ssh-command.gif",
     "probe": {
       "codec_name": "gif",
       "container": {
@@ -1002,7 +1002,7 @@
   "motion_grammar_version": "3.4",
   "motion_scene": "tool-grounding",
   "ok": true,
-  "output": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/ssh-command/ssh-command.gif",
+  "output": "docs/projects/ai-ssh-agent/assets/ssh-command/ssh-command.gif",
   "output_format": "gif",
   "preset": "tool-grounding",
   "rendered_pixels": 79488000,
@@ -1021,7 +1021,7 @@
     "ok": true,
     "paint_barrier": "fonts-ready-plus-two-animation-frames-before-capture",
     "preset": "tool-grounding",
-    "resolved_module": "/Users/jiang/.codex/skills/fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+    "resolved_module": "fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
     "sandbox": "enabled",
     "scene_report": {
       "animated_background_count": 0,
@@ -2042,7 +2042,7 @@
     },
     "width": 960
   },
-  "report": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/ssh-command/ssh-command.motion.json",
+  "report": "docs/projects/ai-ssh-agent/assets/ssh-command/ssh-command.motion.json",
   "required_encoder": "ffmpeg/gif",
   "review_reference_source_sha256": null,
   "review_status": "user-approved",
@@ -2055,7 +2055,7 @@
     "format": {
       "gif": true
     },
-    "node": "/Users/jiang/.nvm/versions/node/v26.7.0/bin/node",
+    "node": "node-runtime",
     "ok": true,
     "renderer": {
       "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -2079,10 +2079,10 @@
         "event-transit",
         "ops-pulse"
       ],
-      "resolved_module": "/Users/jiang/.codex/skills/fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+      "resolved_module": "fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
       "sandbox_default": "enabled"
     },
-    "worker": "/Users/jiang/.codex/skills/fireworks-tech-graph/scripts/svg2gif.js"
+    "worker": "fireworks-tech-graph/scripts/svg2gif.js"
   },
   "scene_signature": {
     "distinctive_primitives": [
@@ -2166,7 +2166,7 @@
     "artifact_within_target": true,
     "warnings": []
   },
-  "source": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/ssh-command/ssh-command.svg",
+  "source": "docs/projects/ai-ssh-agent/assets/ssh-command/ssh-command.svg",
   "source_checks": {
     "composition": {
       "details": [],

@@ -1,7 +1,11 @@
 ---
 title: SSH 命令执行主链路
-type: project-doc
-project: AI SSH Agent
+type: project-chapter
+project: ai-ssh-agent
+group: SSH 执行
+order: 6
+description: 从 ssh_execute 到执行准入、目标策略、Managed Shell、输出帧和响应，拆解一次真实命令如何流转。
+sidebar: true
 layout: project-doc
 ---
 
@@ -36,6 +40,12 @@ HOST 目标使用 Managed Shell。实现使用非 PTY 的 Shell 通道、控制�
 
 它不适合 `vim`、密码询问或依赖真实交互 TTY 的程序。需要页面交互时走终端资源，需要不可信脚本时走 Sandbox，三种目标不能混成一个执行器。
 
+## Managed Shell 如何结束一次命令
+
+Managed Shell 为每个执行上下文维护独占的 Shell Channel。提交命令时，网关写入带有命令边界的控制数据；读取线程把普通输出、错误输出、退出码和控制帧解析成领域结果。命令结束后，Case 记录 `success`、`exitCode`、输出是否完整、是否截断、耗时和失败代码，再由响应组装成同步结果或长任务记录。
+
+如果同步等待被打断，Case 会关闭当前执行上下文并释放占用；如果超时，只是把控制权转给长任务跟踪，不会再次调用执行策略。取消动作只针对该 executionId 的独占上下文，页面终端、SFTP 和其他 Agent 执行都有自己的 Channel。
+
 ## 并发和同步窗口
 
 默认执行线程池核心线程数为 4，最大线程数为 8，队列容量为 32，拒绝策略为 `AbortPolicy`。Case 层还以执行上下文做业务占用控制，因此线程池有空闲并不意味着同一上下文可以并行提交多个命令。
@@ -47,6 +57,10 @@ HOST 目标使用 Managed Shell。实现使用非 PTY 的 Shell 通道、控制�
 实现限制单次输出上限 20 MiB，诊断尾部保留 64 KiB，内联输出上限 256 KiB，预览上限 16 KiB。输出超过内联上限时，客户端应依据 executionId、游标和状态继续读取，不应依赖一次 HTTP 响应承载全部结果。
 
 命令非零退出和工具异常被分开：命令正常完成但 exit code 非零，可以返回 `COMMAND_EXIT_NON_ZERO`；SSH 通道断开、线程池拒绝、参数错误或提交异常则是工具或执行生命周期失败。调用方需要结合 code、disposition、exitCode 和 output 做判断。
+
+## 事务边界在哪里
+
+一次命令至少跨越三个系统边界：远端 Shell 的真实副作用、JVM 中的运行时跟踪、Redis 中的观察记录。没有一个事务能同时回滚它们。因而 `executionId` 是“找回同一次执行”的稳定句柄，查询和取消都围绕它工作；HTTP 请求超时不能说明远端命令未执行，也不能触发盲目重试。
 
 ## 验证方式
 

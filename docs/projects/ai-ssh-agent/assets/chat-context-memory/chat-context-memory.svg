@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="960" height="620" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="4" data-visual-theme="Notion Clean" data-diagram-type="memory" data-motion-scene="memory-lifecycle" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="showcase" data-max-bends-per-edge="2" data-max-total-bends="8" data-max-route-stretch="1.35" data-max-bridged-crossings="0" data-min-node-gap="40.0" data-min-container-gutter="20.0" data-min-label-clearance="4.0" data-min-segment-length="16.0">
+  <defs>
+    <marker id="arrowA" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowC" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowE" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowF" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrowH" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#d1d5db"/>
+    </marker>
+    <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 13px; font-weight: 500; fill: #9ca3af; }
+    .section { font-size: 13px; font-weight: 700; fill: #9ca3af; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #d1d5db; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #374151; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #9ca3af; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #9ca3af; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #9ca3af; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="620.0" fill="#ffffff"/>
+  <text x="48.0" y="48" text-anchor="start" class="title">Conversation Context and Memory</text>
+  <text x="48.0" y="72" text-anchor="start" class="subtitle">history, providers, milestones, core memory, and dynamic prompt construction</text>
+  <line x1="48" y1="100" x2="912.0" y2="100" stroke="#e5e7eb" stroke-width="1"/>
+  <g id="working" data-graph-role="container" data-container-id="working" data-semantic-role="boundary" data-graph-bounds="40,120,920,285">
+  <rect data-graph-role="container" x="40.0" y="120.0" width="880.0" height="165.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+  <text x="58.0" y="144.0" class="section">WORKING CONVERSATION CONTEXT</text>
+    <rect id="working-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="126" width="231.76" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="durable" data-graph-role="container" data-container-id="durable" data-semantic-role="boundary" data-graph-bounds="40,335,920,520">
+  <rect data-graph-role="container" x="40.0" y="335.0" width="880.0" height="185.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+  <text x="58.0" y="359.0" class="section">DURABLE MEMORY AND PROMPT</text>
+    <rect id="durable-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="341" width="219.28" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="append" data-graph-role="edge" data-edge-id="append" data-source="input" data-target="history" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="sample" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 220,210 L 270,210" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="collect" data-graph-role="edge" data-edge-id="collect" data-source="history" data-target="context" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="attend" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 430,210 L 490,210" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="compose" data-graph-role="edge" data-edge-id="compose" data-source="context" data-target="prompt" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="invoke" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 650,210 L 700,210" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="detect" data-graph-role="edge" data-edge-id="detect" data-source="history" data-target="milestone" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="remember" data-motion-stage="4" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 350,255 L 350,400" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="learn" data-graph-role="edge" data-edge-id="learn" data-source="milestone" data-target="memory" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="consolidate" data-motion-stage="5" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 430,445 L 490,445" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="recall" data-graph-role="edge" data-edge-id="recall" data-source="memory" data-target="context" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="recall" data-motion-stage="6" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 570,400 L 570,255" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <g id="node-input" data-graph-role="node" data-node-id="input" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,165,220,255">
+  <rect x="60.0" y="165.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="140.0" y="183.0" text-anchor="middle" class="node-type">INPUT</text>
+  <text x="140.0" y="216.0" text-anchor="middle" class="node-title" font-size="18.0">User Message</text>
+  <text x="140.0" y="238.0" text-anchor="middle" class="node-sub">latest intent</text>
+  <rect x="78.0" y="235.0" width="114" height="16" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="135.0" y="246.5" text-anchor="middle" font-size="11" font-weight="500" fill="#3b82f6">text + media</text>
+  </g>
+  <g id="node-history" data-graph-role="node" data-node-id="history" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="270,165,430,255">
+  <rect x="270.0" y="165.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="350.0" y="183.0" text-anchor="middle" class="node-type">HISTORY</text>
+  <text x="350.0" y="216.0" text-anchor="middle" class="node-title" font-size="18.0">Chat History</text>
+  <text x="350.0" y="238.0" text-anchor="middle" class="node-sub">recent messages</text>
+  <rect x="288.0" y="235.0" width="62" height="16" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="319.0" y="246.5" text-anchor="middle" font-size="11" font-weight="500" fill="#3b82f6">MySQL</text>
+  </g>
+  <g id="node-context" data-graph-role="node" data-node-id="context" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="490,165,650,255">
+  <path d="M 512.0 165.0 L 628.0 165.0 L 650.0 210.0 L 628.0 255.0 L 512.0 255.0 L 490.0 210.0 Z" fill="#ffffff" stroke="#3b82f6" stroke-width="1.6"/>
+  <text x="570.0" y="183.0" text-anchor="middle" class="node-type">CONTEXT</text>
+  <text x="570.0" y="216.0" text-anchor="middle" class="node-title" font-size="15.31">Context Service</text>
+  <text x="570.0" y="238.0" text-anchor="middle" class="node-sub">providers + reducer</text>
+  </g>
+  <g id="node-prompt" data-graph-role="node" data-node-id="prompt" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="700,165,880,255">
+  <rect x="700.0" y="165.0" width="180.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="790.0" y="183.0" text-anchor="middle" class="node-type">PROMPT</text>
+  <text x="790.0" y="216.0" text-anchor="middle" class="node-title" font-size="18.0">Dynamic Prompt</text>
+  <text x="790.0" y="238.0" text-anchor="middle" class="node-sub">runtime prefix</text>
+  <rect x="718.0" y="235.0" width="154" height="16" rx="3" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="795.0" y="246.5" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">current + history</text>
+  </g>
+  <g id="node-milestone" data-graph-role="node" data-node-id="milestone" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="270,400,430,490">
+  <rect x="270.0" y="400.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="350.0" y="418.0" text-anchor="middle" class="node-type">EVENT</text>
+  <text x="350.0" y="451.0" text-anchor="middle" class="node-title" font-size="18.0">Milestones</text>
+  <text x="350.0" y="473.0" text-anchor="middle" class="node-sub">change / error / done</text>
+  <rect x="288.0" y="470.0" width="90" height="16" rx="3" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="333.0" y="481.5" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">recent 10</text>
+  </g>
+  <g id="node-memory" data-graph-role="node" data-node-id="memory" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="490,400,650,490">
+  <rect x="490.0" y="400.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="570.0" y="418.0" text-anchor="middle" class="node-type">LONG TERM</text>
+  <text x="570.0" y="451.0" text-anchor="middle" class="node-title" font-size="18.0">Core Memory</text>
+  <text x="570.0" y="473.0" text-anchor="middle" class="node-sub">relevant user facts</text>
+  <rect x="508.0" y="470.0" width="122" height="16" rx="3" fill="#fff7ed" stroke="#fed7aa" stroke-width="1"/>
+  <text x="569.0" y="481.5" text-anchor="middle" font-size="11" font-weight="500" fill="#ea580c">keyword match</text>
+  </g>
+  <g id="detect-label" data-graph-role="label" data-owner="detect" data-graph-bounds="298.2,313.5,347,333.5">
+  <rect x="298.2" y="313.5" width="48.8" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="322.6" y="327.5" text-anchor="middle" class="arrow-label">event</text>
+  </g>
+  <g id="recall-label" data-graph-role="label" data-owner="recall" data-graph-bounds="525.16,313.5,567,333.5">
+  <rect x="525.16" y="313.5" width="41.839999999999996" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="546.08" y="327.5" text-anchor="middle" class="arrow-label">read</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,578,699,594">
+  <text x="48.0" y="590.0" class="footnote">History and milestones are persisted; provider caches and terminal facts remain process-local</text>
+  </g>
+</svg>

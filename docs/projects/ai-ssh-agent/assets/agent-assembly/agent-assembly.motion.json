@@ -312,7 +312,7 @@
     "encoder": "ffmpeg/gif-palette",
     "format": "gif",
     "mime_type": "image/gif",
-    "path": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/agent-assembly/agent-assembly.gif",
+    "path": "docs/projects/ai-ssh-agent/assets/agent-assembly/agent-assembly.gif",
     "probe": {
       "codec_name": "gif",
       "container": {
@@ -814,7 +814,7 @@
   "motion_grammar_version": "3.4",
   "motion_scene": "agent-orchestration",
   "ok": true,
-  "output": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/agent-assembly/agent-assembly.gif",
+  "output": "docs/projects/ai-ssh-agent/assets/agent-assembly/agent-assembly.gif",
   "output_format": "gif",
   "preset": "agent-orchestration",
   "rendered_pixels": 77280000,
@@ -833,7 +833,7 @@
     "ok": true,
     "paint_barrier": "fonts-ready-plus-two-animation-frames-before-capture",
     "preset": "agent-orchestration",
-    "resolved_module": "/Users/jiang/.codex/skills/fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+    "resolved_module": "fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
     "sandbox": "enabled",
     "scene_report": {
       "animated_background_count": 0,
@@ -2213,7 +2213,7 @@
     },
     "width": 960
   },
-  "report": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/agent-assembly/agent-assembly.motion.json",
+  "report": "docs/projects/ai-ssh-agent/assets/agent-assembly/agent-assembly.motion.json",
   "required_encoder": "ffmpeg/gif",
   "review_reference_source_sha256": "52bf52e8ac0b129fcfad8dcd06e93468b3b79e29e9e0f919be80cb58046c0991",
   "review_status": "user-approved",
@@ -2226,7 +2226,7 @@
     "format": {
       "gif": true
     },
-    "node": "/Users/jiang/.nvm/versions/node/v26.7.0/bin/node",
+    "node": "node-runtime",
     "ok": true,
     "renderer": {
       "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -2250,10 +2250,10 @@
         "event-transit",
         "ops-pulse"
       ],
-      "resolved_module": "/Users/jiang/.codex/skills/fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+      "resolved_module": "fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
       "sandbox_default": "enabled"
     },
-    "worker": "/Users/jiang/.codex/skills/fireworks-tech-graph/scripts/svg2gif.js"
+    "worker": "fireworks-tech-graph/scripts/svg2gif.js"
   },
   "scene_signature": {
     "distinctive_primitives": [
@@ -2344,7 +2344,7 @@
     "artifact_within_target": true,
     "warnings": []
   },
-  "source": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/agent-assembly/agent-assembly.svg",
+  "source": "docs/projects/ai-ssh-agent/assets/agent-assembly/agent-assembly.svg",
   "source_checks": {
     "composition": {
       "details": [],

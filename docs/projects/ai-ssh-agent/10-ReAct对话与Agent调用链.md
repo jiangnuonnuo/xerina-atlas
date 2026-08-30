@@ -1,7 +1,11 @@
 ---
 title: ReAct 对话与 Agent 调用链
-type: project-doc
-project: AI SSH Agent
+type: project-chapter
+project: ai-ssh-agent
+group: Agent 调用
+order: 10
+description: 追踪一次用户消息如何经过任务拆解、模型调用、工具执行、循环判断、SSE 事件和最终结果。
+sidebar: true
 layout: project-doc
 ---
 
@@ -31,9 +35,13 @@ layout: project-doc
 
 长任务返回 executionId 后，Agent 不应再提交同一命令，而应调用统一的 `execution_get`，按 nextCursor 读取增量输出。这个规则既写在工具说明中，也由 Execution Case 负责约束。
 
+当前实现有两条 ReAct 工具执行形态：ADK 自动执行是主路径，Runner 事件中已经包含工具结果，系统在事后做权限审计并把结果写回上下文；手动工具执行路径保留了逐个做权限检查、等待用户确认、执行并发送工具结果事件的能力。两条路径都不应该绕过 SSH Case，但它们在“拒绝发生在执行前还是执行后”上不同，因此不能用一套测试结论替代另一套。
+
 ## 上下文记录和历史边界
 
 上下文记录包含用户任务、模型响应、工具参数、工具结果和进度事件。实现对流式历史有压缩和边界处理，避免把无限增长的工具输出全部塞回模型上下文。SSH 输出本身受 20 MiB 总上限和内联、预览上限约束，Agent 需要使用摘要、尾部或游标结果继续推理。
+
+聊天服务在创建会话时同时创建 ADK Session 和 MySQL 会话记录；消息、工具结果和里程碑通过持久仓储保存，加载历史时按时间恢复并受 token 预算约束。终端绑定通过聊天会话关联到终端资源，ReAct 结束、暂停或异常时都会尝试解绑并清理 ThreadLocal，避免后续请求误用旧终端。
 
 ## 循环和预算保护
 

@@ -236,7 +236,7 @@
     "encoder": "ffmpeg/gif-palette",
     "format": "gif",
     "mime_type": "image/gif",
-    "path": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/isolation/isolation.gif",
+    "path": "docs/projects/ai-ssh-agent/assets/isolation/isolation.gif",
     "probe": {
       "codec_name": "gif",
       "container": {
@@ -662,7 +662,7 @@
   "motion_grammar_version": "3.4",
   "motion_scene": "review-trace",
   "ok": true,
-  "output": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/isolation/isolation.gif",
+  "output": "docs/projects/ai-ssh-agent/assets/isolation/isolation.gif",
   "output_format": "gif",
   "preset": "review-trace",
   "rendered_pixels": 67454400,
@@ -681,7 +681,7 @@
     "ok": true,
     "paint_barrier": "fonts-ready-plus-two-animation-frames-before-capture",
     "preset": "review-trace",
-    "resolved_module": "/Users/jiang/.codex/skills/fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+    "resolved_module": "fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
     "sandbox": "enabled",
     "scene_report": {
       "animated_background_count": 0,
@@ -1503,7 +1503,7 @@
     },
     "width": 960
   },
-  "report": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/isolation/isolation.motion.json",
+  "report": "docs/projects/ai-ssh-agent/assets/isolation/isolation.motion.json",
   "required_encoder": "ffmpeg/gif",
   "review_reference_source_sha256": "b45264d17910fda296a7b52e7a338f361d8272ff14da55d2cad8c6e8dabe2717",
   "review_status": "user-approved",
@@ -1516,7 +1516,7 @@
     "format": {
       "gif": true
     },
-    "node": "/Users/jiang/.nvm/versions/node/v26.7.0/bin/node",
+    "node": "node-runtime",
     "ok": true,
     "renderer": {
       "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -1540,10 +1540,10 @@
         "event-transit",
         "ops-pulse"
       ],
-      "resolved_module": "/Users/jiang/.codex/skills/fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
+      "resolved_module": "fireworks-tech-graph/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js",
       "sandbox_default": "enabled"
     },
-    "worker": "/Users/jiang/.codex/skills/fireworks-tech-graph/scripts/svg2gif.js"
+    "worker": "fireworks-tech-graph/scripts/svg2gif.js"
   },
   "scene_signature": {
     "distinctive_primitives": [
@@ -1605,7 +1605,7 @@
     "artifact_within_target": true,
     "warnings": []
   },
-  "source": "/Users/jiang/Item/Java/xerina-atlas/docs/projects/ai-ssh-agent/assets/isolation/isolation.svg",
+  "source": "docs/projects/ai-ssh-agent/assets/isolation/isolation.svg",
   "source_checks": {
     "composition": {
       "details": [],

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "mode": "agent",
+  "template_type": "agent",
+  "style": 5,
+  "motion_scene": "agent-orchestration",
+  "quality_profile": "standard",
+  "width": 960,
+  "height": 700,
+  "title": "HTTP and MCP Entry Contracts",
+  "subtitle": "two entry surfaces, one governed tool plane, and four operational tool groups",
+  "containers": [
+    { "id": "entry", "x": 40, "y": 110, "width": 880, "height": 110, "label": "Entry Contracts" },
+    { "id": "routing", "x": 40, "y": 270, "width": 880, "height": 140, "label": "Routing and Context" },
+    { "id": "capability", "x": 40, "y": 450, "width": 880, "height": 140, "label": "Governed Tool Plane" }
+  ],
+  "nodes": [
+    { "id": "client", "kind": "speech", "x": 60, "y": 146, "width": 160, "height": 54, "label": "Ops Client", "sublabel": "HTTP or MCP", "fill": "rgba(255,255,255,0.12)", "stroke": "rgba(255,255,255,0.35)", "flat": true },
+    { "id": "coordinator", "kind": "double_rect", "x": 390, "y": 146, "width": 200, "height": 54, "type_label": "ENTRY", "label": "Request Router", "sublabel": "API + Streamable HTTP", "fill": "rgba(255,255,255,0.12)", "stroke": "#c084fc" },
+    { "id": "session", "kind": "rect", "x": 80, "y": 330, "width": 180, "height": 60, "type_label": "CONTEXT", "label": "Session Context", "sublabel": "user + session", "fill": "rgba(255,255,255,0.12)", "stroke": "#60a5fa" },
+    { "id": "adapter", "kind": "rect", "x": 390, "y": 330, "width": 200, "height": 60, "type_label": "ADAPTER", "label": "Request Adapter", "sublabel": "DTO / JSON-RPC", "fill": "rgba(255,255,255,0.12)", "stroke": "#60a5fa" },
+    { "id": "guard", "kind": "rect", "x": 700, "y": 330, "width": 180, "height": 60, "type_label": "BOUNDARY", "label": "Context Guard", "sublabel": "token + scope", "fill": "rgba(255,255,255,0.12)", "stroke": "#34d399" },
+    { "id": "catalog", "kind": "cylinder", "x": 80, "y": 510, "width": 180, "height": 60, "label": "Tool Catalog", "sublabel": "28 enabled tools", "fill": "rgba(255,255,255,0.08)", "stroke": "#34d399" },
+    { "id": "execution", "kind": "double_rect", "x": 390, "y": 510, "width": 200, "height": 60, "type_label": "CASE + DOMAIN", "label": "Governed Execution", "sublabel": "same SSH rules", "fill": "rgba(255,255,255,0.12)", "stroke": "#c084fc" },
+    { "id": "result", "kind": "speech", "x": 700, "y": 510, "width": 180, "height": 60, "label": "Result Contract", "sublabel": "JSON + progress", "fill": "rgba(255,255,255,0.12)", "stroke": "#f59e0b", "flat": true }
+  ],
+  "arrows": [
+    { "id": "ingress", "source": "client", "target": "coordinator", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "ingress", "motion_stage": 1, "motion_order": 0, "label": "in" },
+    { "id": "context", "source": "coordinator", "target": "session", "source_port": "bottom", "target_port": "top", "flow": "control", "motion_role": "delegate", "motion_stage": 2, "motion_order": 0, "label": "ctx" },
+    { "id": "adapt", "source": "coordinator", "target": "adapter", "source_port": "bottom", "target_port": "top", "flow": "control", "motion_role": "delegate", "motion_stage": 2, "motion_order": 1, "label": "map" },
+    { "id": "scope", "source": "coordinator", "target": "guard", "source_port": "bottom", "target_port": "top", "flow": "control", "motion_role": "delegate", "motion_stage": 2, "motion_order": 2, "label": "scope" },
+    { "id": "session-to-catalog", "source": "session", "target": "catalog", "source_port": "bottom", "target_port": "top", "flow": "write", "motion_role": "evidence", "motion_stage": 3, "motion_order": 0, "label": "facts" },
+    { "id": "catalog-to-case", "source": "catalog", "target": "execution", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "context", "motion_stage": 4, "motion_order": 0, "label": "tool" },
+    { "id": "adapter-to-case", "source": "adapter", "target": "execution", "source_port": "bottom", "target_port": "top", "flow": "write", "motion_role": "artifact", "motion_stage": 3, "motion_order": 1, "label": "call" },
+    { "id": "guard-to-result", "source": "guard", "target": "result", "source_port": "bottom", "target_port": "top", "flow": "feedback", "motion_role": "approval", "motion_stage": 5, "motion_order": 1, "label": "allow" },
+    { "id": "case-to-result", "source": "execution", "target": "result", "source_port": "right", "target_port": "left", "flow": "feedback", "motion_role": "deliver", "motion_stage": 5, "motion_order": 0, "label": "out" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 625,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "read", "label": "request / discovery" },
+    { "flow": "control", "label": "routing" },
+    { "flow": "write", "label": "execution input" },
+    { "flow": "feedback", "label": "result / progress" }
+  ],
+  "footer": "HTTP API is not protected by the MCP token · /mcp exposes only configured tools",
+  "footer_x": 48,
+  "footer_y": 680
+}
