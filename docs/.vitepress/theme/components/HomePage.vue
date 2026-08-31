@@ -94,8 +94,8 @@ function honorYear(honor: unknown) {
       </section>
 
       <section v-if="honors.length" class="section-block home-honors">
-        <div class="section-heading compact-heading"><div><span class="section-index">03 / PORTFOLIO · COMPETITIONS &amp; HONORS</span><h2>竞赛与荣誉</h2></div><a class="section-link" :href="url('/portfolio/#honors')">查看作品集 <span aria-hidden="true">↗</span></a></div>
-        <div class="honor-strip"><a v-for="honor in honors" :key="honorText(honor)" class="honor-row" :href="url('/portfolio/#honors')"><span>{{ honorYear(honor) }}</span><strong>{{ honorText(honor) }}</strong><i aria-hidden="true">↗</i></a></div>
+        <div class="section-heading compact-heading"><div><span class="section-index">03 / COMPETITIONS &amp; HONORS</span><h2>竞赛与荣誉</h2></div><a class="section-link" :href="url('/about/#honors')">查看完整信息 <span aria-hidden="true">↗</span></a></div>
+        <div class="honor-strip"><a v-for="honor in honors" :key="honorText(honor)" class="honor-row" :href="url('/about/#honors')"><span>{{ honorYear(honor) }}</span><strong>{{ honorText(honor) }}</strong><i aria-hidden="true">↗</i></a></div>
       </section>
 
       <section class="lower-grid section-block">

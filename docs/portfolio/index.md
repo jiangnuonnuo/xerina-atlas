@@ -1,6 +1,6 @@
 ---
 title: 作品集
-description: 江科萱的项目作品、实习实践与竞赛荣誉。
+description: 江科萱已成功部署上线、可在线直接体验的项目与内容。
 layout: portfolio-index
 ---
 

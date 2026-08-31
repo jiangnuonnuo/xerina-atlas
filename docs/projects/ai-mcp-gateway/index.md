@@ -45,6 +45,8 @@ layout: project-doc
 
 因此，AI MCP Gateway 更准确的定位是：**面向企业内部能力的 AI 工具接入与发布平台**。它兼有协议适配器、能力工作台、运行时网关和 AI 联调入口
 
+**完整源码已开源在 GitHub**：[AI-MCP-Gateway](https://github.com/jiangnuonnuo/AI-MCP-Gateway)。本文档中的模块结构、实现细节与运行方式，都可以直接对照仓库代码阅读。
+
 ![AI MCP Gateway 运行时边界](./assets/architecture.gif)
 
 ## 项目背景：AI 使用企业能力时，真正缺的是什么
@@ -102,7 +104,7 @@ layout: project-doc
 
 我没有把“协议入口”“用例编排”“领域规则”和“连接实现”塞进一个服务类，主要因为这四部分的变化原因不同：Spring MVC 或 SSE 头部变化不应该修改 SQL 安全规则；新增 Redis 操作不应该修改 Controller；切换 HTTP 客户端不应该改变能力包发布门禁。
 
-如果要真正开始开发，不建议从管理页面或某个 Controller 单点切入。先阅读 [从 0 到 1 开发与上线链路](./12-从0到1开发与上线链路.md)，用企业查询样例穿过对象、Port、适配器、发布、会话和 LLM；再用 [管理端操作与 MCP 客户端联调](./13-管理端操作与MCP客户端联调.md) 按实际接口复现。这样总览里的每个名词都有一条可以跑通的落地路径。
+如果要真正开始开发，不建议从管理页面或某个 Controller 单点切入。先阅读 [从 0 到 1 开发与上线链路](./12-从0到1开发与上线链路.md)，用企业查询样例穿过对象、Port、适配器、发布、会话和 LLM；再用 [管理端操作与 MCP 客户端联调](./13-管理端操作与MCP客户端联调.md) 按实际接口复现。也可以直接 clone 开源仓库 [AI-MCP-Gateway](https://github.com/jiangnuonnuo/AI-MCP-Gateway) 对照代码运行。这样总览里的每个名词都有一条可以跑通的落地路径。
 
 ![能力接入到 AI 调用的全链路](./assets/capability-onboarding.gif)
 
