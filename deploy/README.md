@@ -20,10 +20,12 @@
 ## 用法
 
 ```bash
-./deploy/deploy.sh --check    # 仅检查, 输出是否可以一键部署(不构建不部署)
-./deploy/deploy.sh            # 一键: 检查 → 构建 → 传输 → 平滑升级 → 公网验证
-./deploy/deploy.sh --yes      # 跳过交互确认
-./deploy/deploy.sh --force    # 前置检查有硬性失败也继续(危险, 慎用)
+npm run deploy:check           # 仅检查, 输出是否可以一键部署(不构建不部署)
+npm run deploy                 # 一键: 检查 → 构建 → 传输 → 平滑升级 → 公网验证
+./deploy/deploy.sh --check     # 同上(直接执行脚本)
+./deploy/deploy.sh             # 同上
+./deploy/deploy.sh --yes       # 跳过交互确认
+./deploy/deploy.sh --force     # 前置检查有硬性失败也继续(危险, 慎用)
 ```
 
 ## 脚本做了什么

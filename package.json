@@ -10,7 +10,9 @@
     "check": "npm run check:content && npm run check:assets",
     "check:content": "tsx scripts/validate-content.ts",
     "check:assets": "tsx scripts/validate-assets.ts",
-    "svg:png": "tsx scripts/svg-to-png.ts"
+    "svg:png": "tsx scripts/svg-to-png.ts",
+    "deploy": "bash deploy/deploy.sh",
+    "deploy:check": "bash deploy/deploy.sh --check"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
