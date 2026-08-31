@@ -42,8 +42,8 @@ const deployed: DeployedItem[] = [
   },
   {
     title: 'AI OfficePal',
-    url: 'http://118.89.18.90/',
-    displayUrl: '118.89.18.90',
+    url: 'http://123.207.10.5/',
+    displayUrl: '123.207.10.5',
     visual: 'web',
     icon: 'workflow',
     tags: ['AI 应用', 'Office', 'Web'],
