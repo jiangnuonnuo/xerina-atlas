@@ -7,6 +7,7 @@ period: 2026.06 — 2026.09
 location: 中国
 icon: scan-search
 visual: field-intelligence
+cardImage: /media/experience/field-intelligence-cover.png
 order: 20
 featured: true
 summary: 参与Lexicon · AI 字段词典平台的 AI 应用研发，把分散在业务页面里的菜单、页签、表单与表格列沉淀为可审核、可维护、可导出的层级化字段资产。最体现价值的链路有三条：把"全量 Agent 自动抓"演进为"人工定界 + 插件采集 + Agent 解析"的半智能化采集范式；设计读写分离、流式落盘的异步 XLSX 导出；以及用邻接表 + 闭包表 + 版本 CAS 解决目录入库的防重与并发子节点问题。

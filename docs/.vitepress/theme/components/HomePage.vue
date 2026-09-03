@@ -5,7 +5,7 @@ import { data as experiences } from '../../data/experiences.data'
 import { data as notes } from '../../data/notes.data'
 import { useRoute } from 'vitepress'
 import ItemIcon from './ItemIcon.vue'
-import ProjectVisual from './ProjectVisual.vue'
+import CardMedia from './CardMedia.vue'
 import { relativeUrl } from '../utils/relative-url'
 
 const featuredExperience = experiences.slice(0, 3)
@@ -45,7 +45,7 @@ function honorYear(honor: unknown) {
       <section class="hero-grid">
         <div class="hero-copy">
           <div class="eyebrow"><span class="eyebrow-dot"></span> OPEN TO WORK <span class="eyebrow-line"></span> JAVA BACKEND</div>
-          <h1>先理清问题，<br /><em>再做实系统。</em></h1>
+          <h1>欢迎来到Xerina 的个人存储窝</h1>
           <p class="hero-lede">你好，我是 {{ value('displayName', 'Xerina') }}，一名专注于 Java 后端开发、AI 应用工程化与系统设计的开发者。正在寻找 Java 后端开发、平台工程或 AI 应用方向的机会。</p>
           <div class="hero-actions">
             <a class="button button-primary" :href="url('/projects/')"><span>查看项目</span><span aria-hidden="true">↗</span></a>
@@ -77,7 +77,7 @@ function honorYear(honor: unknown) {
         <div class="section-heading compact-heading"><div><span class="section-index">01 / INTERNSHIP &amp; PRACTICE EXPERIENCE</span><h2>实习与实践经历</h2></div><a class="section-link" :href="url('/experience/')">查看完整经历 <span aria-hidden="true">↗</span></a></div>
         <div class="experience-list">
           <a v-for="(item, index) in featuredExperience" :key="item.slug" class="experience-row" :class="{ 'experience-row-featured': index === 0 }" :href="url(item.url)">
-            <span class="experience-item-icon"><ItemIcon :name="item.frontmatter.icon" :size="21" /></span><span class="experience-year">{{ item.frontmatter.period }}</span><span class="experience-role"><strong>{{ item.frontmatter.title }}</strong><small>{{ item.frontmatter.organization }}</small></span><span class="experience-summary">{{ item.frontmatter.summary }}</span><span class="row-arrow" aria-hidden="true">↗</span>
+            <span class="experience-item-icon"><ItemIcon :name="item.frontmatter.icon" :size="21" /></span><CardMedia class="home-experience-media" :src="url(item.frontmatter.cardImage)" :alt="`${item.organization} · ${item.title} 的实习主题插画`" :icon="item.frontmatter.icon" label="实习经历" /><span class="experience-year">{{ item.frontmatter.period }}</span><span class="experience-role"><strong>{{ item.frontmatter.title }}</strong><small>{{ item.frontmatter.organization }}</small></span><span class="experience-summary">{{ item.frontmatter.summary }}</span><span class="row-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
       </section>
@@ -87,7 +87,7 @@ function honorYear(honor: unknown) {
         <div class="project-grid">
           <article v-for="(project, index) in featuredProjects" :key="project.slug" class="project-card" :class="{ 'project-card-featured': index === 0 }">
             <div class="project-card-top"><span class="project-number">{{ String(index + 1).padStart(2, '0') }}</span><span class="project-type">{{ project.frontmatter.categoryLabel }} / {{ project.frontmatter.year }}</span></div>
-            <ProjectVisual :kind="project.frontmatter.visual" :icon="project.frontmatter.icon" />
+            <CardMedia class="project-card-media" :src="url(project.frontmatter.cardImage)" :alt="`${project.frontmatter.title} 的项目主题插画`" :icon="project.frontmatter.icon" label="项目案例" />
             <div class="project-card-body"><div class="tag-row"><span v-for="tag in (project.frontmatter.stack || []).slice(0, 3)" :key="tag">{{ tag }}</span></div><h3>{{ project.frontmatter.title }}</h3><p>{{ project.frontmatter.summary }}</p><a :href="url(project.url)" class="card-arrow">查看项目详情 <span aria-hidden="true">↗</span></a></div>
           </article>
         </div>
@@ -101,7 +101,7 @@ function honorYear(honor: unknown) {
       <section class="lower-grid section-block">
         <div>
           <div class="section-heading compact-heading"><div><span class="section-index">04 / NOTES</span><h2>技术文章与知识库</h2></div><a class="section-link" :href="url('/notes/')">查看全部文章 <span aria-hidden="true">↗</span></a></div>
-          <div v-if="featuredNotes.length" class="notes-preview"><a v-for="note in featuredNotes" :key="note.slug" class="note-row" :href="url(note.url)"><span class="note-date">{{ formatDate(note.frontmatter.date) }}</span><span class="note-title"><strong>{{ note.frontmatter.title }}</strong><small>{{ note.frontmatter.category }} · {{ note.frontmatter.readingTime || '阅读' }}</small></span><span aria-hidden="true">↗</span></a></div>
+          <div v-if="featuredNotes.length" class="notes-preview"><a v-for="note in featuredNotes" :key="note.slug" class="note-row" :href="url(note.url)"><span class="note-date">{{ formatDate(note.frontmatter.date) }}</span><CardMedia class="home-note-media" :src="url(note.frontmatter.cardImage)" :alt="`${note.frontmatter.title} 的文章主题插画`" icon="scan-search" label="技术文章" /><span class="note-title"><strong>{{ note.frontmatter.title }}</strong><small>{{ note.frontmatter.category }} · {{ note.frontmatter.readingTime || '阅读' }}</small></span><span aria-hidden="true">↗</span></a></div>
           <p v-else class="empty-state">文章正在整理中，后续会按项目章节和技术主题持续更新。</p>
         </div>
         <aside class="contact-card"><span class="section-index">LET'S TALK</span><h3>联系方式</h3><p>欢迎聊 Java 后端、AI 应用工程、项目解析与实习机会。</p><a class="button button-dark" :href="`mailto:${value('email', 'hsq_hi@126.com')}`">发送邮件 <span aria-hidden="true">↗</span></a><div class="social-row"><a :href="value('githubUrl', 'https://github.com/jiangnuonnuo')" target="_blank" rel="noreferrer">GitHub</a><a :href="url('/about/')">简历</a><a :href="url('/about/')">联系我</a></div></aside>

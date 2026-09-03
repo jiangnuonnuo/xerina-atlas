@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import {
   FileSpreadsheet,
+  GitFork,
   ImagePlus,
   ListTree,
   Network,
@@ -23,6 +24,7 @@ const props = withDefaults(defineProps<{
 
 const icons = {
   'file-spreadsheet': FileSpreadsheet,
+  github: GitFork,
   'image-plus': ImagePlus,
   'list-tree': ListTree,
   network: Network,

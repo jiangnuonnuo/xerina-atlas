@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import ItemIcon from './ItemIcon.vue'
 
 const props = defineProps<{ kind?: string, icon?: string }>()
-const visualKinds = new Set(['skills', 'mcp', 'ssh', 'aigc', 'lexicon', 'web', 'article'])
+const visualKinds = new Set(['skills', 'mcp', 'ssh', 'aigc', 'lexicon', 'web', 'article', 'api'])
 const visualKind = computed(() => visualKinds.has(props.kind || '') ? props.kind! : 'lexicon')
 </script>
 
@@ -13,6 +13,10 @@ const visualKind = computed(() => visualKinds.has(props.kind || '') ? props.kind
     <template v-if="visualKind === 'mcp'">
       <div class="mcp-orbit"><i></i><i></i><i></i><i></i></div>
       <div class="visual-system-label">MCP<br /><b>GATEWAY</b></div>
+    </template>
+    <template v-else-if="visualKind === 'api'">
+      <div class="api-flow"><i></i><b></b><i></i><b></b><i></i></div>
+      <div class="visual-system-label">API<br /><b>OPEN SOURCE</b></div>
     </template>
     <template v-else-if="visualKind === 'ssh'">
       <div class="terminal-lines"><i></i><i></i><i></i><i></i></div>

@@ -5,8 +5,9 @@ category: engineering
 categoryLabel: Lexicon · AI 字段词典平台
 visual: lexicon
 icon: list-tree
+cardImage: /media/projects/lexicon-cover.png
 year: 2026
-order: 40
+order: 10
 featured: true
 status: active
 summary: 把业务页面上的菜单、页签、分组、字段与指标沉淀为可维护的层级目录，通过 DOM-SCOUT 内部定制采集、受限 Agent 语义解析、一致性快照与异步导出形成完整字段治理闭环。
@@ -82,18 +83,10 @@ layout: project-doc
 
 ---
 
-## 建议阅读顺序
-
-建议先阅读项目总纲和 01 章，再按图进入采集、解析、工作台、目录治理和交付。
-
-![技术文章阅读顺序](./assets/reading-sequence.svg)
-
----
-
 ## 一张图看懂文档结构
 
 ![Lexicon文章结构](./assets/document-map.svg)
 
 ---
 
-> **说明**：新增的技术流程图采用 Fireworks Tech Graph 生成，源描述保存在 `assets/fireworks/*.json`，静态 SVG 用于文档内嵌，交互版本由对应的 HTML 查看器打开；既有平台全景仍保留 `InteractiveDiagram` 入口。图中只展示公开的架构、契约和流程，不包含公司内部代码、密钥或真实业务数据。
+> **说明**由于为公司内部实现项目，相关源码，数据库结构，具体代码实现等都进行脱敏和安全防护，该项目文章只只分享工作流和大概的实现线路。

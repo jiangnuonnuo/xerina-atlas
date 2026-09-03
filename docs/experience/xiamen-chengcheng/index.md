@@ -7,6 +7,7 @@ period: 2025.02 — 2025.10
 location: 厦门 / 中国
 icon: server-cog
 visual: aigc-backend
+cardImage: /media/experience/aigc-backend-cover.png
 order: 10
 featured: true
 summary: 面向 C 端用户和 B 端运营人员建设 AI 生图、视频生成、印花提取与素材交付能力，负责把 Midjourney 等不稳定的外部大模型能力包装成高可用后端服务。最体现后端工程能力的链路有五条：长耗时 AI 任务的异步编排、消息可靠性与三层幂等、状态机统一竞态、OSS 直传去中转、以及高并发权益防超卖四道闸门。

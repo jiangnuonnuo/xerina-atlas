@@ -4,6 +4,7 @@ type: note
 category: engineering
 date: 2026-08-18
 order: 10
+cardImage: /media/notes/harness-cover.png
 summary: 不堆术语，把 Harness 拆清楚——它是管住 Agent 的"缰绳"，和大模型、Agent、Framework 三者到底什么关系，为什么商用产品几乎全是 Harness。
 tags:
   - Harness
@@ -310,4 +311,3 @@ tags:
 未来的 AI 能力竞争，可能不再是"谁的模型参数多"，而是"谁的缰绳系得好"——谁能把同一个模型，驯成更靠谱、更有用的员工，谁就赢了。
 
 至于该换大模型还是换 Harness？记住这句话：**大脑是标配，缰绳才分高下。**
-

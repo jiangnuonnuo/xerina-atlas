@@ -5,8 +5,9 @@ category: skills
 categoryLabel: Agent skills
 visual: skills
 icon: workflow
+cardImage: /media/projects/v-team-skills-cover.png
 year: 2026
-order: 30
+order: 50
 featured: true
 status: active
 summary: 面向 Codex、Claude 等 coding agent 的个人功能交付技能，覆盖需求判断、技术设计、实现约束与风险驱动验收。

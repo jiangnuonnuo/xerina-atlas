@@ -4,6 +4,7 @@ type: note
 category: engineering
 date: 2026-08-21
 order: 20
+cardImage: /media/notes/code-mode-cover.png
 summary: 不站队，把 Code Mode 拆解清楚——它用 2 个工具把 2500+ 个 API 压缩进 1000 token，并对比 Function Calling 说明二者是"队友"而非"对手"。
 tags:
   - Code Mode

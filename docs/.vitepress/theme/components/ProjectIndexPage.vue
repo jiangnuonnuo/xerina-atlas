@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { data as projects } from '../../data/projects.data'
 import { useRoute } from 'vitepress'
-import ProjectVisual from './ProjectVisual.vue'
+import CardMedia from './CardMedia.vue'
 import { relativeUrl } from '../utils/relative-url'
 
 const filter = ref('all')
@@ -24,7 +24,7 @@ const url = (path: string) => relativeUrl(path, route.path)
       <div class="filter-bar" role="toolbar" aria-label="项目分类筛选"><span class="filter-label">FILTER BY</span><button v-for="item in filters" :key="item.key" class="filter-button" :class="{ 'is-active': filter === item.key }" type="button" @click="filter = item.key">{{ item.label }} <span>{{ item.key === 'all' ? projects.length : projects.filter((project) => project.frontmatter.category === item.key).length }}</span></button></div>
       <div class="project-index-list">
         <article v-for="(project, index) in visibleProjects" :key="project.slug" class="project-index-card">
-          <ProjectVisual :kind="project.frontmatter.visual" :icon="project.frontmatter.icon" class="index-card-media" />
+          <CardMedia class="index-card-media project-index-media" :src="url(project.frontmatter.cardImage)" :alt="`${project.frontmatter.title} 的项目主题插画`" :icon="project.frontmatter.icon" label="项目案例" />
           <div class="index-card-copy"><div class="project-card-top"><span class="project-number">{{ String(index + 1).padStart(2, '0') }}</span><span class="project-type">{{ project.frontmatter.categoryLabel }} / {{ project.frontmatter.year }}</span></div><h2>{{ project.frontmatter.title }}</h2><p>{{ project.frontmatter.summary }}</p><div class="index-card-bottom"><div class="tag-row"><span v-for="tag in project.frontmatter.stack || []" :key="tag">{{ tag }}</span></div><a :href="url(project.url)" class="button button-small">查看项目文档 <span>↗</span></a></div></div>
         </article>
       </div>

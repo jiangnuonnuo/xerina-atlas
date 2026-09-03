@@ -4,6 +4,7 @@ type: note
 category: engineering
 date: 2026-08-27
 order: 40
+cardImage: /media/notes/hashmap-cover.png
 summary: 以 JDK 1.8 源码为主线，从 key 进入 HashMap 开始，拆解扰动、桶定位、链表与红黑树、put/get/remove、扩容、迭代器、并发边界与工程使用，让“会背八股”变成“能解释为什么”。
 tags:
   - Java
