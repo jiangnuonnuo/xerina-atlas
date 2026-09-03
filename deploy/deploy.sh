@@ -27,6 +27,7 @@
 #    IMAGE_NAME      镜像名,       默认 xerina-atlas
 #    CONTAINER_NAME  容器名,       默认 xerina-atlas
 #    CANDIDATE_PORT  候选容器端口, 默认 18080
+#    NET_NAME        反代共享 Docker 网络, 默认 walicode-frontnet(不存在时自动创建)
 # ============================================================================
 
 set -euo pipefail
@@ -39,6 +40,8 @@ DEPLOY_DIR="${DEPLOY_DIR:-/opt/xerina-atlas}"
 IMAGE_NAME="${IMAGE_NAME:-xerina-atlas}"
 CONTAINER_NAME="${CONTAINER_NAME:-xerina-atlas}"
 CANDIDATE_PORT="${CANDIDATE_PORT:-18080}"
+# 与 walicode-server(app) 共享的 Docker 网络：前端 nginx 通过服务名 app:8091 反代 /api
+NET_NAME="${NET_NAME:-walicode-frontnet}"
 NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 
 CHECK_ONLY=0
@@ -271,13 +274,19 @@ ship_and_build() {
 # ---------- 远端部署(含健康检查与回滚) ----------
 remote_deploy() {
   section "远端部署 ($DEPLOY_HOST)"
-  local remote_out
-  remote_out="$(ssh "${SSH_OPTS[@]}" "$DEPLOY_USER@$DEPLOY_HOST" \
-    bash -s -- "$SHA" "$DEPLOY_DIR" "$IMAGE_NAME" "$CONTAINER_NAME" "$CANDIDATE_PORT" <<'REMOTE'
+  local remote_out tmp_out rc=0
+  tmp_out="$(mktemp)" || die "无法创建临时文件"
+  if ssh "${SSH_OPTS[@]}" "$DEPLOY_USER@$DEPLOY_HOST" \
+     bash -s -- "$SHA" "$DEPLOY_DIR" "$IMAGE_NAME" "$CONTAINER_NAME" "$CANDIDATE_PORT" "$NET_NAME" <<'REMOTE' >"$tmp_out"
 set -euo pipefail
-sha="$1"; deploy_dir="$2"; image_name="$3"; container_name="$4"; candidate_port="$5"
+sha="$1"; deploy_dir="$2"; image_name="$3"; container_name="$4"; candidate_port="$5"; net_name="$6"
 image="$image_name:$sha"
 candidate="${container_name}-candidate"
+
+# 反代依赖的共享网络: 不存在则创建(幂等), 前端容器加入后可用服务名 app 解析 walicode 后端
+if ! docker network inspect "$net_name" >/dev/null 2>&1; then
+  docker network create "$net_name" >/dev/null
+fi
 
 # 记录旧版镜像(供回滚与报告)
 old_tag="$(docker inspect --format '{{index .Config.Image}}' "$container_name" 2>/dev/null || true)"
@@ -288,7 +297,7 @@ fi
 
 echo "[1/4] 启动候选容器 ($image, 127.0.0.1:${candidate_port}) ..."
 docker rm -f "$candidate" >/dev/null 2>&1 || true
-docker run -d --name "$candidate" -p "127.0.0.1:${candidate_port}:80" "$image" >/dev/null
+docker run -d --name "$candidate" --network "$net_name" -p "127.0.0.1:${candidate_port}:80" "$image" >/dev/null
 
 echo "[2/4] 候选容器健康检查 ..."
 candidate_ready=false
@@ -306,11 +315,17 @@ if [ "$candidate_ready" != true ]; then
   echo "RESULT=CANDIDATE_FAILED"
   exit 1
 fi
+# 提示性探测: /api 反代是否已连上 walicode 后端(不阻断部署)
+api_probe="$(curl -s --max-time 5 "http://127.0.0.1:${candidate_port}/api/v1/query_ai_agent_config_list" 2>/dev/null | head -c 60 || true)"
+case "$api_probe" in
+  *'code":"0000'*) echo "候选容器 /api 反代正常 (walicode 后端可达)" ;;
+  *) echo "候选容器 /api 反代未就绪 (提示: 确认 walicode 后端已运行在 ${net_name} 网络)" ;;
+esac
 
 echo "[3/4] 切换生产容器 (:80) ..."
 docker rm -f "$container_name" >/dev/null 2>&1 || true
 sleep 1
-docker run -d --name "$container_name" --restart unless-stopped -p 80:80 "$image" >/dev/null
+docker run -d --name "$container_name" --restart unless-stopped -p 80:80 --network "$net_name" "$image" >/dev/null
 
 production_ready=false
 for i in $(seq 1 20); do
@@ -328,7 +343,7 @@ if [ "$production_ready" != true ]; then
   docker rm -f "$container_name" >/dev/null 2>&1 || true
   if [ -n "$old_tag" ]; then
     sleep 1
-    docker run -d --name "$container_name" --restart unless-stopped -p 80:80 "$old_tag" >/dev/null
+    docker run -d --name "$container_name" --restart unless-stopped -p 80:80 --network "$net_name" "$old_tag" >/dev/null
     for i in $(seq 1 20); do
       curl -fsS "http://127.0.0.1/healthz" >/dev/null 2>&1 && break
       sleep 1
@@ -355,7 +370,17 @@ printf '%s %s %s\n' "$(date -u +%FT%TZ)" "$sha" "${old_tag:-none}" > "$deploy_di
 echo "RESULT=OK"
 echo "OLD_TAG=${old_tag:-none}"
 REMOTE
-)" || true
+  then
+    rc=0
+  else
+    rc=$?
+  fi
+  remote_out="$(cat "$tmp_out" 2>/dev/null || true)"
+  rm -f "$tmp_out"
+  if [ "$rc" != 0 ] && ! printf '%s\n' "$remote_out" | grep -q 'RESULT='; then
+    printf '%s\n' "$remote_out" | tail -n 25 >&2
+    die "SSH/远端部署退出码 $rc, 请查看上方远端输出"
+  fi
 
   echo "$remote_out" | grep -E '^\[[0-9]/4\]' || true
   if printf '%s\n' "$remote_out" | grep -q 'RESULT=OK'; then
