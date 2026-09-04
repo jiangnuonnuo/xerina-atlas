@@ -56,6 +56,12 @@ layout: project-doc
 - **[30 · 平台字段目录结构治理](./30-platform-field-structure-management)**：目录树不变量、生命周期与一致性。
 - **[40 · 数据库并发与 XLSX 字典交付](./40-field-dictionary-data-delivery)**：从数据库快照到异步导出、原子交付与高并发边界。
 
+如果你要理解 Lexicon 字段词典如何承接数仓查询、自然语言转 SQL 以及日报周报生成，继续阅读：
+
+- **[50 · Text2SQL 报表查询架构](./50-text2sql-report-architecture)**：Cognida 在数仓查询和报表链路中的职责边界。
+- **[60 · 从自然语言到日报周报 SQL](./60-text2sql-report-flow)**：用脱敏日报案例拆解从业务问题到 SQL 结果的实际流程。
+- **[70 · SQL 安全边界与正确性验证](./70-text2sql-safety-validation)**：SQL 只读控制、资源边界、Golden Query 和报表发布闸门。
+
 ---
 
 ## 阅读导航
@@ -69,6 +75,9 @@ layout: project-doc
 | [25 · 字段治理交互工作台](./25-full-stack-workbench) | 采集、解析、审核、目录和导出交互 | 一条完整的前后端状态链路 |
 | [30 · 平台字段目录结构治理](./30-platform-field-structure-management) | 树不变量、生命周期、一致性 | 目录结构的"地基" |
 | [40 · 数据库并发与 XLSX 字典交付](./40-field-dictionary-data-delivery) | 数据库并发、快照、XLSX、原子交付 | 不影响采集的可复现交付物 |
+| [50 · Text2SQL 报表查询架构](./50-text2sql-report-architecture) | Cognida、数仓查询、报表职责边界 | 自然语言转 SQL 的系统定位 |
+| [60 · 从自然语言到日报周报 SQL](./60-text2sql-report-flow) | 意图解析、Schema、语义匹配、执行结果 | 一条日报 SQL 是怎样生成的 |
+| [70 · SQL 安全边界与正确性验证](./70-text2sql-safety-validation) | 只读闸门、结果校验、Golden Query | 如何避免错误 SQL 进入正式报表 |
 
 ---
 

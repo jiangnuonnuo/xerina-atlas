@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 6,
+  "motion_scene": "governed-runtime",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 430,
+  "title": "Text2SQL · 日报周报查询架构",
+  "subtitle": "自然语言进入 Cognida，经过语义治理与只读执行，生成可复用的报表结果。",
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "speech",
+      "x": 30,
+      "y": 170,
+      "width": 120,
+      "height": 82,
+      "label": "业务问题",
+      "sublabel": "自然语言",
+      "fill": "#e9f1fb",
+      "stroke": "#8c6f5a",
+      "flat": true
+    },
+    {
+      "id": "agent",
+      "kind": "double_rect",
+      "x": 190,
+      "y": 170,
+      "width": 120,
+      "height": 82,
+      "label": "Data Agent",
+      "sublabel": "意图解析",
+      "fill": "#c8e4db",
+      "stroke": "#8c6f5a"
+    },
+    {
+      "id": "semantic",
+      "kind": "rect",
+      "x": 350,
+      "y": 170,
+      "width": 120,
+      "height": 82,
+      "label": "语义层",
+      "sublabel": "指标 / 维度",
+      "fill": "#f7ecda",
+      "stroke": "#d0b893",
+      "flat": true
+    },
+    {
+      "id": "guard",
+      "kind": "hexagon",
+      "x": 510,
+      "y": 170,
+      "width": 120,
+      "height": 82,
+      "label": "SQL 闸门",
+      "sublabel": "只读 / LIMIT",
+      "fill": "#f7ecda",
+      "stroke": "#d97757",
+      "flat": true
+    },
+    {
+      "id": "warehouse",
+      "kind": "cylinder",
+      "x": 670,
+      "y": 170,
+      "width": 120,
+      "height": 82,
+      "label": "公司数仓",
+      "sublabel": "只读查询",
+      "fill": "#e5e8df",
+      "stroke": "#7b8b5c"
+    },
+    {
+      "id": "result",
+      "kind": "cylinder",
+      "x": 830,
+      "y": 170,
+      "width": 120,
+      "height": 82,
+      "label": "结果集",
+      "sublabel": "Result Store",
+      "fill": "#e5e8df",
+      "stroke": "#7b8b5c"
+    },
+    {
+      "id": "report",
+      "kind": "document",
+      "x": 990,
+      "y": 170,
+      "width": 120,
+      "height": 82,
+      "label": "日报 / 周报",
+      "sublabel": "表格 / 图表",
+      "fill": "#f7ecda",
+      "stroke": "#d97757"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "user-agent",
+      "source": "user",
+      "target": "agent",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "ingress",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "agent-semantic",
+      "source": "agent",
+      "target": "semantic",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "dispatch",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "semantic-guard",
+      "source": "semantic",
+      "target": "guard",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "ground",
+      "motion_stage": 3,
+      "motion_order": 0
+    },
+    {
+      "id": "guard-warehouse",
+      "source": "guard",
+      "target": "warehouse",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "execute",
+      "motion_stage": 4,
+      "motion_order": 0
+    },
+    {
+      "id": "warehouse-result",
+      "source": "warehouse",
+      "target": "result",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "read",
+      "motion_role": "result",
+      "motion_stage": 5,
+      "motion_order": 0
+    },
+    {
+      "id": "result-report",
+      "source": "result",
+      "target": "report",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "deliver",
+      "motion_stage": 6,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 335,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "control", "label": "Agent / 执行控制" },
+    { "flow": "read", "label": "数仓 / 结果读取" },
+    { "flow": "data", "label": "业务语义与 SQL" },
+    { "flow": "write", "label": "报表产物" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 6 · governed Text2SQL runtime",
+  "footer_x": 48,
+  "footer_y": 400
+}
