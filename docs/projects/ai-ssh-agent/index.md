@@ -5,7 +5,7 @@ category: platform
 categoryLabel: 运维智能化
 visual: ssh
 icon: terminal
-cardImage: /media/projects/ai-ssh-agent-cover.png
+cardImage: /media/projects/ai-ssh-agent-cover.webp
 year: 2026
 order: 31
 featured: true

@@ -37,7 +37,7 @@ function url(path: string) { return relativeUrl(path, route.path) }
   <header class="site-header">
     <div class="container nav-shell">
       <a class="brand" :href="url('/')" aria-label="回到 Xerina 首页">
-        <span class="brand-mark"><img :src="url('/brand/xerina-avatar.png')" alt="" /></span>
+        <span class="brand-mark"><img :src="url('/brand/xerina-avatar.png')" alt="" width="128" height="128" fetchpriority="high" /></span>
         <span class="brand-copy">
           <strong>Xerina</strong>
           <small>ATLAS / PORTFOLIO</small>

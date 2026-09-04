@@ -5,7 +5,7 @@ category: skills
 categoryLabel: Agent skills
 visual: skills
 icon: workflow
-cardImage: /media/projects/v-team-skills-cover.png
+cardImage: /media/projects/v-team-skills-cover.webp
 year: 2026
 order: 50
 featured: true

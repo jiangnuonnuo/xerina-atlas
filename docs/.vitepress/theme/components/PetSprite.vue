@@ -3,6 +3,35 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vitepress'
 import { relativeUrl } from '../utils/relative-url'
 
+// —— 雪碧图懒加载: 首次用户交互/滚动后才拉取 spritesheet (每页省 ~470KB) ——
+let spriteActivated = false
+type SpriteListener = () => void
+const spriteListeners = new Set<SpriteListener>()
+let spriteCleanup: (() => void) | undefined
+const ACTIVATION_EVENTS = ['pointerdown', 'pointermove', 'scroll', 'keydown', 'touchstart', 'wheel'] as const
+
+function activateSprite() {
+  if (spriteActivated) return
+  spriteActivated = true
+  spriteListeners.forEach((fn) => fn())
+  spriteListeners.clear()
+  spriteCleanup?.()
+  spriteCleanup = undefined
+}
+
+function registerSprite(fn: SpriteListener) {
+  if (spriteActivated) {
+    fn()
+    return
+  }
+  spriteListeners.add(fn)
+  if (!spriteCleanup) {
+    const handler = () => activateSprite()
+    ACTIVATION_EVENTS.forEach((event) => window.addEventListener(event, handler, { passive: true, once: true }))
+    spriteCleanup = () => ACTIVATION_EVENTS.forEach((event) => window.removeEventListener(event, handler))
+  }
+}
+
 export type PetState =
   | 'idle'
   | 'running-right'
@@ -45,6 +74,7 @@ const rows: Record<Exclude<PetState, 'look'>, { row: number; durations: number[]
 
 const frame = ref(0)
 const reduceMotion = ref(false)
+const spriteLoaded = ref(false)
 let timer: number | undefined
 
 const lookIndex = computed(() => Math.round(((props.direction % 360) + 360) % 360 / 22.5) % 16)
@@ -54,7 +84,7 @@ const column = computed(() => (props.state === 'look' ? lookIndex.value % 8 : fr
 const spriteStyle = computed(() => ({
   width: `${192 * props.scale}px`,
   height: `${208 * props.scale}px`,
-  backgroundImage: `url(${relativeUrl('/pets/xerina/spritesheet.webp', route.path)})`,
+  backgroundImage: spriteLoaded.value ? `url(${relativeUrl('/pets/xerina/spritesheet.webp', route.path)})` : 'none',
   backgroundPosition: `${(column.value * 100) / 7}% ${row.value * 10}%`,
 }))
 
@@ -87,6 +117,9 @@ watch(
 
 onMounted(() => {
   reduceMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  registerSprite(() => {
+    spriteLoaded.value = true
+  })
   scheduleFrame()
 })
 

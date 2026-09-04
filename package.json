@@ -10,6 +10,8 @@
     "check": "npm run check:content && npm run check:assets",
     "check:content": "tsx scripts/validate-content.ts",
     "check:assets": "tsx scripts/validate-assets.ts",
+    "media:optimize": "tsx scripts/media-optimize.ts",
+    "media:optimize:check": "tsx scripts/media-optimize.ts --dry-run",
     "svg:png": "tsx scripts/svg-to-png.ts",
     "deploy": "bash deploy/deploy.sh",
     "deploy:check": "bash deploy/deploy.sh --check"
@@ -20,6 +22,7 @@
     "@types/node": "^24.0.0",
     "gray-matter": "^4.0.3",
     "markdown-it": "^15.0.1",
+    "sharp": "^0.35.4",
     "tsx": "^4.20.3",
     "typescript": "^5.9.2",
     "vitepress": "^1.6.4",

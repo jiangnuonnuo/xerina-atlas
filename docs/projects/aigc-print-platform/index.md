@@ -5,7 +5,7 @@ category: platform
 categoryLabel: 平台工程
 visual: aigc
 icon: image-plus
-cardImage: /media/projects/aigc-print-platform-cover.png
+cardImage: /media/projects/aigc-print-platform-cover.webp
 year: 2025
 order: 20
 featured: true

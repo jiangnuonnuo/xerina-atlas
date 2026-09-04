@@ -5,7 +5,7 @@ category: platform
 categoryLabel: 平台工程
 visual: mcp
 icon: network
-cardImage: /media/projects/ai-mcp-gateway-cover.png
+cardImage: /media/projects/ai-mcp-gateway-cover.webp
 year: 2026
 order: 30
 featured: true

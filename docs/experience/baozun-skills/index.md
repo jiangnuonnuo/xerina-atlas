@@ -7,7 +7,7 @@ period: 2026.06 — 2026.09
 location: 中国
 icon: file-spreadsheet
 visual: spreadsheet-skills
-cardImage: /media/experience/spreadsheet-skills-cover.png
+cardImage: /media/experience/spreadsheet-skills-cover.webp
 order: 21
 featured: true
 summary: 依据业务人员提供的固定 SOP，将跨系统"表格流转"任务——从源系统下载文件表格、对大表格执行固定的清洗/计算/校验工作流、再把结果回写目标系统——按需定制为可复用的 Skills，累计定制 6 个、合计对接数十个内部/外部源系统、覆盖数百种表格类型，并通过飞书机器人与企业内置 IM 机器人交付业务人员自助使用，把单任务处理时长从小时级压缩到 10 分钟以内。

@@ -4,7 +4,7 @@ type: note
 category: engineering
 date: 2026-08-18
 order: 10
-cardImage: /media/notes/harness-cover.png
+cardImage: /media/notes/harness-cover.webp
 summary: 不堆术语，把 Harness 拆清楚——它是管住 Agent 的"缰绳"，和大模型、Agent、Framework 三者到底什么关系，为什么商用产品几乎全是 Harness。
 tags:
   - Harness

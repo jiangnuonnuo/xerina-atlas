@@ -4,7 +4,7 @@ type: note
 category: engineering
 date: 2026-08-23
 order: 30
-cardImage: /media/notes/wiki-rag-cover.png
+cardImage: /media/notes/wiki-rag-cover.webp
 summary: 从 1995 年 Ward Cunningham 的 WikiWikiWeb 讲起，用 8 张图拆解 Wiki 是什么、怎么运转、有什么用；再讲清 RAG 的原理与短板，并用「发动机 vs 油箱」讲透二者为何是搭档而非对手；最后介绍 Karpathy 提出的 LLM Wiki 新范式。
 tags:
   - Wiki

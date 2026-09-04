@@ -5,7 +5,7 @@ category: engineering
 categoryLabel: Lexicon · AI 字段词典平台
 visual: lexicon
 icon: list-tree
-cardImage: /media/projects/lexicon-cover.png
+cardImage: /media/projects/lexicon-cover.webp
 year: 2026
 order: 10
 featured: true
