@@ -8,103 +8,90 @@ import ItemIcon from './ItemIcon.vue'
 import CardMedia from './CardMedia.vue'
 import { relativeUrl } from '../utils/relative-url'
 
+const route = useRoute()
 const featuredExperience = experiences.slice(0, 3)
-const featuredProjects = projects.slice(0, 3)
+const featuredProjects = projects.slice(0, 4)
 const featuredNotes = [...notes]
   .sort((a, b) => String(b.frontmatter.date ?? '').localeCompare(String(a.frontmatter.date ?? '')))
   .slice(0, 3)
-const honors = profile.honors || []
-const route = useRoute()
 
-function value(key: string, fallback = '') {
-  return profile[key] || fallback
-}
+const techStack = ['Java', 'Spring Boot', 'MySQL', 'Redis', 'RabbitMQ', 'Spring AI', 'MCP', 'Docker', 'Kubernetes', 'Linux']
+const socials = [
+  { label: 'GitHub', short: 'GH', href: 'https://github.com/jiangnuonnuo' },
+  { label: '知乎', short: '知', href: 'https://www.zhihu.com/people/6-10-31-7' },
+  { label: 'LinkedIn', short: 'in', href: 'https://www.linkedin.com/' },
+  { label: 'Email', short: '✉', href: 'mailto:hsq_hi@126.com' },
+]
 
-function url(path: string) {
-  return relativeUrl(path, route.path)
-}
-
-function formatDate(date: unknown) {
-  return String(date ?? '').slice(0, 10).replaceAll('-', '.')
-}
-
-function honorText(honor: unknown) {
-  if (typeof honor === 'string') return honor
-  if (honor && typeof honor === 'object' && 'title' in honor) return String(honor.title)
-  return String(honor ?? '')
-}
-
-function honorYear(honor: unknown) {
-  return honorText(honor).match(/20\d{2}/)?.[0] || 'HONOR'
-}
+function value(key: string, fallback = '') { return profile[key] || fallback }
+function url(path: string) { return relativeUrl(path, route.path) }
+function formatDate(date: unknown) { return String(date ?? '').slice(0, 10).replaceAll('-', '.') }
+function honorText(honor: unknown) { return typeof honor === 'string' ? honor : String(honor ?? '') }
+function honorYear(honor: unknown) { return honorText(honor).match(/20\d{2}/)?.[0] || 'HONOR' }
 </script>
 
 <template>
-  <main class="page page-home is-active">
+  <main class="page page-home is-active violet-home">
     <div class="container">
-      <section class="hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="eyebrow-dot"></span> OPEN TO WORK <span class="eyebrow-line"></span> JAVA BACKEND</div>
-          <h1>欢迎来到Xerina 的个人存储窝</h1>
-          <p class="hero-lede">你好，我是 {{ value('displayName', 'Xerina') }}，一名专注于 Java 后端开发、AI 应用工程化与系统设计的开发者。正在寻找 Java 后端开发、平台工程或 AI 应用方向的机会。</p>
+      <section class="violet-hero">
+        <div class="violet-hero-copy">
+          <span class="hello-pill">👋 Hi, I'm Xerina</span>
+          <h1>专注 <em>Java</em> 后端开发<br /><span>&amp; <b>AI</b> 应用工程化</span></h1>
+          <p class="hero-lede">热爱构建高性能、可扩展的系统，探索 AI 技术在实际业务中的落地应用。<br />持续学习，持续创造价值。</p>
           <div class="hero-actions">
-            <a class="button button-primary" :href="url('/projects/')"><span>查看项目</span><span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" :href="url('/resume/xerina-java-backend-resume.pdf')" download><span>下载简历</span><span aria-hidden="true">↓</span></a>
+            <a class="button button-primary" :href="url('/projects/')">查看我的项目 <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" :href="url('/resume/xerina-java-backend-resume.pdf')" download>下载简历 <span aria-hidden="true">↓</span></a>
           </div>
-          <div class="hero-contact">
-            <span class="status-pulse"></span><span>期待与优秀团队一起解决真实问题</span>
-            <a class="inline-link" :href="`mailto:${value('email', 'hsq_hi@126.com')}`">{{ value('email', 'hsq_hi@126.com') }}</a>
+          <div class="social-links" aria-label="社交链接">
+            <a v-for="social in socials" :key="social.label" :href="social.href" :aria-label="social.label" target="_blank" rel="noreferrer"><span>{{ social.short }}</span></a>
           </div>
         </div>
-        <div class="hero-visual" aria-label="Xerina 的个人定位信息">
-          <div class="hero-visual-top"><span>PROFILE / 001</span><span>JAVA / AI / SYSTEMS</span></div>
-          <div class="identity-orbit">
-            <div class="orbit-ring ring-one"></div><div class="orbit-ring ring-two"></div><div class="orbit-dot dot-one"></div><div class="orbit-dot dot-two"></div>
-            <div class="monogram">X<span>.</span></div><div class="orbit-label label-one">BACKEND</div><div class="orbit-label label-two">SYSTEMS</div><div class="orbit-label label-three">AI × PRODUCT</div>
-          </div>
-          <div class="hero-visual-bottom"><div><span class="data-label">BASE</span><strong>中国 · 莆田</strong></div><div><span class="data-label">FOCUS</span><strong>Build / Explain / Iterate</strong></div></div>
+        <div class="violet-hero-art" aria-label="Java 与 AI 工程化能力图示">
+          <div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div><div class="hero-orbit orbit-c"></div>
+          <span class="orbit-node node-java">Java Backend</span><span class="orbit-node node-ai">AI Application</span><span class="orbit-node node-db">Database</span><span class="orbit-node node-cloud">Cloud &amp; DevOps</span>
+          <span class="orbit-point point-a"></span><span class="orbit-point point-b"></span><span class="orbit-point point-c"></span>
+          <div class="hero-monogram">X</div>
         </div>
       </section>
 
-      <section class="quick-facts section-rule" aria-label="个人概况">
-        <div class="fact"><span class="data-label">EDUCATION</span><strong>{{ value('educationShort', '数据科学与大数据技术') }}</strong><small>{{ value('educationSchool', '莆田学院') }} · {{ value('educationPeriod', '2023 — 2027') }}</small></div>
-        <div class="fact"><span class="data-label">CURRENTLY</span><strong>寻找 Java 后端开发机会</strong><small>实习 / 校招 · 可快速到岗</small></div>
-        <div class="fact"><span class="data-label">EXPERIENCE</span><strong>{{ experiences.length }} 段经历 · {{ projects.length }} 个重点项目</strong><small>从异步架构到 AI 应用工程化</small></div>
-        <a class="fact fact-link" :href="url('/about/')"><span class="data-label">MORE ABOUT ME</span><strong>认识完整的 Xerina <span aria-hidden="true">↗</span></strong><small>教育、技能、竞赛和联系方式</small></a>
+      <section class="violet-overview-row" aria-label="个人概览">
+        <div class="violet-stats-card">
+          <div class="violet-stat"><span class="stat-icon"><ItemIcon name="workflow" :size="20" /></span><strong>3+</strong><small>项目经验</small></div>
+          <div class="violet-stat"><span class="stat-icon"><ItemIcon name="list-tree" :size="20" /></span><strong>5+</strong><small>技术栈掌握</small></div>
+          <div class="violet-stat"><span class="stat-icon"><ItemIcon name="server-cog" :size="20" /></span><strong>2+</strong><small>实习经历</small></div>
+          <div class="violet-stat"><span class="stat-icon"><ItemIcon name="workflow" :size="20" /></span><strong>100%</strong><small>项目完成度</small></div>
+        </div>
+        <div class="violet-stack-card"><div class="stack-heading"><strong>技术栈</strong><a :href="url('/about/#skills')">查看全部 <span>→</span></a></div><div class="stack-list"><span v-for="stack in techStack" :key="stack"><i></i>{{ stack }}</span></div></div>
       </section>
 
-      <section class="split-section section-block home-experience">
-        <div class="section-heading compact-heading"><div><span class="section-index">01 / INTERNSHIP &amp; PRACTICE EXPERIENCE</span><h2>实习与实践经历</h2></div><a class="section-link" :href="url('/experience/')">查看完整经历 <span aria-hidden="true">↗</span></a></div>
-        <div class="experience-list">
-          <a v-for="(item, index) in featuredExperience" :key="item.slug" class="experience-row" :class="{ 'experience-row-featured': index === 0 }" :href="url(item.url)">
-            <span class="experience-item-icon"><ItemIcon :name="item.frontmatter.icon" :size="21" /></span><CardMedia class="home-experience-media" :src="url(item.frontmatter.cardImage)" :alt="`${item.organization} · ${item.title} 的实习主题插画`" :icon="item.frontmatter.icon" label="实习经历" /><span class="experience-year">{{ item.frontmatter.period }}</span><span class="experience-role"><strong>{{ item.frontmatter.title }}</strong><small>{{ item.frontmatter.organization }}</small></span><span class="experience-summary">{{ item.frontmatter.summary }}</span><span class="row-arrow" aria-hidden="true">↗</span>
+      <section class="section-block violet-experience-section">
+        <div class="section-heading"><div><span class="section-index violet-index">01 / INTERNSHIP &amp; PRACTICE</span><h2>实习经历</h2><p class="section-subtitle">在真实业务中积累工程经验，持续把复杂问题做成稳定能力。</p></div><a class="section-link" :href="url('/experience/')">查看全部经历 <span>→</span></a></div>
+        <div class="violet-experience-grid">
+          <a v-for="item in featuredExperience" :key="item.slug" class="violet-experience-card" :href="url(item.url)">
+            <CardMedia :src="url(item.frontmatter.cardImage)" :alt="`${item.frontmatter.organization} · ${item.frontmatter.title}`" :icon="item.frontmatter.icon" label="实习经历" />
+            <div class="violet-experience-copy"><span class="violet-experience-period">{{ item.frontmatter.period }}</span><h3>{{ item.frontmatter.title }}</h3><p>{{ item.frontmatter.organization }}</p><span class="violet-card-arrow">了解详情 <b>→</b></span></div>
           </a>
         </div>
       </section>
 
-      <section class="section-block home-projects">
-        <div class="section-heading"><div><span class="section-index">02 / PROJECT EXPERIENCE · HR QUICK VIEW</span><h2>项目经历</h2></div><a class="section-link" :href="url('/projects/')">全部项目 <span aria-hidden="true">↗</span></a></div>
-        <div class="project-grid">
-          <article v-for="(project, index) in featuredProjects" :key="project.slug" class="project-card" :class="{ 'project-card-featured': index === 0 }">
-            <div class="project-card-top"><span class="project-number">{{ String(index + 1).padStart(2, '0') }}</span><span class="project-type">{{ project.frontmatter.categoryLabel }} / {{ project.frontmatter.year }}</span></div>
-            <CardMedia class="project-card-media" :src="url(project.frontmatter.cardImage)" :alt="`${project.frontmatter.title} 的项目主题插画`" :icon="project.frontmatter.icon" label="项目案例" />
-            <div class="project-card-body"><div class="tag-row"><span v-for="tag in (project.frontmatter.stack || []).slice(0, 3)" :key="tag">{{ tag }}</span></div><h3>{{ project.frontmatter.title }}</h3><p>{{ project.frontmatter.summary }}</p><a :href="url(project.url)" class="card-arrow">查看项目详情 <span aria-hidden="true">↗</span></a></div>
+      <section class="section-block violet-projects-section">
+        <div class="section-heading"><div><span class="section-index violet-index">02 / SELECTED PROJECTS</span><h2>精选项目</h2><p class="section-subtitle">精选的项目与开源实践，展示我如何把想法落成可运行的系统。</p></div><a class="section-link" :href="url('/projects/')">查看全部项目 <span>→</span></a></div>
+        <div class="violet-project-grid">
+          <article v-for="(project, index) in featuredProjects" :key="project.slug" class="violet-project-card">
+            <a :href="url(project.url)" class="violet-project-media"><CardMedia :src="url(project.frontmatter.cardImage)" :alt="`${project.frontmatter.title} 的项目主题插画`" :icon="project.frontmatter.icon" label="项目案例" /><span class="violet-project-number">{{ String(index + 1).padStart(2, '0') }}</span></a>
+            <div class="violet-project-body"><h3>{{ project.frontmatter.title }}</h3><p>{{ project.frontmatter.summary }}</p><div class="tag-row"><span v-for="tag in (project.frontmatter.stack || []).slice(0, 5)" :key="tag">{{ tag }}</span></div><a :href="url(project.url)" class="violet-card-arrow">查看项目详情 <b>→</b></a></div>
           </article>
         </div>
       </section>
 
-      <section v-if="honors.length" class="section-block home-honors">
-        <div class="section-heading compact-heading"><div><span class="section-index">03 / COMPETITIONS &amp; HONORS</span><h2>竞赛与荣誉</h2></div><a class="section-link" :href="url('/about/#honors')">查看完整信息 <span aria-hidden="true">↗</span></a></div>
-        <div class="honor-strip"><a v-for="honor in honors" :key="honorText(honor)" class="honor-row" :href="url('/about/#honors')"><span>{{ honorYear(honor) }}</span><strong>{{ honorText(honor) }}</strong><i aria-hidden="true">↗</i></a></div>
+      <section v-if="(profile.honors || []).length" class="section-block violet-honors-section">
+        <div class="section-heading compact-heading"><div><span class="section-index violet-index">03 / COMPETITIONS &amp; HONORS</span><h2>竞赛与荣誉</h2></div><a class="section-link" :href="url('/about/#honors')">查看完整信息 <span>→</span></a></div>
+        <div class="violet-honor-strip"><a v-for="honor in profile.honors" :key="honorText(honor)" :href="url('/about/#honors')"><span>{{ honorYear(honor) }}</span><strong>{{ honorText(honor) }}</strong><i>→</i></a></div>
       </section>
 
-      <section class="lower-grid section-block">
-        <div>
-          <div class="section-heading compact-heading"><div><span class="section-index">04 / NOTES</span><h2>技术文章与知识库</h2></div><a class="section-link" :href="url('/notes/')">查看全部文章 <span aria-hidden="true">↗</span></a></div>
-          <div v-if="featuredNotes.length" class="notes-preview"><a v-for="note in featuredNotes" :key="note.slug" class="note-row" :href="url(note.url)"><span class="note-date">{{ formatDate(note.frontmatter.date) }}</span><CardMedia class="home-note-media" :src="url(note.frontmatter.cardImage)" :alt="`${note.frontmatter.title} 的文章主题插画`" icon="scan-search" label="技术文章" /><span class="note-title"><strong>{{ note.frontmatter.title }}</strong><small>{{ note.frontmatter.category }} · {{ note.frontmatter.readingTime || '阅读' }}</small></span><span aria-hidden="true">↗</span></a></div>
-          <p v-else class="empty-state">文章正在整理中，后续会按项目章节和技术主题持续更新。</p>
-        </div>
-        <aside class="contact-card"><span class="section-index">LET'S TALK</span><h3>联系方式</h3><p>欢迎聊 Java 后端、AI 应用工程、项目解析与实习机会。</p><a class="button button-dark" :href="`mailto:${value('email', 'hsq_hi@126.com')}`">发送邮件 <span aria-hidden="true">↗</span></a><div class="social-row"><a :href="value('githubUrl', 'https://github.com/jiangnuonnuo')" target="_blank" rel="noreferrer">GitHub</a><a :href="url('/about/')">简历</a><a :href="url('/about/')">联系我</a></div></aside>
+      <section v-if="featuredNotes.length" class="lower-grid section-block violet-lower-section">
+        <div><div class="section-heading compact-heading"><div><span class="section-index violet-index">04 / NOTES</span><h2>技术文章与知识库</h2></div><a class="section-link" :href="url('/notes/')">查看全部文章 <span>→</span></a></div><div class="notes-preview"><a v-for="note in featuredNotes" :key="note.slug" class="note-row violet-note-row" :href="url(note.url)"><span class="note-date">{{ formatDate(note.frontmatter.date) }}</span><span class="note-title"><strong>{{ note.frontmatter.title }}</strong><small>{{ note.frontmatter.category }} · {{ note.frontmatter.readingTime || '阅读' }}</small></span><span>→</span></a></div></div>
+        <aside class="contact-card violet-contact-card"><span class="section-index">LET'S TALK</span><h3>一起聊聊<br />技术与可能</h3><p>欢迎交流 Java 后端、AI 应用工程、项目解析与实习机会。</p><a class="button button-dark" :href="`mailto:${value('email', 'hsq_hi@126.com')}`">联系我 <span>→</span></a></aside>
       </section>
     </div>
   </main>

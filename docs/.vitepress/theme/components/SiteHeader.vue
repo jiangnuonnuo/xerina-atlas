@@ -40,7 +40,7 @@ function url(path: string) { return relativeUrl(path, route.path) }
         <span class="brand-mark"><img :src="url('/brand/xerina-avatar.png')" alt="" width="128" height="128" fetchpriority="high" /></span>
         <span class="brand-copy">
           <strong>Xerina</strong>
-          <small>ATLAS / PORTFOLIO</small>
+            <small>AI Engineer &amp; Java Developer</small>
         </span>
       </a>
 
