@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "mode": "data-flow",
+  "template_type": "data-flow",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 720,
+  "title": "导出快照的版本边界与业务并行",
+  "subtitle": "t0 建立 MySQL 一致性视图；t0 之后的目录写入继续提交，但只进入下一次导出。",
+  "containers": [
+    { "id": "snapshot", "x": 40, "y": 100, "width": 1120, "height": 150, "label": "01 · CONSISTENT SOURCE VIEW", "header_prefix": "01" },
+    { "id": "parallel", "x": 40, "y": 300, "width": 1120, "height": 150, "label": "02 · BUSINESS CONTINUES", "header_prefix": "02" },
+    { "id": "delivery", "x": 40, "y": 500, "width": 1120, "height": 140, "label": "03 · LOCAL DELIVERY", "header_prefix": "03" }
+  ],
+  "nodes": [
+    { "id": "create", "kind": "rect", "x": 70, "y": 150, "width": 180, "height": 68, "label": "创建任务", "sublabel": "202 + PENDING", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "mysql", "kind": "cylinder", "x": 330, "y": 150, "width": 220, "height": 68, "label": "MySQL 正式目录", "sublabel": "RR · no FOR UPDATE", "fill": "#eff6ff", "stroke": "#2563eb" },
+    { "id": "t0", "kind": "double_rect", "x": 630, "y": 150, "width": 190, "height": 68, "label": "快照时点 t0", "sublabel": "同一一致性视图", "fill": "#f0fdfa", "stroke": "#0d9488", "flat": true },
+    { "id": "version", "kind": "rect", "x": 900, "y": 150, "width": 200, "height": 68, "label": "SQLite tree_version", "sublabel": "保留值，未入 manifest", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "write", "kind": "rect", "x": 70, "y": 350, "width": 230, "height": 68, "label": "采集 / 目录写入", "sublabel": "短事务继续提交", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true },
+    { "id": "excluded", "kind": "hexagon", "x": 390, "y": 350, "width": 220, "height": 68, "label": "不进入本次导出", "sublabel": "t0 之后提交的变更", "fill": "#fef2f2", "stroke": "#dc2626", "flat": true },
+    { "id": "next", "kind": "rect", "x": 700, "y": 350, "width": 190, "height": 68, "label": "下一次导出", "sublabel": "重新建立 t1 视图", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "audit", "kind": "rect", "x": 960, "y": 350, "width": 140, "height": 68, "label": "审计缺口", "sublabel": "需扩展 manifest", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "sqlite", "kind": "cylinder", "x": 110, "y": 540, "width": 250, "height": 68, "label": "SQLite snapshot.db", "sublabel": "释放 MySQL 连接", "fill": "#f0fdfa", "stroke": "#0d9488" },
+    { "id": "xlsx", "kind": "rect", "x": 470, "y": 540, "width": 250, "height": 68, "label": "SXSSF xlsx.part", "sublabel": "100 行窗口", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "final", "kind": "document", "x": 830, "y": 540, "width": 260, "height": 68, "label": "final key + SUCCESS", "sublabel": "大小 + SHA-256 + 下载", "fill": "#eff6ff", "stroke": "#2563eb" }
+  ],
+  "arrows": [
+    { "id": "create-mysql", "source": "create", "target": "mysql", "source_port": "right", "target_port": "left", "flow": "control", "label": "claim", "label_style": "offset" },
+    { "id": "mysql-t0", "source": "mysql", "target": "t0", "source_port": "right", "target_port": "left", "flow": "read", "label": "RR read", "label_style": "offset" },
+    { "id": "t0-version", "source": "t0", "target": "version", "source_port": "right", "target_port": "left", "flow": "data", "label": "capture", "label_style": "offset" },
+    { "id": "mysql-write", "source": "mysql", "target": "write", "source_port": "bottom", "target_port": "top", "flow": "async", "label": "no write lock", "label_style": "offset" },
+    { "id": "write-excluded", "source": "write", "target": "excluded", "source_port": "right", "target_port": "left", "flow": "control", "label": "t > t0", "label_style": "offset" },
+    { "id": "excluded-next", "source": "excluded", "target": "next", "source_port": "right", "target_port": "left", "flow": "async", "label": "next view", "label_style": "offset" },
+    { "id": "version-audit", "source": "version", "target": "audit", "source_port": "bottom", "target_port": "top", "flow": "data", "label": "not exposed", "label_style": "offset" },
+    { "id": "t0-sqlite", "source": "t0", "target": "sqlite", "source_port": "bottom", "target_port": "top", "flow": "data", "label": "copy batch", "label_style": "offset" },
+    { "id": "sqlite-xlsx", "source": "sqlite", "target": "xlsx", "source_port": "right", "target_port": "left", "flow": "write", "label": "DFS rows", "label_style": "offset" },
+    { "id": "xlsx-final", "source": "xlsx", "target": "final", "source_port": "right", "target_port": "left", "flow": "write", "label": "atomic commit", "label_style": "offset" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 680,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "read", "label": "一致性读" },
+    { "flow": "data", "label": "版本/快照数据" },
+    { "flow": "write", "label": "本地交付" },
+    { "flow": "async", "label": "业务并行" },
+    { "flow": "control", "label": "任务控制" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · snapshot version boundary",
+  "footer_x": 700,
+  "footer_y": 680
+}

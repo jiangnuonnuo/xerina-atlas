@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "mode": "data-flow",
+  "template_type": "data-flow",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 820,
+  "title": "XLSX 文件提交、下载门控与孤儿回收",
+  "subtitle": "文件系统移动与数据库成功状态不是同一事务；下载必须由 SUCCESS、元数据和物理文件共同门控。",
+  "containers": [
+    { "id": "commit", "x": 40, "y": 100, "width": 1120, "height": 150, "label": "01 · ATOMIC COMMIT", "header_prefix": "01" },
+    { "id": "visibility", "x": 40, "y": 300, "width": 1120, "height": 240, "label": "02 · DOWNLOAD GATE", "header_prefix": "02" },
+    { "id": "reconcile", "x": 40, "y": 590, "width": 1120, "height": 150, "label": "03 · ORPHAN RECONCILIATION", "header_prefix": "03" }
+  ],
+  "nodes": [
+    { "id": "part", "kind": "document", "x": 70, "y": 155, "width": 190, "height": 68, "label": "xlsx.part", "sublabel": "workbook close", "fill": "#f3f4f6", "stroke": "#9ca3af" },
+    { "id": "verify", "kind": "double_rect", "x": 340, "y": 155, "width": 190, "height": 68, "label": "文件校验", "sublabel": "size + SHA-256", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "move", "kind": "document", "x": 610, "y": 155, "width": 190, "height": 68, "label": "原子移动", "sublabel": "final key 先出现", "fill": "#f0fdf4", "stroke": "#22c55e" },
+    { "id": "success", "kind": "rect", "x": 880, "y": 155, "width": 190, "height": 68, "label": "SUCCESS 事务", "sublabel": "详情 + 状态", "fill": "#eff6ff", "stroke": "#2563eb", "flat": true },
+    { "id": "request", "kind": "rect", "x": 70, "y": 335, "width": 200, "height": 68, "label": "下载请求", "sublabel": "权限 + taskId", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "gate", "kind": "hexagon", "x": 440, "y": 335, "width": 220, "height": 68, "label": "SUCCESS 门控", "sublabel": "状态 / 元数据 / 文件", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "available", "kind": "document", "x": 160, "y": 440, "width": 220, "height": 68, "label": "允许下载", "sublabel": "打开 final stream", "fill": "#f0fdf4", "stroke": "#22c55e" },
+    { "id": "blocked", "kind": "hexagon", "x": 820, "y": 440, "width": 220, "height": 68, "label": "拒绝下载", "sublabel": "非 SUCCESS / 不一致", "fill": "#fef2f2", "stroke": "#dc2626", "flat": true },
+    { "id": "crash", "kind": "hexagon", "x": 70, "y": 635, "width": 190, "height": 68, "label": "进程中断", "sublabel": "move 后 commit 前", "fill": "#fef2f2", "stroke": "#dc2626", "flat": true },
+    { "id": "orphan", "kind": "document", "x": 340, "y": 635, "width": 190, "height": 68, "label": "孤儿 final", "sublabel": "物理文件无 SUCCESS", "fill": "#fff7ed", "stroke": "#f97316" },
+    { "id": "sweep", "kind": "double_rect", "x": 610, "y": 635, "width": 190, "height": 68, "label": "巡检回收", "sublabel": "状态 + hash + TTL", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true },
+    { "id": "history", "kind": "rect", "x": 880, "y": 635, "width": 190, "height": 68, "label": "任务历史", "sublabel": "保留审计记录", "fill": "#eff6ff", "stroke": "#2563eb", "flat": true }
+  ],
+  "arrows": [
+    { "id": "part-verify", "source": "part", "target": "verify", "source_port": "right", "target_port": "left", "flow": "data", "label": "close", "label_style": "offset" },
+    { "id": "verify-move", "source": "verify", "target": "move", "source_port": "right", "target_port": "left", "flow": "write", "label": "verified", "label_style": "offset" },
+    { "id": "move-success", "source": "move", "target": "success", "source_port": "right", "target_port": "left", "flow": "control", "label": "commit", "label_style": "offset" },
+    { "id": "request-gate", "source": "request", "target": "gate", "source_port": "right", "target_port": "left", "flow": "control", "label": "check", "label_style": "offset" },
+    { "id": "gate-available", "source": "gate", "target": "available", "source_port": "bottom", "target_port": "top", "flow": "write", "label": "all pass", "label_style": "offset" },
+    { "id": "gate-blocked", "source": "gate", "target": "blocked", "source_port": "bottom", "target_port": "top", "flow": "error", "label": "any fail", "label_style": "offset" },
+    { "id": "crash-orphan", "source": "crash", "target": "orphan", "source_port": "right", "target_port": "left", "flow": "error", "label": "orphan", "label_style": "offset" },
+    { "id": "orphan-sweep", "source": "orphan", "target": "sweep", "source_port": "right", "target_port": "left", "flow": "control", "label": "scan", "label_style": "offset" },
+    { "id": "sweep-history", "source": "sweep", "target": "history", "source_port": "right", "target_port": "left", "flow": "data", "label": "mark", "label_style": "offset" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 785,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "文件/校验数据" },
+    { "flow": "write", "label": "物理文件操作" },
+    { "flow": "control", "label": "数据库状态/巡检" },
+    { "flow": "error", "label": "不可见或异常分支" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · file visibility gate",
+  "footer_x": 760,
+  "footer_y": 785
+}

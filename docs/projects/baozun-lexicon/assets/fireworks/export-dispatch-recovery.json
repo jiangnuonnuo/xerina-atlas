@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "mode": "data-flow",
+  "template_type": "data-flow",
+  "style": 1,
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 820,
+  "title": "导出调度、条件领取与重启恢复",
+  "subtitle": "本地单实例基线依靠数据库条件更新防重复执行；应用启动首轮恢复旧 RUNNING，生产多实例还需租约和代次。",
+  "containers": [
+    { "id": "dispatch", "x": 40, "y": 100, "width": 1120, "height": 150, "label": "01 · DISPATCH", "header_prefix": "01" },
+    { "id": "claim", "x": 40, "y": 300, "width": 1120, "height": 180, "label": "02 · CONDITIONAL CLAIM", "header_prefix": "02" },
+    { "id": "recover", "x": 40, "y": 530, "width": 1120, "height": 180, "label": "03 · RETRY / RECOVERY", "header_prefix": "03" }
+  ],
+  "nodes": [
+    { "id": "pending", "kind": "cylinder", "x": 70, "y": 155, "width": 210, "height": 68, "label": "PENDING / RETRYING", "sublabel": "next_run_at 到期", "fill": "#faf5ff", "stroke": "#8b5cf6" },
+    { "id": "scheduler", "kind": "rect", "x": 360, "y": 155, "width": 210, "height": 68, "label": "定时扫描", "sublabel": "每 2 分钟 · 批量 4", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "dispatcher", "kind": "double_rect", "x": 650, "y": 155, "width": 220, "height": 68, "label": "有界分发器", "sublabel": "2 线程 · 队列 4", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "retry-scan", "kind": "rect", "x": 950, "y": 155, "width": 180, "height": 68, "label": "下一轮扫描", "sublabel": "拒绝不丢任务", "fill": "#f0fdf4", "stroke": "#22c55e", "flat": true },
+    { "id": "claim-update", "kind": "double_rect", "x": 120, "y": 355, "width": 260, "height": 68, "label": "条件 UPDATE", "sublabel": "status → RUNNING", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "claim-one", "kind": "document", "x": 510, "y": 355, "width": 230, "height": 68, "label": "affected = 1", "sublabel": "当前 worker 获得执行权", "fill": "#f0fdf4", "stroke": "#22c55e" },
+    { "id": "claim-zero", "kind": "hexagon", "x": 850, "y": 355, "width": 230, "height": 68, "label": "affected = 0", "sublabel": "重复投递直接退出", "fill": "#fef2f2", "stroke": "#dc2626", "flat": true },
+    { "id": "worker", "kind": "rect", "x": 120, "y": 585, "width": 230, "height": 68, "label": "导出处理器", "sublabel": "快照 · DFS · XLSX", "fill": "#eff6ff", "stroke": "#2563eb", "flat": true },
+    { "id": "success", "kind": "document", "x": 470, "y": 585, "width": 190, "height": 68, "label": "SUCCESS", "sublabel": "文件可下载", "fill": "#f0fdf4", "stroke": "#22c55e" },
+    { "id": "retry", "kind": "hexagon", "x": 770, "y": 585, "width": 190, "height": 68, "label": "RETRYING", "sublabel": "退避 + next_run_at", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "restart", "kind": "double_rect", "x": 1000, "y": 585, "width": 130, "height": 68, "label": "启动首轮", "sublabel": "旧 RUNNING", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true },
+    { "id": "failed", "kind": "hexagon", "x": 470, "y": 675, "width": 190, "height": 28, "label": "FAILED", "sublabel": "不可重试/耗尽", "fill": "#fef2f2", "stroke": "#dc2626", "flat": true }
+  ],
+  "arrows": [
+    { "id": "pending-scheduler", "source": "pending", "target": "scheduler", "source_port": "right", "target_port": "left", "flow": "control", "label": "due", "label_style": "offset" },
+    { "id": "scheduler-dispatcher", "source": "scheduler", "target": "dispatcher", "source_port": "right", "target_port": "left", "flow": "control", "label": "dispatch", "label_style": "offset" },
+    { "id": "dispatcher-next", "source": "dispatcher", "target": "retry-scan", "source_port": "right", "target_port": "left", "flow": "async", "label": "full", "label_style": "offset" },
+    { "id": "dispatcher-claim", "source": "dispatcher", "target": "claim-update", "source_port": "bottom", "target_port": "top", "flow": "control", "label": "try claim", "label_style": "offset" },
+    { "id": "claim-update-one", "source": "claim-update", "target": "claim-one", "source_port": "right", "target_port": "left", "flow": "write", "label": "1 row", "label_style": "offset" },
+    { "id": "claim-update-zero", "source": "claim-update", "target": "claim-zero", "source_port": "right", "target_port": "left", "corridor_y": [510], "flow": "error" },
+    { "id": "one-worker", "source": "claim-one", "target": "worker", "source_port": "bottom", "target_port": "top", "flow": "data", "label": "execute", "label_style": "offset" },
+    { "id": "worker-success", "source": "worker", "target": "success", "source_port": "right", "target_port": "left", "flow": "write", "label": "complete", "label_style": "offset" },
+    { "id": "worker-retry", "source": "worker", "target": "retry", "source_port": "right", "target_port": "left", "flow": "async", "label": "transient", "label_style": "offset" },
+    { "id": "retry-pending", "source": "retry", "target": "pending", "source_port": "top", "target_port": "bottom", "flow": "control", "label": "next due", "label_style": "offset" },
+    { "id": "worker-failed", "source": "worker", "target": "failed", "source_port": "bottom", "target_port": "top", "flow": "error", "label": "final", "label_style": "offset" },
+    { "id": "restart-pending", "source": "restart", "target": "pending", "source_port": "top", "target_port": "bottom", "flow": "control", "label": "recover once", "label_style": "offset" }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 70,
+  "legend_y": 785,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "control", "label": "任务扫描/状态" },
+    { "flow": "write", "label": "成功状态" },
+    { "flow": "async", "label": "重试/队列" },
+    { "flow": "error", "label": "退出/失败" }
+  ],
+  "footer": "Fireworks Tech Graph · Style 1 · dispatch and recovery",
+  "footer_x": 760,
+  "footer_y": 785
+}
