@@ -373,17 +373,3 @@ Excel 2007 单 Sheet 最大行索引是 1,048,575；由于表头占第 0 行，�
 当前开发环境没有可用 `mvn` 命令，不能把本轮说成完整 Maven 测试已通过。已有候选测试包括源读取批次、处理器端到端、任务重试/进度、调度去重、XLSX 结构和公式注入；CI 应在具备 Maven 的环境执行并归档测试、压测和故障注入结果。
 
 > 可信交付的关键不是把 XLSX 尽快写出来，而是让“快照版本、任务状态、本地阶段文件、工作簿内容、文件 hash 和下载条件”形成一条可核对的链。只有这条链被测量和审计，才能把“导出与采集并行”讲成工程事实，而不是一句性能口号。
-
-## 13. 本章配图源文件
-
-本章配图均使用 `fireworks-tech-graph` 的 SVG 生成和校验流程，源 JSON 保存在 `assets/fireworks/`：
-
-- [导出总链路 JSON](./assets/fireworks/export-xlsx-pipeline.json)
-- [快照版本边界 JSON](./assets/fireworks/export-consistency-boundary.json)
-- [任务状态机 JSON](./assets/fireworks/export-task-state-machine.json)
-- [数据库并发边界 JSON](./assets/fireworks/catalog-db-concurrency.json)
-- [锁粒度 JSON](./assets/fireworks/catalog-lock-granularity.json)
-- [DFS 清洗判断 JSON](./assets/fireworks/catalog-dfs-cleaning-flow.json)
-- [DFS 流式发现 JSON](./assets/fireworks/catalog-dfs-export.json)
-- [文件提交、下载门控与孤儿回收 JSON](./assets/fireworks/export-download-gate.json)
-- [任务调度与重启恢复 JSON](./assets/fireworks/export-dispatch-recovery.json)

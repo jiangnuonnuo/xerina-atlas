@@ -397,9 +397,3 @@ Agent 没有任意浏览器控制、数据库连接、正式目录写入和任�
 | 用户在修复期间编辑 | 以最新草稿版本为基线重新校验 | 不覆盖人工修改 |
 
 
-
-## 本章结论
-
-本章的核心不是“调用了几个模型”，而是把业务层级判断组织成一条可控的 Agent 编排：Evidence Agent 补证据，Hierarchy Agent 判父子，Field Semantics Agent 判名称和类型，Reflection Agent 找问题，Proposal Assembler 固化语义结果，后端编译和校验为人工同构 `FieldTreeDraft`，SSE 推送确认，Repair Agent 只根据错误码做有限局部修复。
-
-Agent 负责业务解释，工作流负责顺序和预算，后端负责契约和确定性质量门，前端负责展示与人工确认。四者边界清楚，方案才能既能快速解析层级，又不会让 Agent 全盘接管系统。
