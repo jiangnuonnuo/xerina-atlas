@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 640" width="1060" height="640">
+  <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+  </style>
+  <defs>
+    <marker id="ap" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="ag" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="1060" height="640" fill="#ffffff"/>
+  <text x="530" y="42" text-anchor="middle" font-size="21" font-weight="600" fill="#111827">SDD 的流水线：把「感觉」翻译成「合同」</text>
+  <text x="530" y="68" text-anchor="middle" font-size="13" fill="#6b7280">每一阶段都产出一份工件，下一阶段只准消费上一阶段的产物</text>
+  <rect x="40" y="96" width="980" height="62" rx="10" fill="#111827"/>
+  <text x="530" y="122" text-anchor="middle" font-size="14.5" font-weight="600" fill="#ffffff">① 宪法 Constitution：全项目不可违反的元规则</text>
+  <text x="530" y="145" text-anchor="middle" font-size="12.5" fill="#d1d5db">分层铁律 · 命名规范 · 禁止行为（不许拼 SQL、不许吞异常、不许跨层调用）· 测试门槛</text>
+  <line x1="530" y1="158" x2="530" y2="196" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <rect x="57" y="200" width="176" height="210" rx="10" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.5"/>
+  <text x="145" y="224" text-anchor="middle" font-size="12" font-weight="600" fill="#7c3aed">②</text>
+  <text x="145" y="250" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">Specify</text>
+  <text x="145" y="270" text-anchor="middle" font-size="13" fill="#6b7280">写规格</text>
+  <line x1="73" y1="284" x2="217" y2="284" stroke="#e9d5ff" stroke-width="1" opacity="0.7"/>
+  <text x="73" y="306" font-size="11.5" fill="#374151">输入：一句模糊需求</text>
+  <text x="73" y="328" font-size="11.5" fill="#374151">输出：spec.md</text>
+  <text x="73" y="350" font-size="11.5" fill="#374151">包含：输入输出契约、</text>
+  <text x="73" y="372" font-size="11.5" fill="#374151">　　　边界、异常、验收</text>
+  <rect x="245" y="200" width="176" height="210" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="333" y="224" text-anchor="middle" font-size="12" font-weight="600" fill="#1d4ed8">③</text>
+  <text x="333" y="250" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">Plan</text>
+  <text x="333" y="270" text-anchor="middle" font-size="13" fill="#6b7280">做设计</text>
+  <line x1="261" y1="284" x2="405" y2="284" stroke="#bfdbfe" stroke-width="1" opacity="0.7"/>
+  <text x="261" y="306" font-size="11.5" fill="#374151">输入：spec.md</text>
+  <text x="261" y="328" font-size="11.5" fill="#374151">输出：plan.md</text>
+  <text x="261" y="350" font-size="11.5" fill="#374151">包含：技术方案、依赖、</text>
+  <text x="261" y="372" font-size="11.5" fill="#374151">　　　风险与测试策略</text>
+  <rect x="442" y="200" width="176" height="210" rx="10" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="530" y="224" text-anchor="middle" font-size="12" font-weight="600" fill="#0f766e">④</text>
+  <text x="530" y="250" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">Tasks</text>
+  <text x="530" y="270" text-anchor="middle" font-size="13" fill="#6b7280">拆任务</text>
+  <line x1="458" y1="284" x2="602" y2="284" stroke="#99f6e4" stroke-width="1" opacity="0.7"/>
+  <text x="458" y="306" font-size="11.5" fill="#374151">输入：plan.md</text>
+  <text x="458" y="328" font-size="11.5" fill="#374151">输出：tasks.md</text>
+  <text x="458" y="350" font-size="11.5" fill="#374151">包含：可勾选的小步任务</text>
+  <text x="458" y="372" font-size="11.5" fill="#374151">　　　每步对应一条验收</text>
+  <rect x="639" y="200" width="176" height="210" rx="10" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="727" y="224" text-anchor="middle" font-size="12" font-weight="600" fill="#c2410c">⑤</text>
+  <text x="727" y="250" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">Implement</text>
+  <text x="727" y="270" text-anchor="middle" font-size="13" fill="#6b7280">AI 实现</text>
+  <line x1="655" y1="284" x2="799" y2="284" stroke="#fed7aa" stroke-width="1" opacity="0.7"/>
+  <text x="655" y="306" font-size="11.5" fill="#374151">输入：tasks.md + spec.md</text>
+  <text x="655" y="328" font-size="11.5" fill="#374151">输出：代码 + 测试</text>
+  <text x="655" y="350" font-size="11.5" fill="#374151">约束：不许改 spec，</text>
+  <text x="655" y="372" font-size="11.5" fill="#374151">　　　发现缺失要回写</text>
+  <rect x="827" y="200" width="176" height="210" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="915" y="224" text-anchor="middle" font-size="12" font-weight="600" fill="#15803d">⑥</text>
+  <text x="915" y="250" text-anchor="middle" font-size="16" font-weight="600" fill="#111827">Verify</text>
+  <text x="915" y="270" text-anchor="middle" font-size="13" fill="#6b7280">验证归档</text>
+  <line x1="843" y1="284" x2="987" y2="284" stroke="#bbf7d0" stroke-width="1" opacity="0.7"/>
+  <text x="843" y="306" font-size="11.5" fill="#374151">输入：代码 + spec.md</text>
+  <text x="843" y="328" font-size="11.5" fill="#374151">输出：验证报告 + 归档</text>
+  <text x="843" y="350" font-size="11.5" fill="#374151">动作：对照 spec 验收，</text>
+  <text x="843" y="372" font-size="11.5" fill="#374151">　　　把增量合回主 spec</text>
+  <line x1="241" y1="305" x2="235" y2="305" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#ap)"/>
+  <line x1="429" y1="305" x2="432" y2="305" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#ap)"/>
+  <line x1="626" y1="305" x2="629" y2="305" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#ap)"/>
+  <line x1="823" y1="305" x2="817" y2="305" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#ap)"/>
+  <path d="M 915 410 L 915 470 L 145 470 L 145 410" stroke="#7c3aed" stroke-width="1.8" fill="none" stroke-dasharray="7,4" marker-end="url(#ap)"/>
+  <text x="530" y="464" text-anchor="middle" font-size="12.5" font-weight="600" fill="#7c3aed">验证不通过或发现 spec 缺失 → 回写 spec，不许直接改代码绕过</text>
+  <line x1="40" y1="506" x2="1020" y2="506" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="40" y="534" font-size="14" font-weight="600" fill="#111827">规格的三种严格程度：你打算让 spec 活多久</text>
+  <rect x="40" y="548" width="320" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="56" y="572" font-size="13.5" font-weight="600" fill="#111827">Spec-first</text>
+  <text x="56" y="592" font-size="12" fill="#374151">先写规格再写代码</text>
+  <text x="56" y="610" font-size="12" fill="#6b7280">之后规格可能漂移</text>
+  <rect x="373" y="548" width="320" height="70" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.2"/>
+  <text x="389" y="572" font-size="13.5" font-weight="600" fill="#111827">Spec-anchored</text>
+  <text x="389" y="592" font-size="12" fill="#374151">规格与代码同步维护</text>
+  <text x="389" y="610" font-size="12" fill="#6b7280">测试负责检查二者对齐</text>
+  <rect x="706" y="548" width="320" height="70" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+  <text x="722" y="572" font-size="13.5" font-weight="600" fill="#111827">Spec-as-source</text>
+  <text x="722" y="592" font-size="12" fill="#374151">人只改规格，代码再生</text>
+  <text x="722" y="610" font-size="12" fill="#6b7280">代码变成编译产物</text>
+</svg>
