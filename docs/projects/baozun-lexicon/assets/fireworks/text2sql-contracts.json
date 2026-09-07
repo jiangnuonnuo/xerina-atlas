@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "mode": "data-flow",
+  "template_type": "data-flow",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 560,
+  "title": "Text2SQL 的六点输入输出契约",
+  "subtitle": "每一阶段只接收结构化输入，并输出可校验的下一阶段事实。",
+  "nodes": [
+    { "id": "input", "kind": "speech", "x": 35, "y": 165, "width": 165, "height": 86, "label": "自然语言请求", "sublabel": "指标 / 周期 / 维度", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "intent", "kind": "rect", "x": 245, "y": 165, "width": 165, "height": 86, "label": "查询意图 IR", "sublabel": "时间 / 口径 / 过滤", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "binding", "kind": "document", "x": 455, "y": 165, "width": 165, "height": 86, "label": "字段绑定", "sublabel": "Schema / 指标定义", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "sql", "kind": "double_rect", "x": 665, "y": 165, "width": 165, "height": 86, "label": "SQL 候选", "sublabel": "AST / 参数 / 版本", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true },
+    { "id": "query", "kind": "hexagon", "x": 875, "y": 165, "width": 165, "height": 86, "label": "受控查询", "sublabel": "只读 / 限量 / 超时", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "result", "kind": "cylinder", "x": 455, "y": 370, "width": 165, "height": 86, "label": "结果信封", "sublabel": "列 / 行 / 质量 / 来源", "fill": "#f0fdf4", "stroke": "#4ade80" },
+    { "id": "report", "kind": "document", "x": 665, "y": 370, "width": 165, "height": 86, "label": "报告数据", "sublabel": "表格 / 图表 / 摘要", "fill": "#fff7ed", "stroke": "#fb923c" }
+  ],
+  "arrows": [
+    { "id": "input-intent", "source": "input", "target": "intent", "source_port": "right", "target_port": "left", "flow": "data", "motion_role": "parse", "motion_stage": 1, "motion_order": 0 },
+    { "id": "intent-binding", "source": "intent", "target": "binding", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "ground", "motion_stage": 2, "motion_order": 0 },
+    { "id": "binding-sql", "source": "binding", "target": "sql", "source_port": "right", "target_port": "left", "flow": "data", "motion_role": "compose", "motion_stage": 3, "motion_order": 0 },
+    { "id": "sql-query", "source": "sql", "target": "query", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "validate", "motion_stage": 4, "motion_order": 0 },
+    { "id": "query-result", "source": "query", "target": "result", "source_port": "bottom", "target_port": "top", "flow": "read", "motion_role": "execute", "motion_stage": 5, "motion_order": 0 },
+    { "id": "result-report", "source": "result", "target": "report", "source_port": "right", "target_port": "left", "flow": "write", "motion_role": "deliver", "motion_stage": 6, "motion_order": 0 }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 40,
+  "legend_y": 500,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "意图 / SQL 数据" },
+    { "flow": "read", "label": "Schema / 结果读取" },
+    { "flow": "control", "label": "安全控制" },
+    { "flow": "write", "label": "报表产物" }
+  ],
+  "footer": "Fireworks Tech Graph · explicit Text2SQL contracts",
+  "footer_x": 40,
+  "footer_y": 540
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "governed-runtime",
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 620,
+  "title": "固定日报 / 周报的发布生命周期",
+  "subtitle": "自然语言负责生成查询草稿，审核后的 SQL 模板负责稳定运行。",
+  "nodes": [
+    { "id": "requirement", "kind": "speech", "x": 40, "y": 160, "width": 160, "height": 82, "label": "报表需求", "sublabel": "指标 / 周期 / 维度", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "draft", "kind": "double_rect", "x": 250, "y": 160, "width": 160, "height": 82, "label": "SQL 草稿", "sublabel": "自然语言生成", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "test", "kind": "rect", "x": 460, "y": 160, "width": 160, "height": 82, "label": "测试验证", "sublabel": "结构 / 结果 / 边界", "fill": "#f0fdfa", "stroke": "#14b8a6", "flat": true },
+    { "id": "review", "kind": "hexagon", "x": 670, "y": 160, "width": 160, "height": 82, "label": "审核通过？", "sublabel": "技术 + 业务", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "template", "kind": "document", "x": 880, "y": 160, "width": 160, "height": 82, "label": "参数模板", "sublabel": "固定 SQL 版本", "fill": "#f0fdf4", "stroke": "#4ade80" },
+    { "id": "schedule", "kind": "rect", "x": 250, "y": 390, "width": 160, "height": 82, "label": "周期触发", "sublabel": "替换日期参数", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "query", "kind": "rect", "x": 460, "y": 390, "width": 160, "height": 82, "label": "只读查询", "sublabel": "安全 / 超时 / 限量", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "quality", "kind": "rect", "x": 670, "y": 390, "width": 160, "height": 82, "label": "结果检查", "sublabel": "空值 / 总计 / 波动", "fill": "#f0fdfa", "stroke": "#14b8a6", "flat": true },
+    { "id": "publish", "kind": "document", "x": 880, "y": 390, "width": 160, "height": 82, "label": "报告发布", "sublabel": "表格 / 图表 / 摘要", "fill": "#f0fdf4", "stroke": "#4ade80" },
+    { "id": "revise", "kind": "rect", "x": 670, "y": 540, "width": 160, "height": 58, "label": "返回修订", "sublabel": "保留原因", "fill": "#fef2f2", "stroke": "#ef4444", "flat": true }
+  ],
+  "arrows": [
+    { "id": "requirement-draft", "source": "requirement", "target": "draft", "source_port": "right", "target_port": "left", "flow": "data", "motion_role": "draft", "motion_stage": 1, "motion_order": 0 },
+    { "id": "draft-test", "source": "draft", "target": "test", "source_port": "right", "target_port": "left", "flow": "data", "motion_role": "test", "motion_stage": 2, "motion_order": 0 },
+    { "id": "test-review", "source": "test", "target": "review", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "review", "motion_stage": 3, "motion_order": 0 },
+    { "id": "review-template", "source": "review", "target": "template", "source_port": "right", "target_port": "left", "flow": "write", "motion_role": "approve", "motion_stage": 4, "motion_order": 0 },
+    { "id": "review-revise", "source": "review", "target": "revise", "source_port": "bottom", "target_port": "top", "flow": "feedback", "motion_role": "reject", "motion_stage": 4, "motion_order": 0 },
+    { "id": "revise-draft", "source": "revise", "target": "draft", "source_port": "left", "target_port": "bottom", "flow": "feedback", "motion_role": "revise", "motion_stage": 5, "motion_order": 0, "corridor_y": [510] },
+    { "id": "template-schedule", "source": "template", "target": "schedule", "source_port": "bottom", "target_port": "top", "flow": "control", "motion_role": "trigger", "motion_stage": 5, "motion_order": 1 },
+    { "id": "schedule-query", "source": "schedule", "target": "query", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "run", "motion_stage": 6, "motion_order": 0 },
+    { "id": "query-quality", "source": "query", "target": "quality", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "check", "motion_stage": 7, "motion_order": 0 },
+    { "id": "quality-publish", "source": "quality", "target": "publish", "source_port": "right", "target_port": "left", "flow": "write", "motion_role": "deliver", "motion_stage": 8, "motion_order": 0 }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 50,
+  "legend_y": 110,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "需求 / SQL 数据" },
+    { "flow": "control", "label": "审核 / 执行控制" },
+    { "flow": "read", "label": "结果读取" },
+    { "flow": "feedback", "label": "修订反馈" },
+    { "flow": "write", "label": "模板 / 报告产物" }
+  ],
+  "footer": "Fireworks Tech Graph · reviewed SQL template lifecycle",
+  "footer_x": 50,
+  "footer_y": 605
+}

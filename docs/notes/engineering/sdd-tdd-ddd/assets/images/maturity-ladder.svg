@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 630" width="1060" height="630">
+  <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+  </style>
+  <defs>
+    <marker id="ab" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect width="1060" height="630" fill="#ffffff"/>
+  <text x="530" y="42" text-anchor="middle" font-size="21" font-weight="600" fill="#111827">从新手到老手：五级台阶，一级一级往上搬</text>
+  <text x="380" y="68" text-anchor="middle" font-size="13" fill="#6b7280">每一级都解决上一级暴露出来的新问题，不要跳级</text>
+  <rect x="36" y="240" width="188" height="280" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="52" y="268" font-size="13" font-weight="600" fill="#6b7280">L0</text>
+  <text x="52" y="292" font-size="14.5" font-weight="600" fill="#111827">复制粘贴期</text>
+  <line x1="52" y1="308" x2="208" y2="308" stroke="#e5e7eb" stroke-width="1" opacity="0.8"/>
+  <text x="52" y="334" font-size="12" fill="#374151">把报错丢给 AI，</text>
+  <text x="52" y="354" font-size="12" fill="#374151">它给啥就贴啥</text>
+  <text x="52" y="386" font-size="11.5" font-weight="600" fill="#6b7280">痛点：改一行崩三处，</text>
+  <text x="52" y="405" font-size="11.5" font-weight="600" fill="#6b7280">永远不知道为什么</text>
+  <line x1="226" y1="280" x2="232" y2="280" stroke="#2563eb" stroke-width="2" marker-end="url(#ab)"/>
+  <rect x="236" y="200" width="188" height="320" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+  <text x="252" y="228" font-size="13" font-weight="600" fill="#dc2626">L1</text>
+  <text x="252" y="252" font-size="14.5" font-weight="600" fill="#111827">会写测试了</text>
+  <line x1="252" y1="268" x2="408" y2="268" stroke="#fecaca" stroke-width="1" opacity="0.8"/>
+  <text x="252" y="294" font-size="12" fill="#374151">先写一条会失败的测试，</text>
+  <text x="252" y="314" font-size="12" fill="#374151">再让 AI 补实现</text>
+  <text x="252" y="346" font-size="11.5" font-weight="600" fill="#dc2626">收获：第一次有了</text>
+  <text x="252" y="365" font-size="11.5" font-weight="600" fill="#dc2626">「回归能被发现」的安全感</text>
+  <line x1="426" y1="240" x2="432" y2="240" stroke="#2563eb" stroke-width="2" marker-end="url(#ab)"/>
+  <rect x="436" y="160" width="188" height="360" rx="10" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="452" y="188" font-size="13" font-weight="600" fill="#c2410c">L2</text>
+  <text x="452" y="212" font-size="14.5" font-weight="600" fill="#111827">会写规格了</text>
+  <line x1="452" y1="228" x2="608" y2="228" stroke="#fed7aa" stroke-width="1" opacity="0.8"/>
+  <text x="452" y="254" font-size="12" fill="#374151">动手前先写清输入、</text>
+  <text x="452" y="274" font-size="12" fill="#374151">输出、异常和边界</text>
+  <text x="452" y="306" font-size="11.5" font-weight="600" fill="#c2410c">收获：AI 一次通过率上升，</text>
+  <text x="452" y="325" font-size="11.5" font-weight="600" fill="#c2410c">返工明显减少</text>
+  <line x1="626" y1="200" x2="632" y2="200" stroke="#2563eb" stroke-width="2" marker-end="url(#ab)"/>
+  <rect x="636" y="120" width="188" height="400" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="652" y="148" font-size="13" font-weight="600" fill="#1d4ed8">L3</text>
+  <text x="652" y="172" font-size="14.5" font-weight="600" fill="#111827">会划边界了</text>
+  <line x1="652" y1="188" x2="808" y2="188" stroke="#bfdbfe" stroke-width="1" opacity="0.8"/>
+  <text x="652" y="214" font-size="12" fill="#374151">先切限界上下文，</text>
+  <text x="652" y="234" font-size="12" fill="#374151">再给每个上下文写 spec</text>
+  <text x="652" y="266" font-size="11.5" font-weight="600" fill="#1d4ed8">收获：需求变了知道动哪，</text>
+  <text x="652" y="285" font-size="11.5" font-weight="600" fill="#1d4ed8">不再牵一发而动全身</text>
+  <line x1="826" y1="160" x2="832" y2="160" stroke="#2563eb" stroke-width="2" marker-end="url(#ab)"/>
+  <rect x="836" y="80" width="188" height="440" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="852" y="108" font-size="13" font-weight="600" fill="#15803d">L4</text>
+  <text x="852" y="132" font-size="14.5" font-weight="600" fill="#111827">会定宪法了</text>
+  <line x1="852" y1="148" x2="1008" y2="148" stroke="#bbf7d0" stroke-width="1" opacity="0.8"/>
+  <text x="852" y="174" font-size="12" fill="#374151">把不可违反的原则固化</text>
+  <text x="852" y="194" font-size="12" fill="#374151">成元规则与 CI 门禁</text>
+  <text x="852" y="226" font-size="11.5" font-weight="600" fill="#15803d">收获：团队里每个人</text>
+  <text x="852" y="245" font-size="11.5" font-weight="600" fill="#15803d">都在同一套规则里干活</text>
+  <rect x="36" y="544" width="988" height="64" rx="10" fill="#111827"/>
+  <text x="530" y="571" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">台阶不是用来攀比的，是用来定位的</text>
+  <text x="530" y="595" text-anchor="middle" font-size="12.5" fill="#d1d5db">先看你现在卡在哪一级的痛点上，然后只往上搬一级。一次上全套，通常坚持不过两周。</text>
+</svg>

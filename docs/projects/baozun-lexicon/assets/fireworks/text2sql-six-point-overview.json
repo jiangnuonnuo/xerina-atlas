@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 520,
+  "title": "Text2SQL 六点工作链路",
+  "subtitle": "从业务问题到可复用的日报 / 周报结果，每一步都有输入、校验和输出。",
+  "nodes": [
+    { "id": "p1", "kind": "speech", "x": 40, "y": 170, "width": 150, "height": 82, "label": "1 需求拆解", "sublabel": "时间 / 维度 / 指标", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "p2", "kind": "rect", "x": 240, "y": 170, "width": 150, "height": 82, "label": "2 语义绑定", "sublabel": "业务词 / 字段口径", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },
+    { "id": "p3", "kind": "double_rect", "x": 440, "y": 170, "width": 150, "height": 82, "label": "3 SQL 生成", "sublabel": "候选查询逻辑", "fill": "#fff7ed", "stroke": "#fb923c", "flat": true },
+    { "id": "p4", "kind": "hexagon", "x": 640, "y": 170, "width": 150, "height": 82, "label": "4 安全校验", "sublabel": "只读 / 限量 / 超时", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "p5", "kind": "rect", "x": 840, "y": 170, "width": 150, "height": 82, "label": "5 只读执行", "sublabel": "数仓查询 / 结果集", "fill": "#f0fdf4", "stroke": "#4ade80", "flat": true },
+    { "id": "p6", "kind": "document", "x": 1040, "y": 170, "width": 150, "height": 82, "label": "6 报表输出", "sublabel": "日报 / 周报 / 摘要", "fill": "#f0fdfa", "stroke": "#14b8a6" }
+  ],
+  "arrows": [
+    { "id": "p1-p2", "source": "p1", "target": "p2", "source_port": "right", "target_port": "left", "flow": "data", "motion_role": "intent", "motion_stage": 1, "motion_order": 0 },
+    { "id": "p2-p3", "source": "p2", "target": "p3", "source_port": "right", "target_port": "left", "flow": "data", "motion_role": "ground", "motion_stage": 2, "motion_order": 0 },
+    { "id": "p3-p4", "source": "p3", "target": "p4", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "guard", "motion_stage": 3, "motion_order": 0 },
+    { "id": "p4-p5", "source": "p4", "target": "p5", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "execute", "motion_stage": 4, "motion_order": 0 },
+    { "id": "p5-p6", "source": "p5", "target": "p6", "source_port": "right", "target_port": "left", "flow": "write", "motion_role": "deliver", "motion_stage": 5, "motion_order": 0 }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 50,
+  "legend_y": 420,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "意图与语义" },
+    { "flow": "control", "label": "执行与安全控制" },
+    { "flow": "write", "label": "报表产物" }
+  ],
+  "footer": "Fireworks Tech Graph · six-point Text2SQL report workflow",
+  "footer_x": 50,
+  "footer_y": 470
+}

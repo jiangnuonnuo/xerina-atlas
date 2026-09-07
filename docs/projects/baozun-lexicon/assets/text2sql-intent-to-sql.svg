@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-motion-scene="token-stream" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f97316"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+    <filter id="shadowSoft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <filter id="shadowGlass" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#020617" flood-opacity="0.28"/>
+    </filter>
+    <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #6b7280; }
+    .section { font-size: 13px; font-weight: 700; fill: #2563eb; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #94a3b8; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .node-type { font-size: 12px; font-weight: 700; fill: #9ca3af; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #94a3b8; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #94a3b8; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="1200.0" height="600.0" fill="#ffffff"/>
+  <text x="600.0" y="56" text-anchor="middle" class="title">一条自然语言如何变成 SQL</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">先抽取查询意图，再绑定真实对象，最后生成并校验可执行查询。</text>
+  <path id="question-intent" data-graph-role="edge" data-edge-id="question-intent" data-source="question" data-target="intent" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="parse" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 230,208 L 290,208" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="intent-schema" data-graph-role="edge" data-edge-id="intent-schema" data-source="intent" data-target="schema" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="inspect" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 480,208 L 540,208" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="schema-semantic" data-graph-role="edge" data-edge-id="schema-semantic" data-source="schema" data-target="semantic" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="ground" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 730,208 L 790,208" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="intent-sql" data-graph-role="edge" data-edge-id="intent-sql" data-source="intent" data-target="sql" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="compose" data-motion-stage="4" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 385,251 L 385,271.4 L 501,271.4 L 501,390" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="semantic-sql" data-graph-role="edge" data-edge-id="semantic-sql" data-source="semantic" data-target="sql" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="compose" data-motion-stage="4" data-motion-order="1" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 885,251 L 885,330 L 519,330 L 519,390" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="sql-gate" data-graph-role="edge" data-edge-id="sql-gate" data-source="sql" data-target="gate" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="validate" data-motion-stage="5" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 605,433 L 665,433" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="gate-result" data-graph-role="edge" data-edge-id="gate-result" data-source="gate" data-target="result" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="execute" data-motion-stage="6" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 855,433 L 915,433" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <g id="node-question" data-graph-role="node" data-node-id="question" data-semantic-role="speech" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="40,165,230,251">
+  <path d="M 50.0 165.0 L 220.0 165.0 Q 230.0 165.0 230.0 175.0 L 230.0 241.0 Q 230.0 251.0 220.0 251.0 L 66.0 251.0 L 52.0 269.0 L 56.0 251.0 L 50.0 251.0 Q 40.0 251.0 40.0 241.0 L 40.0 175.0 Q 40.0 165.0 50.0 165.0 Z" fill="#eff6ff" stroke="#60a5fa" stroke-width="2.0"/>
+  <text x="135.0" y="208.0" text-anchor="middle" class="node-title" font-size="18.0">业务问题</text>
+  <text x="135.0" y="230.0" text-anchor="middle" class="node-sub">看各渠道销售额</text>
+  </g>
+  <g id="node-intent" data-graph-role="node" data-node-id="intent" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="290,165,480,251">
+  <rect x="290.0" y="165.0" width="190.0" height="86.0" rx="10.0" fill="#faf5ff" stroke="#a78bfa" stroke-width="1.8"/>
+  <text x="385.0" y="208.0" text-anchor="middle" class="node-title" font-size="18.0">查询意图</text>
+  <text x="385.0" y="230.0" text-anchor="middle" class="node-sub">日期 / 维度 / 指标</text>
+  </g>
+  <g id="node-schema" data-graph-role="node" data-node-id="schema" data-semantic-role="document" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="540,165,730,251">
+  <path d="M 540.0 165.0 L 712.0 165.0 L 730.0 183.0 L 730.0 251.0 L 540.0 251.0 Z" fill="#f0fdfa" stroke="#14b8a6" stroke-width="2.0" filter="url(#shadowSoft)"/>
+  <path d="M 712.0 165.0 L 712.0 183.0 L 730.0 183.0" fill="none" stroke="#14b8a6" stroke-width="2.0"/>
+  <line x1="558.0" y1="191.0" x2="702.0" y2="191.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="558.0" y1="205.0" x2="702.0" y2="205.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="558.0" y1="219.0" x2="702.0" y2="219.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="558.0" y1="233.0" x2="702.0" y2="233.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <text x="635.0" y="277.0" text-anchor="middle" class="node-title" font-size="18.0">真实 Schema</text>
+  <text x="635.0" y="295.0" text-anchor="middle" class="node-sub">表 / 列 / 类型</text>
+  </g>
+  <g id="node-semantic" data-graph-role="node" data-node-id="semantic" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="790,165,980,251">
+  <rect x="790.0" y="165.0" width="190.0" height="86.0" rx="10.0" fill="#fff7ed" stroke="#fb923c" stroke-width="1.8"/>
+  <text x="885.0" y="208.0" text-anchor="middle" class="node-title" font-size="18.0">业务口径</text>
+  <text x="885.0" y="230.0" text-anchor="middle" class="node-sub">指标 / 聚合 / 关联</text>
+  </g>
+  <g id="node-sql" data-graph-role="node" data-node-id="sql" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="415,390,605,476">
+  <rect x="415.0" y="390.0" width="190.0" height="86.0" rx="10.0" fill="#faf5ff" stroke="#8b5cf6" stroke-width="2.0"/>
+  <rect x="421.0" y="396.0" width="178.0" height="74.0" rx="7.0" fill="none" stroke="#8b5cf6" stroke-width="1.2" opacity="0.65"/>
+  <text x="510.0" y="433.0" text-anchor="middle" class="node-title" font-size="18.0">候选 SQL</text>
+  <text x="510.0" y="455.0" text-anchor="middle" class="node-sub">表名 / 条件 / GROUP BY</text>
+  </g>
+  <g id="node-gate" data-graph-role="node" data-node-id="gate" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="665,390,855,476">
+  <path d="M 687.0 390.0 L 833.0 390.0 L 855.0 433.0 L 833.0 476.0 L 687.0 476.0 L 665.0 433.0 Z" fill="#fff7ed" stroke="#f97316" stroke-width="2.0"/>
+  <text x="760.0" y="433.0" text-anchor="middle" class="node-title" font-size="18.0">执行前校验</text>
+  <text x="760.0" y="455.0" text-anchor="middle" class="node-sub">只读 / 安全 / 资源</text>
+  </g>
+  <g id="node-result" data-graph-role="node" data-node-id="result" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="915,390,1105,476">
+  <ellipse cx="1010.0" cy="400.75" rx="47.5" ry="10.75" fill="#f0fdf4" stroke="#4ade80" stroke-width="2.2"/>
+  <rect x="915.0" y="400.75" width="190.0" height="64.5" fill="#f0fdf4" stroke="#4ade80" stroke-width="2.2"/>
+  <ellipse cx="1010.0" cy="465.25" rx="47.5" ry="10.75" fill="#f0fdf4" stroke="#4ade80" stroke-width="2.2"/>
+  <ellipse cx="1010.0" cy="422.68" rx="47.5" ry="10.75" fill="none" stroke="#4ade80" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="1010.0" cy="441.6" rx="47.5" ry="10.75" fill="none" stroke="#4ade80" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text x="1010.0" y="427.0" text-anchor="middle" class="node-title" font-size="18.0">结果集</text>
+  <text x="1010.0" y="451.0" text-anchor="middle" class="node-sub">表格 / 图表 / 摘要</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="40" y="500" width="458.96" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="50.0" y1="514.0" x2="80.0" y2="514.0" stroke="#f97316" stroke-width="2.4" marker-end="url(#arrowE)"/>
+    <text data-graph-role="decoration" x="90.0" y="518.0" class="legend">意图 / 口径数据</text>
+    <line data-graph-role="decoration" x1="205.6" y1="514.0" x2="235.6" y2="514.0" stroke="#2563eb" stroke-width="2.4" marker-end="url(#arrowC)"/>
+    <text data-graph-role="decoration" x="245.6" y="518.0" class="legend">Schema / 结果读取</text>
+    <line data-graph-role="decoration" x1="378.96000000000004" y1="514.0" x2="408.96000000000004" y2="514.0" stroke="#7c3aed" stroke-width="2.4" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="418.96000000000004" y="518.0" class="legend">执行前控制</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="50,558,456,574">
+  <text x="50.0" y="570.0" class="footnote">Fireworks Tech Graph · natural language to SQL composition</text>
+  </g>
+</svg>

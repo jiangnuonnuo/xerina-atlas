@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "governed-runtime",
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 560,
+  "title": "查询结果信封与失败边界",
+  "subtitle": "查询成功、结果可信、报告可发布是三个不同状态，必须分开判断。",
+  "nodes": [
+    { "id": "sql", "kind": "double_rect", "x": 35, "y": 165, "width": 165, "height": 86, "label": "已校验 SQL", "sublabel": "只读 / 参数化", "fill": "#faf5ff", "stroke": "#8b5cf6", "flat": true },
+    { "id": "resource", "kind": "hexagon", "x": 245, "y": 165, "width": 165, "height": 86, "label": "资源闸门", "sublabel": "范围 / 行数 / 超时", "fill": "#fff7ed", "stroke": "#f97316", "flat": true },
+    { "id": "warehouse", "kind": "cylinder", "x": 455, "y": 165, "width": 165, "height": 86, "label": "只读数仓", "sublabel": "执行与状态", "fill": "#f0fdfa", "stroke": "#14b8a6" },
+    { "id": "envelope", "kind": "document", "x": 665, "y": 165, "width": 165, "height": 86, "label": "结果信封", "sublabel": "列 / 行 / 截断 / 来源", "fill": "#f0fdf4", "stroke": "#4ade80" },
+    { "id": "quality", "kind": "rect", "x": 875, "y": 165, "width": 165, "height": 86, "label": "质量检查", "sublabel": "总计 / 空值 / 波动", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
+    { "id": "publish", "kind": "document", "x": 875, "y": 370, "width": 165, "height": 86, "label": "报告发布", "sublabel": "通过审核后交付", "fill": "#f0fdf4", "stroke": "#4ade80" },
+    { "id": "repair", "kind": "speech", "x": 455, "y": 370, "width": 165, "height": 86, "label": "有限修复", "sublabel": "分类 / 回注 / 重检", "fill": "#fef2f2", "stroke": "#ef4444", "flat": true },
+    { "id": "stop", "kind": "rect", "x": 245, "y": 370, "width": 165, "height": 86, "label": "停止并升级", "sublabel": "权限 / 歧义 / 超时", "fill": "#fef2f2", "stroke": "#ef4444", "flat": true }
+  ],
+  "arrows": [
+    { "id": "sql-resource", "source": "sql", "target": "resource", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "gate", "motion_stage": 1, "motion_order": 0 },
+    { "id": "resource-warehouse", "source": "resource", "target": "warehouse", "source_port": "right", "target_port": "left", "flow": "control", "motion_role": "execute", "motion_stage": 2, "motion_order": 0 },
+    { "id": "warehouse-envelope", "source": "warehouse", "target": "envelope", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "result", "motion_stage": 3, "motion_order": 0 },
+    { "id": "envelope-quality", "source": "envelope", "target": "quality", "source_port": "right", "target_port": "left", "flow": "read", "motion_role": "check", "motion_stage": 4, "motion_order": 0 },
+    { "id": "quality-publish", "source": "quality", "target": "publish", "source_port": "bottom", "target_port": "top", "flow": "write", "motion_role": "deliver", "motion_stage": 5, "motion_order": 0 },
+    { "id": "warehouse-repair", "source": "warehouse", "target": "repair", "source_port": "bottom", "target_port": "top", "flow": "feedback", "motion_role": "repair", "motion_stage": 3, "motion_order": 0 },
+    { "id": "repair-sql", "source": "repair", "target": "sql", "source_port": "left", "target_port": "bottom", "flow": "feedback", "motion_role": "repair", "motion_stage": 4, "motion_order": 0, "corridor_y": [510] },
+    { "id": "resource-stop", "source": "resource", "target": "stop", "source_port": "bottom", "target_port": "top", "flow": "feedback", "motion_role": "stop", "motion_stage": 2, "motion_order": 1 },
+    { "id": "stop-sql", "source": "stop", "target": "sql", "source_port": "top", "target_port": "bottom", "flow": "feedback", "motion_role": "stop", "motion_stage": 3, "motion_order": 1 }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 40,
+  "legend_y": 500,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "control", "label": "执行控制" },
+    { "flow": "read", "label": "数仓 / 结果读取" },
+    { "flow": "feedback", "label": "失败修复 / 停止" },
+    { "flow": "write", "label": "报告产物" }
+  ],
+  "footer": "Fireworks Tech Graph · result envelope and bounded recovery",
+  "footer_x": 40,
+  "footer_y": 540
+}
