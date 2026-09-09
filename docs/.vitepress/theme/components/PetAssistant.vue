@@ -31,7 +31,9 @@ const visitorKey = 'xerina-atlas-visitor-id'
 const sessionKey = 'xerina-atlas-knowledge-session'
 const conversationKeyPrefix = 'xerina-atlas-knowledge-conversation:'
 const positionKey = 'xerina-atlas-pet-position'
-const conversationStorageVersion = 1
+// Bump when the response/link contract changes so stale assistant answers are not
+// shown again from localStorage after a deployment.
+const conversationStorageVersion = 2
 const maxPersistedMessages = 100
 const dragThreshold = 6
 const viewportPadding = 12
