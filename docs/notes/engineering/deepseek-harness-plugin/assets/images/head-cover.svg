@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',ui-sans-serif,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#312e81"/>
+      <stop offset="0.55" stop-color="#4338ca"/>
+      <stop offset="1" stop-color="#5b21b6"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#a78bfa" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+
+  <!-- left text -->
+  <rect x="90" y="168" width="8" height="112" rx="4" fill="url(#accent)"/>
+  <text x="130" y="200" fill="#c7d2fe" font-size="26" letter-spacing="3">DEEPSEEK HARNESS</text>
+  <text x="128" y="264" fill="#ffffff" font-size="56" font-weight="700">写一个 Agent 插件</text>
+  <text x="130" y="322" fill="#e0e7ff" font-size="30">插件化架构 · 目录结构 · 加载链路</text>
+
+  <!-- tags -->
+  <g font-size="20">
+    <rect x="130" y="382" width="128" height="48" rx="24" fill="#ffffff" fill-opacity="0.12"/>
+    <text x="194" y="413" fill="#e0e7ff" text-anchor="middle">一切皆插件</text>
+    <rect x="274" y="382" width="150" height="48" rx="24" fill="#ffffff" fill-opacity="0.12"/>
+    <text x="349" y="413" fill="#e0e7ff" text-anchor="middle">Cordis 内核</text>
+    <rect x="440" y="382" width="138" height="48" rx="24" fill="#ffffff" fill-opacity="0.12"/>
+    <text x="509" y="413" fill="#e0e7ff" text-anchor="middle">ReAct 循环</text>
+  </g>
+
+  <!-- right visual -->
+  <circle cx="900" cy="336" r="200" fill="url(#glow)"/>
+  <circle cx="900" cy="336" r="78" fill="#6366f1" stroke="#a5b4fc" stroke-width="3"/>
+  <text x="900" y="330" fill="#ffffff" font-size="22" text-anchor="middle" font-weight="600">Cordis</text>
+  <text x="900" y="358" fill="#e0e7ff" font-size="16" text-anchor="middle">插件内核</text>
+
+  <!-- orbiting blocks -->
+  <line x1="828" y1="268" x2="856" y2="296" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2"/>
+  <line x1="1000" y1="252" x2="962" y2="296" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2"/>
+  <line x1="828" y1="428" x2="860" y2="392" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2"/>
+  <line x1="994" y1="470" x2="960" y2="392" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2"/>
+
+  <rect x="740" y="176" width="92" height="92" rx="18" fill="#22d3ee"/>
+  <text x="786" y="230" fill="#083344" font-size="18" text-anchor="middle">工具</text>
+  <rect x="1002" y="206" width="92" height="92" rx="18" fill="#34d399"/>
+  <text x="1048" y="260" fill="#064e3b" font-size="18" text-anchor="middle">UI</text>
+  <rect x="760" y="428" width="92" height="92" rx="18" fill="#f59e0b"/>
+  <text x="806" y="482" fill="#451a03" font-size="18" text-anchor="middle">会话</text>
+  <rect x="988" y="438" width="92" height="92" rx="18" fill="#f472b6"/>
+  <text x="1034" y="492" fill="#500724" font-size="18" text-anchor="middle">业务</text>
+</svg>

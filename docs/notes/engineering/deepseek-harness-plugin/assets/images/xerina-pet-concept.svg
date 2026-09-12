@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="ui-sans-serif, system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2ff"/>
+      <stop offset="1" stop-color="#ecfeff"/>
+    </linearGradient>
+    <linearGradient id="petG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#c4b5fd" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#c4b5fd" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="960" height="540" rx="24" fill="url(#bg)"/>
+
+  <!-- browser window -->
+  <rect x="70" y="70" width="640" height="400" rx="18" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  <rect x="70" y="70" width="640" height="56" rx="18" fill="#f1f5f9"/>
+  <circle cx="102" cy="98" r="7" fill="#f87171"/>
+  <circle cx="126" cy="98" r="7" fill="#fbbf24"/>
+  <circle cx="150" cy="98" r="7" fill="#34d399"/>
+  <rect x="180" y="86" width="500" height="24" rx="12" fill="#e2e8f0"/>
+
+  <!-- page placeholder lines -->
+  <rect x="104" y="160" width="300" height="14" rx="7" fill="#e2e8f0"/>
+  <rect x="104" y="190" width="420" height="14" rx="7" fill="#eef2f7"/>
+  <rect x="104" y="220" width="360" height="14" rx="7" fill="#eef2f7"/>
+  <rect x="104" y="260" width="240" height="120" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- floating panel -->
+  <rect x="690" y="300" width="220" height="150" rx="16" fill="#ffffff" stroke="#c7d2fe" stroke-width="2" opacity="0.97"/>
+  <rect x="690" y="300" width="220" height="34" rx="16" fill="#eef2ff"/>
+  <circle cx="712" cy="317" r="5" fill="#6366f1"/>
+  <rect x="726" y="312" width="120" height="10" rx="5" fill="#c7d2fe"/>
+
+  <!-- pet avatar with halo -->
+  <circle cx="800" cy="400" r="78" fill="url(#halo)"/>
+  <circle cx="800" cy="400" r="46" fill="url(#petG)"/>
+  <circle cx="784" cy="392" r="9" fill="#ffffff"/>
+  <circle cx="816" cy="392" r="9" fill="#ffffff"/>
+  <circle cx="784" cy="394" r="4" fill="#312e81"/>
+  <circle cx="816" cy="394" r="4" fill="#312e81"/>
+  <path d="M784 420 q16 14 32 0" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- caption -->
+  <text x="70" y="510" fill="#64748b" font-size="18">浏览器角落的 AI 搭档：悬浮、可拖拽、不挡交互</text>
+</svg>
