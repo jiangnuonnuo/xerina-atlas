@@ -7,8 +7,8 @@
   "quality_profile": "standard",
   "width": 1200,
   "height": 560,
-  "title": "日报 / 周报：从业务问题到 SQL 结果",
-  "subtitle": "同一条查询链路支持临时问数与固定报表 SQL 的生成、审核和执行。",
+  "title": "从一句周报到只读结果",
+  "subtitle": "意图拆块、语义绑定、生成 SQL、过闸门执行；失败则分类回注，而不是原样重试。",
   "nodes": [
     {
       "id": "question",
@@ -69,7 +69,7 @@
       "width": 120,
       "height": 82,
       "label": "生成 SQL",
-      "sublabel": "确定性或 LLM",
+      "sublabel": "引擎优先，LLM 回退",
       "fill": "#faf5ff",
       "stroke": "#8b5cf6",
       "flat": true

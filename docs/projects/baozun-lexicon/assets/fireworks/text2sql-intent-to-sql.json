@@ -7,8 +7,8 @@
   "quality_profile": "standard",
   "width": 1200,
   "height": 600,
-  "title": "一条自然语言如何变成 SQL",
-  "subtitle": "先抽取查询意图，再绑定真实对象，最后生成并校验可执行查询。",
+  "title": "人话如何变成可重复的 SQL",
+  "subtitle": "先抽时间、维度、指标，再绑定治理对象；SQL 由引擎装配，而不是从原句直接编译。",
   "nodes": [
     { "id": "question", "kind": "speech", "x": 40, "y": 165, "width": 190, "height": 86, "label": "业务问题", "sublabel": "看各渠道销售额", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
     { "id": "intent", "kind": "rect", "x": 290, "y": 165, "width": 190, "height": 86, "label": "查询意图", "sublabel": "日期 / 维度 / 指标", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },

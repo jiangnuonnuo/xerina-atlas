@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 560,
+  "title": "净营收如何展开成计算片段",
+  "subtitle": "先展开名称引用，再拼成计算片段。",
+  "nodes": [
+    {
+      "id": "ask",
+      "kind": "speech",
+      "x": 40,
+      "y": 228,
+      "width": 156,
+      "height": 88,
+      "label": "问净营收",
+      "sublabel": "业务名称",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "derived",
+      "kind": "double_rect",
+      "x": 256,
+      "y": 228,
+      "width": 188,
+      "height": 88,
+      "label": "派生指标",
+      "sublabel": "{营收} - {退款额}",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "revenue",
+      "kind": "rect",
+      "x": 516,
+      "y": 96,
+      "width": 196,
+      "height": 88,
+      "label": "展开营收",
+      "sublabel": "对支付金额求和",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    },
+    {
+      "id": "refund",
+      "kind": "rect",
+      "x": 516,
+      "y": 368,
+      "width": 196,
+      "height": 88,
+      "label": "展开退款额",
+      "sublabel": "对退款金额求和",
+      "fill": "#fff7ed",
+      "stroke": "#fb923c",
+      "flat": true
+    },
+    {
+      "id": "expr",
+      "kind": "document",
+      "x": 792,
+      "y": 228,
+      "width": 196,
+      "height": 88,
+      "label": "计算片段",
+      "sublabel": "不再含名称引用",
+      "fill": "#f0fdfa",
+      "stroke": "#14b8a6"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "ask-derived",
+      "source": "ask",
+      "target": "derived",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "parse",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "derived-revenue",
+      "source": "derived",
+      "target": "revenue",
+      "source_port": "top",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "expand",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "derived-refund",
+      "source": "derived",
+      "target": "refund",
+      "source_port": "bottom",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "expand",
+      "motion_stage": 2,
+      "motion_order": 1
+    },
+    {
+      "id": "revenue-expr",
+      "source": "revenue",
+      "target": "expr",
+      "source_port": "right",
+      "target_port": "top",
+      "flow": "control",
+      "motion_role": "compose",
+      "motion_stage": 3,
+      "motion_order": 0
+    },
+    {
+      "id": "refund-expr",
+      "source": "refund",
+      "target": "expr",
+      "source_port": "right",
+      "target_port": "bottom",
+      "flow": "control",
+      "motion_role": "compose",
+      "motion_stage": 3,
+      "motion_order": 1
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 40,
+  "legend_y": 492,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "data", "label": "名称展开" },
+    { "flow": "control", "label": "拼成计算片段" }
+  ],
+  "footer": "Fireworks Tech Graph · derived metric expansion",
+  "footer_x": 40,
+  "footer_y": 532
+}

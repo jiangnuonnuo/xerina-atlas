@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data: blob:">
-  <title>一条自然语言如何变成 SQL</title>
+  <title>人话如何变成可重复的 SQL</title>
   <style>
     :root { color-scheme: dark; --page:#0f0f1a; --panel:#0f172a; --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --accent:#a855f7; }
     html[data-theme="light"] { color-scheme:light; --page:#f8fafc; --panel:#fff; --border:#cbd5e1; --text:#0f172a; --muted:#475569; --accent:#7c3aed; }
@@ -26,7 +26,7 @@
 </head>
 <body>
   <header class="toolbar" aria-label="Diagram controls">
-    <span class="title">一条自然语言如何变成 SQL</span>
+    <span class="title">人话如何变成可重复的 SQL</span>
     <button type="button" data-action="zoom-out" aria-label="Zoom out">−</button>
     <button type="button" data-action="reset" aria-label="Reset view">Reset</button>
     <button type="button" data-action="zoom-in" aria-label="Zoom in">+</button>
@@ -84,8 +84,8 @@
     </style>
   </defs>
   <rect data-graph-role="background" width="1200.0" height="600.0" fill="#ffffff" />
-  <text x="600.0" y="56" text-anchor="middle" class="title">一条自然语言如何变成 SQL</text>
-  <text x="600.0" y="82" text-anchor="middle" class="subtitle">先抽取查询意图，再绑定真实对象，最后生成并校验可执行查询。</text>
+  <text x="600.0" y="56" text-anchor="middle" class="title">人话如何变成可重复的 SQL</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">先抽时间、维度、指标，再绑定治理对象；SQL 由引擎装配，而不是从原句直接编译。</text>
   <path id="question-intent" data-graph-role="edge" data-edge-id="question-intent" data-source="question" data-target="intent" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="parse" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 230,208 L 290,208" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)" />
   <path id="intent-schema" data-graph-role="edge" data-edge-id="intent-schema" data-source="intent" data-target="schema" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="inspect" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 480,208 L 540,208" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)" />
   <path id="schema-semantic" data-graph-role="edge" data-edge-id="schema-semantic" data-source="schema" data-target="semantic" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="ground" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 730,208 L 790,208" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)" />

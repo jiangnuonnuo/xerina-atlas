@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="flowchart" data-motion-scene="token-stream" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f97316"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+    <filter id="shadowSoft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <filter id="shadowGlass" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#020617" flood-opacity="0.28"/>
+    </filter>
+    <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #6b7280; }
+    .section { font-size: 13px; font-weight: 700; fill: #2563eb; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #94a3b8; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .node-type { font-size: 12px; font-weight: 700; fill: #9ca3af; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #94a3b8; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #94a3b8; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="1200.0" height="560.0" fill="#ffffff"/>
+  <text x="600.0" y="56" text-anchor="middle" class="title">净营收如何展开成计算片段</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">先展开名称引用，再拼成计算片段。</text>
+  <path id="ask-derived" data-graph-role="edge" data-edge-id="ask-derived" data-source="ask" data-target="derived" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="parse" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 196,272 L 256,272" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="derived-revenue" data-graph-role="edge" data-edge-id="derived-revenue" data-source="derived" data-target="revenue" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="expand" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="1" data-route-stretch="1.0" data-bridges="" d="M 350,228 L 350,140 L 516,140" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="derived-refund" data-graph-role="edge" data-edge-id="derived-refund" data-source="derived" data-target="refund" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="expand" data-motion-stage="2" data-motion-order="1" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="1" data-route-stretch="1.0" data-bridges="" d="M 350,316 L 350,412 L 516,412" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="revenue-expr" data-graph-role="edge" data-edge-id="revenue-expr" data-source="revenue" data-target="expr" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="compose" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="1" data-route-stretch="1.0" data-bridges="" d="M 712,140 L 890,140 L 890,228" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="refund-expr" data-graph-role="edge" data-edge-id="refund-expr" data-source="refund" data-target="expr" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="compose" data-motion-stage="3" data-motion-order="1" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="1" data-route-stretch="1.0" data-bridges="" d="M 712,412 L 890,412 L 890,316" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <g id="node-ask" data-graph-role="node" data-node-id="ask" data-semantic-role="speech" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="40,228,196,316">
+  <path d="M 50.0 228.0 L 186.0 228.0 Q 196.0 228.0 196.0 238.0 L 196.0 306.0 Q 196.0 316.0 186.0 316.0 L 66.0 316.0 L 52.0 334.0 L 56.0 316.0 L 50.0 316.0 Q 40.0 316.0 40.0 306.0 L 40.0 238.0 Q 40.0 228.0 50.0 228.0 Z" fill="#eff6ff" stroke="#60a5fa" stroke-width="2.0"/>
+  <text x="118.0" y="272.0" text-anchor="middle" class="node-title" font-size="18.0">问净营收</text>
+  <text x="118.0" y="294.0" text-anchor="middle" class="node-sub">业务名称</text>
+  </g>
+  <g id="node-derived" data-graph-role="node" data-node-id="derived" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="256,228,444,316">
+  <rect x="256.0" y="228.0" width="188.0" height="88.0" rx="10.0" fill="#faf5ff" stroke="#a78bfa" stroke-width="2.0"/>
+  <rect x="262.0" y="234.0" width="176.0" height="76.0" rx="7.0" fill="none" stroke="#a78bfa" stroke-width="1.2" opacity="0.65"/>
+  <text x="350.0" y="272.0" text-anchor="middle" class="node-title" font-size="18.0">派生指标</text>
+  <text x="350.0" y="294.0" text-anchor="middle" class="node-sub">{营收} - {退款额}</text>
+  </g>
+  <g id="node-revenue" data-graph-role="node" data-node-id="revenue" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="516,96,712,184">
+  <rect x="516.0" y="96.0" width="196.0" height="88.0" rx="10.0" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.8"/>
+  <text x="614.0" y="140.0" text-anchor="middle" class="node-title" font-size="18.0">展开营收</text>
+  <text x="614.0" y="162.0" text-anchor="middle" class="node-sub">对支付金额求和</text>
+  </g>
+  <g id="node-refund" data-graph-role="node" data-node-id="refund" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="516,368,712,456">
+  <rect x="516.0" y="368.0" width="196.0" height="88.0" rx="10.0" fill="#fff7ed" stroke="#fb923c" stroke-width="1.8"/>
+  <text x="614.0" y="412.0" text-anchor="middle" class="node-title" font-size="18.0">展开退款额</text>
+  <text x="614.0" y="434.0" text-anchor="middle" class="node-sub">对退款金额求和</text>
+  </g>
+  <g id="node-expr" data-graph-role="node" data-node-id="expr" data-semantic-role="document" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="792,228,988,316">
+  <path d="M 792.0 228.0 L 970.0 228.0 L 988.0 246.0 L 988.0 316.0 L 792.0 316.0 Z" fill="#f0fdfa" stroke="#14b8a6" stroke-width="2.0" filter="url(#shadowSoft)"/>
+  <path d="M 970.0 228.0 L 970.0 246.0 L 988.0 246.0" fill="none" stroke="#14b8a6" stroke-width="2.0"/>
+  <line x1="810.0" y1="254.0" x2="960.0" y2="254.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="810.0" y1="268.0" x2="960.0" y2="268.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="810.0" y1="282.0" x2="960.0" y2="282.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <line x1="810.0" y1="296.0" x2="960.0" y2="296.0" stroke="#c4b5fd" stroke-width="1.2"/>
+  <text x="890.0" y="342.0" text-anchor="middle" class="node-title" font-size="18.0">计算片段</text>
+  <text x="890.0" y="360.0" text-anchor="middle" class="node-sub">不再含名称引用</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="32" y="468" width="258" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="42.0" y1="482.0" x2="72.0" y2="482.0" stroke="#f97316" stroke-width="2.4" marker-end="url(#arrowE)"/>
+    <text data-graph-role="decoration" x="82.0" y="486.0" class="legend">名称展开</text>
+    <line data-graph-role="decoration" x1="158.0" y1="482.0" x2="188.0" y2="482.0" stroke="#7c3aed" stroke-width="2.4" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="198.0" y="486.0" class="legend">拼成计算片段</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="40,520,369,536">
+  <text x="40.0" y="532.0" class="footnote">Fireworks Tech Graph · derived metric expansion</text>
+  </g>
+</svg>

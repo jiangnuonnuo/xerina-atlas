@@ -7,8 +7,8 @@
   "quality_profile": "standard",
   "width": 1200,
   "height": 560,
-  "title": "Text2SQL 的六点输入输出契约",
-  "subtitle": "每一阶段只接收结构化输入，并输出可校验的下一阶段事实。",
+  "title": "查询链路的六点输入输出契约",
+  "subtitle": "模型错误最多停在候选阶段，不能直接写成库操作或正式周报。",
   "nodes": [
     { "id": "input", "kind": "speech", "x": 35, "y": 165, "width": 165, "height": 86, "label": "自然语言请求", "sublabel": "指标 / 周期 / 维度", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
     { "id": "intent", "kind": "rect", "x": 245, "y": 165, "width": 165, "height": 86, "label": "查询意图 IR", "sublabel": "时间 / 口径 / 过滤", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },

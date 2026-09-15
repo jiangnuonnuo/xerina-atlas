@@ -7,8 +7,8 @@
   "quality_profile": "showcase",
   "width": 1200,
   "height": 430,
-  "title": "Text2SQL · 日报周报查询架构",
-  "subtitle": "自然语言进入 Cognida，经过语义治理与只读执行，生成可复用的报表结果。",
+  "title": "电商数仓上的自然语言查询层",
+  "subtitle": "Cognida 夹在业务问题和数仓之间：理解问题、钉死口径、只读取数、再组织日报周报。",
   "nodes": [
     {
       "id": "user",
@@ -31,7 +31,7 @@
       "width": 120,
       "height": 82,
       "label": "Data Agent",
-      "sublabel": "意图解析",
+      "sublabel": "抽槽不写口径",
       "fill": "#c8e4db",
       "stroke": "#8c6f5a"
     },
@@ -42,8 +42,8 @@
       "y": 170,
       "width": 120,
       "height": 82,
-      "label": "语义层",
-      "sublabel": "指标 / 维度",
+      "label": "语义引擎",
+      "sublabel": "确定性 SQL",
       "fill": "#f7ecda",
       "stroke": "#d0b893",
       "flat": true

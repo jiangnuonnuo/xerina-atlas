@@ -38,8 +38,8 @@
     </style>
   </defs>
   <rect data-graph-role="background" width="1200.0" height="430.0" fill="#f8f6f3"/>
-  <text x="48.0" y="48" text-anchor="start" class="title">Text2SQL · 日报周报查询架构</text>
-  <text x="48.0" y="72" text-anchor="start" class="subtitle">自然语言进入 Cognida，经过语义治理与只读执行，生成可复用的报表结果。</text>
+  <text x="48.0" y="48" text-anchor="start" class="title">电商数仓上的自然语言查询层</text>
+  <text x="48.0" y="72" text-anchor="start" class="subtitle">Cognida 夹在业务问题和数仓之间：理解问题、钉死口径、只读取数、再组织日报周报。</text>
   <line x1="48" y1="100" x2="1152.0" y2="100" stroke="#ded8cf" stroke-width="1"/>
   <path id="user-agent" data-graph-role="edge" data-edge-id="user-agent" data-source="user" data-target="agent" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="ingress" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 150,211 L 190,211" fill="none" stroke="#d97757" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
   <path id="agent-semantic" data-graph-role="edge" data-edge-id="agent-semantic" data-source="agent" data-target="semantic" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="dispatch" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 310,211 L 350,211" fill="none" stroke="#b45309" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
@@ -56,12 +56,12 @@
   <rect x="190.0" y="170.0" width="120.0" height="82.0" rx="10.0" fill="#c8e4db" stroke="#8c6f5a" stroke-width="2.0"/>
   <rect x="196.0" y="176.0" width="108.0" height="70.0" rx="7.0" fill="none" stroke="#8c6f5a" stroke-width="1.2" opacity="0.65"/>
   <text x="250.0" y="211.0" text-anchor="middle" class="node-title" font-size="14.6">Data Agent</text>
-  <text x="250.0" y="233.0" text-anchor="middle" class="node-sub">意图解析</text>
+  <text x="250.0" y="233.0" text-anchor="middle" class="node-sub">抽槽不写口径</text>
   </g>
   <g id="node-semantic" data-graph-role="node" data-node-id="semantic" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="350,170,470,252">
   <rect x="350.0" y="170.0" width="120.0" height="82.0" rx="10.0" fill="#f7ecda" stroke="#d0b893" stroke-width="1.8"/>
-  <text x="410.0" y="211.0" text-anchor="middle" class="node-title" font-size="18.0">语义层</text>
-  <text x="410.0" y="233.0" text-anchor="middle" class="node-sub">指标 / 维度</text>
+  <text x="410.0" y="211.0" text-anchor="middle" class="node-title" font-size="18.0">语义引擎</text>
+  <text x="410.0" y="233.0" text-anchor="middle" class="node-sub">确定性 SQL</text>
   </g>
   <g id="node-guard" data-graph-role="node" data-node-id="guard" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="510,170,630,252">
   <path d="M 532.0 170.0 L 608.0 170.0 L 630.0 211.0 L 608.0 252.0 L 532.0 252.0 L 510.0 211.0 Z" fill="#f7ecda" stroke="#d97757" stroke-width="2.0"/>

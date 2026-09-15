@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "读取：一次问数怎样拿到这一份模型",
+  "subtitle": "对话只选名称；完整模型包只给编译；物理表不进上下文。",
+  "nodes": [
+    {
+      "id": "talk",
+      "kind": "speech",
+      "x": 40,
+      "y": 148,
+      "width": 176,
+      "height": 88,
+      "label": "人话",
+      "sublabel": "上周华东 GMV",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "card",
+      "kind": "document",
+      "x": 264,
+      "y": 148,
+      "width": 176,
+      "height": 88,
+      "label": "目录卡选名",
+      "sublabel": "指标 / 维度",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa"
+    },
+    {
+      "id": "bundle",
+      "kind": "double_rect",
+      "x": 488,
+      "y": 148,
+      "width": 176,
+      "height": 88,
+      "label": "加载模型包",
+      "sublabel": "该主题完整快照",
+      "fill": "#f0fdfa",
+      "stroke": "#14b8a6",
+      "flat": true
+    },
+    {
+      "id": "reuse",
+      "kind": "hexagon",
+      "x": 712,
+      "y": 148,
+      "width": 176,
+      "height": 88,
+      "label": "按版本复用",
+      "sublabel": "未命中再编译",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "hide",
+      "kind": "rect",
+      "x": 936,
+      "y": 148,
+      "width": 176,
+      "height": 88,
+      "label": "对话隔离",
+      "sublabel": "不见公式和表",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "talk-card",
+      "source": "talk",
+      "target": "card",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "parse",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "card-bundle",
+      "source": "card",
+      "target": "bundle",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "read",
+      "motion_role": "load",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "bundle-reuse",
+      "source": "bundle",
+      "target": "reuse",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "cache",
+      "motion_stage": 3,
+      "motion_order": 0
+    },
+    {
+      "id": "reuse-hide",
+      "source": "reuse",
+      "target": "hide",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "isolate",
+      "motion_stage": 4,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "选名称" },
+    { "flow": "read", "label": "加载快照" },
+    { "flow": "control", "label": "复用或编译" },
+    { "flow": "write", "label": "隔离对话" }
+  ],
+  "footer": "Fireworks Tech Graph · semantic model read path",
+  "footer_x": 40,
+  "footer_y": 428
+}

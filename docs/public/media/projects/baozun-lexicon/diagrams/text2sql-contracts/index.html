@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data: blob:">
-  <title>Text2SQL 的六点输入输出契约</title>
+  <title>查询链路的六点输入输出契约</title>
   <style>
     :root { color-scheme: dark; --page:#0f0f1a; --panel:#0f172a; --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --accent:#a855f7; }
     html[data-theme="light"] { color-scheme:light; --page:#f8fafc; --panel:#fff; --border:#cbd5e1; --text:#0f172a; --muted:#475569; --accent:#7c3aed; }
@@ -26,7 +26,7 @@
 </head>
 <body>
   <header class="toolbar" aria-label="Diagram controls">
-    <span class="title">Text2SQL 的六点输入输出契约</span>
+    <span class="title">查询链路的六点输入输出契约</span>
     <button type="button" data-action="zoom-out" aria-label="Zoom out">−</button>
     <button type="button" data-action="reset" aria-label="Reset view">Reset</button>
     <button type="button" data-action="zoom-in" aria-label="Zoom in">+</button>
@@ -84,8 +84,8 @@
     </style>
   </defs>
   <rect data-graph-role="background" width="1200.0" height="560.0" fill="#ffffff" />
-  <text x="600.0" y="56" text-anchor="middle" class="title">Text2SQL 的六点输入输出契约</text>
-  <text x="600.0" y="82" text-anchor="middle" class="subtitle">每一阶段只接收结构化输入，并输出可校验的下一阶段事实。</text>
+  <text x="600.0" y="56" text-anchor="middle" class="title">查询链路的六点输入输出契约</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">模型错误最多停在候选阶段，不能直接写成库操作或正式周报。</text>
   <path id="input-intent" data-graph-role="edge" data-edge-id="input-intent" data-source="input" data-target="intent" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="parse" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 200,208 L 245,208" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)" />
   <path id="intent-binding" data-graph-role="edge" data-edge-id="intent-binding" data-source="intent" data-target="binding" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="ground" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 410,208 L 455,208" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)" />
   <path id="binding-sql" data-graph-role="edge" data-edge-id="binding-sql" data-source="binding" data-target="sql" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="compose" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 620,208 L 665,208" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)" />

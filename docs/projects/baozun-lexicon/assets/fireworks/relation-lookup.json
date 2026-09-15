@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "跨表问数只走已登记的边",
+  "subtitle": "城市在用户表时，必须先找到订单到用户的关系；没有边就不能猜 ON。",
+  "nodes": [
+    {
+      "id": "metric",
+      "kind": "rect",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "GMV 在订单",
+      "sublabel": "指标落在事实表",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "dim",
+      "kind": "rect",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "城市在用户",
+      "sublabel": "维度落在维表",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "lookup",
+      "kind": "hexagon",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "查关系清单",
+      "sublabel": "订单 → 用户",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "fail",
+      "kind": "rect",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "有边才 JOIN",
+      "sublabel": "无边不猜 ON",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "metric-dim",
+      "source": "metric",
+      "target": "dim",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "locate",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "dim-lookup",
+      "source": "dim",
+      "target": "lookup",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "lookup",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "lookup-fail",
+      "source": "lookup",
+      "target": "fail",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "reject",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "定位对象" },
+    { "flow": "control", "label": "查已登记边" },
+    { "flow": "write", "label": "判定能否连表" }
+  ],
+  "footer": "Fireworks Tech Graph · relation lookup without guessed ON",
+  "footer_x": 40,
+  "footer_y": 428
+}

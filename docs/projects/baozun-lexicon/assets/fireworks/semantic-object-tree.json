@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 1,
+  "motion_scene": "governed-runtime",
+  "quality_profile": "standard",
+  "width": 1200,
+  "height": 540,
+  "title": "一份模型头下面挂哪些对象",
+  "subtitle": "表挂度量与维度；关系只连本模型的表。",
+  "nodes": [
+    {
+      "id": "head",
+      "kind": "double_rect",
+      "x": 492,
+      "y": 112,
+      "width": 216,
+      "height": 88,
+      "label": "模型头",
+      "sublabel": "电商销售 / 版本 / 生效",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "table",
+      "kind": "cylinder",
+      "x": 144,
+      "y": 248,
+      "width": 200,
+      "height": 88,
+      "label": "逻辑表",
+      "sublabel": "订单、用户",
+      "fill": "#f0fdfa",
+      "stroke": "#14b8a6"
+    },
+    {
+      "id": "metric",
+      "kind": "hexagon",
+      "x": 500,
+      "y": 248,
+      "width": 200,
+      "height": 88,
+      "label": "指标",
+      "sublabel": "营收、净营收",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "rel",
+      "kind": "rect",
+      "x": 920,
+      "y": 248,
+      "width": 200,
+      "height": 88,
+      "label": "关系",
+      "sublabel": "订单 → 用户",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "measure",
+      "kind": "rect",
+      "x": 48,
+      "y": 400,
+      "width": 176,
+      "height": 80,
+      "label": "度量",
+      "sublabel": "支付金额、退款额",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    },
+    {
+      "id": "dim",
+      "kind": "rect",
+      "x": 264,
+      "y": 400,
+      "width": 176,
+      "height": 80,
+      "label": "维度",
+      "sublabel": "状态、大区、日期",
+      "fill": "#fff7ed",
+      "stroke": "#fb923c",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "head-table",
+      "source": "head",
+      "target": "table",
+      "source_port": "left",
+      "target_port": "top",
+      "flow": "control",
+      "motion_role": "own",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "head-metric",
+      "source": "head",
+      "target": "metric",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "control",
+      "motion_role": "own",
+      "motion_stage": 1,
+      "motion_order": 1
+    },
+    {
+      "id": "head-rel",
+      "source": "head",
+      "target": "rel",
+      "source_port": "right",
+      "target_port": "top",
+      "flow": "control",
+      "motion_role": "own",
+      "motion_stage": 1,
+      "motion_order": 2
+    },
+    {
+      "id": "table-measure",
+      "source": "table",
+      "target": "measure",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "motion_role": "own",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "table-dim",
+      "source": "table",
+      "target": "dim",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "motion_role": "own",
+      "motion_stage": 2,
+      "motion_order": 1
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 720,
+  "legend_y": 400,
+  "legend_locked": false,
+  "legend": [
+    { "flow": "control", "label": "模型拥有" },
+    { "flow": "data", "label": "表上的字段" }
+  ],
+  "footer": "Fireworks Tech Graph · semantic object tree",
+  "footer_x": 40,
+  "footer_y": 512
+}

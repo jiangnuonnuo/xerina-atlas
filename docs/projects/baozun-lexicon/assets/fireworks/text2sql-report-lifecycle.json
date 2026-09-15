@@ -8,7 +8,7 @@
   "width": 1200,
   "height": 620,
   "title": "固定日报 / 周报的发布生命周期",
-  "subtitle": "自然语言负责生成查询草稿，审核后的 SQL 模板负责稳定运行。",
+  "subtitle": "对话按需出数已经落地；定时推送仍属企业调度要补的一截，不要说成已上线。",
   "nodes": [
     { "id": "requirement", "kind": "speech", "x": 40, "y": 160, "width": 160, "height": 82, "label": "报表需求", "sublabel": "指标 / 周期 / 维度", "fill": "#eff6ff", "stroke": "#60a5fa", "flat": true },
     { "id": "draft", "kind": "double_rect", "x": 250, "y": 160, "width": 160, "height": 82, "label": "SQL 草稿", "sublabel": "自然语言生成", "fill": "#faf5ff", "stroke": "#a78bfa", "flat": true },

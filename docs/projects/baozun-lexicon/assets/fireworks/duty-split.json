@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 1,
+  "motion_scene": "governed-runtime",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 420,
+  "title": "口径归治理，SQL 归引擎，数字归代码",
+  "subtitle": "人话只负责抽槽；同一指标在日报周报必须走同一条生成路径。",
+  "nodes": [
+    {
+      "id": "llm",
+      "kind": "bot",
+      "x": 48,
+      "y": 156,
+      "width": 168,
+      "height": 92,
+      "label": "LLM / Agent",
+      "sublabel": "意图 / 抽槽 / 解读",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa"
+    },
+    {
+      "id": "engine",
+      "kind": "double_rect",
+      "x": 276,
+      "y": 156,
+      "width": 168,
+      "height": 92,
+      "label": "语义引擎",
+      "sublabel": "确定性生成 SQL",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    },
+    {
+      "id": "guard",
+      "kind": "hexagon",
+      "x": 504,
+      "y": 156,
+      "width": 168,
+      "height": 92,
+      "label": "只读执行",
+      "sublabel": "闸门 / 路由 / LIMIT",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "code",
+      "kind": "rect",
+      "x": 732,
+      "y": 156,
+      "width": 168,
+      "height": 92,
+      "label": "分析代码",
+      "sublabel": "趋势 / 对比 / 归因",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "report",
+      "kind": "document",
+      "x": 960,
+      "y": 156,
+      "width": 168,
+      "height": 92,
+      "label": "日报 / 周报",
+      "sublabel": "表格 / 图表 / 口径",
+      "fill": "#f0fdfa",
+      "stroke": "#14b8a6"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "llm-engine",
+      "source": "llm",
+      "target": "engine",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "dispatch",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "engine-guard",
+      "source": "engine",
+      "target": "guard",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "execute",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "guard-code",
+      "source": "guard",
+      "target": "code",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "read",
+      "motion_role": "result",
+      "motion_stage": 3,
+      "motion_order": 0
+    },
+    {
+      "id": "code-report",
+      "source": "code",
+      "target": "report",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "deliver",
+      "motion_stage": 4,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 330,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "结构化取数请求" },
+    { "flow": "control", "label": "SQL 与安全控制" },
+    { "flow": "read", "label": "结果引用" },
+    { "flow": "write", "label": "报告产物" }
+  ],
+  "footer": "Fireworks Tech Graph · duty split for governed weekly reports",
+  "footer_x": 48,
+  "footer_y": 384
+}

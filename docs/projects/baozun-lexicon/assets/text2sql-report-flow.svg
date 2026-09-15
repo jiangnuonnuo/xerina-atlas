@@ -44,8 +44,8 @@
     </style>
   </defs>
   <rect data-graph-role="background" width="1200.0" height="560.0" fill="#ffffff"/>
-  <text x="600.0" y="56" text-anchor="middle" class="title">日报 / 周报：从业务问题到 SQL 结果</text>
-  <text x="600.0" y="82" text-anchor="middle" class="subtitle">同一条查询链路支持临时问数与固定报表 SQL 的生成、审核和执行。</text>
+  <text x="600.0" y="56" text-anchor="middle" class="title">从一句周报到只读结果</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">意图拆块、语义绑定、生成 SQL、过闸门执行；失败则分类回注，而不是原样重试。</text>
   <path id="question-intent" data-graph-role="edge" data-edge-id="question-intent" data-source="question" data-target="intent" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="connect" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 145,211 L 155,211" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
   <path id="intent-schema" data-graph-role="edge" data-edge-id="intent-schema" data-source="intent" data-target="schema" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="prepare" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 275,211 L 285,211" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
   <path id="schema-ground" data-graph-role="edge" data-edge-id="schema-ground" data-source="schema" data-target="ground" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="tool-call" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 405,211 L 415,211" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
@@ -85,7 +85,7 @@
   <rect x="545.0" y="170.0" width="120.0" height="82.0" rx="10.0" fill="#faf5ff" stroke="#8b5cf6" stroke-width="2.0"/>
   <rect x="551.0" y="176.0" width="108.0" height="70.0" rx="7.0" fill="none" stroke="#8b5cf6" stroke-width="1.2" opacity="0.65"/>
   <text x="605.0" y="211.0" text-anchor="middle" class="node-title" font-size="18.0">生成 SQL</text>
-  <text x="605.0" y="233.0" text-anchor="middle" class="node-sub">确定性或 LLM</text>
+  <text x="605.0" y="233.0" text-anchor="middle" class="node-sub">引擎优先，LLM 回退</text>
   </g>
   <g id="node-guard" data-graph-role="node" data-node-id="guard" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="675,170,795,252">
   <path d="M 697.0 170.0 L 773.0 170.0 L 795.0 211.0 L 773.0 252.0 L 697.0 252.0 L 675.0 211.0 Z" fill="#fff7ed" stroke="#f97316" stroke-width="2.0"/>

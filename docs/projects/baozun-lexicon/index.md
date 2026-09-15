@@ -56,11 +56,13 @@ layout: project-doc
 - **[30 · 平台字段目录结构治理](./30-platform-field-structure-management)**：目录树不变量、生命周期与一致性。
 - **[40 · 数据库并发与 XLSX 字典交付](./40-field-dictionary-data-delivery)**：从数据库快照到异步导出、原子交付与高并发边界。
 
-如果你要理解 Lexicon 字段词典如何承接数仓查询、自然语言转 SQL 以及日报周报生成，继续阅读：
+如果你要理解字段字典如何变成可执行口径，再接到日报周报问数，继续阅读：
 
-- **[50 · Text2SQL 报表查询架构](./50-text2sql-report-architecture)**：Cognida 在数仓查询和报表链路中的职责边界。
-- **[60 · 从自然语言到日报周报 SQL](./60-text2sql-report-flow)**：用脱敏日报案例拆解从业务问题到 SQL 结果的实际流程。
-- **[70 · SQL 安全边界与正确性验证](./70-text2sql-safety-validation)**：SQL 只读控制、资源边界、Golden Query 和报表发布闸门。
+- **[50 · 从字段字典到可执行语义](./50-semantic-model-from-dictionary)**：为什么字典还不够，一行字典如何变成逻辑表、度量和指标。
+- **[51 · 语义对象、流转与目录卡](./51-semantic-objects-and-runtime-flow)**：六个对象怎么分工，为什么对话只能看到业务目录。
+- **[55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture)**：口径归治理、SQL 归引擎、数字归代码。
+- **[60 · 从一句周报到受治理 SQL](./60-text2sql-report-flow)**：按面试口播把意图路由、抽槽、引擎写 SQL 和结果引用走一遍。
+- **[70 · SQL 安全边界、正确性验证与面试追问](./70-text2sql-safety-validation)**：只读闸门、Golden Query、正式报表生命周期和高频追问。
 
 ---
 
@@ -75,9 +77,11 @@ layout: project-doc
 | [25 · 字段治理交互工作台](./25-full-stack-workbench) | 采集、解析、审核、目录和导出交互 | 一条完整的前后端状态链路 |
 | [30 · 平台字段目录结构治理](./30-platform-field-structure-management) | 树不变量、生命周期、一致性 | 目录结构的"地基" |
 | [40 · 数据库并发与 XLSX 字典交付](./40-field-dictionary-data-delivery) | 数据库并发、快照、XLSX、原子交付 | 不影响采集的可复现交付物 |
-| [50 · Text2SQL 报表查询架构](./50-text2sql-report-architecture) | Cognida、数仓查询、报表职责边界 | 自然语言转 SQL 的系统定位 |
-| [60 · 从自然语言到日报周报 SQL](./60-text2sql-report-flow) | 意图解析、Schema、语义匹配、执行结果 | 一条日报 SQL 是怎样生成的 |
-| [70 · SQL 安全边界与正确性验证](./70-text2sql-safety-validation) | 只读闸门、结果校验、Golden Query | 如何避免错误 SQL 进入正式报表 |
+| [50 · 从字段字典到可执行语义](./50-semantic-model-from-dictionary) | 静态字典升级为可执行口径 | 一行字典如何变成语义对象 |
+| [51 · 语义对象、流转与目录卡](./51-semantic-objects-and-runtime-flow) | 对象分工、写入读取、目录卡隔离 | 对话和编译为什么不能看同一份资料 |
+| [55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture) | 职责拆分、治理主路、Lexicon 衔接 | 周报为什么不能靠裸 Text2SQL |
+| [60 · 从一句周报到受治理 SQL](./60-text2sql-report-flow) | 意图路由、抽槽、引擎装配、结果引用 | 一条周报从 0 到 1 怎么跑通 |
+| [70 · SQL 安全边界、正确性验证与面试追问](./70-text2sql-safety-validation) | 只读闸门、Golden Query、发布生命周期 | 能执行为什么还不能当正式周报 |
 
 ---
 

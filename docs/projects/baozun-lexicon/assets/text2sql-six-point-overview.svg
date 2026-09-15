@@ -44,8 +44,8 @@
     </style>
   </defs>
   <rect data-graph-role="background" width="1200.0" height="520.0" fill="#ffffff"/>
-  <text x="600.0" y="56" text-anchor="middle" class="title">Text2SQL 六点工作链路</text>
-  <text x="600.0" y="82" text-anchor="middle" class="subtitle">从业务问题到可复用的日报 / 周报结果，每一步都有输入、校验和输出。</text>
+  <text x="600.0" y="56" text-anchor="middle" class="title">从周报问题到可追溯结果</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">人话先变成可校验的指标和维度，再生成 SQL；数字由代码计算，模型只组织解释。</text>
   <path id="p1-p2" data-graph-role="edge" data-edge-id="p1-p2" data-source="p1" data-target="p2" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="intent" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 190,211 L 240,211" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
   <path id="p2-p3" data-graph-role="edge" data-edge-id="p2-p3" data-source="p2" data-target="p3" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="ground" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 390,211 L 440,211" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
   <path id="p3-p4" data-graph-role="edge" data-edge-id="p3-p4" data-source="p3" data-target="p4" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="guard" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 590,211 L 640,211" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
@@ -64,8 +64,8 @@
   <g id="node-p3" data-graph-role="node" data-node-id="p3" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="440,170,590,252">
   <rect x="440.0" y="170.0" width="150.0" height="82.0" rx="10.0" fill="#fff7ed" stroke="#fb923c" stroke-width="2.0"/>
   <rect x="446.0" y="176.0" width="138.0" height="70.0" rx="7.0" fill="none" stroke="#fb923c" stroke-width="1.2" opacity="0.65"/>
-  <text x="515.0" y="211.0" text-anchor="middle" class="node-title" font-size="18.0">3 SQL 生成</text>
-  <text x="515.0" y="233.0" text-anchor="middle" class="node-sub">候选查询逻辑</text>
+  <text x="515.0" y="211.0" text-anchor="middle" class="node-title" font-size="18.0">3 引擎写 SQL</text>
+  <text x="515.0" y="233.0" text-anchor="middle" class="node-sub">未覆盖才回退 LLM</text>
   </g>
   <g id="node-p4" data-graph-role="node" data-node-id="p4" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="640,170,790,252">
   <path d="M 662.0 170.0 L 768.0 170.0 L 790.0 211.0 L 768.0 252.0 L 662.0 252.0 L 640.0 211.0 Z" fill="#fff7ed" stroke="#f97316" stroke-width="2.0"/>

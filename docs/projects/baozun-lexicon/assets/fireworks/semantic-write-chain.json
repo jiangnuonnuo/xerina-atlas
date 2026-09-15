@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "写入：字典怎样变成生效模型",
+  "subtitle": "低频整份替换；成功则全部生效，失败则全部回到提交前。",
+  "nodes": [
+    {
+      "id": "src",
+      "kind": "document",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "准备素材",
+      "sublabel": "字典 / 口径 / 关联",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa"
+    },
+    {
+      "id": "pack",
+      "kind": "double_rect",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "组装对象",
+      "sublabel": "头 + 六类对象",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "tx",
+      "kind": "hexagon",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "事务替换",
+      "sublabel": "先清旧再插入",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "live",
+      "kind": "rect",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "生效抬版本",
+      "sublabel": "问数只认生效",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "src-pack",
+      "source": "src",
+      "target": "pack",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "prepare",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "pack-tx",
+      "source": "pack",
+      "target": "tx",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "commit",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "tx-live",
+      "source": "tx",
+      "target": "live",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "publish",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "素材" },
+    { "flow": "control", "label": "整份提交" },
+    { "flow": "write", "label": "发布生效" }
+  ],
+  "footer": "Fireworks Tech Graph · semantic model write path",
+  "footer_x": 40,
+  "footer_y": 428
+}

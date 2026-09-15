@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "编译 SQL 怎样按版本复用",
+  "subtitle": "模型包每次现加载；SQL 命中同一版本和同一请求才跳过编译。",
+  "nodes": [
+    {
+      "id": "load",
+      "kind": "double_rect",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "加载模型包",
+      "sublabel": "取出当前版本",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "key",
+      "kind": "rect",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "构成查找键",
+      "sublabel": "租户 / 名 / 版本 / 请求",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "hit",
+      "kind": "hexagon",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "是否命中",
+      "sublabel": "同版本同请求",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "out",
+      "kind": "document",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "返回 SQL",
+      "sublabel": "未命中则先编译",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "load-key",
+      "source": "load",
+      "target": "key",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "read",
+      "motion_role": "load",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "key-hit",
+      "source": "key",
+      "target": "hit",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "lookup",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "hit-out",
+      "source": "hit",
+      "target": "out",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "return",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "read", "label": "加载快照" },
+    { "flow": "control", "label": "按键查找" },
+    { "flow": "write", "label": "复用或编译" }
+  ],
+  "footer": "Fireworks Tech Graph · compiled SQL reuse",
+  "footer_x": 40,
+  "footer_y": 428
+}

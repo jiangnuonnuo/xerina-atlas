@@ -1,59 +1,82 @@
 ---
-title: 60 · 我参与的日报周报 SQL 生成流程
+title: 60 · 从一句周报到受治理 SQL
 type: project-chapter
 project: baozun-lexicon
 order: 60
 group: 数仓与智能报表
-description: 用脱敏日报和周报案例，拆解 Cognida 从自然语言解析、指标绑定到 SQL 执行和报告结果的完整流程。
+description: 用脱敏周报案例，按面试口播把 Cognida 从意图路由、语义抽槽、引擎写 SQL 到结果引用的完整路径走一遍。
 layout: project-doc
 ---
 
-## 我参与的日报周报 SQL 生成流程
+## 60 · 从一句周报到受治理 SQL
 
-> 本文中的表名、字段名、日期、数值和接口名称均为脱敏或泛化示例，仅用于说明技术流程。
+> 表名、字段名、日期和接口名称均为脱敏示例。这一章按「面试官让你从 0 讲到 1」来写：先分清日报周报和普通问数，再用一句话把整条链路跑通。架构职责见 [55](./55-governed-report-architecture)，语义对象见 [51](./51-semantic-objects-and-runtime-flow)。
 
-![Text2SQL 日报周报流程](./assets/text2sql-report-flow.svg)
+![从一句周报到只读结果](./assets/text2sql-report-flow.svg)
 
 <InteractiveDiagram
-  title="Text2SQL 日报周报流程"
+  title="从一句周报到只读结果"
   src="../../media/projects/baozun-lexicon/diagrams/text2sql-report-flow/index.html?embed=1"
   poster="../../media/projects/baozun-lexicon/diagrams/text2sql-report-flow/preview.png"
   description="从业务问题、意图解析和 Schema 探查，到 SQL 生成、只读执行、结果保存和报告交付。"
 />
 
-## 1. 先区分日报周报和普通问数
-
-“查一个数字”和“生成日报/周报”看起来都可以用自然语言转 SQL，但工程要求不同：
+## 1. 先分清「查一个数」和「出一份周报」
 
 | 场景 | 结果 | 允许的生成方式 | 质量要求 |
 | --- | --- | --- | --- |
-| 即席问数 | 一个数、一张明细或一个排行 | `get_schema → SQL → sql_execute` | 结果可解释，失败可重试 |
-| 日报 | 当前日指标、维度分布、对比值 | 语义查询优先，必要时受控 SQL | 日期边界、指标口径和总计必须可复核 |
-| 周报 | 周期汇总、趋势、环比或同比 | 审核 SQL 模板 + 参数替换 | 同一模板跨周期稳定，不能每天换口径 |
+| 即席问数 | 一个数、一张明细或一个排行 | `get_schema → LLM 写 SQL → sql_execute` | 结果可解释，失败可重试 |
+| 日报 | 当日指标、维度分布、对比值 | 语义查询优先 | 日期边界和口径必须可复核 |
+| 周报 | 周期汇总、趋势、环比 | 同一口径，只换周期参数 | 不能每周换一套公式 |
 
-项目里的 `report-composition` 技能把报告拆成总览、趋势、分群和对比等多个查询块，分别取数后再分析和渲染。我的落地原则是：**自然语言负责提出需求，已审核的 SQL 或语义模型负责稳定取数，代码负责计算数字，模型负责组织解释。**
+落地原则：**自然语言负责提出需求，已审核的语义模型或 SQL 模板负责稳定取数，代码负责计算数字，模型负责组织解释。**
 
-## 2. 脱敏日报案例：从一句话到查询意图
+## 2. 用户点下去之后，系统先分类而不是直接写 SQL
 
-业务问题：
+假设运营说：「帮我出一份上周电商经营周报。」
+
+入口把请求送进 Data Agent。进循环前有一组 BeforeHook：
+
+1. **硬工具门**：read 会话拦住写库和 ETL；
+2. **意图路由**：小模型把问题分成取数 / 趋势 / 归因 / 报告 / 歧义 / 通用，失败则用关键词兜底。「周报、日报、看板、综合」落到 **report**；
+3. 命中报告后，确定性注入技能 `report-composition`，并加一段很薄的 playbook：多主题拆开、重活委派子代理、轻活自己做；
+4. 可选召回历史上类似问法，只作参考，**必须重新查实时数据**。
+
+到这里模型已经知道：这不是「查一个数」，而是「出一份多段报告」。
+
+## 3. 周报怎么拆，才是在取代重复 SQL 劳动
+
+技能里的骨架和分析师脑子里的模板是对齐的：
+
+1. 核心指标总览：GMV、订单数、客单价；
+2. 趋势：按周或按日；
+3. 分群 / 复购；
+4. 洞察和建议；
+5. **数据来源与口径**（必须写清，不然业务不信）。
+
+多主题不会都堆进主 Agent 上下文。每个主题一个 Insight 子代理，内部自己取数和分析，只回传 `result_id` + 一段摘要；主 Agent 只做汇总和出图。这不是为了炫多 Agent，是防止周报把上下文撑爆。
+
+取数优先级也写死：
+
+**能走语义层的指标，禁止直接对物理表猜 SQL。**  
+没建模的（例如复购率）才允许 `get_schema` 写 SQL，并且回答里必须说「这是推断口径」。
+
+## 4. 人话如何变成可重复的 SQL
+
+![人话如何变成可重复的 SQL](./assets/text2sql-intent-to-sql.svg)
+
+<InteractiveDiagram
+  title="人话如何变成可重复的 SQL"
+  src="../../media/projects/baozun-lexicon/diagrams/text2sql-intent-to-sql/index.html?embed=1"
+  poster="../../media/projects/baozun-lexicon/diagrams/text2sql-intent-to-sql/preview.png"
+  description="先抽取查询意图，再绑定真实对象，最后生成并校验可执行查询。"
+/>
+
+业务原句：
 
 > 查询 2026 年 8 月 30 日各渠道销售额、支付订单量和退款金额，并与上周同日比较，生成日报，按销售额从高到低输出。
 
-我不会把这句话直接放进 SQL 字符串，而是先拆解：
-
-| 查询要素 | 解析结果 | 需要确认的边界 |
-| --- | --- | --- |
-| 当前周期 | `2026-08-30 00:00:00` 到 `2026-08-31 00:00:00` | 使用公司业务时区，还是数据源时区 |
-| 对比周期 | `2026-08-23` 同一自然日 | “上周”是否指上周同日 |
-| 维度 | 渠道 | 使用渠道名称还是渠道 ID |
-| 指标 | 销售额、支付订单量、退款金额 | 销售额的正式业务口径是什么 |
-| 对比方式 | 差值、变化率 | 对比值为 0 时如何展示 |
-| 排序 | 当前销售额降序 | 是否限制 Top 100 |
-| 输出 | 日报表格、图表和摘要 | 哪些字段允许进入报告 |
-
-如果“销售额”没有被确认是支付金额，“上周”没有统一解释，系统应先返回澄清问题。这是查询正确性的一部分，不是体验上的多余步骤。
-
-说明性的意图结构可以是：
+我不会把它直接塞进 SQL 字符串，而是先得到可校验的中间结构：
 
 ```json
 {
@@ -63,87 +86,92 @@ layout: project-doc
   "compare": { "start": "2026-08-23", "end": "2026-08-23", "kind": "same_day_last_week" },
   "dimensions": ["渠道"],
   "metrics": ["销售额", "支付订单量", "退款金额"],
-  "derived_metrics": ["销售额差值", "销售额变化率"],
   "order_by": [{ "name": "销售额", "direction": "desc" }],
   "limit": 100
 }
 ```
 
-这个对象的重点是把“时间、维度、指标和计算关系”显式化。它允许后端逐项校验，也允许前端在执行前把 SQL 草稿和口径展示给审核人。
+「上周」是前七天、上一个自然周还是上周同日，必须在这一层暴露出来。如果「销售额」还没被确认是支付金额，系统应先澄清。
 
-## 3. Schema 探查：生成 SQL 前先认识数据
+![从周报问题到可追溯结果](./assets/text2sql-six-point-overview.svg)
 
-即席 Text2SQL 的第一步是 `get_schema`。它可以从数据源的元数据中获取表清单、表说明、列名、类型、可空性和列注释；不确定表名时，先获取表清单再定位。
+<InteractiveDiagram
+  title="从周报问题到可追溯结果"
+  src="../../media/projects/baozun-lexicon/diagrams/text2sql-six-point-overview/index.html?embed=1"
+  poster="../../media/projects/baozun-lexicon/diagrams/text2sql-six-point-overview/preview.png"
+  description="需求拆解、语义绑定、引擎写 SQL、安全校验、只读执行到报表输出。"
+/>
 
-脱敏后的候选表如下：
-
-| 逻辑含义 | 示例表 | 字段 | 类型 | 用途 |
-| --- | --- | --- | --- | --- |
-| 渠道日报汇总 | `daily_sales_summary` | `stat_date` | date | 日期间过滤 |
-| 渠道日报汇总 | `daily_sales_summary` | `channel` | varchar | 分组维度 |
-| 渠道日报汇总 | `daily_sales_summary` | `paid_amount` | decimal | 支付金额 |
-| 渠道日报汇总 | `daily_sales_summary` | `paid_orders` | bigint | 已聚合支付订单数 |
-| 渠道日报汇总 | `daily_sales_summary` | `refund_amount` | decimal | 退款金额 |
-
-Schema 只回答“有什么”，不完全回答“应该怎么统计”。例如：
-
-- `paid_orders` 如果来自日渠道汇总表，可以直接 `SUM`；
-- 如果换成订单明细表，则可能必须 `COUNT(DISTINCT order_id)`；
-- `refund_amount` 可能按退款发生日统计，也可能按订单创建日归属；
-- `channel` 可能需要把页面上的“直营”映射成数据库中的 `DIRECT`。
-
-所以 Schema 探查之后还要经过指标语义绑定，不能看到一个名为 `amount` 的字段就直接判定它是销售额。
-
-## 4. 语义路径如何生成日报 SQL
-
-对于日报和周报这种需要口径一致的场景，我会优先使用语义主路径：
+## 5. 治理主路：模型只填槽，引擎写 SQL
 
 ```text
-semantic_models
-  → 识别已生效指标和维度
-  → 将“销售额”对齐到治理指标，将“渠道”对齐到治理维度
-  → semantic_query 提交 metrics / dimensions / filters / order_by
-  → 指标引擎生成治理 SQL
-  → sql_execute 执行生成的 SQL
+semantic_models  → 看到生效指标、同义词、允许取值
+ground_terms     → 「流水」对齐到「营收」；对不上就反问
+semantic_query   → {metrics, dimensions, filters, time_grain}
+metricsql.Build  → 确定性 SQL
+sql_execute      → 带上模型绑定的 database_id
 ```
 
-`semantic_query` 的请求不是直接提交中文 SQL，而是提交结构化对象：
+提交给引擎的不是中文 SQL，而是：
 
 ```json
 {
   "model": "渠道销售模型",
   "metrics": ["销售额", "支付订单量", "退款金额"],
   "dimensions": ["渠道"],
-  "filters": [
-    { "field": "统计日期", "op": "=", "values": ["2026-08-30"] }
-  ],
+  "filters": [{ "field": "统计日期", "op": "=", "values": ["2026-08-30"] }],
   "order_by": [{ "field": "销售额", "desc": true }],
   "limit": 100
 }
 ```
 
-指标引擎再根据逻辑表、物理表、度量表达式、默认聚合和关联关系装配 SQL。这样“销售额”的公式只在语义模型中维护一次，日报、周报和临时查询不会各自写出不同口径。
+引擎逐步做这些事：
 
-如果语义模型完整覆盖，结果会带有 `covered=true`、模型名称、模型版本和生成 SQL；如果某个指标、维度或过滤字段未覆盖，返回 `covered=false` 和未覆盖名称，Data Agent 回退到 `get_schema + sql_execute`。回退是可用性机制，不等于已经获得正式报表口径。
+1. 用名称和同义词解析指标、维度；解析失败记入 uncovered；
+2. 按建模口径展开表达式（客单价可以是 GMV/订单数，循环引用算未覆盖）；
+3. 过滤值经 ValueMap 把「已完成」翻成物理枚举 `completed`；
+4. 需要时间上卷时按方言生成分桶；模型没有时间维度就失败，绝不静默聚成一个总数当趋势；
+5. **任一名称未覆盖：不生成半截 SQL，返回 `covered=false`**；
+6. 覆盖完整：选基表（跨表指标从事实表出发）、按 Relation 规划 JOIN、装配 SELECT / GROUP BY / WHERE。
 
-## 5. 脱敏 SQL 结果和每个子句的含义
+信任边界要能讲给面试官：
 
-假设示例表已经按日期和渠道完成汇总，且 `paid_orders` 的口径已确认，可能生成如下只读查询：
+- 指标表达式和 JOIN 条件是管理员建模写入的，视为可信 SQL 片段；
+- 用户只能影响「名字」和「过滤值」：名字解析后丢掉原文，过滤值转义，算子走白名单。
+
+命中受信查询时按「租户 + 模型 + 版本 + 查询结构」缓存。口径升版本，旧缓存失效。周报结构稳定、数字要新，缓存的是 SQL 语义，执行仍走实时库。
+
+## 6. Schema 探查：回退路径才需要「先认识表」
+
+即席路径的第一步是 `get_schema`。不确定表名时先给轻量表目录，禁止一次灌全库。
+
+| 逻辑含义 | 示例表 | 字段 | 用途 |
+| --- | --- | --- | --- |
+| 渠道日报汇总 | `daily_sales_summary` | `stat_date` | 日期过滤 |
+| 渠道日报汇总 | `daily_sales_summary` | `channel` | 分组维度 |
+| 渠道日报汇总 | `daily_sales_summary` | `paid_amount` | 支付金额 |
+| 渠道日报汇总 | `daily_sales_summary` | `paid_orders` | 已聚合订单数 |
+| 渠道日报汇总 | `daily_sales_summary` | `refund_amount` | 退款金额 |
+
+Schema 只回答「有什么」，不回答「应该怎么统计」。`paid_orders` 在汇总表可以直接 `SUM`，换成明细表就可能必须 `COUNT(DISTINCT order_id)`。看到名为 `amount` 的列不能直接当销售额。
+
+回退是可用性机制，不等于已经获得正式报表口径。
+
+## 7. 脱敏 SQL：每个子句都要说得出原因
+
+假设汇总表口径已确认，对比查询可能是：
 
 ```sql
 WITH current_day AS (
-    SELECT
-        channel,
-        SUM(paid_amount) AS current_sales,
-        SUM(paid_orders) AS current_orders,
-        SUM(refund_amount) AS current_refund
+    SELECT channel,
+           SUM(paid_amount) AS current_sales,
+           SUM(paid_orders) AS current_orders,
+           SUM(refund_amount) AS current_refund
     FROM daily_sales_summary
     WHERE stat_date = '2026-08-30'
     GROUP BY channel
 ), previous_day AS (
-    SELECT
-        channel,
-        SUM(paid_amount) AS previous_sales
+    SELECT channel, SUM(paid_amount) AS previous_sales
     FROM daily_sales_summary
     WHERE stat_date = '2026-08-23'
     GROUP BY channel
@@ -152,107 +180,53 @@ SELECT
     current_day.channel,
     current_day.current_sales,
     previous_day.previous_sales,
-    current_day.current_sales
-        - COALESCE(previous_day.previous_sales, 0) AS sales_difference,
-    (
-        current_day.current_sales
-        - COALESCE(previous_day.previous_sales, 0)
-    ) / NULLIF(previous_day.previous_sales, 0) AS wow_rate,
+    current_day.current_sales - COALESCE(previous_day.previous_sales, 0) AS sales_difference,
+    (current_day.current_sales - COALESCE(previous_day.previous_sales, 0))
+        / NULLIF(previous_day.previous_sales, 0) AS wow_rate,
     current_day.current_orders,
     current_day.current_refund
 FROM current_day
-LEFT JOIN previous_day
-    ON current_day.channel = previous_day.channel
+LEFT JOIN previous_day ON current_day.channel = previous_day.channel
 ORDER BY current_day.current_sales DESC
 LIMIT 100;
 ```
 
-这段示例的关键点不是 SQL 长度，而是每个决策都有原因：
-
-| SQL 部分 | 作用 | 错误时的后果 |
+| SQL 部分 | 作用 | 错了会怎样 |
 | --- | --- | --- |
-| `current_day` | 当前日报周期按渠道聚合 | 日期错会导致整份日报错位 |
-| `previous_day` | 上周同日使用相同维度和聚合 | 不能误用上一个自然周 |
-| `SUM(paid_amount)` | 采用已确认的支付金额口径 | 可能把下单金额当销售额 |
-| `SUM(paid_orders)` | 依赖汇总表的粒度 | 换成明细表会产生重复或错误计数 |
-| `LEFT JOIN` | 保留当前周期有数据的渠道 | `INNER JOIN` 会丢掉新出现渠道 |
-| `COALESCE` | 对缺失对比值给出约定默认值 | 需与业务约定区分空值和 0 |
-| `NULLIF` | 避免对比值为 0 时除零 | 否则会执行失败或产生无穷值 |
-| `LIMIT 100` | 限制报告输出规模 | 不限制可能拉取无界结果 |
+| `current_day` | 当前周期按渠道聚合 | 日期错则整份日报错位 |
+| `previous_day` | 上周同日，同一口径 | 不能误用上一个自然周 |
+| `SUM(paid_amount)` | 已确认的支付金额 | 可能把下单金额当销售额 |
+| `LEFT JOIN` | 保留本期新出现的渠道 | `INNER JOIN` 会丢掉新渠道 |
+| `NULLIF` | 避免对比值为 0 时除零 | 执行失败或无穷值 |
+| `LIMIT 100` | 限制报告规模 | 不限制可能拉无界结果 |
 
-这里还有一个必须说明的业务细节：如果对比周期不存在渠道，`previous_sales` 展示为空、0 或“不适用”，不能由模型私自决定。计算公式和展示规则都应写进指标或报告模板。
-
-## 6. 周报只替换参数，不随机重写口径
-
-周报例子：
-
-> 统计 2026 年 8 月 24 日至 8 月 30 日各渠道销售额、支付订单量和退款金额，与 8 月 17 日至 8 月 23 日比较，输出周报。
-
-这时查询意图变成：
-
-```text
-当前周期：2026-08-24 <= stat_date < 2026-08-31
-对比周期：2026-08-17 <= stat_date < 2026-08-24
-分组维度：channel
-指标：销售额、支付订单量、退款金额
-比较：当前周期 - 对比周期、变化率
-```
-
-如果日报 SQL 已经过审核，周报可以复用相同的指标绑定、JOIN 和派生公式，只替换周期参数和时间粒度。对于周报趋势，语义引擎的 `time_grain=week` 可以按数据源方言生成周粒度；对于固定报告，更推荐保存已经审核的参数化 SQL 模板，避免模型每周选择不同的日期函数。
-
-日报和周报的日期边界必须使用半开区间：
+周报只替换周期参数，不随机重写口径。日期用半开区间：
 
 ```sql
 WHERE stat_date >= :period_start
   AND stat_date < :period_end
 ```
 
-这样可以避免把当天 00:00:00 重复算入前一天，也能较好地处理时间字段带时分秒的表。实际使用时还要统一业务时区、数据延迟和“最近完整日”的定义。
+避免把当天 00:00:00 算进前一天，也更好处理带时分秒的字段。
 
-## 7. 结果怎样生成报表，而不是让模型编数字
+## 8. 结果怎样进报告：数字不让模型口算
 
-查询成功后，结果处理分为三层：
+查询成功后分三层：
 
-1. **结果数据层**：完整行集保存到 Result Store，得到 `result_id`；
-2. **确定性分析层**：代码基于结果集计算总计、差值、变化率、排名、趋势或异常；
-3. **展示层**：前端用表格、图表和指标卡呈现，模型只解释已经返回的数据。
+1. **结果数据层**：完整行集进 Result Store，得到 `result_id`；
+2. **确定性分析层**：代码算总计、差值、变化率、趋势或归因；
+3. **展示层**：表格、图表、指标卡；模型只解释已经返回的数据。
 
-项目的结果信封包含列名、类型、总行数、有限样本、聚合摘要、截断状态和 `result_id`。大结果不直接完整回灌模型，后续 `data_analysis` 或 `render_ui` 通过引用读取。多段报告也可以把每一块的 `result_id` 传给对应分析子任务，主 Agent 只汇总结论和来源。
+Agent 上下文里只有列名、行数、样本、聚合摘要和 `result_id`。大结果不进模型。「销售额增长 15%」必须来自结果集和代码；LLM 可以写成自然语言，不能重新计算或补没有返回的数。
 
-例如日报最终可以组织成：
+失败修复也不是无限重试：错误分级（列不存在、表不存在、语法、超时），回注候选列名/表名，让模型改写。权限错误直接停。同一失败反复出现会触发再规划，避免空转。
 
-```text
-核心指标：今日销售额、支付订单量、退款金额
-渠道表格：channel + 当前值 + 对比值 + 差值 + 变化率
-图表：渠道销售额排名或当前/上周同日对比
-摘要：基于结果集确定增长最高、下降最高和无历史数据的渠道
-来源：query_id、result_id、数据源、统计周期、语义模型版本
-```
+## 9. 面试时把这条路径讲成 STAR
 
-“销售额增长 15%”这个数字应由查询结果和确定性计算得出；LLM 可以把它写成自然语言，但不应重新计算或凭空补充没有返回的数据。
+**Situation：** 分析师每周为经营周报手写 SQL，口径容易漂，业务不敢让 ChatBI 直接出数。
 
-## 8. 查询失败如何回到正确路径
+**Task：** 让「出一份上周经营周报」走受治理路径，未覆盖再诚实回退。
 
-Cognida 的自修复不是无限重试，而是“错误分类 → 回注必要线索 → 定向修改 → 重新过闸门”。典型过程如下：
+**Action：** 意图路由到 report → 拆成总览/趋势/分群 → 语义层抽槽并由引擎写 SQL → 只读执行得到 `result_id` → 代码算对比和趋势 → 回答里写清口径。未覆盖指标标明推断，不假装已经治理。
 
-| 错误 | 可执行的修复 | 是否可以自动进入正式报表 |
-| --- | --- | --- |
-| `unknown_column` | 重新读取 Schema，修正字段名 | 需要重新做结构和结果校验 |
-| `unknown_table` | 依据候选表和语义重新选表 | 需要人工确认业务对象 |
-| 类型或日期错误 | 修正参数格式或方言表达 | 测试通过后才可继续 |
-| 结果为空 | 检查日期、值映射和数据新鲜度 | 不能直接把空结果当成 0 |
-| 权限错误 | 停止自动重试，转人工申请权限 | 不自动绕过 |
-| 查询超时 | 缩小周期、减少列或改用汇总表 | 不能无限扩大资源 |
-| 连续同类错误 | 触发失败护栏，停止空转 | 必须人工排查 |
-
-项目中的失败护栏会记录工具和错误类型的失败签名；相同错误达到阈值后注入再规划提示或提前结束，并把任务标记为部分完成，而不是耗尽迭代预算继续重复同一条 SQL。瞬时连接抖动只允许在只读查询内做有限退避重试，语义错误不会使用同样方式盲重试。
-
-## 9. 从对话查询到正式日报周报
-
-固定报告的发布链路建议分成两段：
-
-```text
-需求 → 自然语言生成 SQL 草稿 → 结构/口径/结果验证 → 技术与业务确认
-    → 保存参数化 SQL + 语义模型版本 → 周期触发 → 只读执行
-    → 结果质量检查 → 生成表格/图表/摘要 → 发布并留审计记录
-```
+**Result：** 同一指标在不同报告里走同一条生成路径；当前验证方式是对话按需出数、Golden Query 和执行准确率，而不是编造已上线的自动日报推送。

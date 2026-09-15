@@ -44,8 +44,8 @@
     </style>
   </defs>
   <rect data-graph-role="background" width="1200.0" height="560.0" fill="#ffffff"/>
-  <text x="600.0" y="56" text-anchor="middle" class="title">Text2SQL 的六点输入输出契约</text>
-  <text x="600.0" y="82" text-anchor="middle" class="subtitle">每一阶段只接收结构化输入，并输出可校验的下一阶段事实。</text>
+  <text x="600.0" y="56" text-anchor="middle" class="title">查询链路的六点输入输出契约</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">模型错误最多停在候选阶段，不能直接写成库操作或正式周报。</text>
   <path id="input-intent" data-graph-role="edge" data-edge-id="input-intent" data-source="input" data-target="intent" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="parse" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 200,208 L 245,208" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
   <path id="intent-binding" data-graph-role="edge" data-edge-id="intent-binding" data-source="intent" data-target="binding" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="ground" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 410,208 L 455,208" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
   <path id="binding-sql" data-graph-role="edge" data-edge-id="binding-sql" data-source="binding" data-target="sql" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="compose" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 620,208 L 665,208" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
