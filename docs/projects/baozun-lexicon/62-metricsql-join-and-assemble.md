@@ -306,7 +306,7 @@ ORDER BY DATE_FORMAT(orders.created_at, '%Y-%m-%d')
 
 **未覆盖的结果禁止写入。** 否则「实时库存」会变成一条可复用的空口径。
 
-缓存放在哪、TTL 多少、工具层如何取放，属于 Agent 循环。本层只规定：版本是失效锚点。
+缓存放在哪、TTL 多少、工具层如何取放，见 [72](./72-agent-fallback-and-report)。本层只规定：版本是失效锚点。
 
 ---
 
@@ -324,5 +324,7 @@ ORDER BY DATE_FORMAT(orders.created_at, '%Y-%m-%d')
 | --- | --- | --- | --- |
 | 治理命中 | true | 非空 | 不要再让模型改写这条 SQL |
 | 回退词法 | false | 空字符串 | 不要把空 SQL 当查询结果展示，也不要写入复用 |
+
+下一层从 [71](./71-agent-hit-path) 开始：谁调用引擎、命中路径如何执行、未覆盖如何换工具。
 
 ---

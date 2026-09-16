@@ -10,6 +10,8 @@ layout: project-doc
 
 ## 55 · 治理型语义层与日报周报查询架构
 
+> 本篇是面试口播总览，**不占三层**。正文按语义模型 [50](./50-semantic-model-from-dictionary) / [51](./51-semantic-objects-and-runtime-flow)、执行引擎 [60](./60-metricsql-compile-engine)–[62](./62-metricsql-join-and-assemble)、Agent 循环 [71](./71-agent-hit-path) / [72](./72-agent-fallback-and-report) 读。这里只回答「三层怎么分工，为什么周报不能靠裸 Text2SQL」。
+
 ## 1.我在这条链路上做什么
 
 如果面试官问「你在数仓相关工作里做了什么」，我不会先说「我做了一个会写 SQL 的 AI」。

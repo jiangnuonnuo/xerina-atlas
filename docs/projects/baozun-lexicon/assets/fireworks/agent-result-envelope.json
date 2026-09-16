@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "完整行集不回灌对话",
+  "subtitle": "Result Store 保存全量；Agent 只看见 result_id、样本和聚合。",
+  "nodes": [
+    {
+      "id": "rows",
+      "kind": "rect",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "查询行集",
+      "sublabel": "可能很多行",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "store",
+      "kind": "double_rect",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "Result Store",
+      "sublabel": "按 result_id 存放",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "env",
+      "kind": "document",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "结果信封",
+      "sublabel": "样本 + 聚合",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa"
+    },
+    {
+      "id": "answer",
+      "kind": "speech",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "口头回答",
+      "sublabel": "数字来自信封",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "rows-store",
+      "source": "rows",
+      "target": "store",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "put",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "store-env",
+      "source": "store",
+      "target": "env",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "clip",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "env-answer",
+      "source": "env",
+      "target": "answer",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "narrate",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "暂存全量" },
+    { "flow": "control", "label": "裁成信封" },
+    { "flow": "write", "label": "用数字说话" }
+  ],
+  "footer": "Fireworks Tech Graph · result envelope",
+  "footer_x": 40,
+  "footer_y": 428
+}

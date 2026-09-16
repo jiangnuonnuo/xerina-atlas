@@ -19,7 +19,7 @@ layout: project-doc
 4. 每一步留下什么中间零件，怎样装配成 SELECT / WHERE / GROUP BY；
 5. 合上文章后，能默写本例的 Query 和最终 SQL。
 
-谁决定调用引擎、覆盖失败后怎样改工具，仍是 Agent 循环章。跨表 JOIN、空 SQL、按版本复用，见 [62](./62-metricsql-join-and-assemble)。
+谁决定调用引擎见 [71](./71-agent-hit-path)，覆盖失败后怎样改工具见 [72](./72-agent-fallback-and-report)。跨表 JOIN、空 SQL、按版本复用，见 [62](./62-metricsql-join-and-assemble)。
 
 ---
 

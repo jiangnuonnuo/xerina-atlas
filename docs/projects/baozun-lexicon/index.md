@@ -71,7 +71,10 @@ layout: project-doc
 
 **Agent 循环**
 
-- **[55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture)**：谁调用引擎、治理主路与词法回退、只读执行边界。面试 90 秒口播也用这篇，不另占一层。
+- **[71 · 从一句人话到只读结果](./71-agent-hit-path)**：谁调用引擎、目录卡如何对齐名称、命中路径如何执行到 `result_id`。
+- **[72 · 未覆盖回退、只读闸门与周报拆章](./72-agent-fallback-and-report)**：空 SQL 之后换工具、闸门与信封、周报如何分章取数。
+
+面试 90 秒口播仍可看 [55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture)，它不占三层。
 
 ---
 
@@ -91,7 +94,9 @@ layout: project-doc
 | [60 · 编译步骤如何使用语义模型](./60-metricsql-compile-engine) | 执行引擎 · 步骤与模型对象串联 | 每一步消费哪类语义对象 |
 | [61 · 从 Agent Query 到最终 SQL](./61-metricsql-name-resolution) | 执行引擎 · Query 契约与完整案例 | 上周华东 GMV 如何变成一条 SQL |
 | [62 · 覆盖、JOIN 与 SQL 装配](./62-metricsql-join-and-assemble) | 执行引擎 · 覆盖、连表、装配、复用 | 无边为什么不能猜 ON |
-| [55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture) | Agent 循环 · 职责拆分与问数主路 | 口径、SQL、数字各归谁 |
+| [71 · 从一句人话到只读结果](./71-agent-hit-path) | Agent 循环 · 命中路径调度 | 上周华东 GMV 如何变成信封 |
+| [72 · 未覆盖回退、只读闸门与周报拆章](./72-agent-fallback-and-report) | Agent 循环 · 回退、闸门、周报 | 空 SQL 之后为什么换工具 |
+| [55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture) | 面试口播 · 不占三层 | 口径、SQL、数字各归谁 |
 
 ---
 

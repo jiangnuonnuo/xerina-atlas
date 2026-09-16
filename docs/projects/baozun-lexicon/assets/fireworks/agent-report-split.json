@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "周报先拆章，再各自取数",
+  "subtitle": "每一章优先走治理路径；未覆盖的章单独回退，并标明推断口径。",
+  "nodes": [
+    {
+      "id": "ask",
+      "kind": "speech",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "出上周周报",
+      "sublabel": "意图 report",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "split",
+      "kind": "hexagon",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "拆成主题",
+      "sublabel": "总览 / 趋势 / 分群",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "each",
+      "kind": "rect",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "每章取数",
+      "sublabel": "优先 semantic_query",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "sum",
+      "kind": "document",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "汇总叙述",
+      "sublabel": "数字来自各 result_id",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "ask-split",
+      "source": "ask",
+      "target": "split",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "parse",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "split-each",
+      "source": "split",
+      "target": "each",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "fanout",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "each-sum",
+      "source": "each",
+      "target": "sum",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "compose",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "识别报告" },
+    { "flow": "control", "label": "分章取数" },
+    { "flow": "write", "label": "汇总成文" }
+  ],
+  "footer": "Fireworks Tech Graph · report chapter split",
+  "footer_x": 40,
+  "footer_y": 428
+}

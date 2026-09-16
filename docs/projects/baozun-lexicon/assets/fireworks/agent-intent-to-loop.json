@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "人话先分类，再进入 ReAct 循环",
+  "subtitle": "意图只注入薄引导；真正选工具发生在每一轮循环里。",
+  "nodes": [
+    {
+      "id": "talk",
+      "kind": "speech",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "人话",
+      "sublabel": "上周华东 GMV 按天",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "intent",
+      "kind": "hexagon",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "意图分类",
+      "sublabel": "本例 fetch",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "loop",
+      "kind": "rect",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "ReAct 轮次",
+      "sublabel": "选工具并回灌",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "end",
+      "kind": "document",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "自然收尾",
+      "sublabel": "用信封里的数字",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "talk-intent",
+      "source": "talk",
+      "target": "intent",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "classify",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "intent-loop",
+      "source": "intent",
+      "target": "loop",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "enter",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "loop-end",
+      "source": "loop",
+      "target": "end",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "finish",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "理解问题" },
+    { "flow": "control", "label": "进入循环" },
+    { "flow": "write", "label": "给出回答" }
+  ],
+  "footer": "Fireworks Tech Graph · intent then react loop",
+  "footer_x": 40,
+  "footer_y": 428
+}

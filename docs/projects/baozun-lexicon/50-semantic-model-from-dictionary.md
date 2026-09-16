@@ -48,7 +48,7 @@ layout: project-doc
 | B. 语义建模 | 数据工程师按主题录入 | 字段字典 + 口径 + 关联 | 一份生效的语义模型 | 主题上线或口径变更时 |
 | C. 日常问数 | 业务人员提问，系统调度 | 自然语言 | 表格 / 图表 | 每天反复发生 |
 
-本篇把 **A → B** 讲透。B 之后如何编译见 [60](./60-metricsql-compile-engine)，如何调度见 [55](./55-governed-report-architecture)。这里只标明接口。
+本篇把 **A → B** 讲透。B 之后如何编译见 [60](./60-metricsql-compile-engine)，如何调度见 [71](./71-agent-hit-path)。这里只标明接口。
 
 三个环节都具有唯一的必要性：
 

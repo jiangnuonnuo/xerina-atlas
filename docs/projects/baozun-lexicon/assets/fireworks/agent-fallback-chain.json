@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "未覆盖必须换工具",
+  "subtitle": "空 SQL 不是报错。下一步是有界探表，再让模型写候选 SQL。",
+  "nodes": [
+    {
+      "id": "miss",
+      "kind": "hexagon",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "covered=false",
+      "sublabel": "SQL 为空",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "schema",
+      "kind": "rect",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "get_schema",
+      "sublabel": "有界探表",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "draft",
+      "kind": "document",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "词法 SQL",
+      "sublabel": "模型写候选",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa"
+    },
+    {
+      "id": "exec",
+      "kind": "rect",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "sql_execute",
+      "sublabel": "闸门不放松",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "miss-schema",
+      "source": "miss",
+      "target": "schema",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "switch",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "schema-draft",
+      "source": "schema",
+      "target": "draft",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "draft",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "draft-exec",
+      "source": "draft",
+      "target": "exec",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "run",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "承认缺口" },
+    { "flow": "control", "label": "探表写 SQL" },
+    { "flow": "write", "label": "仍只读执行" }
+  ],
+  "footer": "Fireworks Tech Graph · lexical fallback chain",
+  "footer_x": 40,
+  "footer_y": 428
+}
