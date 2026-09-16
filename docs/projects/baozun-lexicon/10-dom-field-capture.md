@@ -327,7 +327,7 @@ serialize(selectionRoot, pageState):
 
 客户端清洗的目标是尽可能不让敏感值离开浏览器；Agent 输入侧仍然要把插件结果视为不可信数据，必要时再做一次服务端或工作流入口校验。
 
-上图对应的处理链路交互版：<a href="../../media/projects/baozun-lexicon/diagrams/agent-prompt-context-pipeline/index.html" target="_blank" rel="noreferrer">打开输入到 Agent 的处理链路</a>。插件清洗不是“把 HTML 随便压缩”，而是先删除高风险和无关节点，再保留能够回指字段证据的属性、顺序和包含关系。
+清洗结果进入 Agent 的处理链路交互版：<a href="../../media/projects/baozun-lexicon/diagrams/agent-prompt-context-pipeline/index.html" target="_blank" rel="noreferrer">打开输入到 Agent 的处理链路</a>。插件清洗不是“把 HTML 随便压缩”，而是先删除高风险和无关节点，再保留能够回指字段证据的属性、顺序和包含关系。
 
 ## 6. DomSnapshot 输入契约
 

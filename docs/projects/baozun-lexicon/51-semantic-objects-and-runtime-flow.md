@@ -11,7 +11,7 @@ layout: project-doc
 
 ## 这篇要让你看懂什么
 
-[上一篇](./50-semantic-model-from-dictionary) 说明了为什么要把字典升级成语义模型。本篇只讲语义模型这一层：对象长什么样、怎么整份生效、问数时怎么加载。编译每一步如何使用这些对象，见 [60](./60-metricsql-compile-engine)；Agent Query 如何变成 SQL，见 [61](./61-metricsql-name-resolution)。谁决定调用、未覆盖怎么回退，见 Agent 循环章。
+[上一篇](./50-semantic-model-from-dictionary) 说明了为什么要把字典升级成语义模型。本篇只讲语义模型这一层：对象长什么样、怎么整份生效、问数时怎么加载。编译每一步如何使用这些对象，见 [60](./60-metricsql-compile-engine)；Agent Query 如何变成 SQL，见 [61](./61-metricsql-name-resolution)。谁决定调用、未覆盖怎么回退，见 [55](./55-governed-report-architecture)。
 
 1. 一份语义模型的外壳是什么，下面挂哪些对象；
 2. 每个对象保存什么语义、查询时怎么被用、不做什么；

@@ -71,10 +71,7 @@ layout: project-doc
 
 **Agent 循环**
 
-- **[70 · 从一句周报到受治理 SQL](./70-text2sql-report-flow)**：谁调用引擎、周报如何拆章、未覆盖如何回退。
-- **[80 · SQL 安全边界、正确性验证与面试追问](./80-text2sql-safety-validation)**：只读闸门、Golden Query、正式报表生命周期。
-
-面试 90 秒口播仍可看 [55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture)，它不占三层。
+- **[55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture)**：谁调用引擎、治理主路与词法回退、只读执行边界。面试 90 秒口播也用这篇，不另占一层。
 
 ---
 
@@ -94,8 +91,7 @@ layout: project-doc
 | [60 · 编译步骤如何使用语义模型](./60-metricsql-compile-engine) | 执行引擎 · 步骤与模型对象串联 | 每一步消费哪类语义对象 |
 | [61 · 从 Agent Query 到最终 SQL](./61-metricsql-name-resolution) | 执行引擎 · Query 契约与完整案例 | 上周华东 GMV 如何变成一条 SQL |
 | [62 · 覆盖、JOIN 与 SQL 装配](./62-metricsql-join-and-assemble) | 执行引擎 · 覆盖、连表、装配、复用 | 无边为什么不能猜 ON |
-| [70 · 从一句周报到受治理 SQL](./70-text2sql-report-flow) | Agent 循环 · 调度与周报拆章 | 一条周报从 0 到 1 怎么跑通 |
-| [80 · SQL 安全边界、正确性验证与面试追问](./80-text2sql-safety-validation) | Agent 循环 · 只读闸门与发布 | 能执行为什么还不能当正式周报 |
+| [55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture) | Agent 循环 · 职责拆分与问数主路 | 口径、SQL、数字各归谁 |
 
 ---
 
