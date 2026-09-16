@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "模型对象怎样进入编译步骤",
+  "subtitle": "先把模型包装成查找表，再按名取出列和条件，最后才 JOIN 和装配。",
+  "nodes": [
+    {
+      "id": "bundle",
+      "kind": "cylinder",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "模型包",
+      "sublabel": "51 交出的快照",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa"
+    },
+    {
+      "id": "index",
+      "kind": "rect",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "按名查找",
+      "sublabel": "名称与同义词",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "parts",
+      "kind": "hexagon",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "列与条件",
+      "sublabel": "维度 / 指标 / 过滤",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "sql",
+      "kind": "document",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "JOIN 与装配",
+      "sublabel": "才生成 SQL",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "bundle-index",
+      "source": "bundle",
+      "target": "index",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "read",
+      "motion_role": "load",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "index-parts",
+      "source": "index",
+      "target": "parts",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "resolve",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "parts-sql",
+      "source": "parts",
+      "target": "sql",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "assemble",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "read", "label": "读模型" },
+    { "flow": "data", "label": "按名解析" },
+    { "flow": "control", "label": "再连表装配" }
+  ],
+  "footer": "Fireworks Tech Graph · model objects into compile steps",
+  "footer_x": 40,
+  "footer_y": 428
+}

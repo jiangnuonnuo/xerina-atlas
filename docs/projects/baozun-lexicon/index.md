@@ -56,13 +56,25 @@ layout: project-doc
 - **[30 · 平台字段目录结构治理](./30-platform-field-structure-management)**：目录树不变量、生命周期与一致性。
 - **[40 · 数据库并发与 XLSX 字典交付](./40-field-dictionary-data-delivery)**：从数据库快照到异步导出、原子交付与高并发边界。
 
-如果你要理解字段字典如何变成可执行口径，再接到日报周报问数，继续阅读：
+如果你要理解字段字典如何变成可执行口径，再接到日报周报问数，按三层阅读：
+
+**语义模型**
 
 - **[50 · 从字段字典到可执行语义](./50-semantic-model-from-dictionary)**：为什么字典还不够，一行字典如何变成逻辑表、度量和指标。
-- **[51 · 语义对象、流转与目录卡](./51-semantic-objects-and-runtime-flow)**：六个对象怎么分工，为什么对话只能看到业务目录。
-- **[55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture)**：口径归治理、SQL 归引擎、数字归代码。
-- **[60 · 从一句周报到受治理 SQL](./60-text2sql-report-flow)**：按面试口播把意图路由、抽槽、引擎写 SQL 和结果引用走一遍。
-- **[70 · SQL 安全边界、正确性验证与面试追问](./70-text2sql-safety-validation)**：只读闸门、Golden Query、正式报表生命周期和高频追问。
+- **[51 · 语义对象、流转与目录卡](./51-semantic-objects-and-runtime-flow)**：六个对象怎么分工，为什么对话只能看到业务目录。本层停在「模型包交给编译」。
+
+**执行引擎**
+
+- **[60 · 编译步骤如何使用语义模型](./60-metricsql-compile-engine)**：每一步读模型里哪些对象，怎样串到下一步。
+- **[61 · 从 Agent Query 到最终 SQL](./61-metricsql-name-resolution)**：Agent 允许返回什么，再用「上周华东 GMV 按天」装配成一条 SQL。
+- **[62 · 覆盖、JOIN 与 SQL 装配](./62-metricsql-join-and-assemble)**：未覆盖必须空 SQL，只走已登记的边，再按版本复用。
+
+**Agent 循环**
+
+- **[70 · 从一句周报到受治理 SQL](./70-text2sql-report-flow)**：谁调用引擎、周报如何拆章、未覆盖如何回退。
+- **[80 · SQL 安全边界、正确性验证与面试追问](./80-text2sql-safety-validation)**：只读闸门、Golden Query、正式报表生命周期。
+
+面试 90 秒口播仍可看 [55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture)，它不占三层。
 
 ---
 
@@ -77,11 +89,13 @@ layout: project-doc
 | [25 · 字段治理交互工作台](./25-full-stack-workbench) | 采集、解析、审核、目录和导出交互 | 一条完整的前后端状态链路 |
 | [30 · 平台字段目录结构治理](./30-platform-field-structure-management) | 树不变量、生命周期、一致性 | 目录结构的"地基" |
 | [40 · 数据库并发与 XLSX 字典交付](./40-field-dictionary-data-delivery) | 数据库并发、快照、XLSX、原子交付 | 不影响采集的可复现交付物 |
-| [50 · 从字段字典到可执行语义](./50-semantic-model-from-dictionary) | 静态字典升级为可执行口径 | 一行字典如何变成语义对象 |
-| [51 · 语义对象、流转与目录卡](./51-semantic-objects-and-runtime-flow) | 对象分工、写入读取、目录卡隔离 | 对话和编译为什么不能看同一份资料 |
-| [55 · 治理型语义层与日报周报查询架构](./55-governed-report-architecture) | 职责拆分、治理主路、Lexicon 衔接 | 周报为什么不能靠裸 Text2SQL |
-| [60 · 从一句周报到受治理 SQL](./60-text2sql-report-flow) | 意图路由、抽槽、引擎装配、结果引用 | 一条周报从 0 到 1 怎么跑通 |
-| [70 · SQL 安全边界、正确性验证与面试追问](./70-text2sql-safety-validation) | 只读闸门、Golden Query、发布生命周期 | 能执行为什么还不能当正式周报 |
+| [50 · 从字段字典到可执行语义](./50-semantic-model-from-dictionary) | 语义模型 · 静态字典升级为可执行口径 | 一行字典如何变成语义对象 |
+| [51 · 语义对象、流转与目录卡](./51-semantic-objects-and-runtime-flow) | 语义模型 · 对象分工、写入读取、目录卡 | 对话和编译为什么不能看同一份资料 |
+| [60 · 编译步骤如何使用语义模型](./60-metricsql-compile-engine) | 执行引擎 · 步骤与模型对象串联 | 每一步消费哪类语义对象 |
+| [61 · 从 Agent Query 到最终 SQL](./61-metricsql-name-resolution) | 执行引擎 · Query 契约与完整案例 | 上周华东 GMV 如何变成一条 SQL |
+| [62 · 覆盖、JOIN 与 SQL 装配](./62-metricsql-join-and-assemble) | 执行引擎 · 覆盖、连表、装配、复用 | 无边为什么不能猜 ON |
+| [70 · 从一句周报到受治理 SQL](./70-text2sql-report-flow) | Agent 循环 · 调度与周报拆章 | 一条周报从 0 到 1 怎么跑通 |
+| [80 · SQL 安全边界、正确性验证与面试追问](./80-text2sql-safety-validation) | Agent 循环 · 只读闸门与发布 | 能执行为什么还不能当正式周报 |
 
 ---
 

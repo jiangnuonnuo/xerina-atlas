@@ -11,7 +11,7 @@ layout: project-doc
 
 ## 这篇要让你看懂什么
 
-[上一篇](./50-semantic-model-from-dictionary) 说明了为什么要把字典升级成语义模型。本篇只讲语义模型这一层：对象长什么样、怎么整份生效、问数时怎么加载。编译每一步如何使用这些对象，见 [52](./52-metricsql-compile-engine)；Agent Query 如何变成 SQL，见 [53](./53-metricsql-name-resolution)。谁决定调用、未覆盖怎么回退，见 Agent 循环章。
+[上一篇](./50-semantic-model-from-dictionary) 说明了为什么要把字典升级成语义模型。本篇只讲语义模型这一层：对象长什么样、怎么整份生效、问数时怎么加载。编译每一步如何使用这些对象，见 [60](./60-metricsql-compile-engine)；Agent Query 如何变成 SQL，见 [61](./61-metricsql-name-resolution)。谁决定调用、未覆盖怎么回退，见 Agent 循环章。
 
 1. 一份语义模型的外壳是什么，下面挂哪些对象；
 2. 每个对象保存什么语义、查询时怎么被用、不做什么；
@@ -89,7 +89,7 @@ layout: project-doc
 2. **普通列 + 默认计数**：订单数用主键计数。不能对主键再求和。
 3. **表达式已经完整 + 不再外套**：客户数如果已经是「去重客户标识再计数」，默认聚合必须是「不要再包一层」。否则会出现套娃聚合，口径直接错。
 
-业务人员通常不直接点度量名。度量存在的意义是：指标公式有原材料，未单独定义指标时还可以降级命中度量。怎么降级，是 [编译引擎](./52-metricsql-compile-engine) 的规则。
+业务人员通常不直接点度量名。度量存在的意义是：指标公式有原材料，未单独定义指标时还可以降级命中度量。怎么降级，是 [编译引擎](./60-metricsql-compile-engine) 的规则。
 
 ![度量像食材，指标像写好的菜谱](./assets/illustrations/metric-vs-measure.png)
 
@@ -229,7 +229,7 @@ layout: project-doc
 | 该主题全部逻辑表、维度、度量、指标、关系 | 覆盖埋点 |
 | 公式、物理列、JOIN、完整值映射 | 其他租户的模型 |
 
-加载模型包是为了口径以生效版本为准。SQL 怎么生成、是否复用，是 [执行引擎](./52-metricsql-compile-engine) 的事。
+加载模型包是为了口径以生效版本为准。SQL 怎么生成、是否复用，是 [执行引擎](./60-metricsql-compile-engine) 的事。
 
 ---
 
@@ -388,7 +388,7 @@ layout: project-doc
 | 华东 | 要么原样比对，要么翻成一组物理值 |
 | 订单 / 用户 | 逻辑表、数据源、关系 |
 
-[编译引擎](./52-metricsql-compile-engine) 会按对象逐步消费这些事实。[53](./53-metricsql-name-resolution) 用同一句话把 Query 装配成 SQL。本篇到此为止。
+[编译引擎](./60-metricsql-compile-engine) 会按对象逐步消费这些事实。[61](./61-metricsql-name-resolution) 用同一句话把 Query 装配成 SQL。本篇到此为止。
 
 ### 8.4 如果目录里没有这个词
 

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "模型包如何变成按名查找",
+  "subtitle": "每次编译只遍历内存快照；对不上的名称后面记未覆盖。",
+  "nodes": [
+    {
+      "id": "bundle",
+      "kind": "cylinder",
+      "x": 80,
+      "y": 148,
+      "width": 240,
+      "height": 88,
+      "label": "对象列表",
+      "sublabel": "指标 / 维度 / 表",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa"
+    },
+    {
+      "id": "maps",
+      "kind": "double_rect",
+      "x": 440,
+      "y": 148,
+      "width": 240,
+      "height": 88,
+      "label": "查找表",
+      "sublabel": "名称 + 同义词",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "hit",
+      "kind": "rect",
+      "x": 800,
+      "y": 148,
+      "width": 240,
+      "height": 88,
+      "label": "按名命中",
+      "sublabel": "未登记则未覆盖",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "bundle-maps",
+      "source": "bundle",
+      "target": "maps",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "index",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "maps-hit",
+      "source": "maps",
+      "target": "hit",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "read",
+      "motion_role": "lookup",
+      "motion_stage": 2,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 440,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "摊开列表" },
+    { "flow": "read", "label": "按名查找" }
+  ],
+  "footer": "Fireworks Tech Graph · semantic bundle index maps",
+  "footer_x": 40,
+  "footer_y": 428
+}

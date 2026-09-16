@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "按天是粒度，上周是范围",
+  "subtitle": "同一句话里的两个时间词，进 Query 的不同格子，也进 SQL 的不同子句。",
+  "nodes": [
+    {
+      "id": "talk",
+      "kind": "speech",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "人话里的时间",
+      "sublabel": "上周 + 按天",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "split",
+      "kind": "hexagon",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "先拆开",
+      "sublabel": "粒度和范围不是一件事",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "grain",
+      "kind": "rect",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "按天",
+      "sublabel": "time_grain → 分桶列",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "range",
+      "kind": "rect",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "上周",
+      "sublabel": "filters → 原始时间列",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "talk-split",
+      "source": "talk",
+      "target": "split",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "parse",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "split-grain",
+      "source": "split",
+      "target": "grain",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "bucket",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "grain-range",
+      "source": "grain",
+      "target": "range",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "filter",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "拆时间词" },
+    { "flow": "control", "label": "粒度进分桶" },
+    { "flow": "write", "label": "范围进 WHERE" }
+  ],
+  "footer": "Fireworks Tech Graph · grain versus range",
+  "footer_x": 40,
+  "footer_y": 428
+}

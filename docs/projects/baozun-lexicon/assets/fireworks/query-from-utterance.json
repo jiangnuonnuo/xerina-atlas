@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "人话如何拆进 Agent Query",
+  "subtitle": "GMV、华东、上周、按天分别进入指标、过滤、范围和粒度。",
+  "nodes": [
+    {
+      "id": "talk",
+      "kind": "speech",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "人话",
+      "sublabel": "上周华东 GMV 按天",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "slots",
+      "kind": "rect",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "拆成四格",
+      "sublabel": "指标 / 区 / 周 / 天",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "query",
+      "kind": "document",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "结构化 Query",
+      "sublabel": "只有名称和值",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa"
+    },
+    {
+      "id": "engine",
+      "kind": "double_rect",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "交给引擎",
+      "sublabel": "不带 SQL",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "talk-slots",
+      "source": "talk",
+      "target": "slots",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "parse",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "slots-query",
+      "source": "slots",
+      "target": "query",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "fill",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "query-engine",
+      "source": "query",
+      "target": "engine",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "submit",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "理解人话" },
+    { "flow": "control", "label": "填 Query" },
+    { "flow": "write", "label": "提交引擎" }
+  ],
+  "footer": "Fireworks Tech Graph · utterance to structured query",
+  "footer_x": 40,
+  "footer_y": 428
+}

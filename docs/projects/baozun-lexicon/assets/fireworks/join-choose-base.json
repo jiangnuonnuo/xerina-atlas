@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "跨表时如何选出 FROM",
+  "subtitle": "先选带度量的事实表当基表，再只沿已登记的 to-one 边扩出去。",
+  "nodes": [
+    {
+      "id": "needed",
+      "kind": "rect",
+      "x": 40,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "needed",
+      "sublabel": "订单 + 用户",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "base",
+      "kind": "hexagon",
+      "x": 320,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "选基表",
+      "sublabel": "优先订单事实表",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "walk",
+      "kind": "rect",
+      "x": 600,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "沿关系走",
+      "sublabel": "订单 → 用户",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    },
+    {
+      "id": "from",
+      "kind": "document",
+      "x": 880,
+      "y": 148,
+      "width": 200,
+      "height": 88,
+      "label": "FROM 片段",
+      "sublabel": "LEFT JOIN 用户",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "needed-base",
+      "source": "needed",
+      "target": "base",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "choose",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "base-walk",
+      "source": "base",
+      "target": "walk",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "expand",
+      "motion_stage": 2,
+      "motion_order": 0
+    },
+    {
+      "id": "walk-from",
+      "source": "walk",
+      "target": "from",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "write",
+      "motion_role": "emit",
+      "motion_stage": 3,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 320,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "收集用到的表" },
+    { "flow": "control", "label": "只走已登记边" },
+    { "flow": "write", "label": "写出 FROM" }
+  ],
+  "footer": "Fireworks Tech Graph · choose base then join",
+  "footer_x": 40,
+  "footer_y": 428
+}

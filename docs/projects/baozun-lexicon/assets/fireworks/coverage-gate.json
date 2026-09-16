@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "mode": "flowchart",
+  "template_type": "flowchart",
+  "style": 1,
+  "motion_scene": "token-stream",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 460,
+  "title": "未覆盖就必须空 SQL",
+  "subtitle": "任一名称对不上，不再猜 JOIN，也不写入复用。",
+  "nodes": [
+    {
+      "id": "names",
+      "kind": "rect",
+      "x": 80,
+      "y": 148,
+      "width": 240,
+      "height": 88,
+      "label": "解析结果",
+      "sublabel": "命中与缺口",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "gate",
+      "kind": "hexagon",
+      "x": 440,
+      "y": 148,
+      "width": 240,
+      "height": 88,
+      "label": "是否全覆盖",
+      "sublabel": "全有或全无",
+      "fill": "#fff7ed",
+      "stroke": "#f97316",
+      "flat": true
+    },
+    {
+      "id": "out",
+      "kind": "document",
+      "x": 800,
+      "y": 148,
+      "width": 240,
+      "height": 88,
+      "label": "两种出口",
+      "sublabel": "空 SQL 或继续 JOIN",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "names-gate",
+      "source": "names",
+      "target": "gate",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "motion_role": "check",
+      "motion_stage": 1,
+      "motion_order": 0
+    },
+    {
+      "id": "gate-out",
+      "source": "gate",
+      "target": "out",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "motion_role": "branch",
+      "motion_stage": 2,
+      "motion_order": 0
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 440,
+  "legend_y": 368,
+  "legend_locked": true,
+  "legend": [
+    { "flow": "data", "label": "收集缺口" },
+    { "flow": "control", "label": "决定出口" }
+  ],
+  "footer": "Fireworks Tech Graph · coverage fail-closed",
+  "footer_x": 40,
+  "footer_y": 428
+}
