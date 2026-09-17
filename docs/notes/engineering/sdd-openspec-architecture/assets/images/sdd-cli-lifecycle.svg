@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 800" width="960" height="800">
+  <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', 'SimHei', sans-serif; }
+  </style>
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="960" height="800" fill="#ffffff"/>
+  <text x="480" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#111827">OpenSpec 命令驱动的生命周期</text>
+  <text x="480" y="56" text-anchor="middle" font-size="13" fill="#6b7280">每次状态流转都由一条 CLI / agent 命令触发，箭头标注具体命令</text>
+
+  <rect x="170" y="80" width="380" height="64" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="360" y="106" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">① 空骨架（刚 init）</text>
+  <text x="360" y="128" text-anchor="middle" font-size="12" fill="#6b7280">specs/ 空 · changes/ 空</text>
+
+  <rect x="170" y="216" width="380" height="84" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="360" y="242" text-anchor="middle" font-size="14" font-weight="600" fill="#1d4ed8">② 活跃变更诞生</text>
+  <text x="360" y="264" text-anchor="middle" font-size="12" fill="#374151">changes/&lt;name&gt;/</text>
+  <text x="360" y="284" text-anchor="middle" font-size="12" fill="#374151">proposal · design · tasks</text>
+
+  <rect x="170" y="372" width="380" height="84" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="360" y="398" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">③ 代码完成 · tasks 勾选</text>
+  <text x="360" y="422" text-anchor="middle" font-size="12" fill="#6b7280">tasks.md 中 [x] 增多（目录结构不变）</text>
+  <text x="360" y="442" text-anchor="middle" font-size="12" fill="#6b7280">specs/(delta) · evidence</text>
+
+  <rect x="170" y="528" width="380" height="64" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="360" y="554" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">④ 校验通过（目录不变）</text>
+  <text x="360" y="576" text-anchor="middle" font-size="12" fill="#6b7280">结构合法 · delta 与基线对得上</text>
+
+  <rect x="170" y="648" width="380" height="96" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="360" y="674" text-anchor="middle" font-size="14" font-weight="600" fill="#15803d">⑤ 已归档 · 基线更新</text>
+  <text x="360" y="698" text-anchor="middle" font-size="12" fill="#374151">specs/&lt;cap&gt;/spec.md 冻结为基线</text>
+  <text x="360" y="720" text-anchor="middle" font-size="12" fill="#374151">changes/archive/&lt;date&gt;-&lt;name&gt;/</text>
+  <text x="360" y="738" text-anchor="middle" font-size="11" fill="#6b7280">（合并 + 搬迁，一次操作两个产出）</text>
+
+  <line x1="360" y1="144" x2="360" y2="214" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <text x="372" y="182" font-size="12" fill="#1f2937">openspec init</text>
+
+  <line x1="360" y1="300" x2="360" y2="370" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <text x="372" y="338" font-size="12" fill="#1f2937">openspec new change &lt;name&gt;</text>
+
+  <line x1="360" y1="456" x2="360" y2="526" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <text x="372" y="494" font-size="12" fill="#1f2937">/opsx:apply 写代码+勾选</text>
+
+  <line x1="360" y1="592" x2="360" y2="646" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <text x="372" y="622" font-size="12" fill="#1f2937">openspec archive</text>
+
+  <path d="M170,696 C 90,696 90,258 170,258" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#arrow-blue)"/>
+  <text x="14" y="480" font-size="11" fill="#1f2937">← 下一轮：openspec new change</text>
+  <text x="14" y="496" font-size="11" fill="#1f2937">  （基于已冻结基线）</text>
+
+  <rect x="620" y="300" width="300" height="300" rx="8" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <text x="640" y="328" font-size="14" font-weight="600" fill="#374151">只读 / 检视（不改变目录）</text>
+  <text x="640" y="358" font-size="12" fill="#374151">openspec list [--specs]</text>
+  <text x="640" y="382" font-size="12" fill="#374151">openspec show &lt;item&gt;</text>
+  <text x="640" y="406" font-size="12" fill="#374151">openspec view</text>
+  <text x="640" y="430" font-size="12" fill="#374151">openspec doctor</text>
+  <text x="640" y="454" font-size="12" fill="#374151">openspec status</text>
+  <text x="640" y="478" font-size="12" fill="#374151">openspec context</text>
+  <text x="640" y="502" font-size="12" fill="#374151">openspec change show</text>
+  <text x="640" y="526" font-size="12" fill="#374151">openspec spec show</text>
+  <text x="640" y="560" font-size="11" fill="#6b7280">可在 ①②③④ 任意阶段随时执行，</text>
+  <text x="640" y="578" font-size="11" fill="#6b7280">仅读取、不修改 openspec/ 结构。</text>
+
+  <line x1="550" y1="414" x2="618" y2="414" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-gray)"/>
+  <text x="560" y="402" font-size="11" fill="#6b7280">随时可查</text>
+
+  <g transform="translate(170,762)">
+    <line x1="0" y1="6" x2="28" y2="6" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+    <text x="34" y="10" font-size="12" fill="#6b7280">写操作（变更目录）</text>
+    <line x1="200" y1="6" x2="228" y2="6" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-gray)"/>
+    <text x="234" y="10" font-size="12" fill="#6b7280">只读操作</text>
+  </g>
+</svg>

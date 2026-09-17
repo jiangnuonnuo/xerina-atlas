@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1040" viewBox="0 0 960 520">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;}</style>
+<defs>
+<marker id="a-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="a-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="a-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="a-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="a-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="960" height="520" fill="#ffffff"/>
+<text x="480" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#111827">spec.md 标注层级模型（由外到内嵌套）</text>
+<rect x="24" y="200" width="170" height="92" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="109" y="233" text-anchor="middle" font-size="15" fill="#111827" font-weight="600">变更</text>
+<text x="109" y="251" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">spec.md</text>
+<text x="109" y="269" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="400">整个变更规范文件</text>
+<text x="109" y="178" text-anchor="middle" font-size="12" fill="#9ca3af" font-weight="600">第1层·文件</text>
+<rect x="232" y="190" width="190" height="112" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="327" y="224" text-anchor="middle" font-size="14" fill="#111827" font-weight="600">delta 动词</text>
+<text x="327" y="242" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="600">## ADDED Requirements</text>
+<text x="327" y="260" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="400">ADDED / MODIFIED /</text>
+<text x="327" y="278" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="400">REMOVED / RENAMED</text>
+<text x="327" y="178" text-anchor="middle" font-size="12" fill="#9ca3af" font-weight="600">第2层·增量动词</text>
+<rect x="452" y="200" width="150" height="92" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="527" y="233" text-anchor="middle" font-size="14" fill="#111827" font-weight="600">Requirement</text>
+<text x="527" y="251" text-anchor="middle" font-size="11" fill="#16a34a" font-weight="600">### Requirement:</text>
+<text x="527" y="269" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="400">一条强制契约</text>
+<text x="527" y="178" text-anchor="middle" font-size="12" fill="#9ca3af" font-weight="600">第3层·契约</text>
+<rect x="632" y="200" width="150" height="92" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="707" y="233" text-anchor="middle" font-size="14" fill="#111827" font-weight="600">Scenario</text>
+<text x="707" y="251" text-anchor="middle" font-size="11" fill="#0d9488" font-weight="600">#### Scenario:</text>
+<text x="707" y="269" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="400">契约的一个实例</text>
+<text x="707" y="178" text-anchor="middle" font-size="12" fill="#9ca3af" font-weight="600">第4层·实例</text>
+<rect x="812" y="200" width="140" height="92" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="882" y="233" text-anchor="middle" font-size="13" fill="#111827" font-weight="600">WHEN / THEN</text>
+<text x="882" y="251" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="400">(可选 GIVEN)</text>
+<text x="882" y="269" text-anchor="middle" font-size="10" fill="#9333ea" font-weight="600">→ 测试骨架</text>
+<text x="882" y="178" text-anchor="middle" font-size="12" fill="#9ca3af" font-weight="600">第5层·步骤</text>
+<line x1="194" y1="246" x2="232" y2="246" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<line x1="422" y1="246" x2="452" y2="246" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<line x1="602" y1="246" x2="632" y2="246" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<line x1="782" y1="246" x2="812" y2="246" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="24" y="440" width="912" height="50" rx="8" ry="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="480" y="470" text-anchor="middle" font-size="12" fill="#9a3412">archive 合并时：剥掉 delta 动词，只留 Requirement + Scenario 作为冻结基线写入顶层 specs/</text>
+</svg>

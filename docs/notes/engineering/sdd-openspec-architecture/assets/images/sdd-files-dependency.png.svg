@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 960 600">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;}</style>
+<defs>
+<marker id="a-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="a-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="a-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="a-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="a-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="960" height="600" fill="#ffffff"/>
+<text x="480" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#111827">五个文件的内置依赖流转（单向下传 + 代码反向对齐）</text>
+<rect x="40" y="80" width="280" height="56" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="180" y="104" text-anchor="middle" font-size="15" fill="#111827" font-weight="600">proposal.md</text>
+<text x="180" y="122" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">为什么做、范围、边界</text>
+<rect x="40" y="178" width="280" height="56" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="180" y="202" text-anchor="middle" font-size="15" fill="#111827" font-weight="600">design.md</text>
+<text x="180" y="220" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">怎么做（数据模型/流程/边界）</text>
+<rect x="20" y="276" width="320" height="64" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="180" y="304" text-anchor="middle" font-size="14" fill="#111827" font-weight="600">specs/&lt;cap&gt;/spec.md</text>
+<text x="180" y="322" text-anchor="middle" font-size="11" fill="#16a34a" font-weight="600">SHALL 契约（枢纽）</text>
+<rect x="40" y="388" width="280" height="56" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="180" y="412" text-anchor="middle" font-size="15" fill="#111827" font-weight="600">tasks.md</text>
+<text x="180" y="430" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">可勾选的 TDD 小步</text>
+<rect x="20" y="486" width="320" height="60" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="180" y="512" text-anchor="middle" font-size="13" fill="#111827" font-weight="600">tasks.md 勾选框 ↔ 测试文件</text>
+<text x="180" y="530" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="400">闭环终点：勾 [x] = 测试通过</text>
+<rect x="620" y="80" width="300" height="64" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="770" y="108" text-anchor="middle" font-size="14" fill="#111827" font-weight="600">Capabilities 名称</text>
+<text x="770" y="126" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">= specs/ 子目录名</text>
+<rect x="600" y="300" width="320" height="70" rx="8" ry="8" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="760" y="322" text-anchor="middle" font-size="14" fill="#374151" font-weight="600">.openspec.yaml</text>
+<text x="760" y="340" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">工具账本：状态 / 归档开关</text>
+<text x="760" y="358" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="400">不参与业务，只决定 archive 行为</text>
+<line x1="180" y1="136" x2="180" y2="178" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<line x1="180" y1="234" x2="180" y2="276" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<line x1="180" y1="340" x2="180" y2="388" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<line x1="180" y1="444" x2="180" y2="486" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<line x1="320" y1="108" x2="620" y2="108" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="394" y="87" width="152" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="470" y="100" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">proposal 定范围</text>
+<path d="M 320,416 L 470,416 L 470,308 L 340,308" fill="none" stroke="#16a34a" stroke-width="1.8" marker-end="url(#a-green)" stroke-dasharray="5,4"/>
+<rect x="299" y="287" width="212" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="405" y="300" text-anchor="middle" font-size="12" fill="#16a34a" font-weight="600">代码 / 测试反向对齐 specs</text>
+<g transform="translate(40,562)">
+<line x1="0" y1="6" x2="28" y2="6" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<text x="36" y="10" font-size="12" fill="#6b7280">信息下传链 proposal→design→specs→tasks</text>
+<line x1="0" y1="28" x2="28" y2="28" stroke="#16a34a" stroke-width="1.8" marker-end="url(#a-green)"/>
+<text x="36" y="32" font-size="12" fill="#6b7280">代码/测试反向对齐（满足 specs）</text>
+</g>
+</svg>

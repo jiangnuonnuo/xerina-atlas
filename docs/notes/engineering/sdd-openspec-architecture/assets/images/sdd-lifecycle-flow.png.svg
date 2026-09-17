@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1520" viewBox="0 0 960 760">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;}</style>
+<defs>
+<marker id="a-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="a-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="a-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="a-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="a-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="960" height="760" fill="#ffffff"/>
+<text x="480" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#111827">OpenSpec 目录状态流转图（init → new → apply → sync/archive）</text>
+<rect x="355" y="54" width="250" height="52" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="480" y="76" text-anchor="middle" font-size="15" fill="#111827" font-weight="600">openspec init</text>
+<text x="480" y="94" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">创建空骨架：specs/、changes/ 空</text>
+<rect x="300" y="150" width="360" height="72" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="480" y="173" text-anchor="middle" font-size="14" fill="#111827" font-weight="600">changes/&lt;name&gt;/ 活跃变更诞生</text>
+<text x="480" y="191" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">proposal.md · design.md · tasks.md</text>
+<text x="480" y="209" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">specs/(delta) · evidence/</text>
+<rect x="320" y="270" width="320" height="52" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="480" y="301" text-anchor="middle" font-size="13" fill="#111827" font-weight="600">opsx:apply：写项目源码 + 勾 tasks [x]</text>
+<polygon points="480,378 575,420 480,462 385,420" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="480" y="424" text-anchor="middle" font-size="13" fill="#1e40af" font-weight="600">sync 还是 archive?</text>
+<rect x="55" y="388" width="280" height="78" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="195" y="414" text-anchor="middle" font-size="13" fill="#111827" font-weight="600">opsx:sync（边做边同步）</text>
+<text x="195" y="432" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">specs/ 基线被更新</text>
+<text x="195" y="450" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">变更仍留在 changes/ 活跃</text>
+<rect x="625" y="388" width="280" height="78" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="765" y="414" text-anchor="middle" font-size="13" fill="#111827" font-weight="600">opsx:archive（最终归档）</text>
+<text x="765" y="432" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">delta 合并为冻结基线</text>
+<text x="765" y="450" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">变更移入 archive/日期-&lt;name&gt;</text>
+<rect x="290" y="600" width="380" height="60" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="480" y="626" text-anchor="middle" font-size="14" fill="#111827" font-weight="600">变更完结 → 留审计轨迹</text>
+<text x="480" y="644" text-anchor="middle" font-size="11" fill="#6b7280" font-weight="400">所有变更最终都流向 archive/</text>
+<line x1="480" y1="106" x2="480" y2="150" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="466" y="115" width="308" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="620" y="128" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">/opsx:new 或 /opsx:propose</text>
+<line x1="480" y1="222" x2="480" y2="270" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="478" y="235" width="284" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="620" y="248" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">/opsx:apply 写代码、勾 tasks</text>
+<line x1="480" y1="322" x2="480" y2="378" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="512" y="339" width="176" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="600" y="352" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">代码写完，delta 仍存在</text>
+<line x1="385" y1="420" x2="335" y2="420" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="185" y="359" width="140" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="255" y="372" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">① sync：合并基线</text>
+<line x1="575" y1="420" x2="625" y2="420" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="561" y="359" width="188" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="655" y="372" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">① archive：冻结+搬移</text>
+<path d="M 195,388 L 195,250 L 480,250 L 480,270" fill="none" stroke="#9333ea" stroke-width="1.8" marker-end="url(#a-purple)" stroke-dasharray="5,4"/>
+<rect x="200" y="229" width="200" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="300" y="242" text-anchor="middle" font-size="12" fill="#9333ea" font-weight="600">变更仍活跃 → 继续 apply</text>
+<path d="M 765,466 L 765,560 L 480,560 L 480,600" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="528" y="539" width="164" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="610" y="552" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">② 移入 archive/</text>
+<g transform="translate(40,712)">
+<line x1="0" y1="6" x2="28" y2="6" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<text x="36" y="10" font-size="12" fill="#6b7280">操作流转</text>
+<line x1="0" y1="28" x2="28" y2="28" stroke="#9333ea" stroke-width="1.8" marker-end="url(#a-purple)"/>
+<text x="36" y="32" font-size="12" fill="#6b7280">循环 / 持续（sync）</text>
+</g>
+</svg>

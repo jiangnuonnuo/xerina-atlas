@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 960 600">
+<style>text{font-family:'Helvetica Neue',Helvetica,Arial,'PingFang SC','Microsoft YaHei',sans-serif;}</style>
+<defs>
+<marker id="a-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2563eb"/></marker>
+<marker id="a-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#dc2626"/></marker>
+<marker id="a-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#16a34a"/></marker>
+<marker id="a-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#9333ea"/></marker>
+<marker id="a-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6b7280"/></marker>
+</defs>
+<rect width="960" height="600" fill="#ffffff"/>
+<text x="480" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#111827">归档前后目录对照（archive 命令的目录变化）</text>
+<rect x="30" y="70" width="410" height="480" rx="10" ry="10" fill="#f8fafc" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="7,5"/>
+<text x="44" y="92" font-size="13" font-weight="600" fill="#374151">执行 archive 前</text>
+<rect x="520" y="70" width="410" height="480" rx="10" ry="10" fill="#f8fafc" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="7,5"/>
+<text x="534" y="92" font-size="13" font-weight="600" fill="#374151">执行 archive 后</text>
+<rect x="55" y="100" width="360" height="42" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="235" y="126" text-anchor="middle" font-size="13" fill="#111827" font-weight="600">openspec/changes/&lt;name&gt;/</text>
+<rect x="80" y="160" width="310" height="34" rx="8" ry="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="235" y="182" text-anchor="middle" font-size="11" fill="#374151" font-weight="400">proposal.md</text>
+<rect x="80" y="202" width="310" height="34" rx="8" ry="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="235" y="224" text-anchor="middle" font-size="11" fill="#374151" font-weight="400">design.md</text>
+<rect x="80" y="244" width="310" height="34" rx="8" ry="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="235" y="266" text-anchor="middle" font-size="11" fill="#374151" font-weight="400">tasks.md</text>
+<rect x="80" y="286" width="310" height="40" rx="8" ry="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="235" y="311" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="600">specs/&lt;cap&gt;/spec.md (delta)</text>
+<rect x="55" y="430" width="360" height="70" rx="8" ry="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="235" y="470" text-anchor="middle" font-size="12" fill="#9a3412">整个变更文件夹
+下一步被搬入 archive/</text>
+<rect x="545" y="100" width="360" height="42" rx="8" ry="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+<text x="725" y="117" text-anchor="middle" font-size="12" fill="#111827" font-weight="600">openspec/specs/&lt;cap&gt;/spec.md</text>
+<text x="725" y="135" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="400">← delta 合并为冻结基线</text>
+<rect x="545" y="160" width="360" height="36" rx="8" ry="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="725" y="183" text-anchor="middle" font-size="12" fill="#111827" font-weight="600">openspec/changes/archive/</text>
+<rect x="565" y="206" width="320" height="34" rx="8" ry="8" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="725" y="228" text-anchor="middle" font-size="12" fill="#111827" font-weight="600">2026-09-16-&lt;name&gt;/</text>
+<rect x="590" y="250" width="270" height="30" rx="8" ry="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="725" y="270" text-anchor="middle" font-size="11" fill="#374151" font-weight="400">proposal.md</text>
+<rect x="590" y="286" width="270" height="30" rx="8" ry="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="725" y="306" text-anchor="middle" font-size="11" fill="#374151" font-weight="400">design.md</text>
+<rect x="590" y="322" width="270" height="30" rx="8" ry="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="725" y="342" text-anchor="middle" font-size="11" fill="#374151" font-weight="400">tasks.md</text>
+<rect x="590" y="358" width="270" height="34" rx="8" ry="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+<text x="725" y="380" text-anchor="middle" font-size="11" fill="#16a34a" font-weight="600">specs/&lt;cap&gt;/spec.md</text>
+<path d="M 390,306 L 470,306 L 470,121 L 545,121" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="349" y="199" width="212" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="455" y="212" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">① 合并 delta → 冻结基线</text>
+<path d="M 415,465 L 510,465 L 510,223 L 565,223" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="381" y="332" width="248" height="18" rx="4" fill="#ffffff" opacity="0.92"/>
+<text x="505" y="345" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">② 整个变更文件夹搬入 archive/</text>
+<g transform="translate(40,562)">
+<line x1="0" y1="6" x2="28" y2="6" stroke="#2563eb" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<text x="36" y="10" font-size="12" fill="#6b7280">目录流转（合并 / 搬移）</text>
+</g>
+</svg>
