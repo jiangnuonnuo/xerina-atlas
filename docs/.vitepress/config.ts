@@ -1,11 +1,45 @@
 import { defineConfig } from 'vitepress'
 import { defineTeekConfig } from 'vitepress-theme-teek/config'
+import { discoverNotes } from './utils/content-discovery'
+
+const noteCategoryLabels: Record<string, string> = {
+  engineering: '工程实践',
+  ai: 'AI 应用',
+  java: 'Java',
+}
+
+function notesSidebar() {
+  const groups = new Map<string, { text: string; link: string }[]>()
+  for (const note of discoverNotes()) {
+    const category = String(note.frontmatter.category || 'notes')
+    const items = groups.get(category) ?? []
+    items.push({
+      text: String(note.frontmatter.title),
+      link: note.url.replace(/\/$/, ''),
+    })
+    groups.set(category, items)
+  }
+
+  return [
+    { text: '全部文章', link: '/notes/' },
+    ...[...groups.entries()].map(([id, items]) => ({
+      text: noteCategoryLabels[id] || id,
+      collapsed: false,
+      items,
+    })),
+  ]
+}
 
 const teekConfig = defineTeekConfig({
+  vitePlugins: {
+    sidebar: false,
+  },
   themeConfig: {
     outline: [2, 3],
     search: { provider: 'local' },
-    sidebar: {},
+    sidebar: {
+      '/notes/': notesSidebar(),
+    },
   },
 })
 
@@ -63,8 +97,11 @@ export default defineConfig({
     ...teekConfig.themeConfig,
     // Use the site-wide double-click lightbox so project docs and articles behave the same.
     articleAnalyze: { imageViewer: { enabled: false } },
+    outline: [2, 3],
     nav: [],
-    sidebar: {},
+    sidebar: {
+      '/notes/': notesSidebar(),
+    },
     footer: {
       message: '内容驱动的个人作品集与知识库',
       copyright: 'Copyright © 2026 Xerina',
