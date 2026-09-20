@@ -1,0 +1,157 @@
+{
+  "phase": "in_progress",
+  "sessionId": "session-3a12e416-81e4-419e-8beb-649c13f22643",
+  "topic": "Spring / Spring Boot",
+  "difficulty": "junior",
+  "archiveDir": ".dsh-interview/session-3a12e416-81e4-419e-8beb-649c13f22643/round-1-Spring-Spring-Boot",
+  "cards": [
+    {
+      "id": "Q1",
+      "questionText": "**本题：Spring Boot 的核心特性有哪些？请简要说明你最熟悉的 3 点。**",
+      "questionBrief": "Spring Boot 核心特性列举及任意3点的简要说明",
+      "keyPoints": [
+        "自动配置（Auto-configuration）：根据Classpath中的jar依赖自动配置Bean，减少手动@Configuration类编写",
+        "起步依赖（Starters）：提供一站式依赖管理（如spring-boot-starter-web），简化Maven/Gradle配置",
+        "嵌入式Web服务器：内嵌Tomcat/Jetty/Undertow，无需部署WAR包，可直接java -jar运行",
+        "生产就绪（Production-ready）：Actuator提供健康检查、指标监控、审计等生产级功能",
+        "外部化配置：支持application.properties/yml及多种格式，支持多环境Profile配置"
+      ],
+      "answer": "自动配置（Auto-configuration）：根据Classpath中的jar依赖自动配置Bean，减少手动@Configuration类编写\n起步依赖（Starters）：提供一站式依赖管理（如spring-boot-starter-web），简化Maven/Gradle配置\n嵌入式Web服务器：内嵌Tomcat/Jetty/Undertow，无需部署WAR包，可直接java -jar运行\n生产就绪（Production-ready）：Actuator提供健康检查、指标监控、审计等生产级功能\n外部化配置：支持application.properties/yml及多种格式，支持多环境Profile配置",
+      "comparison": {
+        "covered": [
+          "自动配置（Auto-configuration）",
+          "起步依赖（Starters）",
+          "嵌入式Web服务器",
+          "生产就绪（Production-ready）",
+          "外部化配置"
+        ],
+        "missed": [
+          "未按要求筛选出3项最熟悉的特性展开说明，而是罗列全部5项核心特性"
+        ],
+        "comment": "候选人完整准确覆盖了Spring Boot全部5项核心特性，各特性的说明均符合标准要点，基础知识点掌握扎实，但未严格遵循题目“选取3点最熟悉的特性说明”的作答要求，全部罗列导致作答针对性不足，未体现对特定特性的深入认知，也未涉及特性的原理、应用场景等深层内容。"
+      },
+      "scores": [
+        {
+          "dimension": "基础扎实度",
+          "score": 4.5,
+          "reason": "对Spring Boot核心特性的记忆完整准确，5项特性的定义描述均无错误，仅未按题目要求筛选3点作答，不影响知识点掌握扎实度的判断"
+        },
+        {
+          "dimension": "原理理解",
+          "score": 3,
+          "reason": "仅能复述各特性的表层功能，未涉及自动配置的条件装配机制、起步依赖的依赖传递原理等底层逻辑，对原理的认知停留在概念层面"
+        },
+        {
+          "dimension": "场景迁移",
+          "score": 2.5,
+          "reason": "没有结合开发场景说明各特性的实际应用方式，无法体现将核心特性知识点迁移到实际开发问题的能力"
+        },
+        {
+          "dimension": "深度边界",
+          "score": 2,
+          "reason": "仅停留在特性正向作用的说明，未提及自动配置的失效场景、Actuator的安全配置要求等适用边界和常见问题，对知识点的认知深度不足"
+        },
+        {
+          "dimension": "表达清晰度",
+          "score": 4,
+          "reason": "表述条理清晰，各特性的说明准确易懂，结构完整，仅未贴合题目的作答筛选要求，整体表达流畅度较好"
+        }
+      ],
+      "status": "scored",
+      "seedUserText": "<system-reminder>\nA skill is a reusable set of task-specific instructions. The following skills are available in this session:\n\n<available_skills>\n- `fireworks-tech-graph`: Create precise SVG technical diagrams, export PNG or offline HTML, and animate supported semantic SVGs to GIF. Use for architecture, UML, agent, cloud or workflow diagrams; not photos, raster art or statistical charts.\n- `pi-control-chrome`: Control the user's existing Chrome or Edge profile through pi-control-chrome browser tools and the local Bridge. Use for browser tabs, logged-in sessions, page inspection, interaction, screenshots, uploads, downloads, dialogs, clipboard, console/network/CDP, tab handoff or cleanup, and diagnosing Bridge, extension, browser-target, or stale-handle problems.\n</available_skills>\n\nIf the user names a skill, or the task clearly matches a skill's description, call the `skill` tool with the exact skill name before taking task actions. Load all applicable skills, then follow their full instructions. This catalog contains summaries only; do not infer or follow a skill's instructions until it has been loaded.\nA user may also invoke a skill directly; its <skill_content> block then appears in this conversation. Follow it, and do not call the `skill` tool again for that skill.\n</system-reminder>"
+    },
+    {
+      "id": "Q1.1",
+      "questionText": "**本题：Spring Boot 的自动配置主要是通过什么机制或核心注解来完成的？** 也就是说，当你引入 `spring-boot-starter-web` 后，Spring Boot 是怎么自动帮你配好 Tomcat 和 Spring MVC 的？",
+      "questionBrief": "Spring Boot自动配置的核心机制与核心注解，以及引入spring-boot-starter-web后自动配置Tomcat和Spring MVC的原理",
+      "keyPoints": [
+        "核心入口注解为@SpringBootApplication，其组合了@EnableAutoConfiguration注解用于开启自动配置功能",
+        "自动配置依赖spring-boot-autoconfigure模块，通过META-INF/spring.factories文件注册所有自动配置类，启动时会被自动加载",
+        "自动配置基于条件注解实现，常用@ConditionalOnClass判断类路径是否存在指定类、@ConditionalOnMissingBean判断容器是否缺少对应Bean，仅满足条件时才会执行配置逻辑",
+        "引入spring-boot-starter-web后，传递依赖引入了Tomcat、spring-webmvc等相关类，满足条件后自动加载WebMvcAutoConfiguration、TomcatServletWebServerFactory等自动配置类",
+        "自动配置类会自动注册DispatcherServlet、嵌入式Tomcat容器等核心Bean，完成Spring MVC和Tomcat的默认配置，用户自定义的Bean可覆盖自动配置的内容"
+      ],
+      "answer": "核心入口注解为@SpringBootApplication，其组合了@EnableAutoConfiguration注解用于开启自动配置功能\n自动配置依赖spring-boot-autoconfigure模块，通过META-INF/spring.factories文件注册所有自动配置类，启动时会被自动加载\n自动配置基于条件注解实现，常用@ConditionalOnClass判断类路径是否存在指定类、@ConditionalOnMissingBean判断容器是否缺少对应Bean，仅满足条件时才会执行配置逻辑\n引入spring-boot-starter-web后，传递依赖引入了Tomcat、spring-webmvc等相关类，满足条件后自动加载WebMvcAutoConfiguration",
+      "comparison": {
+        "covered": [
+          "核心入口注解@SpringBootApplication组合@EnableAutoConfiguration用于开启自动配置",
+          "自动配置依赖spring-boot-autoconfigure模块，通过META-INF/spring.factories文件注册自动配置类，启动时自动加载",
+          "自动配置基于@ConditionalOnClass、@ConditionalOnMissingBean等条件注解实现按需配置",
+          "引入spring-boot-starter-web后传递依赖引入Tomcat、spring-webmvc等相关类，满足条件后加载WebMvcAutoConfiguration等自动配置类"
+        ],
+        "missed": [
+          "未提及TomcatServletWebServerFactory等Tomcat相关自动配置类，以及自动注册嵌入式Tomcat容器、DispatcherServlet等核心Bean的配置逻辑",
+          "未提及用户自定义Bean可覆盖自动配置内容的特性"
+        ],
+        "comment": "候选人准确覆盖了Spring Boot自动配置的核心基础机制，包括核心注解组合、模块与注册机制、条件注解原理，以及引入spring-boot-starter-web触发自动配置的基础逻辑，但遗漏了Tomcat及Spring MVC核心组件的具体自动配置细节，以及自动配置的可覆盖边界特性，整体掌握程度较好但存在细节缺漏"
+      },
+      "scores": [
+        {
+          "dimension": "基础扎实度",
+          "score": 3.5,
+          "reason": "准确答出自动配置的核心注解、依赖模块、注册机制、核心条件注解等基础知识点，但遗漏了Tomcat相关自动配置类、核心Bean注册、自定义覆盖等基础要点，整体掌握较完整但存在缺漏"
+        },
+        {
+          "dimension": "原理理解",
+          "score": 3,
+          "reason": "理解了自动配置的通用触发原理（spring.factories扫描、条件注解筛选），但未阐述清楚引入spring-boot-starter-web后Tomcat、Spring MVC具体自动配置类的触发与配置原理"
+        },
+        {
+          "dimension": "场景迁移",
+          "score": 2.5,
+          "reason": "能关联引入spring-boot-starter-web与自动配置触发的场景逻辑，但未完整阐述该场景下Tomcat容器、DispatcherServlet等核心组件的具体自动配置过程"
+        },
+        {
+          "dimension": "深度边界",
+          "score": 2,
+          "reason": "未提及自动配置仅提供默认配置、用户自定义Bean可覆盖的边界特性，对自动配置的适用边界认知不足"
+        },
+        {
+          "dimension": "表达清晰度",
+          "score": 4.5,
+          "reason": "回答条理清晰，分点明确，表述准确流畅，逻辑连贯，易于理解"
+        }
+      ],
+      "status": "scored",
+      "seedUserText": "自动配置（Auto-configuration）：根据Classpath中的jar依赖自动配置Bean，减少手动@Configuration类编写\n起步依赖（Starters）：提供一站式依赖管理（如spring-boot-starter-web），简化Maven/Gradle配置\n嵌入式Web服务器：内嵌Tomcat/Jetty/Undertow，无需部署WAR包，可直接java -jar运行\n生产就绪（Production-ready）：Actuator提供健康检查、指标监控、审计等生产级功能\n外部化配置：支持application.properties/yml及多种格式，支持多环境Profile配置"
+    },
+    {
+      "id": "Q1.2",
+      "questionText": "**本题：`@SpringBootApplication` 本身是一个组合注解，它由哪三个核心注解组成？请分别说出它们的作用。**",
+      "questionBrief": "@SpringBootApplication组合注解的组成及各自作用",
+      "keyPoints": [
+        "由@SpringBootConfiguration、@EnableAutoConfiguration、@ComponentScan三个核心注解组成",
+        "@SpringBootConfiguration：标识Spring Boot配置类，等同于标准@Configuration注解",
+        "@EnableAutoConfiguration：启用Spring Boot自动配置机制，根据类路径依赖自动配置Bean",
+        "@ComponentScan：指定组件扫描路径，默认扫描注解所在包及其子包下的@Component、@Controller、@Service等组件"
+      ],
+      "answer": null,
+      "comparison": null,
+      "scores": [
+        {
+          "dimension": "基础扎实度",
+          "score": null
+        },
+        {
+          "dimension": "原理理解",
+          "score": null
+        },
+        {
+          "dimension": "场景迁移",
+          "score": null
+        },
+        {
+          "dimension": "深度边界",
+          "score": null
+        },
+        {
+          "dimension": "表达清晰度",
+          "score": null
+        }
+      ],
+      "status": "pending",
+      "seedUserText": "核心入口注解为@SpringBootApplication，其组合了@EnableAutoConfiguration注解用于开启自动配置功能\n自动配置依赖spring-boot-autoconfigure模块，通过META-INF/spring.factories文件注册所有自动配置类，启动时会被自动加载\n自动配置基于条件注解实现，常用@ConditionalOnClass判断类路径是否存在指定类、@ConditionalOnMissingBean判断容器是否缺少对应Bean，仅满足条件时才会执行配置逻辑\n引入spring-boot-starter-web后，传递依赖引入了Tomcat、spring-webmvc等相关类，满足条件后自动加载WebMvcAutoConfiguration"
+    }
+  ],
+  "currentCardId": "Q1.2"
+}

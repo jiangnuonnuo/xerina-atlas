@@ -4,7 +4,7 @@ type: note
 category: engineering
 date: 2026-09-16
 order: 60
-cardImage: /media/notes/sdd-openspec-architecture-cover.png
+cardImage: /media/notes/sdd-openspec-architecture-cover.webp
 summary: 从定义与思想、目录结构、五类文件职责边界，到命令流转与归档机制，用统一的演示示例，带小白彻底搞懂 OpenSpec 规范驱动开发（SDD）的全套机制。
 tags:
   - OpenSpec
@@ -17,7 +17,7 @@ outline: deep
 
 # OpenSpec（SDD 规范驱动开发）完全指南
 
-![OpenSpec SDD 架构全景标题图](/media/notes/sdd-openspec-architecture-cover.png)
+![OpenSpec SDD 架构全景标题图](/media/notes/sdd-openspec-architecture-cover.webp)
 
 > 如果你是一个重点的 AI 编程领域的开发者，难免会遇到AI执行的指标偏移的问题，执行过程不可控，结果不可控，记录决策无记录，甚至在没有了解任何业务需求的背景下，
 > AgentCode 直接接手了项目开发，使得整个项目的开发周期、过程，以及收尾、维护都带来不小的难度。

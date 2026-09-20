@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="ui-sans-serif, system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef2ff"/>
+      <stop offset="100%" stop-color="#f0fdfa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" rx="24" fill="url(#bg)"/>
+  <text x="70" y="72" fill="#4338ca" font-size="22" font-weight="600">双会话隔离：面试官看不见评分</text>
+
+  <!-- 会话 A -->
+  <rect x="70" y="128" width="372" height="286" rx="16" fill="#6366f1"/>
+  <text x="100" y="176" fill="#ffffff" font-size="20" font-weight="600">会话 A · 考场对话</text>
+  <rect x="100" y="192" width="80" height="26" rx="13" fill="#ffffff" fill-opacity="0.18"/>
+  <text x="140" y="210" fill="#e0e7ff" font-size="13" text-anchor="middle">面试官</text>
+
+  <circle cx="112" cy="256" r="7" fill="#c7d2fe"/>
+  <text x="132" y="261" fill="#ffffff" font-size="16">面试官在这里说话</text>
+  <circle cx="112" cy="296" r="7" fill="#c7d2fe"/>
+  <text x="132" y="301" fill="#ffffff" font-size="16">你的回答也写在这里</text>
+  <circle cx="112" cy="336" r="7" fill="#c7d2fe"/>
+  <text x="132" y="341" fill="#ffffff" font-size="16">用宿主已配好的模型</text>
+
+  <rect x="100" y="368" width="312" height="28" rx="8" fill="#4f46e5"/>
+  <text x="256" y="387" fill="#e0e7ff" font-size="14" text-anchor="middle">看不见评分提示词，也看不见面板</text>
+
+  <!-- 会话 B -->
+  <rect x="518" y="128" width="372" height="286" rx="16" fill="#10b981"/>
+  <text x="548" y="176" fill="#ffffff" font-size="20" font-weight="600">会话 B · 教练</text>
+  <rect x="548" y="192" width="80" height="26" rx="13" fill="#ffffff" fill-opacity="0.18"/>
+  <text x="588" y="210" fill="#d1fae5" font-size="13" text-anchor="middle">只读</text>
+
+  <circle cx="560" cy="256" r="7" fill="#a7f3d0"/>
+  <text x="580" y="261" fill="#ffffff" font-size="16">题目一出来就给开卷要点</text>
+  <circle cx="560" cy="296" r="7" fill="#a7f3d0"/>
+  <text x="580" y="301" fill="#ffffff" font-size="16">作答后给对照与五维</text>
+  <circle cx="560" cy="336" r="7" fill="#a7f3d0"/>
+  <text x="580" y="341" fill="#ffffff" font-size="16">产出只进面板</text>
+
+  <rect x="548" y="368" width="312" height="28" rx="8" fill="#059669"/>
+  <text x="704" y="387" fill="#d1fae5" font-size="14" text-anchor="middle">绝不进入任何对话气泡</text>
+
+  <!-- 正向箭头 -->
+  <line x1="450" y1="248" x2="510" y2="248" stroke="#10b981" stroke-width="4" stroke-linecap="round"/>
+  <path d="M500 238 L514 248 L500 258" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="428" y="212" width="104" height="28" rx="14" fill="#d1fae5"/>
+  <text x="480" y="231" fill="#047857" font-size="14" text-anchor="middle">问答 → 材料</text>
+
+  <!-- 禁止回流 -->
+  <line x1="510" y1="316" x2="450" y2="316" stroke="#ef4444" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round"/>
+  <path d="M460 308 L446 316 L460 324" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="480" y="352" fill="#dc2626" font-size="14" text-anchor="middle">禁止回流</text>
+
+  <text x="70" y="470" fill="#64748b" font-size="15">两条会话共用同一套宿主模型配置 —— 插件不让你另配 Key。</text>
+  <text x="70" y="500" fill="#64748b" font-size="15">你在考场里的回答是干净的，不会被「参考答案」悄悄带跑。</text>
+</svg>

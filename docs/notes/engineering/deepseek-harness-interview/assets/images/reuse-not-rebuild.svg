@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="ui-sans-serif, system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef2ff"/>
+      <stop offset="100%" stop-color="#f0fdfa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" rx="24" fill="url(#bg)"/>
+  <text x="70" y="72" fill="#4338ca" font-size="22" font-weight="600">复用，而不是重建：宿主扛运行时，插件只补业务</text>
+
+  <!-- 左：宿主 -->
+  <rect x="70" y="120" width="358" height="300" rx="16" fill="#6366f1"/>
+  <text x="98" y="166" fill="#ffffff" font-size="20" font-weight="600">宿主 DSH 已经提供</text>
+  <rect x="98" y="182" width="96" height="26" rx="13" fill="#ffffff" fill-opacity="0.18"/>
+  <text x="146" y="200" fill="#e0e7ff" font-size="13" text-anchor="middle">天然 Harness</text>
+
+  <rect x="98" y="224" width="302" height="34" rx="8" fill="#ffffff" fill-opacity="0.14"/>
+  <text x="116" y="246" fill="#ffffff" font-size="15">sessions · 会话创建与轮次</text>
+
+  <rect x="98" y="266" width="302" height="34" rx="8" fill="#ffffff" fill-opacity="0.14"/>
+  <text x="116" y="288" fill="#ffffff" font-size="15">llm · 模型调用与配置</text>
+
+  <rect x="98" y="308" width="302" height="34" rx="8" fill="#ffffff" fill-opacity="0.14"/>
+  <text x="116" y="330" fill="#ffffff" font-size="15">systemPrompt.section · 提示词</text>
+
+  <rect x="98" y="350" width="302" height="34" rx="8" fill="#ffffff" fill-opacity="0.14"/>
+  <text x="116" y="372" fill="#ffffff" font-size="15">ctx.fs · 文件沙箱</text>
+
+  <!-- 右：插件 -->
+  <rect x="532" y="120" width="358" height="300" rx="16" fill="#10b981"/>
+  <text x="560" y="166" fill="#ffffff" font-size="20" font-weight="600">插件只补这三件事</text>
+  <rect x="560" y="182" width="80" height="26" rx="13" fill="#ffffff" fill-opacity="0.18"/>
+  <text x="600" y="200" fill="#d1fae5" font-size="13" text-anchor="middle">业务层</text>
+
+  <rect x="560" y="224" width="302" height="60" rx="10" fill="#ffffff" fill-opacity="0.14"/>
+  <text x="580" y="250" fill="#ffffff" font-size="16" font-weight="600">① 面试规则</text>
+  <text x="580" y="272" fill="#d1fae5" font-size="14">人设 · 提问与追问口径 · 五维</text>
+
+  <rect x="560" y="292" width="302" height="60" rx="10" fill="#ffffff" fill-opacity="0.14"/>
+  <text x="580" y="318" fill="#ffffff" font-size="16" font-weight="600">② 教练面板</text>
+  <text x="580" y="340" fill="#d1fae5" font-size="14">开卷要点 · 对照 · 卡片回看</text>
+
+  <rect x="560" y="360" width="302" height="60" rx="10" fill="#ffffff" fill-opacity="0.14"/>
+  <text x="580" y="386" fill="#ffffff" font-size="16" font-weight="600">③ 档案落盘</text>
+  <text x="580" y="408" fill="#d1fae5" font-size="14">本场问答写成纯 Markdown</text>
+
+  <!-- 中间：复用 -->
+  <line x1="436" y1="270" x2="524" y2="270" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+  <path d="M514 260 L528 270 L514 280" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="428" y="316" width="104" height="34" rx="17" fill="#fef3c7"/>
+  <text x="480" y="338" fill="#b45309" font-size="16" font-weight="600" text-anchor="middle">复用</text>
+
+  <text x="70" y="470" fill="#64748b" font-size="15">DSH 负责「怎么说」，插件负责「按什么规则说、怎么呈现、留下什么」。</text>
+  <text x="70" y="500" fill="#dc2626" font-size="15">红线：不接管对话、不改宿主核心、查不到官方 API 就标 TODO 并可见失败。</text>
+</svg>
